@@ -1,11 +1,12 @@
 {
-  "name": "junior/openclassrooms.",
-  "description": "Projet mvc",
-  "authors": [
-    {
-      "name": "elgato",
-      "email": "amzfba.1bestbuy@gmail.com"
+  "require": {
+    "twig/twig": "2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tools": "Framework",
+      "Entity": "Model/Entity",
+      "Manager": "Model/Manager"
     }
-  ],
-  "require": {}
+  }
 }

@@ -1,0 +1,11 @@
+{
+  "name": "junior/openclassrooms.",
+  "description": "Projet mvc",
+  "authors": [
+    {
+      "name": "elgato",
+      "email": "amzfba.1bestbuy@gmail.com"
+    }
+  ],
+  "require": {}
+}

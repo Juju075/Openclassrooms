@@ -12,7 +12,7 @@ class ControllerRegister
     //Hydratation de obj 
     public function __construct(){
         if(isset($url) && count($url) < 1){
-            throw new\Exception("Page introuvable", 1);
+            throw new \Exception("Page introuvable", 1);
         }
         elseif (isset($_GET['create'])){
             $this->create();       

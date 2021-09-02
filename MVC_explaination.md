@@ -38,7 +38,7 @@ Tous nos fichiers statiques publics. On pourra y mettre à l'intérieur un dossi
 
 C les pages rendu par les controlleurs.
 
-- La class View.php est utilisé en permanence vas permettre de genere le contenu selon les parametres de l'url.
+- La class View.php est utilisé en permanence vas permettre de génerer le contenu selon les parametres de l'url.
 
 - template.php, templateSingle.php ect... sont les pages Html qui contiendront le contenu génerer par la vue (view.php).
   chaque template est un model pour la route souhaité.
@@ -54,10 +54,10 @@ C les pages rendu par les controlleurs.
 Permet la réecriture de l'url. (Elle vas préfixer automatiquement le nom de la route pour forcer l'appel au routeur).
 
 eg:
-Saisie utilisateur > réecriture de l'url + page par defaut si erreur utilisateur.
+Saisie utilisateur > réecriture de l'url.
 
 http://localhost/Blog_MVC/accueil > http://localhost/Blog_MVC/index.php?url=accueil
 
 # index.php
 
-C la page d'entree à l'app elle servira d'appel au routeur.
+C la page d'entrée à l'app elle servira d'appel au routeur.

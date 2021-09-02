@@ -30,13 +30,13 @@ Contient des classes basic reutilisable plus tard dans le code.
 
 # Public
 
-Tous nos fichiers statiques publics. On pourra y mettre à l'intérieur un dossier css/, images/, js/, etc.
+Tous nos fichiers statiques publics. On pourra y mettre un dossier css/, images/, js/, etc.
 
 ---
 
 # View
 
-C les pages rendu par les controlleurs.
+C les pages rendu par les differents controlleurs.
 
 - La class View.php est utilisé en permanence vas permettre de génerer le contenu selon les parametres de l'url.
 

@@ -7,7 +7,7 @@ abstract class Model
     protected static $_bdd;
 
     private static function setBdd(){
-        self::$_bdd = new PDO('mysql:host=localhost;dbname=php_mvc;charset=utf8','root','');
+        self::$_bdd = new PDO('mysql:host=localhost;dbname=app_blog_mvc;charset=utf8','root','');
         self::$_bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 

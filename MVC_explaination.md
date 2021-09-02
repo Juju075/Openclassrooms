@@ -45,7 +45,7 @@ C les pages rendu par les differents controlleurs.
 
   eg: La page d'un article sera différent visuellement de la page détail d'un article.
 
-- Admin / Contact / Form / Login / Registration
+- Admin / Contact / Form / Login / Registration permettront d'organiser les fichiers par section.
 
 --- Fichiers à la racine.
 

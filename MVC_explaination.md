@@ -15,7 +15,7 @@ Controller . Accueil , Admin , Contact , Login , Post , Register .php
 Contient des classes basic reutilisable plus tard dans le code.
 
 - Entity.php |
-- Model.php | Fonctionnalité basic pour se connecter à la BDD (Reusable)
+- Model.php | Fonctionnalités basic pour se connecter à la BDD (Reusable)
 - Routeur.php | Routeur pour diriger l'utilisateur selon les parametres de l'url (page&action) > vers le controllers approprié.
 
 ---

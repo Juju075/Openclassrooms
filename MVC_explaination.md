@@ -30,7 +30,7 @@ Contient des classes basic reutilisable plus tard dans le code.
 
 # Public
 
-tous nos fichiers statiques publics. On pourra y mettre à l'intérieur un dossier css/, images/, js/, etc.
+Tous nos fichiers statiques publics. On pourra y mettre à l'intérieur un dossier css/, images/, js/, etc.
 
 ---
 

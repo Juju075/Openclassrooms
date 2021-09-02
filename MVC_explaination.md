@@ -53,6 +53,7 @@ Permet la réecriture de l'url. (Elle vas préfixer automatiquement le nom de la
 
 eg:
 Saisie utilisateur > réecriture de l'url + page par defaut si erreur utilisateur.
+
 http://localhost/Blog_MVC/accueil > http://localhost/Blog_MVC/index.php?url=accueil
 
 # index.php

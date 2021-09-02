@@ -40,8 +40,10 @@ C les pages rendu par les controlleurs.
 
 - La class View.php est utilisé en permanence vas permettre de genere le contenu selon les parametres de l'url.
 
-- template templateSingle ect... sont les pages Html qui contiendra le contenu genrere par view.ph.
-  chaque template est un model pour la route.
+- template.php, templateSingle.php ect... sont les pages Html qui contiendront le contenu génerer par la vue (view.php).
+  chaque template est un model pour la route souhaité.
+
+  eg: La page d'un article sera différent visuellement de la page détail d'un article.
 
 - Admin / Contact / Form / Login / Registration
 

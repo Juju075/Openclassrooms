@@ -26,11 +26,11 @@ abstract class Model
         $req->execute();
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC)){
-            $var[] = new $obj($data); // Instancie 'Article' avec les data.
+            $var[] = new $obj($data);
         }
 
         return $var;
-        $req->closeCursor(); //Fermeture de la connexion.
+        $req->closeCursor();
     }
     protected function getOne($table, $obj, $id){
 

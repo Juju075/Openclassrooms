@@ -1,3 +1,5 @@
+**Visualisé le cheminement (resumé) des données dans le systeme.** [GRAPHIC CODE](MVC_explainaition/graphic_code.png)
+
 # MVC / Organisation des dossiers.
 
 ## Contenu dans des dossiers.

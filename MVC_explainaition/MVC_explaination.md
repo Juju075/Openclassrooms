@@ -1,12 +1,12 @@
 # MVC / Organisation des dossiers.
 
---- Contenu dans des dossiers.
+## --- Contenu dans des dossiers.
 
 # Controllers
 
 Chaque controlleurs correspond à la gestion des fonctionnalités necessaire pour le bon fonctionnement de la page.
 
-Controller . Accueil , Admin , Contact , Login , Post , Register .php
+Controller _._ Accueil , Admin , Contact , Login , Post , Register \_.\_php
 
 ---
 
@@ -14,17 +14,17 @@ Controller . Accueil , Admin , Contact , Login , Post , Register .php
 
 Contient des classes basic reutilisable plus tard dans le code.
 
-- Entity.php |
-- Model.php | Fonctionnalités basic pour se connecter à la BDD et faire du repository (Reusable)
-- Routeur.php | Routeur pour diriger l'utilisateur selon les parametres de l'url (page&action) > vers le controllers approprié.
+- _Entity.php_ |
+- _Model.php_ | Fonctionnalités basic pour se connecter à la BDD et faire du repository (Reusable)
+- _Routeur.php_ | Routeur pour diriger l'utilisateur selon les parametres de l'url (page&action) > vers le controllers approprié.
 
 ---
 
 # Models
 
-- ENTITY | (Répectorie l'ensemble des entités de l'app).
+- _ENTITY_ | (Répectorie l'ensemble des entités de l'app).
 
-- MANAGER | (Contient l'ensemble des fonctionnalités de chaque entité).
+- _MANAGER_ | (Contient l'ensemble des fonctionnalités de chaque entité).
 
 ---
 
@@ -36,7 +36,7 @@ Tous nos fichiers statiques publics. On pourra y mettre un dossier css/, images/
 
 # View
 
-C les pages rendu par les differents controlleurs.
+_C les pages rendu par les differents controlleurs._
 
 - La class View.php est utilisé en permanence vas permettre de génerer le contenu selon les parametres de l'url.
 
@@ -47,11 +47,11 @@ C les pages rendu par les differents controlleurs.
 
 - Admin / Contact / Form / Login / Registration permettront d'organiser les fichiers par section.
 
---- Fichiers à la racine.
+## --- Fichiers à la racine.
 
 # .htaccess
 
-Permet la réecriture de l'url. (Elle vas préfixer automatiquement le nom de la route pour forcer l'appel au routeur).
+_Permet la réecriture de l'url._ (Elle vas préfixer automatiquement le nom de la route pour forcer l'appel au routeur).
 
 eg:
 Saisie utilisateur > réecriture de l'url.

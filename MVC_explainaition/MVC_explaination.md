@@ -64,7 +64,7 @@ http://localhost/Blog_MVC/accueil > http://localhost/Blog_MVC/index.php?url=accu
 
 # index.php
 
-## C la page d'entrée à l'app elle servira d'appel au routeur.
+C la page d'entrée à l'app elle servira d'appel au routeur.
 
 ---
 

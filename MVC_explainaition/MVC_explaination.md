@@ -68,4 +68,4 @@ C la page d'entrée à l'app elle servira d'appel au routeur.
 
 ---
 
-Visualisé le cheminement (resumé) des données dans le systeme. [GRAPHIC CODE](MVC_explainaition/graphic_code.png)
+**Visualisé le cheminement (resumé) des données dans le systeme.** [GRAPHIC CODE](MVC_explainaition/graphic_code.png)

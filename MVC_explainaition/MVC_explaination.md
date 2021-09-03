@@ -1,6 +1,8 @@
 # MVC / Organisation des dossiers.
 
-## --- Contenu dans des dossiers.
+## Contenu dans des dossiers.
+
+---
 
 # Controllers
 
@@ -47,7 +49,9 @@ _C les pages rendu par les differents controlleurs._
 
 - Admin / Contact / Form / Login / Registration permettront d'organiser les fichiers par section.
 
-## --- Fichiers à la racine.
+---
+
+## Fichiers à la racine.
 
 # .htaccess
 

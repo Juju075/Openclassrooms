@@ -1,0 +1,15 @@
+A FAIRE
+
+1  - 30%   Documentation README / MVC_explaination
+2	- 50%   Revérifie si tout les fichiers sont sur github
+3	Si oui corrige les liens BDD / Tables / 
+4	40%    Font - Corrige le menu + ajouter lien Admin dans footer (verifier si lien fonctionne)
+5   5%     Back - Ajouter la page Intro (présentation) controllerIntro.php+ Intro/viewIntro.php (verifier si fonctionnel)
+
+6   Back - Ecrire les fonctionnalités Modifier et Supprimer un article
+6	Font - Appliquer le cahier des charges (elements qui doivent etre present) Page Accueil et Page "Acceuil" Listing des articles et Page detail article
+7	Test - Navigateur si tout s'affiche et fonctionnalités operationnels
+8	Back - Mentorat determiner toute les fonctionnalités
+9	Font - Améliorer la presentation css des contenus de page
+
+

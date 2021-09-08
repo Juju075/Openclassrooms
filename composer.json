@@ -5,8 +5,8 @@
   "autoload": {
     "psr-4": {
       "Tools": "Framework",
-      "Entity": "Model/Entity",
-      "Manager": "Model/Manager"
+      "Entity": "models/Entity",
+      "Manager": "models/Manager"
     }
   }
 }

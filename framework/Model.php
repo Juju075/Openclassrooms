@@ -53,7 +53,7 @@ abstract class Model
         $var = [];
 
         //modifie en variable id_article
-        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(date, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
+        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(latest_modification, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
         $req->execute(array($id));
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC)){
@@ -71,7 +71,7 @@ abstract class Model
     
     protected function createOne($table, $obj){
         $this->getBdd();
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, content, date) VALUES (?, ?, ?)");
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, content, latest_modification) VALUES (?, ?, ?)");
         $req->execute(array($_POST['title'], $_POST['content'], date("d.m.Y")));
 
         $req->closeCursor();

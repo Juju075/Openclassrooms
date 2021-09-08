@@ -18,12 +18,13 @@
             <div class="post-info">
 
               <div class="left-area">
+                <!-- Avatar img-->
                 <a class="avatar" href="#"><img src="public/images/avatar-1-120x120.jpg" alt="Profile Image"></a>
               </div>
 
               <div class="middle-area">
-                <a class="name" href="#"><b>Katy Liu</b></a> <!-- prenom nom-->
-                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6><!-- twig date aujourdhui-->
+                <p>twig prenom</p> <p>twig nom</p> <p>twig latest modification</p>
+                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6> 
               </div>
 
             </div><!-- post-info -->

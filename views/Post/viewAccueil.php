@@ -3,7 +3,6 @@
 	<section class="blog-area section">
 		<div class="container">
 			<div class="row">
-
 				<?php
 					foreach ($articles as $article):
 				?>
@@ -19,13 +18,8 @@
 								<div class="blog-info">
 
 									<h4 class="title"><a href="post&id=<?= $article->id() ?>"><b><?= $article->title() ?></b></a></h4>
-
-									<ul class="post-footer">
-										<li><a href="#"><i class="ion-heart"></i>57</a></li> <!-- nombre de likes -->
-										<li><a href="#"><i class="ion-chatbubble"></i>6</a></li> <!-- nombre de commentaire -->
-										<li><a href="#"><i class="ion-eye"></i>138</a></li> <!-- nombre de vues -->
-									</ul>
-
+									<h4 class="title">ici temps de lecture</h4>
+									<h4 class="title">ici date de mise a jour</h4>
 								</div><!-- blog-info -->
 							</div><!-- single-post -->
 						</div><!-- card -->

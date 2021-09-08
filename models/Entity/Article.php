@@ -35,11 +35,13 @@ class Article
             $this->_id = $id;
         }
     }
+
     public function setTitle($title){
         if(is_string($title)){
             $this->_title = $title;
         }
     }
+    
     public function setContent($content){
         if(is_string($content)){
             $this->_content = $content;

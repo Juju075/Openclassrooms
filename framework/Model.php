@@ -47,13 +47,13 @@ abstract class Model
 
     // ancienne version id standard pour toute les tables
     //personnaliser id par table
-    protected function getOne($table, $obj, $id){
-        
-        var_dump($id);
 
+    protected function getOne($table, $obj, $id){
         $this->getBdd();
         $var = [];
-        $req = self::$_bdd->prepare("SELECT id, title, content, DATE_FORMAT(date, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id = ?");
+
+        //modifie en variable id_article
+        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(date, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
         $req->execute(array($id));
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC)){

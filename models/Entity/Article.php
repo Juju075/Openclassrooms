@@ -5,7 +5,7 @@
 class Article
 {
 
-    private $_id;
+    private $_id_article;
     private $_title;
     private $_content;
     private $_date;
@@ -29,19 +29,17 @@ class Article
     }
  
 
-    public function setId($id){  
-        $id = (int) $id;
+    public function setId($id_article){  
+        $id = (int) $id_article;
         if ($id > 0){
-            $this->_id = $id;
+            $this->_id_article = $id_article;
         }
     }
-
     public function setTitle($title){
         if(is_string($title)){
             $this->_title = $title;
         }
     }
-    
     public function setContent($content){
         if(is_string($content)){
             $this->_content = $content;
@@ -52,9 +50,15 @@ class Article
     }
  
 
-    public function Id(){
-        return $this->_id;
+    public function Id_article(){
+        return $this->echo();
+        //return $this->_id_article;
     }
+    //debuging
+    public function echo(){
+        echo(17);
+    }
+
     public function Title(){
         return $this->_title;
     }    

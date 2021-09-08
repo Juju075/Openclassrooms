@@ -37,14 +37,16 @@ require_once('models/Manager/ArticleManager.php');
         $this->_articleManager = new ArticleManager;
         $article = $this->_articleManager->createArticle();
         $articles = $this->_articleManager->getArticles();
+
         $this->_view = new View('Accueil','Post');
         $this->_view->generate(array('articles' =>$articles));
     }
 
     private function article(){
-        if(isset($_GET['id'])){
+        if(isset($_GET['id_article'])){
             $this->_articleManager = new ArticleManager;
-            $article = $this->_articleManager->getArticle($_GET['id']);
+            $article = $this->_articleManager->getArticle($_GET['id_article']);
+
             $this->_view = new View('singlePost','Post');
             $this->_view->generatePost(array('article'=>$article));
         }

@@ -7,13 +7,13 @@
 abstract class Model
 {
     protected static $_bdd;
+    
 
 
 
     private static function setBdd(){
         self::$_bdd = new PDO('mysql:host=localhost;dbname=app_blog_mvc;charset=utf8','root','');
         self::$_bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        echo('ok fin fonction setBdd');
     }
 
     protected function getBdd(){
@@ -29,25 +29,10 @@ abstract class Model
 
     //Cette function est appele par une fonction de xxxxManager.php qui lui passe 2 arguments.
     protected function getAll($table, $obj){
-
-        echo('ok function getAll'); 
-        echo($table);
-        echo($obj);
-        
-
         $this->getBdd();
         $var = [];
-
-        // order by id desc    
-        $id = 'id' . '_' . $table;
-        echo($id);
-         
-
-
-        //definir id_article pour variable
         $req  = self::$_bdd->prepare('SELECT * FROM '. $table.' ORDER BY id_article desc');  
         $req->execute();
-
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC)){
             $var[] = new $obj($data); //le tableau vas instancie un nouvel Article.php en lui passant
@@ -55,7 +40,6 @@ abstract class Model
 
         return $var;
         $req->closeCursor();
-        echo('Le code passe ici');
     }
 
 

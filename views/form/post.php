@@ -13,7 +13,7 @@
 				</div>
 
 				<div class="" data-validate = "Contenu is required">
-					<span class="">Article</span>
+					<span class="">Contenu de l'Article</span>
 					<textarea class="" name="content" placeholder="Votre texte ici..."></textarea>
 					<span class=""></span>
 				</div>

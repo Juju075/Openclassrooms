@@ -43,16 +43,10 @@ abstract class Model
     }
 
 
-
-
-    // ancienne version id standard pour toute les tables
-    //personnaliser id par table
-
     protected function getOne($table, $obj, $id){
         $this->getBdd();
         $var = [];
 
-        //modifie en variable id_article
         $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(latest_modification, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
         $req->execute(array($id));
 
@@ -65,10 +59,16 @@ abstract class Model
         
         
     }
+
+    //numero = get post #
+    //Delete FROM article WHERE id_article numero
+
     protected function deleteOne($table, $id){
         $this->getBdd();  
+
     }   
     
+
     protected function createOne($table, $obj){
         $this->getBdd();
         $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, content, latest_modification) VALUES (?, ?, ?)");
@@ -78,6 +78,6 @@ abstract class Model
     }
 
     
-    
+    // update
 
 }

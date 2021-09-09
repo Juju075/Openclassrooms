@@ -1,11 +1,11 @@
 <?php
-
-namespace Entity;
+/**
+ * namespace App\Entity;
+ */
 
 class Comment 
-//extends Entity
 {
-    private $id;
+    private $id_comment;
     private $content;
     private $dateCreation;
     private $userId;
@@ -13,23 +13,35 @@ class Comment
     private $username;
     private $disabled;
 
-    public function getId(){ 
+    public function getId(): ?int
+    { 
         return $this->id; 
     }
-    public function getContent(){ 
+
+    public function getContent(): ?string
+    { 
         return $this->content; 
     }
-    public function getDateCreation(){ 
+
+    public function getDateCreation()
+    { 
         return $this->dateCreation; 
     }
-    public function getUserId(){ 
+
+    public function getUserId(): ?User
+    { 
         return $this->userId; 
     }
-    public function getPostId(){ 
+
+    public function getPostId(): self
+    { 
         return $this->postId; 
     }
     
-    public function getFormattedDateCreation() { return $this->getFormattedDateTime($this->dateCreation); }
+    public function getFormattedDateCreation(): self 
+    { 
+        return $this->getFormattedDateTime($this->dateCreation); 
+    }
     
     public function getUsername() { return $this->username; }
     public function getDisabled() { return $this->disabled; }

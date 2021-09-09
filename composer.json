@@ -4,9 +4,10 @@
   },
   "autoload": {
     "psr-4": {
+      "App\\": "src/",
       "Tools": "Framework",
-      "Entity": "models/Entity",
-      "Manager": "models/Manager"
+      "Entity": "framework/models/Entity",
+      "Manager": "framework/models/Manager"
     }
   }
 }

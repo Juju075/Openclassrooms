@@ -5,6 +5,8 @@
             <div class="row">
                     <div class="col-md-6"><label for="username">Username</label><input type="text"name="username"></div>
                     <div class="col-md-6"><label for="password">password</label><input type="text"name="password"></div>
+                    <div class="col-md-6"><label for="prenom">prenom</label><input type="text"name="prenom"></div>
+                    <div class="col-md-6"><label for="nom">password</label><input type="text"name="nom"></div>
                     <div class="col-md-6"><label for="checkpassword">checkpassword</label><input type="text"name="checkpassword"></div>
                     <div class="col-md-6"><label for="email">email</label><input type="text"name="email"></div>
                     <div class="button"><button type="submit">Soumettre</button></div>               

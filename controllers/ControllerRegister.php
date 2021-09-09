@@ -16,14 +16,14 @@ class ControllerRegister
         }
         elseif (isset($_GET['create'])){
             $this->create();       
-            echo('controller option 1');
+            //echo('controller option 1');
         }
         elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){
             $this->store();       
-            echo('controller option 2');
+            //echo('controller option 2');
         }
         else{
-            echo('controller option 3');
+            //echo('controller option 3');
         }
     }
 
@@ -59,14 +59,8 @@ class ControllerRegister
                     $transfert->add($obj);
 
                     header('location: accueil');
-
- 
-
- 
                 }
             }
         }
-
     }
-
  }

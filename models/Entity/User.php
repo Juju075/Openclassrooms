@@ -1,10 +1,13 @@
 <?php
-require_once('models/Manager/UserManager.php'); // à enlever bizarre
-/** 
+/**
+ * namespace App\Entity;
  */
- 
+
+require_once('models/Manager/UserManager.php'); // à enlever bizarre
+
 class User  
 {
+    // use Timestampable;
 
     const USERTYPE = [
         1 => 'Membre',
@@ -15,27 +18,15 @@ class User
     private $username;
     private $password;
     private $email;
-    private $avatar;
-
-    /*
-
-    namespace BlogMVC\Model\Entity;
-
-    private $id;
-    private $username;
-    private $email;
-    private $password;
     private $activated;
     private $validationKey;
     private $userType;
-    private $dateCreation;
-    */
+    private $avatar;
+    private $prenom;
+    private $nom;
 
-    //Sequence add user 
 
-    //function construct hydrate entity.php
-
-    public function __construct(array $obj)
+    public function __construct(array $obj){
     
         if(!empty($obj)){
 
@@ -67,6 +58,7 @@ class User
         $this->_user;
     }
 
+    //Setter
     public function setUsername(string $username){
         $this->username = $username;
     }
@@ -76,9 +68,30 @@ class User
     public function setEmail(string $email){
         $this->email = $email;
     }
-    public function setAvatar(string $avatar){
+
+/*
+    private $activated;  par defaut a 0
+    private $validationKey; genere une cle de validation
+    private $userType; par defaut 1
+
+*/
+
+    public function setActivated()
+    {
+        
+    }
+    public function setValidationKey()
+    {
+    //generer un code hass simple
+    }
+
+    public function setAvatar(string $avatar)
+    {
         $this->avatar = $avatar;
     }    
+
+
+
 
     //Getters
     public function getUsername(){

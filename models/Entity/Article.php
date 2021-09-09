@@ -1,6 +1,6 @@
 <?php 
 /**
- * 
+ * namespace App\Entity;
  */
 class Article
 {
@@ -18,54 +18,71 @@ class Article
     }
 
 
-    public function hydrate(array $data){
+    public function hydrate(array $data)
+    {
         foreach ($data as $key => $value){
             $method = 'set'.ucfirst($key);  
 
-            if(method_exists($this, $method)) {  
+            if(method_exists($this, $method)) 
+            {  
                 $this->$method($value);
             }
         }
     }
  
 
-    public function setId($id_article){  
+    public function setId($id_article)
+    {  
         $id = (int) $id_article;
         if ($id > 0){
             $this->_id_article = $id_article;
         }
     }
-    public function setTitle($title){
+
+    public function setTitle(?string $title) 
+    {
         if(is_string($title)){
             $this->_title = $title;
         }
     }
-    public function setContent($content){
+
+    public function setContent(?string $content) 
+    {
         if(is_string($content)){
             $this->_content = $content;
         }
     }
-     public function setDate($date){
+
+     public function setDate($date)
+     {
             $this->_date = $date;
     }
  
 
-    public function Id_article(){
+    public function Id_article() 
+    {
         return $this->echo();
         //return $this->_id_article;
     }
+    
     //debuging
-    public function echo(){
+    public function echo()
+    {
         echo(17);
     }
 
-    public function Title(){
+    public function Title(): ?string
+    {
         return $this->_title;
     }    
-    public function Content(){ 
+
+    public function Content(): ?string
+    { 
         return $this->_content;
     }
-    public function Date(){
+
+    public function Date()
+    {
         return $this->_date;
     }
 }

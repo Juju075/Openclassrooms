@@ -1,13 +1,20 @@
 {
+  "name": "openclassrooms/app_blog_mvc",
+  "description": "Blog avec une architecture MVC.",
+  "authors": [
+    {
+      "name": "elgato",
+      "email": "amzfba.1bestbuy@gmail.com"
+    }
+  ],
   "require": {
-    "twig/twig": "2.0"
+    "twig/twig": "3.3"
   },
   "autoload": {
     "psr-4": {
-      "App\\": "src/",
       "Tools": "Framework",
-      "Entity": "framework/models/Entity",
-      "Manager": "framework/models/Manager"
+      "Entity": "models/Entity",
+      "Manager": "models/Manager"
     }
   }
 }

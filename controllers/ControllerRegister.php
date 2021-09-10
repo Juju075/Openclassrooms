@@ -37,7 +37,13 @@ class ControllerRegister
         }
     }
 
+    //Verifier presence des attribut
     private function store(){
+        //debugging
+        echo('OK function store ctrl');
+        echo($_POST['prenom']);
+        echo($_POST['nom']);
+
         if(!empty($_POST['email'] && $_POST['checkpassword'])){
             $email = $_POST['email'];
 
@@ -49,12 +55,10 @@ class ControllerRegister
                     $token = '123456'; //random_bytes (10); // a corriger
 
                     $default_avatar = '01.jpg';
-                    $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'1','avatar' => $default_avatar);
-
+                    $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'1','avatar' => $default_avatar,'prenom'=> $_POST['prenom'],'nom'=> $_POST['nom']);
 
                     $this->_user = new User($obj); 
                  
-
                     $transfert = new UserManager;       	
                     $transfert->add($obj);
 

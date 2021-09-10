@@ -20,6 +20,10 @@ require_once('models/Manager/ArticleManager.php');
         elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){
             $this->store();
         }
+        elseif (isset($_GET['delete'])){
+            $this->create(); 
+
+        }
         else{
             $this->article();
         }
@@ -32,6 +36,18 @@ require_once('models/Manager/ArticleManager.php');
             $this->_view->displayForm('Post');
         }
     }   
+    private function delete(){
+        echo('function delete OK');
+
+        $id ='';
+
+        $this->_articleManager = new ArticleManager;
+        $this->_articleManager->deleteArticle($id);
+
+        //retour a la page du listing
+        header('Location: /accueil');
+
+    }
 
     private function store(){
         $this->_articleManager = new ArticleManager;

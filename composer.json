@@ -8,16 +8,10 @@
     }
   ],
   "require": {
-    "twig/twig": "3.3.2"
+    "twig/twig": "3.3.2",
+    "phpmailer/phpmailer": "^6.5"
   },
   "require-dev": {
     "theofidry/psysh-bundle": "^4.4"
-  },
-  "autoload": {
-    "psr-4": {
-      "Tools": "Framework",
-      "Entity": "models/Entity",
-      "Manager": "models/Manager"
-    }
   }
 }

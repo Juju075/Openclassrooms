@@ -2,6 +2,9 @@
 require_once 'views/View.php';
 require_once('models/Manager/UserManager.php'); // à enlever bizarre
 require_once('models/Entity/User.php'); // à enlever bizarre
+
+//namespace App/controllers;
+
 /**
  * 
  */
@@ -37,7 +40,6 @@ class ControllerRegister
         }
     }
 
-    //Verifier presence des attribut
     private function store(){
         //debugging
         echo('OK function store ctrl');
@@ -54,8 +56,9 @@ class ControllerRegister
                     $username = ucfirst($_POST['username']);
                     $token = '123456'; //random_bytes (10); // a corriger
 
-                    $default_avatar = '01.jpg';
-                    $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'1','avatar' => $default_avatar,'prenom'=> $_POST['prenom'],'nom'=> $_POST['nom']);
+                    //ajouter le fichier dans publid    
+                    $default_avatar = 'default_avatar.jpg';
+                    $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $default_avatar);
 
                     $this->_user = new User($obj); 
                  

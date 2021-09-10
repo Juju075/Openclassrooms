@@ -14,16 +14,19 @@ class User
         2 => 'Admin'
     ];
 
-
+    // created_date et modified_date dans timestampable  $createdAt $updatedAt
     private $username;
     private $password;
     private $email;
-    private $activated;
-    private $validationKey;
-    private $userType;
+
+    private $activated; //defaut 0
+    private $validationKey; //genere
+    private $userType; // defaut 1
+    
+
     private $avatar;
-    private $prenom;
-    private $nom;
+    private $prenom; // champs 
+    private $nom; // champs
 
 
     public function __construct(array $obj){

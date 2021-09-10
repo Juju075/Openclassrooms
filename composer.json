@@ -8,7 +8,10 @@
     }
   ],
   "require": {
-    "twig/twig": "3.3"
+    "twig/twig": "3.3.2"
+  },
+  "require-dev": {
+    "theofidry/psysh-bundle": "^4.4"
   },
   "autoload": {
     "psr-4": {

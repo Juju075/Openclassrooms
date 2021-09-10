@@ -12,11 +12,11 @@ class ControllerLogin
         }
         elseif (isset($_GET['user'])){
             $this->login();        
-            echo('controller option 1a');
+            echo('controller option 1-a');
         }
         elseif (isset($_GET['forgot'])){
             $this->forgot();       
-            echo('controller option 1b');
+            echo('controller option 1-b');
         }        
         elseif (isset($_GET['status']) && isset($_GET['status']) =="login"){  
             $this->logon();       
@@ -28,6 +28,7 @@ class ControllerLogin
     }
 
     private function login(){
+        echo('function login applique');
         $this->_view = new View('Login', 'Login');
         $this->_view->displayForm('Login');       
     }

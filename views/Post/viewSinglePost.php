@@ -37,8 +37,8 @@
 
             <ul class="tags">
               <p>Admin uniquement</p>
-              <li><a href="/post&delete">Supprimer</a></li> <!-- post&delete-->
-              <li><a href="/post&update">Modifier</a></li> <!-- post&update -->
+              <li><a href="App_Blog_MVC//post&delete">Supprimer</a></li> <!-- post&delete-->
+              <li><a href="App_Blog_MVC//post&update">Modifier</a></li> <!-- post&update -->
             </ul>
           </div><!-- blog-post-inner -->
 

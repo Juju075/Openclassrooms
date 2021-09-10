@@ -28,15 +28,15 @@
 	</header>
 
 
-<?=$content?> <!-- viewSinglePost.php -->
+<?=$content?> <!-- Post/viewSinglePost.php -->
 
 	<footer>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-section">
-						<a class="logo" href="#"><img src="public/images/logo.png" alt="Logo Image"></a>
-						<p class="copyright">Mettre twig date </p>
+						<a class="logo" href="#"><img src="public/images/logo.png" alt="Logo Ima²ge"></a>
+						<p class="copyright">Mettre twig date ici ici</p>
 						<ul class="icons">
 							<li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
 							<li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>

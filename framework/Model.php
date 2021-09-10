@@ -42,7 +42,7 @@ abstract class Model
         $req->closeCursor();
     }
 
-
+    //$obj c une entité
     protected function getOne($table, $obj, $id){
         $this->getBdd();
         $var = [];

@@ -16,6 +16,7 @@ class View
         echo $view;
     }
 
+    //il gen
     public function generatePost($data){
         $content = $this->generateFile($this->_file,$data);
 
@@ -28,6 +29,15 @@ class View
         $view = $this->generateFileSimple($page);
         echo $view;
     }
+
+    public function simpleContent($action){ 
+        $page = 'views/template'.$action .'.php';
+
+        
+        $view = $this->generateFileSimple($page);
+        echo $view;
+    }
+
 
     public function generateFileSimple($file){
         if(file_exists($file)){

@@ -28,14 +28,12 @@ class ControllerLogin
     }
 
     private function login(){
-        echo('function login applique');
         $this->_view = new View('Login', 'Login');
         $this->_view->displayForm('Login');       
     }
 
 
     private function logon(){
-        
     echo('function longon applique');
     $credentials = array('username'=> $_POST['username'],'password'=> $_POST['password']);
     $this->_item = new UserManager;

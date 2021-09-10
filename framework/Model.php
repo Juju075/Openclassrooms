@@ -62,9 +62,10 @@ abstract class Model
 
     //numero = get post #
     //Delete FROM article WHERE id_article numero
-
     protected function deleteOne($table, $id){
         $this->getBdd();  
+        $req = self::$_bdd->preparee("DELETE FROM $table WHERE id_article");
+        $req->execute(array());
 
     }   
     

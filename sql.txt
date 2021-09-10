@@ -2,57 +2,69 @@ CREATE SCHEMA IF NOT EXISTS `app_blog_mvc` DEFAULT CHARACTER SET utf8mb4 COLLATE
 
 
 CREATE TABLE IF NOT EXISTS `app_blog_mvc`.`articles` ( 
-	id                   int  NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+	id_article           int  NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
 	title                varchar(255)      ,
-	user_id              varchar(255)      ,
 	content              longtext      ,
-	`date`               datetime      
+	latest_modification  datetime  NOT NULL    ,
+	created_date         datetime  NOT NULL    ,
+	chapo                varchar(255)  NOT NULL    ,
+	id_user              int  NOT NULL      
  ) ENGINE=InnoDB;
 --
 --
 --
 
 CREATE TABLE IF NOT EXISTS `app_blog_mvc`.`comment` (
-	id                   int  NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+	id_comment           int  NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
 	content              text  NOT NULL    ,
 	date_creation        datetime  NOT NULL    ,
-	user_id              int  NOT NULL    ,
-	disabled             boolean  NOT NULL    
+	disabled             boolean  NOT NULL    ,
+	id_article           int      ,
+	id_user              int  NOT NULL    
  ) ENGINE=InnoDB;
 --
 --
 --
 CREATE TABLE IF NOT EXISTS `app_blog_mvc`.`messaging` (
-	`ID`                 int  NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
-	cle_etrangere        varchar(255)  NOT NULL    ,
-	notes                text  NOT NULL    
+	id_messaging         int  NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+	title                int      ,
+	message              int      ,
+	id_user              int  NOT NULL    ,
+	created_date         datetime  NOT NULL 
  ) ENGINE=InnoDB;
 --
 --
 --
 CREATE TABLE IF NOT EXISTS `app_blog_mvc`.`user` (
-	id                   int  NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+	id_user              int  NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+	createdat            datetime  NOT NULL DEFAULT CURRENT_TIMESTAMP   ,
+	updatedat            datetime      ,
 	username             varchar(50)  NOT NULL    ,
 	email                varchar(100)  NOT NULL    ,
 	password             varchar(255)  NOT NULL    ,
 	activated            boolean  NOT NULL    ,
 	validation_key       varchar(50)  NOT NULL    ,
 	usertype             boolean  NOT NULL    ,
-	avatar               varchar(255)  NOT NULL    ,
-	date_creation        datetime  NOT NULL DEFAULT CURRENT_TIMESTAMP   
+	prenom               varchar(255)  NOT NULL    ,
+	nom                  varchar(255)  NOT NULL    ,
+	avatar               varchar(255)  NOT NULL   
  ) ENGINE=InnoDB;
+
+ ALTER TABLE app_blog_mvc.avatar ADD CONSTRAINT fk_avatar_user FOREIGN KEY ( id_avatar ) REFERENCES app_blog_mvc.`user`( id_user ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE app_blog_mvc.comment ADD CONSTRAINT fk_comment_article FOREIGN KEY ( id_article ) REFERENCES app_blog_mvc.article( id_article ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE app_blog_mvc.comment ADD CONSTRAINT fk_comment_user FOREIGN KEY ( id_user ) REFERENCES app_blog_mvc.`user`( id_user ) ON DELETE RESTRICT ON UPDATE RESTRICT;
 --
 -- Datas
 --
 
-INSERT INTO app_blog_mvc.articles( id, title, user_id, content, `date` ) VALUES ( 1, 'React JS', null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut fringilla neque sagittis est interdum, eu blandit massa efficitur. Quisque vitae gravida augue. Curabitur lobortis bibendum justo et semper. Aenean vulputate facilisis dapibus. Nulla eu volutpat odio. Donec eu lacinia orci. Vestibulum commodo sapien mi, quis tincidunt tellus suscipit eu. Nam ultricies suscipit ipsum, et rutrum odio ornare vel. Aenean sit amet nulla id turpis pellentesque rutrum', '2021-01-06 09.23.13 PM');
-INSERT INTO app_blog_mvc.articles( id, title, user_id, content, `date` ) VALUES ( 2, 'Laravel', null, 'Maecenas nec turpis nec diam accumsan molestie. Vestibulum nulla ante, egestas vel finibus id, tempor sed orci. Quisque dapibus sem et nulla ultrices, finibus scelerisque nulla ultrices. Proin sit amet massa consectetur, tincidunt nulla a, finibus nunc. Nullam commodo condimentum placerat. Suspendisse finibus sollicitudin metus, suscipit finibus magna fermentum id. Sed vehicula turpis eu vestibulum efficitur. Donec eget accumsan arcu, vitae luctus ligula. Nunc nec imperdiet lacus.', '2021-01-06 09.23.13 PM');
-INSERT INTO app_blog_mvc.articles( id, title, user_id, content, `date` ) VALUES ( 3, 'NodeJd', null, 'Fusce non diam ut turpis tempus finibus. Nulla malesuada odio sem, viverra lacinia metus luctus id. Sed sit amet ante ut quam maximus volutpat. Sed ac ex id massa elementum tempor at eget enim. Vestibulum et odio tincidunt, placerat sapien ut, iaculis tellus. Sed mauris turpis, commodo ut tellus eu, eleifend egestas magna. Cras bibendum sit amet arcu sed dapibus.', '2021-01-06 09.23.13 PM');
-INSERT INTO app_blog_mvc.articles( id, title, user_id, content, `date` ) VALUES ( 4, 'Python', null, 'Nulla nec massa nec lorem tristique ultrices. Maecenas nec tincidunt dui, vitae efficitur velit. Etiam tincidunt tristique odio vitae ornare. Praesent vestibulum, metus eu euismod tempus, velit libero gravida neque, quis eleifend turpis tortor quis nisl. Nunc ac tortor ligula. Aenean rhoncus ex eu libero venenatis lacinia. Mauris lacinia suscipit dui, a viverra felis congue id. Duis aliquam lorem malesuada dui commodo, quis imperdiet augue gravida. Maecenas eu sem quis augue tincidunt tincidunt vel nec ligula. Aliquam fermentum fringilla augue, eget eleifend arcu cursus ut. Vivamus porta orci felis, et euismod odio elementum ac. Vivamus consequat urna quis odio feugiat, eget pharetra diam viverra. Integer ipsum felis, posuere quis leo at, lacinia luctus lectus. Suspendisse et purus mattis, efficitur orci at, elementum lectus.', '2021-01-06 09.23.13 PM');
-INSERT INTO app_blog_mvc.articles( id, title, user_id, content, `date` ) VALUES ( 17, 'gdgdgd', null, 'dgdgdgd', '2019-08-20 11.00.00 PM');
-INSERT INTO app_blog_mvc.articles( id, title, user_id, content, `date` ) VALUES ( 18, 'gdgdgd', null, 'dgdgdgd', '2019-08-20 11.00.00 PM');
-INSERT INTO app_blog_mvc.`user`( id, username, email, password, activated, validation_key, usertype, avatar, date_creation ) VALUES ( 2, 'testuser', 'juniorkheve@gmail.com', '$2y$10$clPUzgXc8oNsDvOZheuSY.FJK10ZHjzL.ik/34MUPXJeUjYoa.0Gi', 1, '123456', 1, '01.jpg', '2021-01-20 12.34.27 PM');
-INSERT INTO app_blog_mvc.`user`( id, username, email, password, activated, validation_key, usertype, avatar, date_creation ) VALUES ( 4, 'utilisateur', 'amzfba.1bestbuy@gmail.com', '$2y$10$LlQBtasq6CYg1UrvjlGf2.Mp/qun2vVy4ivww0tD2w22wwQxz8RES', 1, '123456', 1, '01.jpg', '2021-01-22 11.25.00 AM');
-INSERT INTO app_blog_mvc.`user`( id, username, email, password, activated, validation_key, usertype, avatar, date_creation ) VALUES ( 5, 'utilisateur2', 'juniorkheve@gmail.com', '$2y$10$QdUdI1ZQh4vNgwprm0i.G.sFDscm9uQvdoanSvbpK/Nsx7usddH1K', 1, '123456', 1, '01.jpg', '2021-01-22 03.12.03 PM');
-INSERT INTO app_blog_mvc.`user`( id, username, email, password, activated, validation_key, usertype, avatar, date_creation ) VALUES ( 8, 'test5', 'junior_kheve@yahoo.fr', '$2y$10$EB41WNOhZSqN3D97fmvhyO6hIcFr0MnvJvcgkYpKGIS3WBKjjcIf.', 1, '123456', 1, '01.jpg', '2021-01-24 05.25.58 PM');
-INSERT INTO app_blog_mvc.`user`( id, username, email, password, activated, validation_key, usertype, avatar, date_creation ) VALUES ( 9, 'sdfsd', 'juniorkheve@gmail.com', '$2y$10$IRpm0OJWCu1WumPdFzyKXO0lFKYhQkfR/kIJb/YdOIXFnFH4YM8uW', 1, '123456', 1, '01.jpg', '2021-01-24 08.42.25 PM');
+INSERT INTO app_blog_mvc.article( id_article, title, content, latest_modification, created_date, chapo, id_user ) VALUES ( 1, 'React JS', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut fringilla neque sagittis est interdum, eu blandit massa efficitur. Quisque vitae gravida augue. Curabitur lobortis bibendum justo et semper. Aenean vulputate facilisis dapibus. Nulla eu volutpat odio. Donec eu lacinia orci. Vestibulum commodo sapien mi, quis tincidunt tellus suscipit eu. Nam ultricies suscipit ipsum, et rutrum odio ornare vel. Aenean sit amet nulla id turpis pellentesque rutrum', '2021-01-06 10.23.13 AM', null, '', 0);
+INSERT INTO app_blog_mvc.article( id_article, title, content, latest_modification, created_date, chapo, id_user ) VALUES ( 2, 'Laravel', 'Maecenas nec turpis nec diam accumsan molestie. Vestibulum nulla ante, egestas vel finibus id, tempor sed orci. Quisque dapibus sem et nulla ultrices, finibus scelerisque nulla ultrices. Proin sit amet massa consectetur, tincidunt nulla a, finibus nunc. Nullam commodo condimentum placerat. Suspendisse finibus sollicitudin metus, suscipit finibus magna fermentum id. Sed vehicula turpis eu vestibulum efficitur. Donec eget accumsan arcu, vitae luctus ligula. Nunc nec imperdiet lacus.', '2021-01-06 10.23.13 AM', null, '', 0);
+INSERT INTO app_blog_mvc.article( id_article, title, content, latest_modification, created_date, chapo, id_user ) VALUES ( 3, 'NodeJd', 'Fusce non diam ut turpis tempus finibus. Nulla malesuada odio sem, viverra lacinia metus luctus id. Sed sit amet ante ut quam maximus volutpat. Sed ac ex id massa elementum tempor at eget enim. Vestibulum et odio tincidunt, placerat sapien ut, iaculis tellus. Sed mauris turpis, commodo ut tellus eu, eleifend egestas magna. Cras bibendum sit amet arcu sed dapibus.', '2021-01-06 10.23.13 AM', null, '', 0);
+INSERT INTO app_blog_mvc.article( id_article, title, content, latest_modification, created_date, chapo, id_user ) VALUES ( 4, 'Python', 'Nulla nec massa nec lorem tristique ultrices. Maecenas nec tincidunt dui, vitae efficitur velit. Etiam tincidunt tristique odio vitae ornare. Praesent vestibulum, metus eu euismod tempus, velit libero gravida neque, quis eleifend turpis tortor quis nisl. Nunc ac tortor ligula. Aenean rhoncus ex eu libero venenatis lacinia. Mauris lacinia suscipit dui, a viverra felis congue id. Duis aliquam lorem malesuada dui commodo, quis imperdiet augue gravida. Maecenas eu sem quis augue tincidunt tincidunt vel nec ligula. Aliquam fermentum fringilla augue, eget eleifend arcu cursus ut. Vivamus porta orci felis, et euismod odio elementum ac. Vivamus consequat urna quis odio feugiat, eget pharetra diam viverra. Integer ipsum felis, posuere quis leo at, lacinia luctus lectus. Suspendisse et purus mattis, efficitur orci at, elementum lectus.', '2021-01-06 10.23.13 AM', null, '', 0);
+INSERT INTO app_blog_mvc.article( id_article, title, content, latest_modification, created_date, chapo, id_user ) VALUES ( 17, 'c l article 17 modifié ok', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2019-08-20 01.00.00 PM', null, '', 0);
+INSERT INTO app_blog_mvc.article( id_article, title, content, latest_modification, created_date, chapo, id_user ) VALUES ( 18, 'c larticle 18 modifié ok', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2019-08-20 01.00.00 PM', null, '', 0);
+INSERT INTO app_blog_mvc.article( id_article, title, content, latest_modification, created_date, chapo, id_user ) VALUES ( 19, 'Test titre article', 'test contenu article', '2009-09-20 11.00.00 PM', null, '', 0);
+INSERT INTO app_blog_mvc.`user`( id_user, username, email, password, activated, validation_key, usertype, avatar, createdat, prenom, nom, updatedat ) VALUES ( 11, 'testutilisateur', 'testemail@gmail.com', '$2y$10$NoKCkMeVJQRP6tDGzPELgu6SAUWOGYRkcs6UkLLZ8ELKl0okj2QHS', 1, '123456', 1, 'default_avatar.jpg', '2021-09-10 05.52.11 PM', 'testprenom', 'testnom', null);
+INSERT INTO app_blog_mvc.`user`( id_user, username, email, password, activated, validation_key, usertype, avatar, createdat, prenom, nom, updatedat ) VALUES ( 12, 'testusername', 'testuser@user.com', '$2y$10$xx9/qZiszTLxl8CkcKcyaOXXKnrtXISfpajqPkGNMS4MKysi9VLFu', 1, '123456', 1, 'default_avatar.jpg', '2021-09-10 09.13.00 PM', 'testprenom', 'testnom', null);

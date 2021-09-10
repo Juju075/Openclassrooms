@@ -28,7 +28,7 @@
 	</header>
 
 
-<?=$content?> <!-- viewSinglePost.php -->
+<!-- <?=$content?> -->
 
 	<footer>
 		<div class="container">

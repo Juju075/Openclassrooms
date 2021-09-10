@@ -10,8 +10,6 @@ require_once('models/Manager/ArticleManager.php');
     private $_view; 
 
      public function __construct(){
-         echo('fonction constructeur ok');
-
          if(isset($url) && count($url) > 1){ 
             throw new \Exception("Page introuvable", 1);
         } 

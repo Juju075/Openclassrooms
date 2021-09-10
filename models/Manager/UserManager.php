@@ -14,11 +14,6 @@ require_once('framework/Model.php');
  */
 class UserManager extends Model
 {
-    public function getList(){
-    }
-    public function get(){
-    }
-
     // Mettre dans Model.php Rajouter des champs
     public function add(array $obj){ 
         echo($obj);
@@ -27,7 +22,6 @@ class UserManager extends Model
 
         //ceatedate
         //updatedate
-
 
         $username = $obj['username'];
         $password = $obj['password'];
@@ -41,12 +35,9 @@ class UserManager extends Model
 
         $avatar = $obj['avatar'];
 
-
-
-
         $this->getBdd();
         //manque les attribut date
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (username, email, password, activated, validation_key, usertype, prenom, nom,  avatar) VALUES (:username, :email, :password, :activated, :validation_key, :usertype, :prenom, :nom, :avatar)");
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (username, email, password, activated, validation_key, usertype, prenom, nom, avatar) VALUES (:username, :email, :password, :activated, :validation_key, :usertype, :prenom, :nom, :avatar)");
         $req->execute(array(
             'username' => $username,
             'email' => $email,
@@ -61,11 +52,12 @@ class UserManager extends Model
         $req->closeCursor();
         return $this;
     }
-    
+
     public function delete(){
     }
     public function update(){
     }
+    
     public function login($obj){
 
         $this->getBdd();
@@ -84,7 +76,6 @@ class UserManager extends Model
             $smg = 'Mauvais mot de pass ou login ou cpt non valide.';
             header('location: accueil?passe=non_valide');
         }     
-
         return $this;   
     }
     public function contact(){

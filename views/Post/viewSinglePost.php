@@ -37,8 +37,10 @@
 
             <ul class="tags">
               <p>Admin uniquement</p>
-              <li><a href="App_Blog_MVC//post&delete">Supprimer</a></li> <!-- post&delete-->
-              <li><a href="App_Blog_MVC//post&update">Modifier</a></li> <!-- post&update -->
+
+              <!-- Recupere Get-->
+              <li><a href="post&delete=<?= $_GET['id_article']?>">Supprimer</a></li> <!-- post&delete-->
+              <li><a href="post&update=<?= $_GET['id_article']?>">Modifier</a></li> <!-- post&update -->
             </ul>
           </div><!-- blog-post-inner -->
 

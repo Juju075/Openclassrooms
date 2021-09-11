@@ -21,8 +21,7 @@ require_once('models/Manager/ArticleManager.php');
             $this->store();
         }
         elseif (isset($_GET['delete'])){
-            $this->create(); 
-
+            $this->delete($_GET['delete']); 
         }
         else{
             $this->article();
@@ -36,16 +35,10 @@ require_once('models/Manager/ArticleManager.php');
             $this->_view->displayForm('Post');
         }
     }   
-    private function delete(){
-        echo('function delete OK');
-
-        $id ='';
-
+    private function delete($id){
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->deleteArticle($id);
-
-        //retour a la page du listing
-        header('Location: /accueil');
+        header('Location: App_Blog_MVC/accueil');
 
     }
 

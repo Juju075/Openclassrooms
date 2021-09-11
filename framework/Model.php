@@ -47,7 +47,7 @@ abstract class Model
         $this->getBdd();
         $var = [];
 
-        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(latest_modification, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
+        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updateat, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
         $req->execute(array($id));
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC)){
@@ -68,22 +68,20 @@ abstract class Model
 
     } 
 
-    //modifie tous les champs title et description 
-        protected function updateOne($table, $id){
-        $this->getBdd();  
-        //$req = self::$_bdd->prepare("UPDATE $table SET WHERE id_article = $id");
-        //$req->execute(array());
-        }
-
     protected function createOne($table, $obj){
         $this->getBdd();
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, content, latest_modification) VALUES (?, ?, ?)");
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, content, updateat) VALUES (?, ?, ?)");
         $req->execute(array($_POST['title'], $_POST['content'], date("d.m.Y")));
 
         $req->closeCursor();
     }
 
-    
-    // update
+     protected function updateOne($table, $id){
+        //$this->getBdd();
+        //$req = self::$_bdd->prepare();
+        //$req->execute(array($));
+
+        //$req->closeCursor();
+    }   
 
 }

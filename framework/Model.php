@@ -68,13 +68,6 @@ abstract class Model
 
     } 
 
-    //modifie tous les champs title et description 
-        protected function updateOne($table, $id){
-        $this->getBdd();  
-        //$req = self::$_bdd->prepare("UPDATE $table SET WHERE id_article = $id");
-        //$req->execute(array());
-        }
-
     protected function createOne($table, $obj){
         $this->getBdd();
         $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, content, latest_modification) VALUES (?, ?, ?)");
@@ -83,7 +76,12 @@ abstract class Model
         $req->closeCursor();
     }
 
-    
-    // update
+     protected function updateOne($table, $id){
+        //$this->getBdd();
+        //$req = self::$_bdd->prepare();
+        //$req->execute(array($));
+
+        //$req->closeCursor();
+    }   
 
 }

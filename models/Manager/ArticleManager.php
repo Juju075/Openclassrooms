@@ -20,12 +20,20 @@ class ArticleManager extends Model
    
       return $this->deleteOne('article', $id);
    }
-   public function updateArticle($id){
-      return $this->updateOne('article', $id);
-   }
+   
    
    //Admin modification post > + page de modification
-   public function update($id){
+   public function updateArticle($id){
+      echo('ArticleManager update');
+//Afficher la page 
+
+//ou selon url
+
+      //Enregistrement Model
+      return $this->updateOne('article', $id);
 
    }
+
+
+
 }

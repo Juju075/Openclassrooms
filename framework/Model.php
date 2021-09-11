@@ -66,8 +66,14 @@ abstract class Model
         $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_article = $id");
         $req->execute(array());
 
-    }   
-    
+    } 
+
+    //modifie tous les champs title et description 
+        protected function updateOne($table, $id){
+        $this->getBdd();  
+        //$req = self::$_bdd->prepare("UPDATE $table SET WHERE id_article = $id");
+        //$req->execute(array());
+        }
 
     protected function createOne($table, $obj){
         $this->getBdd();

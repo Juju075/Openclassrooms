@@ -17,9 +17,11 @@ class ArticleManager extends Model
 
    //Admin delete post
    public function deleteArticle($id){
-
-      return $this->deleteOne('article', $id);
    
+      return $this->deleteOne('article', $id);
+   }
+   public function updateArticle($id){
+      return $this->updateOne('article', $id);
    }
    
    //Admin modification post > + page de modification

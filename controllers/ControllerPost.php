@@ -23,6 +23,9 @@ require_once('models/Manager/ArticleManager.php');
         elseif (isset($_GET['delete'])){
             $this->delete($_GET['delete']); 
         }
+        elseif (isset($_GET['update'])){
+        $this->update($_GET['update']); 
+        }
         else{
             $this->article();
         }
@@ -39,7 +42,11 @@ require_once('models/Manager/ArticleManager.php');
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->deleteArticle($id);
         header('Location: App_Blog_MVC/accueil');
-
+    }
+        private function update($id){
+        $this->_articleManager = new ArticleManager;
+        $this->_articleManager->updateArticle($id);
+        header('Location: App_Blog_MVC/accueil');
     }
 
     private function store(){

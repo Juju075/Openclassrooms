@@ -77,7 +77,13 @@ abstract class Model
         $req->closeCursor();
     }
 
-    
+     protected function updateOne($table, $id){
+        $this->getBdd();
+        $req = self::$_bdd->prepare();
+        //$req->execute(array($));
+
+        $req->closeCursor();
+    }   
     // update
 
 }

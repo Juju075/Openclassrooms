@@ -33,10 +33,7 @@ namespace App\Entity\Traits;
         }
     
 
-        /**
-         * @ORM\PrePersist
-         * @ORM\PreUpdate
-         */
+ 
 
         public function updateTimestamps()
         {

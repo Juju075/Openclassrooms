@@ -17,7 +17,6 @@ class ArticleManager extends Model
 
    //Admin delete post
    public function deleteArticle($id){
-   
       return $this->deleteOne('article', $id);
    }
    
@@ -26,6 +25,7 @@ class ArticleManager extends Model
    public function updateArticle($id){
       echo('ArticleManager update');
    //Afficher la page 
+      $this->_view = new View('Accueil','Post');
 
    //ou selon url
 

@@ -25,15 +25,12 @@ class ArticleManager extends Model
    //Admin modification post > + page de modification
    public function updateArticle($id){
       echo('ArticleManager update');
-//Afficher la page 
+   //Afficher la page 
 
-//ou selon url
+   //ou selon url
 
-      //Enregistrement Model
+   //Enregistrement Model
       return $this->updateOne('article', $id);
 
    }
-
-
-
 }

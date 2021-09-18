@@ -1,2 +1,2 @@
 <?php
-namespace Entity;
+namespace Tools;

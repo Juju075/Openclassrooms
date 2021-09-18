@@ -1,5 +1,5 @@
 <?php
-namespace Entity;
+namespace Tools;
 
 //require_once('framework/models/Entity/Article.php'); // à enlever bizarre
 

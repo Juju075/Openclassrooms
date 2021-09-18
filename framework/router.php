@@ -1,5 +1,5 @@
 <?php
-namespace Entity;
+namespace Tools;
 
 require_once('views/view.php');
 

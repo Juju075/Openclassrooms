@@ -1,5 +1,5 @@
 <?php
-namespace Entity;
+namespace Manager;
 
 /**
  * require_once('framework/Model.php');

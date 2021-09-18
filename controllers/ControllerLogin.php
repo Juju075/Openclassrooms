@@ -1,9 +1,11 @@
 <?php
-require_once 'views/View.php';
-require_once('models/Manager/UserManager.php'); 
+namespace App\controllers;
+
 /**
- * 
+* require_once 'views/View.php';
+* require_once('models/Manager/UserManager.php'); 
  */
+
 class ControllerLogin
 {
     public function __construct(){

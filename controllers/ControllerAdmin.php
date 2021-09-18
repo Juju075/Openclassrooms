@@ -1,4 +1,6 @@
 <?php
+namespace App\controllers;
+
 /**
  * Toute les fonctionnalites
  * postManagement()

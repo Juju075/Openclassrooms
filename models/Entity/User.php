@@ -1,9 +1,10 @@
 <?php
+namespace Entity;
+
 /**
- * namespace App\Entity;
+ * require_once('models/Manager/UserManager.php'); // à enlever bizarre
  */
 
-require_once('models/Manager/UserManager.php'); // à enlever bizarre
 
 class User  
 {

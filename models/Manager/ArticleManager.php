@@ -1,6 +1,10 @@
 <?php
+namespace Entity;
+/**
+ * require_once('framework/Model.php'); // à enlever bizarre
+ */
 
-require_once('framework/Model.php'); // à enlever bizarre
+
 
 class ArticleManager extends Model
 {

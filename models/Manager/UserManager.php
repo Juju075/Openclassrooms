@@ -1,8 +1,10 @@
 <?php
+namespace Entity;
+
 /**
- * namespace & use(namespace de Entity pour hydrater)
+ * require_once('framework/Model.php');
  */
-require_once('framework/Model.php');
+
 /**
  * Toute les fonctionnalités.
  * getList()
@@ -12,6 +14,7 @@ require_once('framework/Model.php');
  * update()
  * login()
  */
+
 class UserManager extends Model
 {
     // Mettre dans Model.php Rajouter des champs

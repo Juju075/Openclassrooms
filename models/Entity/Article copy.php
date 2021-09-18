@@ -1,8 +1,6 @@
 <?php
-
-// Ancienne version de Article.php
-//pb  
 namespace Entity;
+
 
 abstract class Entity 
 {

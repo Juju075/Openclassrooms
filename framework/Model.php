@@ -1,7 +1,6 @@
 <?php
-/**
- *
-*/
+namespace Entity;
+
 //require_once('framework/models/Entity/Article.php'); // à enlever bizarre
 
 abstract class Model

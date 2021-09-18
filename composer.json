@@ -7,6 +7,12 @@
       "email": "amzfba.1bestbuy@gmail.com"
     }
   ],
+  "psr-4": {
+    "App\\": "src/",
+    "Tools\\": "Framework",
+    "Entity\\": "Model/Entity",
+    "Manager\\": "Model/Manager"
+  },
   "require": {
     "twig/twig": "3.3.2",
     "phpmailer/phpmailer": "^6.5"

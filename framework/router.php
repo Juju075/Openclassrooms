@@ -1,4 +1,6 @@
 <?php
+namespace Entity;
+
 require_once('views/view.php');
 
  class Router

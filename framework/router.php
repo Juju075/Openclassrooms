@@ -21,7 +21,6 @@ use View\View;
 
         spl_autoload_register(
             function($class){ 
-            echo('debugging ici $class');
             require_once('models/Entity/Article.php');
             //require_once('models/Entity/'.$class.'.php'); //Bizzare  // ERREUR 1 ICI | Entite pas controlleur
             }

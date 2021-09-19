@@ -21,11 +21,11 @@ use View\View;
 
         spl_autoload_register(
             function($class){ 
-            echo('debugging ici');
+            echo('debugging ici $class');
             var_dump($class);
 
             require_once('models/Entity/Article.php');
-            //require_once('models/Entity/'.$class.'.php'); //Bizzare  // ERREUR ICI | Entite pas controlleur
+            //require_once('models/Entity/'.$class.'.php'); //Bizzare  // ERREUR 1 ICI | Entite pas controlleur
             }
         );
 
@@ -46,16 +46,17 @@ use View\View;
             if (file_exists($controllerFile)){
                 echo('le fichier existe');
                 
-                //require_once($controllerFile); // ERREUR ICI | import du fichier ici ok code passe
                 require_once('controllers/ControllerAccueil.php'); //en dur ca fonctionne
-                
-                var_dump($controllerClass);
+                //require_once($controllerFile); // ERREUR 2 ICI | import du fichier ici ok code passe
+
+                echo('debugging $controllerClass');
+                var_dump($controllerClass); //'ControllerAccueil'
                 
                 
                 //Affectation de ctrl
-                $this->ctrl = new $controllerClass($url);  // ERREUR ICI | 
+                $this->ctrl = new $controllerClass($url);  // ERREUR 3 ICI |  
                 echo('jusqu ici tout vas bien 1');
-                echo($ctrl); //ok
+
                 //Cannot declare class controllers\ControllerPost, because the name is already in use
 
                 echo('jusqu ici tout vas bien 2');
@@ -69,7 +70,7 @@ use View\View;
             }
             else{  // Page par defaut si erreur | Marche
                 $this->ctrl = new ControllerAccueil($url);
-                echo($ctrl);
+
             }
 
         } catch(\Exception $e){ 

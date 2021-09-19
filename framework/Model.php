@@ -60,6 +60,8 @@ abstract class Model
 
     //$obj c une entité
     protected function getOne($table, $obj, $id){
+        var_dump($obj);
+
         $this->getBdd();
         $var = [];
 
@@ -67,7 +69,7 @@ abstract class Model
         $req->execute(array($id));
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            $var[] = new $obj($data);  
+            $var[] = new $obj($data);  //eg: Article
             
         }
         return $var;

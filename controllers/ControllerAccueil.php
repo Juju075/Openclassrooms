@@ -1,11 +1,17 @@
 <?php
 namespace Controllers;
-use View;
+
+use View\View;
 use Manager\ArticleManager;
 
 
-require_once 'views/View.php';
-require_once('models/Manager/ArticleManager.php'); // à enlever bizarre
+//require_once('models/Manager/ArticleManager.php'); // à enlever bizarre
+
+/**
+ *require_once 'views/View.php';
+* require_once('models/Manager/ArticleManager.php'); // à enlever bizarre
+ */
+
 
  class ControllerAccueil
  {

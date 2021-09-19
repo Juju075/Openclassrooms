@@ -5,7 +5,8 @@ namespace Tools;
 require 'controllers/ControllerPost.php';
 
 use Controllers\ControllerAccueil;
-use View;
+use View\View;
+
 
  class Router
  {
@@ -19,8 +20,10 @@ use View;
         $class = 'Article'; 
 
         spl_autoload_register(function($class){ 
-        require_once('models/Entity/Article.php');
-        //require_once('models/'.$class.'.php'); //Bizzare
+            var_dump($class);
+
+        //require_once('models/Entity/Article.php');
+        require_once('models/Entity/'.$class.'.php'); //Bizzare  // ERREUR ICI | 
         });
 
 
@@ -62,7 +65,6 @@ use View;
                 }
             }
             else{  // Page par defaut si erreur | Marche
-                //require_once('controllers/ControllerAccueil.php'); fonctionne sans ok
                 $this->ctrl = new ControllerAccueil($url);
                 echo($ctrl);
             }

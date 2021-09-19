@@ -1,7 +1,7 @@
 <?php
 namespace Manager;
 use Tools\Model;
-use View;
+use View\View;
 
 
 //require_once('framework/Model.php');

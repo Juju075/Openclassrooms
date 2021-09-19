@@ -1,7 +1,7 @@
 <?php
 namespace controllers;
 
-use View;
+use View\View;
 use Manager\ArticleManager;
 
  class ControllerPost

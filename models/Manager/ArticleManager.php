@@ -1,11 +1,10 @@
 <?php
 namespace Manager;
-
-/**
- * require_once('framework/Model.php'); // à enlever bizarre
- */
+use Tools\Model;
+use View;
 
 
+require_once('framework/Model.php');
 
 class ArticleManager extends Model
 {

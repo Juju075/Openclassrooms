@@ -10,12 +10,9 @@ abstract class Model
 {
     protected static $_bdd;
     
-
-
-
     private static function setBdd(){
-        self::$_bdd = new PDO('mysql:host=localhost;dbname=app_blog_mvc;charset=utf8','root','');
-        self::$_bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        self::$_bdd = new \PDO('mysql:host=localhost;dbname=app_blog_mvc;charset=utf8','root','');
+        self::$_bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);
     }
 
     protected function getBdd(){
@@ -36,7 +33,7 @@ abstract class Model
         $req  = self::$_bdd->prepare('SELECT * FROM '. $table.' ORDER BY id_article desc');  
         $req->execute();
 
-        while ($data = $req->fetch(PDO::FETCH_ASSOC)){
+        while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             $var[] = new $obj($data); //le tableau vas instancie un nouvel Article.php en lui passant
         }
 
@@ -52,7 +49,7 @@ abstract class Model
         $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updateat, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
         $req->execute(array($id));
 
-        while ($data = $req->fetch(PDO::FETCH_ASSOC)){
+        while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             $var[] = new $obj($data);  
             
         }

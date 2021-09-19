@@ -1,5 +1,5 @@
 <?php
-namespace controllers;
+namespace Controllers;
 
 /**
  * Toute les fonctionnalites

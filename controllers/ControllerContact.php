@@ -1,15 +1,8 @@
 <?php
-namespace controllers;
+namespace Controllers;
+use View;
+use Manager\UserManager;
 
-/**
-* require_once 'views/View.php';
-* require_once('models/Manager/UserManager.php'); 
- */
-
-
-/**
- * 
- */
 class ControllerContact
 {
     public function __construct(){

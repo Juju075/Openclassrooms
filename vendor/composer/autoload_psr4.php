@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'View\\' => array($baseDir . '/views'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Tools\\' => array($baseDir . '/framework'),
     'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
@@ -45,4 +46,5 @@ return array(
     'Manager\\' => array($baseDir . '/models/Manager'),
     'Fidry\\PsyshBundle\\' => array($vendorDir . '/theofidry/psysh-bundle/src'),
     'Entity\\' => array($baseDir . '/models/Entity'),
+    'Controllers\\' => array($baseDir . '/controllers'),
 );

@@ -1,10 +1,7 @@
 <?php
 namespace controllers;
-
-/**
-* require_once 'views/View.php';
-* require_once('models/Manager/ArticleManager.php');
- */
+use View;
+use Manager\ArticleManager;
 
  class ControllerPost
  {

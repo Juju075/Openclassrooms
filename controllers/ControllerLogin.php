@@ -1,10 +1,7 @@
 <?php
-namespace controllers;
-
-/**
-* require_once 'views/View.php';
-* require_once('models/Manager/UserManager.php'); 
- */
+namespace Controllers;
+use View;
+use Manager\UserManager;
 
 class ControllerLogin
 {

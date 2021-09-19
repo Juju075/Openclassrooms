@@ -9,8 +9,10 @@
   ],
   "autoload": {
     "psr-4": {
+      "Controllers\\": "controllers/",
       "Tools\\": "framework/",
       "Entity\\": "models/Entity/",
+      "View\\": "views/",
       "Manager\\": "models/Manager/"
     }
   },

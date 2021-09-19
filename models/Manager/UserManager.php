@@ -1,9 +1,6 @@
 <?php
 namespace Manager;
-
-/**
- * require_once('framework/Model.php');
- */
+use Tools\Model;
 
 /**
  * Toute les fonctionnalités.

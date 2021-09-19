@@ -1,11 +1,8 @@
 <?php
 namespace Tools;
 
-
-/**
- * require_once('views/view.php');
- */
-
+use controllers\ControllerAccueil;
+use View;
 
  class Router
  {
@@ -35,11 +32,7 @@ namespace Tools;
          
 
             $controllerFile = "controllers/".$controllerClass.".php";
-                $verification = file_exists($controllerFile);
-
-
             
-
             if (file_exists($controllerFile)){
 
                 require_once($controllerFile);
@@ -50,7 +43,7 @@ namespace Tools;
                 throw new \Exception("Page introuvable", 1);
                 }
             }
-            else{ // Page par defaut si erreur
+            else{  // Page par defaut si erreur
                 require_once('controllers/ControllerAccueil.php');
                 $this->ctrl = new ControllerAccueil($url);
             }
@@ -60,7 +53,6 @@ namespace Tools;
 
             $this->_view = new View('Error','Post'); 
             $this->_view->generate(array('errosMsg'=>$errorMsg));
-
             require_once('views/viewError.php'); 
         }
     }

@@ -1,12 +1,12 @@
 <?php
-namespace App\controllers;
+namespace controllers;
 
 /**
 * require_once 'views/View.php';
 * require_once('models/Manager/UserManager.php'); 
  */
-require_once 'views/View.php';
-require_once('models/Manager/UserManager.php'); 
+
+
 /**
  * 
  */

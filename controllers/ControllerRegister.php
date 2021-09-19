@@ -1,13 +1,12 @@
 <?php
-require_once 'views/View.php';
-require_once('models/Manager/UserManager.php'); // à enlever bizarre
-require_once('models/Entity/User.php'); // à enlever bizarre
-
-//namespace App/controllers;
+namespace controllers;
 
 /**
- * 
+* require_once 'views/View.php';
+* require_once('models/Manager/UserManager.php'); // à enlever bizarre
+* require_once('models/Entity/User.php'); // à enlever bizarre
  */
+
 class ControllerRegister
  {
      private $user;

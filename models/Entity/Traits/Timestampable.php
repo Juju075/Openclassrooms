@@ -1,5 +1,5 @@
 <?php
-namespace App\Entity\Traits;
+namespace models\Entity\Traits;
 
 
     trait Timestampable

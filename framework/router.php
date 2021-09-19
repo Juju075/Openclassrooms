@@ -37,18 +37,18 @@ use View\View;
 
             $controller = ucfirst(strtolower($url[0])); 
             $controllerClass = "Controller".$controller;  
-         
-
             $controllerFile = "controllers/".$controllerClass.".php";
+
+            echo('path');
             var_dump($controllerFile);
             
             if (file_exists($controllerFile)){
-                echo('le fichier existe');
+                //echo('le fichier existe');
                 
                 require_once('controllers/ControllerAccueil.php'); //en dur ca fonctionne
                 //require_once($controllerFile); // ERREUR 2 ICI | import du fichier ici ok code passe
 
-                echo('debugging $controllerClass');
+                echo('Class a appeler');
                 var_dump($controllerClass); //'ControllerAccueil'
                 
                 

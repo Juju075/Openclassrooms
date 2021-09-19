@@ -19,12 +19,15 @@ use View\View;
     try {
         $class = 'Article'; 
 
-        spl_autoload_register(function($class){ 
+        spl_autoload_register(
+            function($class){ 
+            echo('debugging ici');
             var_dump($class);
 
-        //require_once('models/Entity/Article.php');
-        require_once('models/Entity/'.$class.'.php'); //Bizzare  // ERREUR ICI | 
-        });
+            require_once('models/Entity/Article.php');
+            //require_once('models/Entity/'.$class.'.php'); //Bizzare  // ERREUR ICI | Entite pas controlleur
+            }
+        );
 
 
         $url = '';

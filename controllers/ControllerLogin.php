@@ -1,6 +1,6 @@
 <?php
 namespace Controllers;
-use View;
+use View\View;
 use Manager\UserManager;
 
 class ControllerLogin

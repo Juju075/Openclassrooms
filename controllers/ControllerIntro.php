@@ -1,6 +1,6 @@
 <?php
 namespace Controllers;
-use View;
+use View\View;
 
 /**
 * require_once('models/Manager/ArticleManager.php'); 

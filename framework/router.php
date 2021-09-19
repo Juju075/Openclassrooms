@@ -10,8 +10,8 @@ use View\View;
 
  class Router
  {
-    private $ctrl; 
-    private $view; 
+    private $_ctrl; 
+    private $_view; 
 
 
     public function routeReq(){
@@ -42,18 +42,22 @@ use View\View;
             var_dump($controllerFile);
             
             if (file_exists($controllerFile)){
-                //echo('le fichier existe');
+                echo('le fichier existe');
                 
-                require_once('controllers/ControllerAccueil.php'); //en dur ca fonctionne
-                //require_once($controllerFile); // ERREUR 2 ICI | import du fichier ici ok code passe
+                //require_once('controllers/ControllerAccueil.php'); //en dur ca fonctionne
+                require_once($controllerFile); // ERREUR 2 ICI | import du fichier ici ok code passe
 
                 echo('Class a appeler');
                 var_dump($controllerClass); //'ControllerAccueil'
                 
                 
-                //Affectation de ctrl
-                $this->ctrl = new $controllerClass($url);  // ERREUR 3 ICI |  
                 echo('jusqu ici tout vas bien 1');
+                echo('$url');
+                var_dump($url);
+
+                //Affectation de ctrl
+                //$this->ctrl = new ControllerAccueil($url);  // ERREUR 3 ICI |  
+                $this->ctrl = new $controllerClass($url);  // ERREUR 3 ICI |  
 
                 //Cannot declare class controllers\ControllerPost, because the name is already in use
 

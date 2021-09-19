@@ -22,13 +22,12 @@ use View\View;
         spl_autoload_register(
             function($class){ 
             echo('debugging ici $class');
-            var_dump($class);
-
             require_once('models/Entity/Article.php');
             //require_once('models/Entity/'.$class.'.php'); //Bizzare  // ERREUR 1 ICI | Entite pas controlleur
             }
         );
-
+            echo('lg 23 $class ');
+            var_dump($class); // ok Article
 
         $url = '';
 

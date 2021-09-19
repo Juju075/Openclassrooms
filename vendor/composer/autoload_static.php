@@ -25,6 +25,7 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
         'T' => 
         array (
             'Twig\\' => 5,
+            'Tools\\' => 6,
         ),
         'S' => 
         array (
@@ -66,9 +67,17 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
             'PhpParser\\' => 10,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'M' => 
+        array (
+            'Manager\\' => 8,
+        ),
         'F' => 
         array (
             'Fidry\\PsyshBundle\\' => 18,
+        ),
+        'E' => 
+        array (
+            'Entity\\' => 7,
         ),
     );
 
@@ -76,6 +85,10 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'Tools\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/framework',
         ),
         'Symfony\\Polyfill\\Php81\\' => 
         array (
@@ -213,9 +226,17 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'Manager\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/models/Manager',
+        ),
         'Fidry\\PsyshBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/theofidry/psysh-bundle/src',
+        ),
+        'Entity\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/models/Entity',
         ),
     );
 

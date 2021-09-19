@@ -1,7 +1,10 @@
 <?php
 namespace Tools;
 
-use controllers\ControllerAccueil;
+//
+require 'controllers/ControllerPost.php';
+
+use Controllers\ControllerAccueil;
 use View;
 
  class Router
@@ -32,20 +35,36 @@ use View;
          
 
             $controllerFile = "controllers/".$controllerClass.".php";
+            var_dump($controllerFile);
             
             if (file_exists($controllerFile)){
+                echo('le fichier existe');
+                
+                //require_once($controllerFile); // ERREUR ICI | import du fichier ici ok code passe
+                require_once('controllers/ControllerAccueil.php'); //en dur ca fonctionne
+                
+                var_dump($controllerClass);
+                
+                
+                //Affectation de ctrl
+                $this->ctrl = new $controllerClass($url);  // ERREUR ICI | 
+                echo('jusqu ici tout vas bien 1');
+                echo($ctrl); //ok
+                //Cannot declare class controllers\ControllerPost, because the name is already in use
 
-                require_once($controllerFile);
-                $this->ctrl = new $controllerClass($url); 
+                echo('jusqu ici tout vas bien 2');
+                
             }
             else{ 
+                echo('le fichier n existe pas');
 
                 throw new \Exception("Page introuvable", 1);
                 }
             }
-            else{  // Page par defaut si erreur
-                require_once('controllers/ControllerAccueil.php');
+            else{  // Page par defaut si erreur | Marche
+                //require_once('controllers/ControllerAccueil.php'); fonctionne sans ok
                 $this->ctrl = new ControllerAccueil($url);
+                echo($ctrl);
             }
 
         } catch(\Exception $e){ 

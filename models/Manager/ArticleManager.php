@@ -4,7 +4,7 @@ use Tools\Model;
 use View;
 
 
-require_once('framework/Model.php');
+//require_once('framework/Model.php');
 
 class ArticleManager extends Model
 {

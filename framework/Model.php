@@ -1,19 +1,35 @@
 <?php
 namespace Tools;
+use Entity\Article;
 
 /**
- * require_once('framework/models/Entity/Article.php'); // à enlever bizarre
+ * require_once('models/Entity/Article.php');
  */
-//
+
 
 abstract class Model
 {
     protected static $_bdd;
-    
-    private static function setBdd(){
-        self::$_bdd = new \PDO('mysql:host=localhost;dbname=app_blog_mvc;charset=utf8','root','');
-        self::$_bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);
+
+    private static function setBdd(){   
+        try {
+                $filePath = 'config.json';
+                //$filePath = __DIR__.'/config.json';
+
+                $configfile = fopen($filePath, 'r');
+                $config= json_decode(fread($configfile, filesize($filePath)));
+
+                self::$_bdd = new \PDO('mysql:host='.$config->host.';dbname='.$config->dbname.';charset=utf8', $config->user, $config->pass);
+                self::$_bdd->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION);
+
+            } catch
+                (\PDOException $e) {
+                    echo "<p>Erreur: " . $e->getMessage();
+                    die();
+                }
     }
+
+
 
     protected function getBdd(){
         if(self::$_bdd == null){
@@ -34,7 +50,8 @@ abstract class Model
         $req->execute();
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            $var[] = new $obj($data); //le tableau vas instancie un nouvel Article.php en lui passant
+            //$var[] = new $obj($data);
+            $var[] = new Article($data); //fonctionne !!!
         }
 
         return $var;

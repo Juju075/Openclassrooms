@@ -1,6 +1,10 @@
 <?php
 namespace controllers;
 
+use Entity\User;
+use Manager\UserManager;
+use View\View;
+
 /**
 * require_once 'views/View.php';
 * require_once('models/Manager/UserManager.php'); // à enlever bizarre

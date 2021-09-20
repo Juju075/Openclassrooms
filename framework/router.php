@@ -26,12 +26,11 @@ use View\View;
         if (isset($_GET['url'])){
             $url = explode('/', filter_var($_GET['url'], FILTER_SANITIZE_URL));
             $controller = ucfirst(strtolower($url[0])); 
-            //$controllerClass = "Controller".$controller;  
             $controllerClass = "Controller".$controller;  
             $controllerFile = "controllers/".$controllerClass.".php";
             
             if (file_exists($controllerFile)){
-                require_once($controllerFile); // ERREUR 2 ICI | import du fichier ici ok code passe
+                require_once($controllerFile); 
                 $controllerClass="\\Controllers\\".$controllerClass;
 
                 //Affectation de ctrl
@@ -41,7 +40,7 @@ use View\View;
                 throw new \Exception("Page introuvable", 1);
                 }
             }
-            else{  // Page par defaut si erreur | Marche
+            else{  
                 $this->_ctrl = new ControllerAccueil($url);
             }
 

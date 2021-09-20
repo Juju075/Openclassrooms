@@ -6,7 +6,6 @@ use Entity\Article;
  * require_once('models/Entity/Article.php');
  */
 
-
 abstract class Model
 {
     protected static $_bdd;
@@ -29,8 +28,6 @@ abstract class Model
                 }
     }
 
-
-
     protected function getBdd(){
         if(self::$_bdd == null){
             self::setBdd();
@@ -38,9 +35,6 @@ abstract class Model
         }
         echo('ok fin fonction getBdd');
     }
-
-
-
 
     //Cette function est appele par une fonction de xxxxManager.php qui lui passe 2 arguments.
     protected function getAll($table, $obj){
@@ -69,15 +63,12 @@ abstract class Model
         $req->execute(array($id));
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            $var[] = new $obj($data);  //eg: Article
+            $var[] = new $obj($data);  //eg: Article || ERREUR
             
         }
         return $var;
         $req->closeCursor();  
-        
-        
     }
-
 
     protected function deleteOne($table, $id){
         $this->getBdd();  
@@ -94,12 +85,11 @@ abstract class Model
         $req->closeCursor();
     }
 
-     protected function updateOne($table, $id){
+    protected function updateOne($table, $id){
         //$this->getBdd();
         //$req = self::$_bdd->prepare();
         //$req->execute(array($));
 
         //$req->closeCursor();
     }   
-
 }

@@ -18,16 +18,16 @@ use Manager\ArticleManager;
         }
         elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ //Traitement
             $this->store();
-        }
-         elseif (isset($_GET['update_id'])){
-            $this->store(); 
-        }    
+        }   
         elseif (isset($_GET['delete'])){
             $this->delete($_GET['delete']); 
         }
         elseif (isset($_GET['update'])){
             $this->update($_GET['update']); 
         }
+        elseif (isset($_GET['update_id']) && isset($_GET['update_id']) =="numeroid"){ //Traitement
+            $this->store(); 
+        } 
         else{
             $this->article();
         }

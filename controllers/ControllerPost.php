@@ -27,7 +27,7 @@ use Manager\ArticleManager;
         }
         elseif (isset($_GET['update_id'])){ //Traitement update
             // methode post
-            $this->storeUpdate($_GET['update_id'], $_POST['title'], $_POST['chapo'], $_POST['content']); 
+            $this->storeUpdate($_GET['update_id']); 
             //recuperer les valeurs du formulaire
         }
         else{
@@ -66,7 +66,7 @@ use Manager\ArticleManager;
     //Creation d'un article.
     private function store(){
         echo('controllerPost.php function store');
-        
+
         $this->_articleManager = new ArticleManager;
         $article = $this->_articleManager->createArticle();
         $articles = $this->_articleManager->getArticles();
@@ -76,11 +76,11 @@ use Manager\ArticleManager;
     }
 
 
-    public function storeUpdate($id, $title, $chapo, $content){
+    public function storeUpdate($id){
         echo('ControllerPost.php  storeUpdate()');
         //BDD 
         $this->_articleManager = new ArticleManager;
-        $this->_articleManager->updateArticle($id, $title, $chapo, $content);
+        $this->_articleManager->updateArticle($id);
 
 
         //une fois fini script

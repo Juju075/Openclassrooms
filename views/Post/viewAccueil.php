@@ -24,7 +24,11 @@
 
 
 									<h6><p>ici le chapo.</p><? $article->chapo() ?></h6>
+
+
 									<h6><? $article->created_date() ?></h6>
+
+									
 								</div><!-- blog-info -->
 							</div><!-- single-post -->
 						</div><!-- card -->

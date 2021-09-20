@@ -26,8 +26,8 @@ class ArticleManager extends Model
    /**
     * Cette fonction modifie le post actuel.
     */
-   public function updateArticle($id, $title, $chapo, $content){
+   public function updateArticle($id){
       echo('ArticleManager updateArticle');
-      return $this->updateOne('article', $id, $title, $chapo, $content);
+      return $this->updateOne('article', $id);
    }
 }

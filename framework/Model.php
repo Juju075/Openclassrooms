@@ -60,6 +60,14 @@ abstract class Model
         $req->closeCursor();
     }
 
+    protected function updateOne($table, $id){
+        //$_POST['title'], $_POST['chapo'], $_POST['content']
+        $this->getBdd();  
+        //$req = self::$_bdd->prepare("UPDATE $table SET title = $_POST['title'], chapo = $_POST['chapo'], content = $_POST['content'] WHERE id_article = $id");
+        //$req->execute(array($_POST['title'], $_POST['chapo'], $_POST['content']));
+
+    } 
+
     //ERREUR Entité
     protected function getOne($table, $obj, $id){ //Article
         $this->getBdd();
@@ -83,11 +91,5 @@ abstract class Model
 
     } 
 
-    protected function updateOne($table, $id, $title, $chapo, $content){
-        echo('Model.php updateOne');
-        $this->getBdd();  
-        $req = self::$_bdd->prepare("UPDATE $table SET title = $title, chapo = $chapo, content = $content WHERE id_article = $id");
-        $req->execute(array());
-
-    }   
+  
 }

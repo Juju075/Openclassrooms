@@ -1,11 +1,10 @@
 <div class="container-contact100">
 		<div class="wrap-contact100">
 <!-- Prepopule avec la var id -->
-			<form  method="post" action="post&update_id=<?$_GET['id_article'] ?>" class="contact100-form validate-form">
+			<form  method="post" action="post&update_id=<?= $_GET['update']?>" class="contact100-form validate-form">
 				<span class="contact100-form-title">
 					Modifier un Article! ici
-				</span>
-
+				</span><br>
 				<div class="" data-validate="Title is required">
 					<span class="">Titre</span>
 					<input class="" type="text" name="title" value="<?php echo('prepopuler le titre'); ?>" > 
@@ -17,8 +16,8 @@
 					<span class=""></span>
 				</div>
 				<div class="" data-validate = "Contenu is required">
-					<span class="">Contenu de l'Article</span>
-					<textarea class="" name="content"><?php echo('prepopuler le chapo'); ?></textarea>
+					<span class="">Contenu de l'Article</span><br>
+					<textarea class="" name="content"><?php echo('prepopuler le content'); ?></textarea>
 					<span class=""></span>
 				</div>
 

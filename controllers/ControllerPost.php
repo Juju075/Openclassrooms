@@ -22,12 +22,14 @@ use Manager\ArticleManager;
         elseif (isset($_GET['delete'])){
             $this->delete($_GET['delete']); 
         }
-        elseif (isset($_GET['update'])){
+        elseif (isset($_GET['update'])){ //App_Blog_MVC/post&update_id=29
             $this->update($_GET['update']); 
         }
-        elseif (isset($_GET['update_id']) && isset($_GET['update_id']) =="numeroid"){ //Traitement
-            $this->store(); 
-        } 
+        elseif (isset($_GET['update_id'])){ //Traitement update
+            // methode post
+            $this->storeUpdate($_GET['update_id'], $_POST['title'], $_POST['chapo'], $_POST['content']); 
+            //recuperer les valeurs du formulaire
+        }
         else{
             $this->article();
         }
@@ -51,27 +53,19 @@ use Manager\ArticleManager;
     private function update($id){
         echo('ControllerPost function update()');
 
-        //View
+        //View ok template + formulaire update ok
         if(isset($_GET['update'])){
             
             $this->_view = new View('UpdatePost', 'Post'); //construct
             $this->_view->displayForm('Update');
         }        
-
-        //BDD 
-        $this->_articleManager = new ArticleManager;
-        $this->_articleManager->updateArticle($id);
-
-        //une fois fini script
-        //header('Location: App_Blog_MVC/accueil');
     }
     
 
 
-
-
     //Creation d'un article.
     private function store(){
+        echo('controllerPost.php function store');
         
         $this->_articleManager = new ArticleManager;
         $article = $this->_articleManager->createArticle();
@@ -80,6 +74,19 @@ use Manager\ArticleManager;
         $this->_view = new View('Accueil','Post');
         $this->_view->generate(array('articles' =>$articles));
     }
+
+
+    public function storeUpdate($id, $title, $chapo, $content){
+        echo('ControllerPost.php  storeUpdate()');
+        //BDD 
+        $this->_articleManager = new ArticleManager;
+        $this->_articleManager->updateArticle($id, $title, $chapo, $content);
+
+
+        //une fois fini script
+        //header('Location: App_Blog_MVC/accueil');
+}
+
 
     private function article(){
         if(isset($_GET['id_article'])){

@@ -3,8 +3,8 @@ namespace View;
 
 class View
 {
-    private $_file;
-    private $_t;
+    private $_file; //
+    private $_t; //
 
     /**
      * Affecte le nom du fichier $_file eg:viewAccueil.php
@@ -15,10 +15,10 @@ class View
 
 
 
-    //GENERATE PAGE
+    //GENERATE PAGE $content
 
     /**
-     * Cette fonction sert à generer le listing des Post. template.php 
+     * Cette fonction sert à generer le listing des Post (All). template.php 
      */
     public function generate($data){   
         $content = $this->generateFile($this->_file, $data);
@@ -28,7 +28,7 @@ class View
     }
 
     /**
-     * Cette fonction sert generer la page de detail Post. templateSingle.php
+     * Cette fonction sert generer la page de detail Post(One). templateSingle.php
      */
     public function generatePost($data){
         $content = $this->generateFile($this->_file,$data);
@@ -58,7 +58,7 @@ class View
      */
     public function displayForm($action){ 
         $page = 'views/template'.$action .'.php';
-        $view = $this->generateFileSimple($page); //require
+        $view = $this->generateFileSimple($page);
         echo $view;
     }
 

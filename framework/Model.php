@@ -48,7 +48,6 @@ abstract class Model
             //$var[] = new $obj($data);
             $var[] = new Article($data); //fonctionne !!!
         }
-
         return $var;
         $req->closeCursor();
     }
@@ -56,9 +55,8 @@ abstract class Model
     
     protected function createOne($table, $obj){
         $this->getBdd();
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, content, updateat) VALUES (?, ?, ?)");
-        $req->execute(array($_POST['title'], $_POST['content'], date("d.m.Y")));
-        
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, chapo, content, updateat) VALUES (?, ?, ?, ?)");
+        $req->execute(array($_POST['title'], $_POST['chapo'], $_POST['content'], date("d.m.Y")));
         $req->closeCursor();
     }
 
@@ -85,11 +83,11 @@ abstract class Model
 
     } 
 
-    protected function updateOne($table, $id){
-        //$this->getBdd();
-        //$req = self::$_bdd->prepare();
-        //$req->execute(array($));
+    protected function updateOne($table, $id, $title, $chapo, $content){
+        echo('Model.php updateOne');
+        $this->getBdd();  
+        $req = self::$_bdd->prepare("UPDATE $table SET title = $title, chapo = $chapo, content = $content WHERE id_article = $id");
+        $req->execute(array());
 
-        //$req->closeCursor();
     }   
 }

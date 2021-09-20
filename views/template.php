@@ -28,7 +28,7 @@
 		</div><!-- conatiner -->
     </header>
 
-
+<b>view/template.php</b>
     <!-- Ci-dessous contenu -->
 	<?= $content ?>
 

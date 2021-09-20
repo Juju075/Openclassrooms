@@ -3,12 +3,17 @@
 
 			<form  method="post" action="post&status=new" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					Ajouter un Article!
+					<b>form/post.php</b>
 				</span>
 
 				<div class="" data-validate="Title is required">
 					<span class="">Titre</span>
 					<input class="" type="text" name="title" placeholder="Entrez un titre">
+					<span class=""></span>
+				</div>
+				<div class="" data-validate="Chapo is required">
+					<span class="">Chapo</span>
+					<input class="" type="text" name="chapo" placeholder="Entrez un chapo">
 					<span class=""></span>
 				</div>
 

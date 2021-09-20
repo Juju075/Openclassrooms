@@ -2,6 +2,7 @@
 namespace Tools;
 use Entity\Article;
 
+
 /**
  * require_once('models/Entity/Article.php');
  */
@@ -36,7 +37,7 @@ abstract class Model
         echo('ok fin fonction getBdd');
     }
 
-    //Cette function est appele par une fonction de xxxxManager.php qui lui passe 2 arguments.
+    //ERREUR Entité
     protected function getAll($table, $obj){
         $this->getBdd();
         $var = [];
@@ -51,11 +52,18 @@ abstract class Model
         return $var;
         $req->closeCursor();
     }
+ 
+    
+    protected function createOne($table, $obj){
+        $this->getBdd();
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, content, updateat) VALUES (?, ?, ?)");
+        $req->execute(array($_POST['title'], $_POST['content'], date("d.m.Y")));
+        
+        $req->closeCursor();
+    }
 
-    //$obj c une entité
-    protected function getOne($table, $obj, $id){
-        var_dump($obj);
-
+    //ERREUR Entité
+    protected function getOne($table, $obj, $id){ //Article
         $this->getBdd();
         $var = [];
 
@@ -63,8 +71,8 @@ abstract class Model
         $req->execute(array($id));
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            $var[] = new $obj($data);  //eg: Article || ERREUR
-            
+            //$var[] = new $obj($data);  // eg: Article || ERREUR
+            $var[] = new Article($data);
         }
         return $var;
         $req->closeCursor();  
@@ -76,14 +84,6 @@ abstract class Model
         $req->execute(array());
 
     } 
-
-    protected function createOne($table, $obj){
-        $this->getBdd();
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, content, updateat) VALUES (?, ?, ?)");
-        $req->execute(array($_POST['title'], $_POST['content'], date("d.m.Y")));
-
-        $req->closeCursor();
-    }
 
     protected function updateOne($table, $id){
         //$this->getBdd();

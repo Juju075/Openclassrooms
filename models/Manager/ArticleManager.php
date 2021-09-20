@@ -4,8 +4,6 @@ use Tools\Model;
 use View\View;
 
 
-//require_once('framework/Model.php');
-
 class ArticleManager extends Model
 {
    public function getArticles(){
@@ -27,14 +25,7 @@ class ArticleManager extends Model
    
    //Admin modification post > + page de modification
    public function updateArticle($id){
-      echo('ArticleManager update');
-   //Afficher la page 
-      $this->_view = new View('Accueil','Post');
-
-   //ou selon url
-
-   //Enregistrement Model
+      echo('ArticleManager updateArticle');
       return $this->updateOne('article', $id);
-
    }
 }

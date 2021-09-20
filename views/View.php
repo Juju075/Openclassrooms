@@ -6,10 +6,20 @@ class View
     private $_file;
     private $_t;
 
+    /**
+     * Affecte le nom du fichier $_file eg:viewAccueil.php
+     */
     function __construct($action, $dossier){
         $this->_file = 'views/'.$dossier.'/view'.$action.'.php';
     }
 
+
+
+    //GENERATE PAGE
+
+    /**
+     * Cette fonction sert à generer le listing des Post. template.php 
+     */
     public function generate($data){   
         $content = $this->generateFile($this->_file, $data);
 
@@ -17,7 +27,9 @@ class View
         echo $view;
     }
 
-    //il gen
+    /**
+     * Cette fonction sert generer la page de detail Post. templateSingle.php
+     */
     public function generatePost($data){
         $content = $this->generateFile($this->_file,$data);
 
@@ -25,27 +37,52 @@ class View
         echo $view;
     }
 
-    public function displayForm($action){ 
-        $page = 'views/template'.$action .'.php';
-        $view = $this->generateFileSimple($page);
-        echo $view;
-    }
 
+
+
+
+
+    /**
+     * pas appeler a voir. 
+     * Cette fonction sert à 
+     */
     public function simpleContent($action){ 
         $page = 'views/template'.$action .'.php';
-
-        
         $view = $this->generateFileSimple($page);
         echo $view;
     }
 
+    /**
+     * Cette fonction sert à afficher le formulaire souhaité.
+     * views/template
+     */
+    public function displayForm($action){ 
+        $page = 'views/template'.$action .'.php';
+        $view = $this->generateFileSimple($page); //require
+        echo $view;
+    }
 
+     /**
+     * Cette fonction sert à 
+     */
+    public function generateForm(){
+        $content = $this->generateFileSimple($this->_file);
+        $view = $this->generateFile('views/form/templatePost.php', array('t' => $this->_t, 'content' => $content));
+        echo $view;
+    }
+    //Call 
+    /**
+     * Cette fonction sert à ajouter un require variable.
+     */
     public function generateFileSimple($file){
         if(file_exists($file)){
             require $file;
         }
     }
 
+    /**
+     * Cette fonction sert à generateForm()
+     */
     private function generateFile($file, $data){  
         if(file_exists($file)){
             extract($data); 
@@ -58,10 +95,13 @@ class View
         }
     }
 
-  public function generateForm(){
-    $content = $this->generateFileSimple($this->_file);
-    $view = $this->generateFile('views/form/templatePost.php', array('t' => $this->_t, 'content' => $content));
-    echo $view;
-  }
+
+
+    /**
+     * Cette fonction sert à 
+     */
+    public function displayFormUpdate(){
+        
+    }
 
 }

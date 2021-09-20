@@ -32,9 +32,9 @@
 	
 	<!-- Ci-dessous contenu -->
 	<div class="slider"></div> 
-	<b>views/templatePost.php</b>
-	<p>include de views/form/post.php</p>
-	<?php include("views/form/post.php"); ?>
+	<b>views/templateUpdate.php</b>
+	<p>include de views/form/update.php</p>
+	<?php include("views/form/update.php"); ?>
 
     <footer>
 		<div class="container">

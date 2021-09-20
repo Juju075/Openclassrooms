@@ -5,9 +5,10 @@ class Article
 {
 
     private $_id_article;
-    private $_title;
     private $_content;
-    private $_date;
+    private $_chapo;
+    private $_title;
+    private $_date; //updateat
 
     //verifie ds video si il a mis incrementation pour ID
     
@@ -30,7 +31,8 @@ class Article
     }
  
 
-    public function setId($id_article)
+    //Setters
+    public function setId(?int $id_article)
     {  
         $id = (int) $id_article;
         if ($id > 0){
@@ -58,30 +60,43 @@ class Article
     }
  
 
-    public function Id_article() 
+    
+
+    //Getters
+    //Erreur ici reuperer l'id pour l'hyperlien.
+    //id_article
+    public function Id_article(): ?int 
     {
-        return $this->echo();
-        //return $this->_id_article;
+        return $this->_id_article;
     }
     
-    //debuging
-    public function echo()
+
+
+    public function Chapo(): ?string
     {
-        echo(17);
+        return $this->_chapo;
     }
 
+
+
+
+    
     public function Title(): ?string
     {
         return $this->_title;
     }    
 
+
+    
     public function Content(): ?string
     { 
         return $this->_content;
     }
-
+    
     public function Date()
     {
         return $this->_date;
     }
+    
+    //here Foreign key
 }

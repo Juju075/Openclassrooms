@@ -16,9 +16,12 @@ use Manager\ArticleManager;
         elseif (isset($_GET['create'])){
             $this->create(); 
         }
-        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){
+        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ //Traitement
             $this->store();
         }
+         elseif (isset($_GET['update_id'])){
+            $this->store(); 
+        }    
         elseif (isset($_GET['delete'])){
             $this->delete($_GET['delete']); 
         }
@@ -30,26 +33,46 @@ use Manager\ArticleManager;
         }
     }
 
+    //CRUD
     private function create(){
         if(isset($_GET['create'])){
-
             $this->_view = new View('CreatePost', 'Post');
             $this->_view->displayForm('Post');
         }
     }   
-        private function delete($id){
-            echo('ControllerPost function delete');
+
+    private function delete($id){
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->deleteArticle($id);
         header('Location: accueil');
     }
-        private function update($id){
+
+
+    private function update($id){
+        echo('ControllerPost function update()');
+
+        //View
+        if(isset($_GET['update'])){
+            
+            $this->_view = new View('UpdatePost', 'Post'); //construct
+            $this->_view->displayForm('Update');
+        }        
+
+        //BDD 
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->updateArticle($id);
+
+        //une fois fini script
         //header('Location: App_Blog_MVC/accueil');
     }
     
+
+
+
+
+    //Creation d'un article.
     private function store(){
+        
         $this->_articleManager = new ArticleManager;
         $article = $this->_articleManager->createArticle();
         $articles = $this->_articleManager->getArticles();

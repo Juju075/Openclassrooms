@@ -16,8 +16,8 @@
 									<h4 class="title"><a href="post&id_article=<?= $article->id_article() ?>"><b><?= $article->title() ?></b></a></h4>
 
 
-									<h6><p>ici resumé du contenu.<?= $article->id_article() ?></p></h6>
-									<h6><p>ici date de mise a jour</p></h>
+									<h6><p>ici le chapo.</p><? $article->chapo() ?></h6>
+									<h6><? $article->created_date() ?></h6>
 								</div><!-- blog-info -->
 							</div><!-- single-post -->
 						</div><!-- card -->

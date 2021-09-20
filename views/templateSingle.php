@@ -27,7 +27,7 @@
 		</div><!-- conatiner -->
 	</header>
 
-
+<b>templateSingle.php $content ok fonctionne >> Post/viewSinglePost.php</b>
 <?=$content?> <!-- Post/viewSinglePost.php -->
 
 	<footer>

@@ -1,5 +1,6 @@
 <?php
 namespace Controllers;
+
 use View\View;
 use Manager\UserManager;
 
@@ -11,7 +12,6 @@ class ControllerContact
         }
         elseif (isset($_GET['create'])){
             $this->Message();        
-            echo('controller option 1');
         }
         elseif (isset($_GET['status']) && isset($_GET['status']) =="send"){  
             $this->sendMessage();        
@@ -25,8 +25,16 @@ class ControllerContact
     
     //Affichage
     private function Message(){ 
-        $this->_view = new View('Contact', 'Contact'); 
-        $this->_view->displayForm('Contact');       
+        echo('function Message');
+
+
+        if(isset($_GET['create'])){
+            //View
+            $this->_view = new View('Contact', 'Contact'); 
+            $this->_view->displayForm('Contact');       
+        }
+
+
     }
 
     //Traitement du formulaire. //

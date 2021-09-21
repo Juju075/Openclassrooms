@@ -64,6 +64,25 @@ abstract class Model
     }
 
 
+    
+
+    /**
+     * Fonction qui cree le commentaire et envoie un mail d'acceptation.
+     */
+    protected function createOneComment($table){
+        echo('model.php createOne');
+        echo($_POST['id_article']);
+
+        $this->getBdd();
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article) VALUES (?, ?)");
+        $req->execute(array($_POST['content'], $_POST['id_article']));
+        $req->closeCursor();
+    }
+
+
+
+
+
 protected function updateOne($table, $id){
 }
 

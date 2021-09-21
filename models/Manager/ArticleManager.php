@@ -1,7 +1,7 @@
 <?php
 namespace Manager;
+
 use Tools\Model;
-use View\View;
 
 
 class ArticleManager extends Model

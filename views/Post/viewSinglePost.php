@@ -93,8 +93,10 @@
 
 
     <!-- =================================================================== -->
-    <!-- Formulaire -->
+    <!-- Formulaire --> <!-- Recuperer GET id de l'article -->
     <!-- =================================================================== -->         
+    <? $_POST['id_article'] = $_GET['article'] ?>
+
           <form method="post" action="comment&status=new">
 
             <div class="row">
@@ -143,7 +145,8 @@
               </div>
 
               <div class="right-area">
-                <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
+                <h5 class="reply-btn" ><a href="comment&status=update"><b>MODIFIER</b></a></h5>
+                <h5 class="reply-btn" ><a href="comment&status=delete"><b>SUPPRIMER</b></a></h5>
               </div>
 
             </div><!-- post-info -->

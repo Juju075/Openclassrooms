@@ -63,7 +63,7 @@ use Manager\ArticleManager;
     
 
 
-    //Creation d'un article.
+    //Traitement add article.
     private function store(){
         echo('controllerPost.php function store');
 
@@ -78,6 +78,7 @@ use Manager\ArticleManager;
 
     public function storeUpdate($id){
         echo('ControllerPost.php  storeUpdate()');
+
         //BDD 
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->updateArticle($id);

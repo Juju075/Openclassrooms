@@ -8,7 +8,7 @@ class Article
     private $_content;
     private $_chapo;
     private $_title;
-    private $_date; //updateat
+
 
     //verifie ds video si il a mis incrementation pour ID
     
@@ -54,12 +54,6 @@ class Article
         }
     }
 
-     public function setDate($date)
-     {
-            $this->_date = $date;
-    }
- 
-
     
 
     //Getters
@@ -91,11 +85,6 @@ class Article
     public function Content(): ?string
     { 
         return $this->_content;
-    }
-    
-    public function Date()
-    {
-        return $this->_date;
     }
     
     //here Foreign key

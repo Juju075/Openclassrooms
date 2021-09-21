@@ -53,27 +53,35 @@ abstract class Model
     }
  
     
+    // corriger la date 
     protected function createOne($table, $obj){
+        echo('model.php createOne');
+
         $this->getBdd();
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, chapo, content, updateat) VALUES (?, ?, ?, ?)");
-        $req->execute(array($_POST['title'], $_POST['chapo'], $_POST['content'], date("d.m.Y")));
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, chapo, content) VALUES (?, ?, ?)");
+        $req->execute(array($_POST['title'], $_POST['chapo'], $_POST['content']));
         $req->closeCursor();
     }
 
-    protected function updateOne($table, $id){
-        //$_POST['title'], $_POST['chapo'], $_POST['content']
-        $this->getBdd();  
-        //$req = self::$_bdd->prepare("UPDATE $table SET title = $_POST['title'], chapo = $_POST['chapo'], content = $_POST['content'] WHERE id_article = $id");
-        //$req->execute(array($_POST['title'], $_POST['chapo'], $_POST['content']));
 
-    } 
+protected function updateOne($table, $id){
+}
+
+
+    // protected function updateOne($table, $id){
+    //     //$_POST['title'], $_POST['chapo'], $_POST['content']
+    //     $this->getBdd();  
+    //     $req = self::$_bdd->prepare("UPDATE $table SET title = '$_POST['title']', chapo = '$_POST['chapo']', content = '$_POST['content']' WHERE id_article = $id");
+    //     //$req->execute(array($_POST['title'], $_POST['chapo'], $_POST['content']));
+
+    // } 
 
     //ERREUR Entité
     protected function getOne($table, $obj, $id){ //Article
         $this->getBdd();
         $var = [];
 
-        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updateat, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
+        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
         $req->execute(array($id));
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){

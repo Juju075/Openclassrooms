@@ -57,10 +57,10 @@ class Article
     
 
     //Getters
-    //Erreur ici reuperer l'id pour l'hyperlien.
-    //id_article
     public function Id_article(): ?int 
     {
+        //function lance mais null
+        //return echo($this->_id_article);;
         return $this->_id_article;
     }
     

@@ -6,13 +6,14 @@ use Tools\Model;
 class CommentManager extends Model
 {
    public function getComments(){
-      return $this->getAll('comment','Comment');
+      return $this->getAllComments('comment','Comment');
    }
 
-   public function getComment($id){
+   public function getCommentdd($id){
       return $this->GetOne('comment','Comment', $id);
    }
    public function createComment(){
+      echo('| CommentManager.php createComment');
       return $this->CreateOneComment('comment');
    } 
 

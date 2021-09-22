@@ -3,14 +3,56 @@ namespace Entity;
 
 class Comment 
 {
+ //use Timestampable
     private $id_comment;
     private $content;
-    private $dateCreation;
-    private $userId;
+    private $id_user;
     private $postId;
-    private $username;
     private $disabled;
 
+    
+    public function __construct(array $data){
+        $this->hydrate($data);
+    }
+
+
+    public function hydrate(array $data)
+    {
+        foreach ($data as $key => $value){
+            $method = 'set'.ucfirst($key);  
+
+            if(method_exists($this, $method)) 
+            {  
+                $this->$method($value);
+            }
+        }
+    }
+    
+    //Setters
+    public function setId_comment($id_comment) 
+    {
+        $this->id_comment = $id_comment;
+    }
+
+    public function setContent($content) 
+    {
+        $this->content = $content;
+    }
+    
+    public function setDisabled($disabled)
+    {
+        $this->disabled = $disabled;
+    }
+
+    //fkcomment_user
+    public function setId_user($id_user) 
+    {
+        $this->userId = $id_user;
+    }
+
+
+
+    //Getters
     public function getId(): ?int
     { 
         return $this->id; 
@@ -21,14 +63,9 @@ class Comment
         return $this->content; 
     }
 
-    public function getDateCreation()
+    public function getId_user(): ?User
     { 
-        return $this->dateCreation; 
-    }
-
-    public function getUserId(): ?User
-    { 
-        return $this->userId; 
+        return $this->id_user; 
     }
 
     public function getPostId(): self
@@ -36,46 +73,9 @@ class Comment
         return $this->postId; 
     }
     
-    public function getFormattedDateCreation(): self 
+    public function getDisabled() 
     { 
-        return $this->getFormattedDateTime($this->dateCreation); 
-    }
-    
-    public function getUsername() { return $this->username; }
-    public function getDisabled() { return $this->disabled; }
-    
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-    
-    public function setDisabled($disabled)
-    {
-        $this->disabled = $disabled;
+        return $this->disabled; 
     }
 
-    public function setId($id) 
-    {
-    	$this->id = $id;
-    }
-
-    public function setContent($content) 
-    {
-    	$this->content = $content;
-    }
-
-    public function setDateCreation($dateCreation) 
-    {
-    	$this->dateCreation = $dateCreation;
-    }
-
-    public function setUserId($userId) 
-    {
-    	$this->userId = $userId;
-    }
-
-    public function setPostId($postId) 
-    {
-    	$this->postId = $postId;
-    }
 }

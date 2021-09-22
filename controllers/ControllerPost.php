@@ -64,6 +64,7 @@ use Manager\ArticleManager;
 
 
     //Traitement add article.
+    // Affectation $articles pour le foreach $content
     private function store(){
         echo('controllerPost.php function store');
 

@@ -1,7 +1,7 @@
 <div class="container-contact100">
 		<div class="wrap-contact100">
 
-			<form  method="post" action="post&status=new" class="contact100-form validate-form">
+			<form method="post" action="post&status=new" class="contact100-form validate-form">
 				<span class="contact100-form-title">
 					<b>form/post.php</b>
 				</span>

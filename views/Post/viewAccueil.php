@@ -30,6 +30,7 @@
 							</div><!-- single-post -->
 						</div><!-- card -->
 					</div><!-- col-lg-4 col-md-6 -->
+				<!-- Fin de l'iteration -->	
 				<?php endforeach ?>
 				
 			</div><!-- row -->

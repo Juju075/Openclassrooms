@@ -6,9 +6,10 @@ use Manager\CommentManager;
 
 class ControllerComment
 {
+        private $_commentManager;
+        private $_view; 
 
-public function __construct(){
-    echo('controllerComment.php');
+        public function __construct(){
         if(isset($url) && count($url) < 1){
             throw new \Exception("Page introuvable", 1);
         }    
@@ -36,23 +37,23 @@ public function __construct(){
 
     //Traitement add comment.
     private function storeComment(){
-        echo('controllerComment.php function storeComment');
+        echo('| ControllerComment.php function storeComment');
         
-        $this->_articleManager = new CommentManager;
-        $comment = $this->_articleManager->createComment();
-        //$comments = $this->_articleManager->getComments();
+        $this->_commentManager = new CommentManager;
+        $comment = $this->_commentManager->createComment(); //ok insert bdd
+        $comments = $this->_commentManager->getComments();
         
         $this->_view = new View('Post','Comment');
-        //$this->_view->generate(array('comment' =>$comments));
+        $this->_view->generate(array('comments' =>$comments));
     }
     
     private function updateComment(){
-        echo('controllerComment.php function updateComment');
+        echo('| ControllerComment.php function updateComment');
         
     }
     
     private function deleteComment(){
-        echo('controllerComment.php function deleteComment');
+        echo('| ControllerComment.php function deleteComment');
 
     }
 

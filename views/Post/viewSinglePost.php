@@ -56,8 +56,9 @@
         </div><!-- main-post -->
       </div><!-- col-lg-8 col-md-12 -->
 
-      <div class="col-lg-4 col-md-12 no-left-padding">
 
+
+      <div class="col-lg-4 col-md-12 no-left-padding">
         <div class="single-post info-area">
 
           <div class="sidebar-area about-area">
@@ -67,11 +68,10 @@
           </b></p>
         <a href="https://github.com/Juju075/Openclassrooms">https://github.com/Juju075/Openclassrooms</a>
           </div>
-
-
         </div><!-- info-area -->
-
       </div><!-- col-lg-4 col-md-12 -->
+
+      
 
     </div><!-- row -->
 
@@ -94,25 +94,19 @@
 
     <!-- =================================================================== -->
     <!-- Formulaire --> <!-- Recuperer GET id de l'article -->
-    <!-- =================================================================== -->         
-    <? $_POST['id_article'] = $_GET['article'] ?>
+    <!-- =================================================================== -->    
+    recuperer id_article
+   <?= $id ='';?>
 
           <form method="post" action="comment&status=new">
-
             <div class="row">
-
-
               <div class="col-sm-12">
-
                 <textarea name="comment" rows="2" class="text-area-messge form-control"
                   placeholder="Ajouter votre commentaire" aria-required="true" aria-invalid="false"></textarea >
-
               </div><!-- col-sm-12 -->
-
               <div class="col-sm-12">
                 <button class="submit-btn" type="submit" id="form-submit"><b>ENVOYER</b></button>
               </div><!-- col-sm-12 -->
-
             </div><!-- row -->
           </form>
     <!-- =================================================================== -->
@@ -123,47 +117,45 @@
         <h4><b>COMMENTAIRES</b></h4>
         FOREACH COMMENT FOR ARTICLE ID 
     <!-- =================================================================== -->
-    <!-- Fin formulaire  -->
+    <!-- Affichage commentaires -->
     <!-- =================================================================== -->  
         <div class="commnets-area">
 
+        <?php
+					foreach ($comments as $comment):
+				?>
 
-
-
-
+        <!--  Recuperation de tout les comments de cet id_article -->
           <div class="comment">
-
             <div class="post-info">
-
               <div class="left-area">
                 <a class="avatar" href="#"><img src="public/images/avatar-1-120x120.jpg" alt="Profile Image"></a>
               </div>
-
               <div class="middle-area">
-                <a class="name" href="#"><b>Katy Liu</b></a>
-                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-              </div>
+            <p>variable content</p>
+            <a class="name" href="#"><?= $comment->nomcomplet() ?></a>
+            <h6 class="date">on <?= $comment->createdAt() ?></h6>
 
+              </div>
               <div class="right-area">
                 <h5 class="reply-btn" ><a href="comment&status=update"><b>MODIFIER</b></a></h5>
                 <h5 class="reply-btn" ><a href="comment&status=delete"><b>SUPPRIMER</b></a></h5>
               </div>
-
             </div><!-- post-info -->
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-              ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-              Ut enim ad minim veniam</p>
-
+            <!-- content -->
+            <p>variable content</p>
+            <?= $comment->content() ?>
+              
           </div>
-
-
-
-
+        <!-- Fin de l'iteration -->
+        <?php endforeach ?>
 
 
 
         </div><!-- commnets-area -->
+
+
 
       </div><!-- col-lg-8 col-md-12 -->
     </div><!-- row -->

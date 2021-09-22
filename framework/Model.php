@@ -1,7 +1,7 @@
 <?php
 namespace Tools;
 use Entity\Article;
-
+use Entity\Comment;
 
 /**
  * require_once('models/Entity/Article.php');
@@ -51,9 +51,27 @@ abstract class Model
         return $var;
         $req->closeCursor();
     }
+
+    protected function getAllComments($table, $obj){
+        $this->getBdd();
+        $var = [];
+        $req  = self::$_bdd->prepare('SELECT * FROM '. $table.' ORDER BY id_article desc');  
+        $req->execute();
+
+        while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
+            //$var[] = new $obj($data);
+            $var[] = new Comment($data); 
+        }
+        return $var;
+        $req->closeCursor();
+    }    
  
     
     // corriger la date 
+    /**
+     * Article
+     * Cette fonction cré
+     */
     protected function createOne($table, $obj){
         echo('model.php createOne');
 
@@ -64,18 +82,23 @@ abstract class Model
     }
 
 
-    
 
     /**
-     * Fonction qui cree le commentaire et envoie un mail d'acceptation.
+     * Comment
+     * Fonction qui insert le commentaire.
      */
     protected function createOneComment($table){
-        echo('model.php createOne');
-        echo($_POST['id_article']);
-
+        echo('| Model.php createOneComment');
+        // manque id article info
         $this->getBdd();
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article) VALUES (?, ?)");
-        $req->execute(array($_POST['content'], $_POST['id_article']));
+
+        //Il manque l'id_article sinon pb
+        // $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article) VALUES (?, ?)");
+        // $req->execute(array($_POST['comment'], $_POST['id_article']));
+
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (content) VALUES (?)");
+        $req->execute(array($_POST['comment']));
+
         $req->closeCursor();
     }
 
@@ -83,8 +106,8 @@ abstract class Model
 
 
 
-protected function updateOne($table, $id){
-}
+        protected function updateOne($table, $id){
+        }
 
 
     // protected function updateOne($table, $id){

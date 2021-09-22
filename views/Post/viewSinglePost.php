@@ -28,10 +28,12 @@
               </div>
 
             </div><!-- post-info -->
-  
-            <h3 class="title"><a href="#"><b><?=$article[0]->title()?></b></a></h3>
 
-            <p class="para"><?=$article[0]->content()?></p>
+            <? var_dump($article);?>
+
+            <h3 class="title"><a href="#"><b><?=$article[0]->getTitle()?></b></a></h3>
+
+            <p class="para"><?=$article[0]->getContent()?></p>
 
 
 
@@ -39,8 +41,8 @@
               <p>Admin uniquement</p>
 
               <!-- Recupere Get-->
-              <li><a href="post&delete=<?= $_GET['id_article']?>">Supprimer</a></li> <!-- post&delete-->
-              <li><a href="post&update=<?= $_GET['id_article']?>">Modifier</a></li> <!-- post&update -->
+              <li><a href="post&delete=<? $_GET['id_article']?>">Supprimer</a></li> <!-- post&delete-->
+              <li><a href="post&update=<? $_GET['id_article']?>">Modifier</a></li> <!-- post&update -->
             </ul>
           </div><!-- blog-post-inner -->
 

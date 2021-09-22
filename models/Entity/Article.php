@@ -57,32 +57,32 @@ class Article
     
 
     //Getters
-    public function Id_article(): ?int 
+    public function getId_article()
     {
         //function lance mais null
         //return echo($this->_id_article);;
-        return $this->_id_article;
+        //return $this->_id_article;
+        echo('45');
     }
     
 
 
-    public function Chapo(): ?string
+    public function getChapo() 
     {
-        return $this->_chapo;
+    echo('resume ici ok');
+        //return $this->_chapo;
     }
 
 
-
-
     
-    public function Title(): ?string
+    public function getTitle(): ?string
     {
         return $this->_title;
     }    
 
 
     
-    public function Content(): ?string
+    public function getContent(): ?string
     { 
         return $this->_content;
     }

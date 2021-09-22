@@ -21,9 +21,10 @@
 
 
 								<div class="blog-info">
-									<h4 class="title"><a href="post&id_article=<?= $article->id_article() ?>"><b><?= $article->title() ?></b></a></h4>
-									<h6><p>ici getChapo()</p><? $article->chapo() ?></h6>
-									<h6><p>ici getChapo()</p><? $article->created_date() ?>></h6>
+									<h4 class="title"><a href="post&id_article=<?= $article->getId_article() ?>"><b><?= $article->getTitle() ?></b></a></h4>
+									<h6><p>ici chapo</p><?= $article->getChapo() ?></h6>
+								 
+									
 								</div><!-- blog-info -->
 
 

@@ -108,19 +108,28 @@ abstract class Model
 
 
 
-
-
-        protected function updateOne($table, $id){
-        }
-
-
     // protected function updateOne($table, $id){
     //     //$_POST['title'], $_POST['chapo'], $_POST['content']
     //     $this->getBdd();  
     //     $req = self::$_bdd->prepare("UPDATE $table SET title = '$_POST['title']', chapo = '$_POST['chapo']', content = '$_POST['content']' WHERE id_article = $id");
+
+
     //     //$req->execute(array($_POST['title'], $_POST['chapo'], $_POST['content']));
 
     // } 
+
+    // protected function updateOneComment($table, $id){
+    //     try{
+    //         $this->getBdd(); 
+    //         $req = self::$_bdd->prepare("UPDATE ".$table." SET content = $_POST['content']');
+    //         $req->execute(array();
+    //     }
+    //     catch(\PDOException $e){
+    //         echo($e->getMessage);
+    //     }
+    // }
+
+    
 
     //ERREUR Entité
     protected function getOne($table, $obj, $id){ //Article

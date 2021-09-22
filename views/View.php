@@ -20,9 +20,8 @@ class View
     /**
      * Cette fonction sert à generer le listing des Post (All). template.php 
      */
-    public function generate($data){   
-        $content = $this->generateFile($this->_file, $data);
-
+    public function generate($data){  
+        $content = $this->generateFile($this->_file,$data);
         $view = $this->generateFile('views/template.php', array('t' => $this->_t, 'content' => $content));
         echo $view;
     }
@@ -32,7 +31,6 @@ class View
      */
     public function generatePost($data){
         $content = $this->generateFile($this->_file,$data);
-
         $view = $this->generateFile('views/templateSingle.php', array('t'=>$this->_t, 'content'=>$content));
         echo $view;
     }
@@ -81,7 +79,8 @@ class View
     }
 
     /**
-     * Cette fonction sert à generateForm()
+     * Cette fonction sert mise en tampon des datas.
+     * generate($data) generatePost($data)
      */
     private function generateFile($file, $data){  
         if(file_exists($file)){

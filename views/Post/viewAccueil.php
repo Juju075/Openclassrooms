@@ -4,6 +4,7 @@
 		<div class="container">
 			<div class="row">
 				<?php
+					//foreach ($array as $value)
 					foreach ($articles as $article):
 				?>
 				

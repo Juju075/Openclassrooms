@@ -41,10 +41,10 @@ class ControllerComment
         
         $this->_commentManager = new CommentManager;
         $comment = $this->_commentManager->createComment(); //ok insert bdd
-        $comments = $this->_commentManager->getComments();
+        $comments = $this->_commentManager->getComments(); //
         
         $this->_view = new View('Post','Comment');
-        $this->_view->generate(array('comments' =>$comments));
+        $this->_view->generatePost(array('comments' =>$comments));
     }
     
     private function updateComment(){

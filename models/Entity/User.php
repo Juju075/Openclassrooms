@@ -58,11 +58,27 @@ class User
         }
     }
 
+
+
     private function addUser($table, $obj){
         $this->_user;
     }
 
-    //Setter
+
+
+
+
+
+
+
+    //Setters
+    public function setPrenom(string $prenom){
+        $this->prenom = $prenom;
+    }
+    public function setNom(string $nom){
+        $this->nom = $nom;
+    }
+
     public function setUsername(string $username){
         $this->username = $username;
     }
@@ -98,6 +114,14 @@ class User
 
 
     //Getters
+        public function getPrenom(){
+        return $this->prenom;
+    }
+
+        public function getNom(){
+        return $this->nom;
+    }
+
     public function getUsername(){
         return $this->username;
     }
@@ -123,6 +147,12 @@ class User
     {
         $this->roles = $roles;
         return $this;
+    }
+
+
+    public function getFullName(){
+        return $this->getPrenom() . " " . $this->getNom();
+
     }
 
 }

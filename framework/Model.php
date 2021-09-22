@@ -52,7 +52,11 @@ abstract class Model
         $req->closeCursor();
     }
 
+       //$comment 
     protected function getAllComments($table, $obj){
+        //table comment, filtrage id_artice = x , order by lastest
+        // select 
+
         $this->getBdd();
         $var = [];
         $req  = self::$_bdd->prepare('SELECT * FROM '. $table.' ORDER BY id_article desc');  

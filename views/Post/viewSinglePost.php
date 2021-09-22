@@ -28,7 +28,7 @@
               </div>
 
             </div><!-- post-info -->
-
+  
             <h3 class="title"><a href="#"><b><?=$article[0]->title()?></b></a></h3>
 
             <p class="para"><?=$article[0]->content()?></p>
@@ -78,14 +78,15 @@
   </div><!-- container -->
 </section><!-- post-area -->
 
+<!-- =================================================================== -->
+<!-- -->
+<!-- =================================================================== -->
+
 <section class="comment-section">
   <div class="container">
     <p>UNIQUEMENT SI ROLE UTILISATEUR</p> 
     <p>VALIDATION PAR L ADMINISTRATEUR</p>
     <h4><b>AJOUTER UN COMMENTAIRE</b></h4>
-    <!-- =================================================================== -->
-    <!-- -->
-    <!-- =================================================================== -->
     <div class="row">
 
       <div class="col-lg-8 col-md-12">
@@ -95,7 +96,8 @@
     <!-- =================================================================== -->
     <!-- Formulaire --> <!-- Recuperer GET id de l'article -->
     <!-- =================================================================== -->    
-    recuperer id_article
+    recuperer id_article<br>
+    ajouter id_user
    <?= $id ='';?>
 
           <form method="post" action="comment&status=new">
@@ -121,34 +123,64 @@
     <!-- =================================================================== -->  
         <div class="commnets-area">
 
-        <?php
-					foreach ($comments as $comment):
-				?>
 
-        <!--  Recuperation de tout les comments de cet id_article -->
+        <!-- Exemple comment -->
+        Exemple:
           <div class="comment">
+
             <div class="post-info">
+
               <div class="left-area">
                 <a class="avatar" href="#"><img src="public/images/avatar-1-120x120.jpg" alt="Profile Image"></a>
               </div>
-              <div class="middle-area">
-            <p>variable content</p>
-            <a class="name" href="#"><?= $comment->nomcomplet() ?></a>
-            <h6 class="date">on <?= $comment->createdAt() ?></h6>
 
+              <div class="middle-area">
+                <a class="name" href="#"><b>Katy Liu</b></a>
+                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
               </div>
+
               <div class="right-area">
-                <h5 class="reply-btn" ><a href="comment&status=update"><b>MODIFIER</b></a></h5>
-                <h5 class="reply-btn" ><a href="comment&status=delete"><b>SUPPRIMER</b></a></h5>
+                <h5 class="reply-btn" ><a href="#"><b>DELETE</b></a></h5>
+                <h5 class="reply-btn" ><a href="#"><b>UPDATE</b></a></h5>
               </div>
+
             </div><!-- post-info -->
 
-            <!-- content -->
-            <p>variable content</p>
-            <?= $comment->content() ?>
-              
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
+              Ut enim ad minim veniam</p>
           </div>
-        <!-- Fin de l'iteration -->
+        <!-- Fin exemple comment -->
+
+
+<!-- $comment = Model getAllComments -->
+        <?php
+					foreach ($comments as $comment):
+				?>
+          <!--  foreach Article id_article need id_user->fullName & content -->
+            <div class="comment">
+              <div class="post-info">
+                <div class="left-area">
+                  <a class="avatar" href="#"><img src="public/images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+                </div>
+                <div class="middle-area">
+              <p>variable content</p>
+              <!-- getFullName -->
+              <a class="name" href="#"><?= $comment->id_user() ?></a>
+              <h6 class="date">on <?= $comment->createdAt() ?></h6>
+
+                </div>
+                <div class="right-area">
+                  <h5 class="reply-btn" ><a href="comment&status=update"><b>MODIFIER</b></a></h5>
+                  <h5 class="reply-btn" ><a href="comment&status=delete"><b>SUPPRIMER</b></a></h5>
+                </div>
+              </div><!-- post-info -->
+
+              <!-- content -->
+              <p>variable content</p>
+              <?= $comment->content() ?>               
+            </div>
+          <!-- Fin de l'iteration -->
         <?php endforeach ?>
 
 

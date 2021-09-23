@@ -62,7 +62,7 @@ class Article
         //function lance mais null
         //return echo($this->_id_article);;
         //return $this->_id_article;
-        echo('45');
+        echo('49');
     }
     
 

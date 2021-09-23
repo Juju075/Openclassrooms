@@ -27,19 +27,32 @@
 		</div><!-- conatiner -->
 	</header>
 
-
+<h1>Example heading <span class="badge badge-secondary">New</span></h1>
 <!-- contenu cidessous -->
-Accueil<br><br>
+templateProfile.php<br><br>
 
 nom et prénom ;<br>
+fullname<br>
+
 une photo et/ou un logo ;<br><br>
+Avatar ici<br>
+
 une phrase d’accroche;<br><br>
-un menu permettant de naviguer parmi l’ensemble des pages de votre site web ;<br>
-un formulaire de contact (à la soumission de ce formulaire, un e-mail avec toutes ces informations vous sera envoyé) avec les champs suivants :
-nom/prénom,<br>
-e-mail de contact,<br>
-message,<br><br>
+sentence ici<br>
+
 un lien vers votre CV au format PDF ;
+lien vers curl_version<br>
+
+un lien vers votre CV au format PDF ;<br>
+<div class="alert alert-success" role="alert">
+  A simple success alert—check it out!
+</div>
+<div class="alert alert-danger" role="alert">
+  A simple danger alert—check it out!
+</div>
+<div class="alert alert-warning" role="alert">
+  A simple warning alert—check it out!
+</div>
 
  
 	<footer>

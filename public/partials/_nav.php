@@ -3,7 +3,7 @@
 				<li><a href="register&create">S'inscrire</a></li>
 				<li><a href="login&user">S'authentifier</a></li>				
 				<!-- Twig -->
-				<li><a href="intro">Mon profil</a></li>
+				<li><a href="profile">Mon profil</a></li>
 				<li><a href="accueil">Listing articles</a></li>
 				
 				<!-- Twig si connecte-->

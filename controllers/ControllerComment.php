@@ -39,8 +39,14 @@ class ControllerComment
     private function storeComment(){
         echo('| ControllerComment.php function storeComment');
         
+
+        //Recuperer l'id de larticle en get   id_article=49     $_GET['id_article']
+        $_POST['id_article'] = $_GET['id_article'];
+
+
         $this->_commentManager = new CommentManager;
-        $comment = $this->_commentManager->createComment(); //ok insert bdd
+        //
+        $comment = $this->_commentManager->createComment();
         $comments = $this->_commentManager->getComments(); //
         
         $this->_view = new View('Post','Comment');

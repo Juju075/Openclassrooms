@@ -3,13 +3,37 @@
 
         <form method="post" action="register&status=new">
             <div class="row">
-                    <div class="col-md-6"><label for="username">Username</label><input type="text"name="username"></div>
-                    <div class="col-md-6"><label for="password">password</label><input type="text"name="password"></div>
-                    <div class="col-md-6"><label for="prenom">prenom</label><input type="text"name="prenom"></div>
-                    <div class="col-md-6"><label for="prenom">nom</label><input type="text"name="nom"></div>
-                    <div class="col-md-6"><label for="checkpassword">checkpassword</label><input type="text"name="checkpassword"></div>
-                    <div class="col-md-6"><label for="email">email</label><input type="text"name="email"></div>
-                    <div class="button"><button type="submit">Soumettre</button></div>               
+                    <div class="col-md-6"><label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" placeholder="username">
+                    </div>
+                    <div class="col-md-6"><label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="password">
+                    </div>
+                    <div class="col-md-6"><label for="prenom">Prénom</label>
+                        <input type="text" class="form-control" name="prenom" placeholder="First name">
+                    </div>
+                    <div class="col-md-6"><label for="nom">Nom</label>
+                        <input type="text" class="form-control" name="nom" placeholder="Last name">
+                    </div>
+                    <div class="col-md-6"><label for="checkpassword">Password verification</label>
+                        <input type="password" class="form-control" name="checkpassword" placeholder="First name">
+                    </div>
+                    <div class="col-md-6"><label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" placeholder="email@example.com">
+                    </div>
 
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroupFileAddon01">Upload Avator or logo.</span>
+  </div>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+  </div>
+</div>
+
+
+                    <div class="button"><button type="submit" class="btn btn-primary">Soumettre</button></div>               
             </div>
 		</form>

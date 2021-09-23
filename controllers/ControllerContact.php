@@ -25,6 +25,15 @@ class ControllerContact
         }
     }
 
+
+    /**
+     * un formulaire de contact (à la soumission de ce formulaire, 
+     * un e-mail avec toutes ces informations vous sera envoyé) 
+     * avec les champs suivants :
+     * nom/prénom,<br>
+     * e-mail de contact,<br>
+     * message,<br><br>
+     */
     
     //Affichage
     private function Message(){ 

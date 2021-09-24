@@ -5,11 +5,11 @@ use Tools\Model;
 
 class CommentManager extends Model
 {
-   public function getComments(){
-      return $this->getAllComments('comment','Comment');
+   public function getComments($id){
+      return $this->getAllComments('comment',$id);
    }
 
-   public function getCommentdd($id){
+   public function getOneComment($id){
       return $this->GetOne('comment','Comment', $id);
    }
    public function createComment(){

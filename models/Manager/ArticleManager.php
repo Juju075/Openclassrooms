@@ -28,6 +28,6 @@ class ArticleManager extends Model
     */
    public function updateArticle($id){
       echo('ArticleManager updateArticle');
-      return $this->updateOne('article', $id);
+      //return $this->updateOne('article', $id);
    }
 }

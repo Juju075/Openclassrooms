@@ -4,15 +4,6 @@ namespace Controllers;
 use View\View;
 use Manager\ArticleManager;
 
-
-//require_once('models/Manager/ArticleManager.php'); // à enlever bizarre
-
-/**
- *require_once 'views/View.php';
-* require_once('models/Manager/ArticleManager.php'); // à enlever bizarre
- */
-
-
  class ControllerAccueil
  {
     private $_articleManager;
@@ -26,8 +17,12 @@ use Manager\ArticleManager;
             $this->articles();  
         }
     }
-        
+    
+    /**
+     * Fonction d'affichage de tous les articles.
+     */
     private function articles(){
+        echo('ControllerAcceuil.php articles');
         $this->_articleManager = new ArticleManager(); 
         $articles = $this->_articleManager->getArticles();
 

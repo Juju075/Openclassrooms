@@ -153,38 +153,8 @@
               Ut enim ad minim veniam</p>
           </div>
         <!-- Fin exemple comment -->
-
-
 <!-- $comment = Model getAllComments -->
-        <?php
-					foreach ($comments as $comment):
-				?>
-          <!--  foreach Article id_article need id_user->fullName & content -->
-            <div class="comment">
-              <div class="post-info">
-                <div class="left-area">
-                  <a class="avatar" href="#"><img src="public/images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-                </div>
-                <div class="middle-area">
-              <p>variable content</p>
-              <!-- getFullName -->
-              <a class="name" href="#"><?= $comment->id_user() ?></a>
-              <h6 class="date">on <?= $comment->createdAt() ?></h6>
-
-                </div>
-                <div class="right-area">
-                  <h5 class="reply-btn" ><a href="comment&status=update"><b>MODIFIER</b></a></h5>
-                  <h5 class="reply-btn" ><a href="comment&status=delete"><b>SUPPRIMER</b></a></h5>
-                </div>
-              </div><!-- post-info -->
-
-              <!-- content -->
-              <p>variable content</p>
-              <?= $comment->content() ?>               
-            </div>
-          <!-- Fin de l'iteration -->
-        <?php endforeach ?>
-
+{% include "listComments.php" %}
 
 
         </div><!-- commnets-area -->

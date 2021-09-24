@@ -7,6 +7,8 @@ use Manager\ArticleManager;
  class ControllerPost
  {
     private $_articleManager;
+    private $_commentManager;
+
     private $_view; 
 
     public function __construct(){
@@ -91,6 +93,7 @@ use Manager\ArticleManager;
 
 
     private function article(){
+        echo('ControllerPost.php  article()');
         if(isset($_GET['id_article'])){
             $this->_articleManager = new ArticleManager;
             $article = $this->_articleManager->getArticle($_GET['id_article']);
@@ -99,5 +102,4 @@ use Manager\ArticleManager;
             $this->_view->generatePost(array('article'=>$article));
         }
     }
-
 }

@@ -18,7 +18,6 @@ use View\View;
         spl_autoload_register(
             function($class){ 
             require_once('models/Entity/Article.php');
-            //require_once('models/Entity/'.$class.'.php'); //Bizzare  // ERREUR 1 ICI | Entite pas controlleur
             }
         );
         $url = '';
@@ -49,7 +48,7 @@ use View\View;
 
             $this->_view = new View('Error','Post'); 
             $this->_view->generate(array('errosMsg'=>$errorMsg));
-            require_once('views/viewError.php'); 
+            require_once('views/Post/viewError.html.twig'); 
         }
     }
 }

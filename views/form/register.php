@@ -34,6 +34,6 @@
 </div>
 
 
-                    <div class="button"><button type="submit" class="btn btn-primary">Soumettre</button></div>               
+                    <div class="button"><button type="submit" class="btn btn-primary btn-lg btn-block">Soumettre</button></div>               
             </div>
 		</form>

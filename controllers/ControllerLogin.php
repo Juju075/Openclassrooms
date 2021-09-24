@@ -11,7 +11,6 @@ class ControllerLogin
         }
         elseif (isset($_GET['user'])){
             $this->login();        
-            echo('controller option 1-a');
         }
         elseif (isset($_GET['forgot'])){
             $this->forgot();       
@@ -27,13 +26,14 @@ class ControllerLogin
     }
 
     private function login(){
+        echo('ControllerLoging.php login');
         $this->_view = new View('Login', 'Login');
         $this->_view->displayForm('Login');       
     }
 
 
     private function logon(){
-    echo('function longon applique');
+    echo('ControllerLogin.php logon');
     $credentials = array('username'=> $_POST['username'],'password'=> $_POST['password']);
     $this->_item = new UserManager;
     $this->_item->login($credentials);

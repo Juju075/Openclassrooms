@@ -4,7 +4,7 @@
 				<li><a href="login&user">S'authentifier</a></li>				
 				<!-- Twig -->
 				<li><a href="profile">Mon profil</a></li>
-				<li><a href="accueil">Listing articles</a></li>
+				<li><a href="accueil">Listing des articles</a></li>
 				
 				<!-- Twig si connecte-->
 				<li><a href="post&create">Créer un article</a></li>

@@ -53,23 +53,22 @@ abstract class Model
     }
 
        //$comment 
-    protected function getAllComments($table, $obj){
-        //table comment, filtrage id_artice = x , order by lastest
-        // select 
-
+    protected function getAllComments($table,$id){
+        echo('| Model.php getAllComments ici');
         $this->getBdd();
         $var = [];
-        $req  = self::$_bdd->prepare('SELECT * FROM '. $table.' ORDER BY id_article desc');  
+        $req  = self::$_bdd->prepare('SELECT `id_comment`, `content`, `createdat`, `id_user` FROM '. $table.' WHERE $id'); 
         $req->execute();
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             //$var[] = new $obj($data);
-            $var[] = new Comment($data); 
-        }
-        return $var;
+            $var[] = new Comment($data); //pour hydratation.
+        //echo($var);
+
+        //return $var;
         $req->closeCursor();
     }    
- 
+}
     
     // corriger la date 
     /**

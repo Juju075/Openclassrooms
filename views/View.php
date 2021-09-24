@@ -10,7 +10,7 @@ class View
      * Affecte le nom du fichier $_file eg:viewAccueil.php
      */
     function __construct($action, $dossier){
-        $this->_file = 'views/'.$dossier.'/view'.$action.'.php';
+        $this->_file = 'views/'.$dossier.'/view'.$action.'.html.twig';
     }
 
 
@@ -21,8 +21,9 @@ class View
      * Cette fonction sert à generer le listing des Post (All). template.php 
      */
     public function generate($data){  
+        echo('View.php generate');
         $content = $this->generateFile($this->_file,$data);
-        $view = $this->generateFile('views/template.php', array('t' => $this->_t, 'content' => $content));
+        $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t, 'content' => $content));
         echo $view;
     }
 
@@ -30,8 +31,11 @@ class View
      * Cette fonction sert generer la page de detail Post(One). templateSingle.php
      */
     public function generatePost($data){
+        echo('View.php generatePost');
         $content = $this->generateFile($this->_file,$data);
-        $view = $this->generateFile('views/templateSingle.php', array('t'=>$this->_t, 'content'=>$content));
+        //ajouter chapo 
+        //$view = $this->generateFile('views/templateSingle.php', array('t'=>$this->_t, 'content'=>$content));
+        $view = $this->generateFile('views/templateSingle.html.twig', array('t'=>$this->_t, 'content'=>$content));  
         echo $view;
     }
 
@@ -45,7 +49,7 @@ class View
      * Cette fonction sert à 
      */
     public function simpleContent($action){ 
-        $page = 'views/template'.$action .'.php';
+        $page = 'views/template'.$action .'.html.twig';
         $view = $this->generateFileSimple($page);
         echo $view;
     }
@@ -55,7 +59,8 @@ class View
      * views/template
      */
     public function displayForm($action){ 
-        $page = 'views/template'.$action .'.php';
+        echo('View.php displayForm');
+        $page = 'views/template'.$action .'.html.twig';
         $view = $this->generateFileSimple($page);
         echo $view;
     }
@@ -65,7 +70,7 @@ class View
      */
     public function generateForm(){
         $content = $this->generateFileSimple($this->_file);
-        $view = $this->generateFile('views/form/templatePost.php', array('t' => $this->_t, 'content' => $content));
+        $view = $this->generateFile('views/form/templatePost.html.twig', array('t' => $this->_t, 'content' => $content));
         echo $view;
     }
     //Call 
@@ -80,7 +85,6 @@ class View
 
     /**
      * Cette fonction sert mise en tampon des datas.
-     * generate($data) generatePost($data)
      */
     private function generateFile($file, $data){  
         if(file_exists($file)){

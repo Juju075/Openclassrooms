@@ -26,12 +26,7 @@
 				<div class="">
 					<div class="">
 						<div class=""></div>
-						<button class="">
-							<span>
-								Soumettre
-								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-							</span>
-						</button>
+						<div class="button"><button type="submit" class="btn btn-primary btn-lg btn-block">Soumettre</button></div>
 					</div>
 				</div>
 			</form>

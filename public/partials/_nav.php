@@ -9,5 +9,6 @@
 				<!-- Twig si connecte-->
 				<li><a href="post&create">Créer un article</a></li>
 				<li><a href="contact&create">Nous contacter</a></li>
+				<li><a href="login&logout">Me deconnecter</a></li>
 				
 			</ul><!-- main-menu -->

@@ -1,5 +1,6 @@
 <?php
 namespace Controllers;
+session_start();
 
 use View\View;
 

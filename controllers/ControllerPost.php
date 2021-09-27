@@ -1,5 +1,6 @@
 <?php
 namespace controllers;
+session_start();
 
 use View\View;
 use Manager\ArticleManager;
@@ -95,6 +96,8 @@ use Manager\ArticleManager;
     private function article(){
         echo('ControllerPost.php  article()');
         if(isset($_GET['id_article'])){
+            $_SESSION['id_article'] = $_GET['id_article'];
+
             $this->_articleManager = new ArticleManager;
             $article = $this->_articleManager->getArticle($_GET['id_article']);
 

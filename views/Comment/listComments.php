@@ -4,6 +4,9 @@
         //     $this->_commentManager = new CommentManager;
         //     $comments = $this->_commentManager->getComments($_GET['id_article']); // un tableau return $var
 
+
+        <!-- -->
+        
 					foreach ($comments as $comment):
 				?>
           <!--  foreach Article id_article need id_user->fullName & content -->
@@ -23,7 +26,7 @@
                 </div>
                 <div class="right-area">
                     <h5 class="reply-btn" ><a href="comment&status=update"><b>MODIFIER</b></a></h5>
-                    <h5 class="reply-btn" ><a href="comment&status=delete"><b>SUPPRIMER</b></a></h5>
+                    <h5 class="reply-btn" ><a href="comment&status=delete&id_comment=<?= ici ?>"><b>SUPPRIMER</b></a></h5>
                 </div>
               </div>
 

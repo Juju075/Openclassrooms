@@ -1,12 +1,13 @@
 <?php
 namespace Controllers;
+session_start();
+
 use View\View;
-use Entity\Article;
 
 
  class ControllerProfile
  {
-    private $_articleManager;
+
     private $_view; 
 
      public function __construct(){
@@ -23,7 +24,6 @@ use Entity\Article;
      private function myProfile(){
       echo('ControllerProfile.php myProfile');
         $this->_view = new View('Profile', 'Profile');
-
         $this->_view->displayForm('Profile'); 
      }
 

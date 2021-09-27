@@ -1,107 +1,123 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>Vue Article</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="UTF-8">
-	<!-- Font -->
+  <head>
+    <title>Vue Article</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <!-- Font -->
 
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+      rel="stylesheet"
+    />
 
-	<!-- Stylesheets -->
-	<link href="public/common-css/bootstrap.css" rel="stylesheet">
-	<link href="public/common-css/ionicons.css" rel="stylesheet">
-	<link href="public/single-post-1/css/styles.css" rel="stylesheet">
-	<link href="public/single-post-1/css/responsive.css" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link href="public/common-css/bootstrap.css" rel="stylesheet" />
+    <link href="public/common-css/ionicons.css" rel="stylesheet" />
+    <link href="public/single-post-1/css/styles.css" rel="stylesheet" />
+    <link href="public/single-post-1/css/responsive.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid position-relative no-side-padding">
+        <a href="#" class="logo"
+          ><img src="public/images/logo.png" alt="Logo Image"
+        /></a>
+        <div class="menu-nav-icon" data-nav-menu="#main-menu">
+          <i class="ion-navicon"></i>
+        </div>
 
-</head>
-<body >
-	<header>
-		<div class="container-fluid position-relative no-side-padding">
-			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
-			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+        <?php include("public/partials/_nav.php"); ?>
+      </div>
+      <!-- conatiner -->
+    </header>
 
-			<?php include("public/partials/_nav.php"); ?>
+    <h1>Example heading <span class="badge badge-secondary">New</span></h1>
+    <!-- contenu cidessous -->
+    templateProfile.php<br /><br />
+    <?= var_dump($_SESSION['id_user']); ?>
+    nom et prénom ;<br />
+    fullname<br />
 
-		</div><!-- conatiner -->
-	</header>
+    une photo et/ou un logo ;<br /><br />
+    Avatar ici<br />
 
-<h1>Example heading <span class="badge badge-secondary">New</span></h1>
-<!-- contenu cidessous -->
-templateProfile.php<br><br>
+    une phrase d’accroche;<br /><br />
+    sentence ici<br />
 
-nom et prénom ;<br>
-fullname<br>
+    un lien vers votre CV au format PDF ; lien vers curl_version<br />
 
-une photo et/ou un logo ;<br><br>
-Avatar ici<br>
+    un lien vers votre CV au format PDF ;<br />
+    <div class="alert alert-success" role="alert">
+      A simple success alert—check it out!
+    </div>
+    <div class="alert alert-danger" role="alert">
+      A simple danger alert—check it out!
+    </div>
+    <div class="alert alert-warning" role="alert">
+      A simple warning alert—check it out!
+    </div>
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
 
-une phrase d’accroche;<br><br>
-sentence ici<br>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-section">
+              <a class="logo" href="#"
+                ><img src="public/images/logo.png" alt="Logo Image"
+              /></a>
+              <p class="copyright">Mettre twig date</p>
+              <ul class="icons">
+                <li>
+                  <a href="#"><i class="ion-social-facebook-outline"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ion-social-twitter-outline"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ion-social-instagram-outline"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ion-social-vimeo-outline"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ion-social-pinterest-outline"></i></a>
+                </li>
+              </ul>
+            </div>
+            <!-- footer-section -->
+          </div>
+          <!-- col-lg-4 col-md-6 -->
 
-un lien vers votre CV au format PDF ;
-lien vers curl_version<br>
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-section"></div>
+            <!-- footer-section -->
+          </div>
+          <!-- col-lg-4 col-md-6 -->
 
-un lien vers votre CV au format PDF ;<br>
-<div class="alert alert-success" role="alert">
-  A simple success alert—check it out!
-</div>
-<div class="alert alert-danger" role="alert">
-  A simple danger alert—check it out!
-</div>
-<div class="alert alert-warning" role="alert">
-  A simple warning alert—check it out!
-</div>
-<div class="spinner-grow text-primary" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-section"></div>
+            <!-- footer-section -->
+          </div>
+          <!-- col-lg-4 col-md-6 -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
+    </footer>
 
- 
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="footer-section">
-						<a class="logo" href="#"><img src="public/images/logo.png" alt="Logo Image"></a>
-						<p class="copyright">Mettre twig date </p>
-						<ul class="icons">
-							<li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
-							<li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
-							<li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-							<li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
-							<li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
-						</ul>
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
+    <!-- SCIPTS -->
 
-				<div class="col-lg-4 col-md-6">
-						<div class="footer-section">
+    <script src="public/common-js/jquery-3.1.1.min.js"></script>
 
-					</div><!-- footer-section -->
+    <script src="public/common-js/tether.min.js"></script>
 
-				</div><!-- col-lg-4 col-md-6 -->
+    <script src="public/common-js/bootstrap.js"></script>
 
-				<div class="col-lg-4 col-md-6">
-					<div class="footer-section">
-
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
-
-			</div><!-- row -->
-		</div><!-- container -->
-	</footer>
-
-
-	<!-- SCIPTS -->
-
-	<script src="public/common-js/jquery-3.1.1.min.js"></script>
-
-	<script src="public/common-js/tether.min.js"></script>
-
-	<script src="public/common-js/bootstrap.js"></script>
-
-	<script src="public/common-js/scripts.js"></script>
-
-</body>
+    <script src="public/common-js/scripts.js"></script>
+  </body>
 </html>

@@ -52,13 +52,17 @@ abstract class Model
         $req->closeCursor();
     }
 
-       //$comment 
-    protected function getAllComments($table,$id){
+      
+        protected function getAllComments($table){
         echo('| Model.php getAllComments ici');
+        $id_article = $_SESSION['id_article'];
+
         $this->getBdd();
         $var = [];
-        $req  = self::$_bdd->prepare('SELECT `id_comment`, `content`, `createdat`, `id_user` FROM '. $table.' WHERE $id'); 
+        $req  = self::$_bdd->prepare('SELECT `id_comment`, `content`, `createdat`, `id_user` FROM '. $table.' WHERE $id_article'); 
         $req->execute();
+
+
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             //$var[] = new $obj($data);
@@ -90,20 +94,15 @@ abstract class Model
      * Comment
      * Fonction qui insert le commentaire.
      */
-    protected function createOneComment($table){
+    protected function createOneComment($table, $comment){
         echo('| Model.php createOneComment');
-        // manque id article info
+
         $this->getBdd();
 
-        //Il manque l'id_article sinon pb
-        // $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article) VALUES (?, ?)");
-        // $req->execute(array($_POST['comment'], $_POST['id_article']));
-
         $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article, id_user) VALUES (?, ?, ?)");
-        $req->execute(array($_POST['comment'], $_POST['id_article'], 14));
-        // $_SESSION['id_user'] au lieu de 14
-
+        $req->execute(array($comment, $_SESSION['id_article'], $_SESSION['id_user']));
         $req->closeCursor();
+        echo('Fin de script');
     }
 
 
@@ -147,9 +146,22 @@ abstract class Model
         $req->closeCursor();  
     }
 
+
+
+    //DELETE
+
     protected function deleteOne($table, $id){
         $this->getBdd();  
         $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_article = $id");
+        $req->execute(array());
+
+    } 
+
+    protected function deleteOneComment($table){
+        $id_comment = $_SESSION['id_comment'];
+
+        $this->getBdd();  
+        $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_comment = $id_comment");
         $req->execute(array());
 
     } 

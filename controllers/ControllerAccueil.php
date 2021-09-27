@@ -1,5 +1,7 @@
 <?php
 namespace Controllers;
+session_start();
+var_dump($_SESSION['id_user']);
 
 use View\View;
 use Manager\ArticleManager;

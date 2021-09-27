@@ -173,10 +173,10 @@
 
               <div class="right-area">
                 <h5 class="reply-btn">
-                  <a href="#"><b>DELETE</b></a>
+                  <a href="comment&status=delete"><b>DELETE</b></a>
                 </h5>
                 <h5 class="reply-btn">
-                  <a href="#"><b>UPDATE</b></a>
+                  <a href="comment&status=update"><b>UPDATE</b></a>
                 </h5>
               </div>
             </div>
@@ -190,7 +190,8 @@
           </div>
           <!-- Fin exemple comment -->
           <!-- $comment = Model getAllComments -->
-          {% include "listComments.php" %}
+
+          {% include '/views/Comment/listComments.html.twig' %}
         </div>
         <!-- commnets-area -->
       </div>

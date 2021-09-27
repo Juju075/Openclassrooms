@@ -16,6 +16,7 @@ class User
     ];
 
     // created_date et modified_date dans timestampable  $createdAt $updatedAt
+    private $id_user;
     private $username;
     private $password;
     private $email;
@@ -72,6 +73,10 @@ class User
 
 
     //Setters
+
+    public function setId_user(int $id_user){
+        $this->id_user = $id_user;
+    }
     public function setPrenom(string $prenom){
         $this->prenom = $prenom;
     }
@@ -114,6 +119,10 @@ class User
 
 
     //Getters
+
+    public function getId_user(){
+        return $this->id_user;
+    }
         public function getPrenom(){
         return $this->prenom;
     }

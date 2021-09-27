@@ -5,9 +5,9 @@ class Article
 {
 
     private $_id_article;
-    private $_content;
-    private $_chapo;
     private $_title;
+    private $_chapo;
+    private $_content;
 
 
     //verifie ds video si il a mis incrementation pour ID
@@ -32,7 +32,7 @@ class Article
  
 
     //Setters
-    public function setId(?int $id_article)
+    public function setId_article(?int $id_article)
     {  
         $id = (int) $id_article;
         if ($id > 0){
@@ -47,6 +47,14 @@ class Article
         }
     }
 
+    //chapo bizzard
+    public function setChapo(?string $chapo) 
+    {
+        if(is_string($chapo)){
+            $this->_chapo = $chapo;
+        }
+    }
+
     public function setContent(?string $content) 
     {
         if(is_string($content)){
@@ -54,34 +62,28 @@ class Article
         }
     }
 
-    
+
+
 
     //Getters
     public function getId_article()
     {
-        //function lance mais null
-        //return echo($this->_id_article);;
-        //return $this->_id_article;
-        echo('49');
+        return $this->_id_article;
     }
     
 
-
-    public function getChapo() 
-    {
-    echo('resume ici ok');
-        //return $this->_chapo;
-    }
-
-
-    
     public function getTitle(): ?string
     {
         return $this->_title;
     }    
 
 
-    
+    public function getChapo(): ?string 
+    {
+    return $this->_chapo;
+    }
+
+
     public function getContent(): ?string
     { 
         return $this->_content;

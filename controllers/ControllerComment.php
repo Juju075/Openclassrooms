@@ -13,11 +13,21 @@ class ControllerComment
         if(isset($url) && count($url) < 1){
             throw new \Exception("Page introuvable", 1);
         }    
+
+
+
         elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ 
-            $this->storeComment();
+
+
+            
+            $this->storeComment($_GET['id_article']);
+            var_dump($_GET['id_article']);
         }
+
+
+
         elseif (isset($_GET['status']) && isset($_GET['status']) =="update"){  
-            $this->updateComment();
+            $this->updateComment($_GET['id_article']);
         }         
          elseif (isset($_GET['status']) && isset($_GET['status']) =="delete"){  
             $this->deleteComment();
@@ -36,21 +46,29 @@ class ControllerComment
 //rechargement des comments
 
     //Traitement add comment.
-    private function storeComment(){
+    private function storeComment($id_article){
         echo('| ControllerComment.php function storeComment');
-        
+
 
         //Recuperer l'id de larticle en get   id_article=49     $_GET['id_article']
-        $_POST['id_article'] = $_GET['id_article'];
+        //$_POST['id_article'] = $_GET['id_article'];
 
 
-        $this->_commentManager = new CommentManager;
-        //
-        $comment = $this->_commentManager->createComment();
-        $comments = $this->_commentManager->getComments(); //
+
+
+
+
+        // $this->_commentManager = new CommentManager;
+        // //
+        // $comment = $this->_commentManager->createComment($_GET['id_article']);
         
-        $this->_view = new View('Post','Comment');
-        $this->_view->generatePost(array('comments' =>$comments));
+        // $comments = $this->_commentManager->getComments(); //
+        
+        // $this->_view = new View('Post','Comment');
+        // $this->_view->generatePost(array('comments' =>$comments));
+
+
+
     }
     
     private function updateComment(){

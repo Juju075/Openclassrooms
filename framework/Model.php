@@ -100,7 +100,8 @@ abstract class Model
         // $req->execute(array($_POST['comment'], $_POST['id_article']));
 
         $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article, id_user) VALUES (?, ?, ?)");
-        $req->execute(array($_POST['comment'], $_POST['id_article'], $_SESSION['id_user']));
+        $req->execute(array($_POST['comment'], $_POST['id_article'], 14));
+        // $_SESSION['id_user'] au lieu de 14
 
         $req->closeCursor();
     }

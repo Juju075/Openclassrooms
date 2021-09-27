@@ -8,18 +8,18 @@
 
 				<div class="" data-validate="Title is required">
 					<span class="">Titre</span>
-					<input class="" type="text" name="title" placeholder="Entrez un titre">
+					<input class="" type="text" name="title" placeholder="Entrez un titre" required="required">
 					<span class=""></span>
 				</div>
 				<div class="" data-validate="Chapo is required">
 					<span class="">Chapo</span>
-					<input class="" type="text" name="chapo" placeholder="Entrez un chapo">
+					<input class="" type="text" name="chapo" placeholder="Entrez un chapo" required="required">
 					<span class=""></span>
 				</div>
 
 				<div class="" data-validate = "Contenu is required">
 					<span class="">Contenu de l'Article</span>
-					<textarea class="" name="content" placeholder="Votre texte ici..."></textarea>
+					<textarea class="" name="content" placeholder="Votre texte ici..." required></textarea>
 					<span class=""></span>
 				</div>
 

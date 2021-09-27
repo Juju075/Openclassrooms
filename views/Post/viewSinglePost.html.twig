@@ -47,11 +47,11 @@
 
               <!-- Recupere Get-->
               <li>
-                <a href="post&delete=<? $_GET['id_article']?>">Supprimer</a>
+                <a href="post&delete=<?= $_GET['id_article']?>">Supprimer</a>
               </li>
               <!-- post&delete-->
               <li>
-                <a href="post&update=<? $_GET['id_article']?>">Modifier</a>
+                <a href="post&update=<?= $_GET['id_article']?>">Modifier</a>
               </li>
               <!-- post&update -->
             </ul>
@@ -116,9 +116,7 @@
           <!-- Formulaire -->
           <!-- Recuperer GET id de l'article -->
           <!-- =================================================================== -->
-          recuperer id_article<br />
-          ajouter id_user
-          <?= $id ='';?>
+          <?  echo($_GET['id_article']); ?>
 
           <form method="post" action="comment&status=new">
             <div class="row">
@@ -133,11 +131,13 @@
                 ></textarea>
               </div>
               <!-- col-sm-12 -->
+
               <div class="col-sm-12">
                 <button class="submit-btn" type="submit" id="form-submit">
                   <b>ENVOYER</b>
                 </button>
               </div>
+
               <!-- col-sm-12 -->
             </div>
             <!-- row -->

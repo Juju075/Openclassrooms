@@ -45,7 +45,8 @@ class ControllerComment
         //Parie 1 - ok fonctionne
         $this->_commentManager = new CommentManager;
         $comment = $this->_commentManager->createComment($_POST['comment']);
-    //
+        
+        //Partie 2 - liste ok
         
         //Afficher les commentaires conserver la variable
         echo('| 2st partie storeComment - Affichage foreach ');

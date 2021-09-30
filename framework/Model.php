@@ -33,8 +33,8 @@ abstract class Model
         echo('|Model.php getBdd ');
         if(self::$_bdd == null){
             self::setBdd();
-            return self::$_bdd;
         }
+        return self::$_bdd;
     }
 
     //ERREUR Entité
@@ -91,7 +91,10 @@ abstract class Model
 
     protected function testGetAllComments($table){
         echo('| Model.php testGetAllComments');
+
         $result = [];
+        $id_article = 86; //
+
         //liste id_article existant 
         $this->getBdd();
         $req0  = self::$_bdd->prepare('SELECT id_article FROM comment'); 
@@ -99,13 +102,11 @@ abstract class Model
         $result = $req0->fetchall();
         
         $nb = count($result);
-        var_dump($nb . $result);
+        //var_dump($result);
+        //exit();
 
-        exit();
         //si id article = result alors on execute 
-        for ($i=0; $i=$nb; $i++) { 
-
-            $id_article = 86; //
+        for ($i=0; $i<=$nb; $i++) { 
 
             if ($_SESSION['id_article'] === $id_article ) {
                 $id_article = $_SESSION['id_article'];

@@ -60,7 +60,7 @@ class ControllerComment
         echo('OK -- voici le resultat de l insertion');
         var_dump($comments); //recuperation des datas de comment table.
     }else{
-        header('Location: /login&user=notconnected');
+         header('location: accueil?login=connected');
     }
 
 

@@ -19,10 +19,8 @@ class ControllerContact
         }
         elseif (isset($_GET['status']) && isset($_GET['status']) =="send"){  
             $this->sendMessage();        
-            echo('controller option 2');
         }
         else{
-            echo('controller option 3');
         }
     }
 
@@ -45,8 +43,6 @@ class ControllerContact
             $this->_view = new View('Contact', 'Contact'); 
             $this->_view->displayForm('Contact');       
         }
-
-
     }
 
     //Traitement du formulaire. //
@@ -83,7 +79,7 @@ class ControllerContact
 
             $mail->send();
             echo 'Message has been sent';
-            header('location: /App_Blog_MVC/accueil');
+            header('location: accueil?message=send');
 
 
             } catch (Exception $e) {

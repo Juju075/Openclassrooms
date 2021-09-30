@@ -30,7 +30,7 @@ abstract class Model
     }
 
     protected function getBdd(){
-        echo('|Model.php getBdd ');
+        echo('| Model.php getBdd ');
         if(self::$_bdd == null){
             self::setBdd();
         }
@@ -51,13 +51,6 @@ abstract class Model
         return $var;
         $req->closeCursor();
     }
-
-
-
-
-
-
-
       
     protected function getAllComments($table){
         echo('| Model.php getAllComments');
@@ -82,18 +75,13 @@ abstract class Model
             echo('| jusquici tous vas bien 3');
             $req->closeCursor();
     }    
-
-
-
-
-    
 }
 
     protected function testGetAllComments($table){
         echo('| Model.php testGetAllComments');
 
         $result = [];
-        $id_article = 86; //
+        $id_article = $_SESSION['id_article'];
 
         //liste id_article existant 
         $this->getBdd();
@@ -108,12 +96,11 @@ abstract class Model
         //si id article = result alors on execute 
         for ($i=0; $i<=$nb; $i++) { 
 
-            if ($_SESSION['id_article'] === $id_article ) {
-                $id_article = $_SESSION['id_article'];
+            if ($_SESSION['id_article'] === $id_article ) {         
                 $this->getBdd();
                 $var= [];
                 
-                $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = 12'); 
+                $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ?'); 
                 $req->execute(array($id_article));
                 $var = $req->fetchall();
                 return $var; 
@@ -152,12 +139,9 @@ abstract class Model
      */
     protected function createOneComment($table, $comment){
         echo(' >> Model.php createOneComment');
-        var_dump($_SESSION['id_article']. ' article & user '. $_SESSION['id_user']);
-
         $this->getBdd();
 
         $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article, id_user) VALUES (?, ?, ?)");
-        
         $req->execute(array($comment, $_SESSION['id_article'], $_SESSION['id_user']));
         $req->closeCursor();
     }

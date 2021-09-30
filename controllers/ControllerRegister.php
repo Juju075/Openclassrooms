@@ -65,9 +65,11 @@ class ControllerRegister
                     $transfert = new UserManager;       	
                     $transfert->add($obj);
 
-                    header('location: accueil');
+                    header('location: accueil?register=created');
                 }
             }
+        }else{
+            header('location: accueil?register=error');
         }
     }
  }

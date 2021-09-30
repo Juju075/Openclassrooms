@@ -18,7 +18,7 @@ views/Post/viewAcceuil.html.twig
     </button>
   </div>
 
-  <!-- route: accueil?login=connected -->
+  <!-- route: accueil?passe=valide -->
   <div class="alert alert-success alert-dismissible fade show" role="alert">
     Vous étes connecté!
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -34,6 +34,14 @@ views/Post/viewAcceuil.html.twig
     </button>
   </div>
 
+  <!-- route: accueil?register=error -->
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Votre soumission est erronée!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
   <!-- route: accueil?session=terminated -->
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
     Votre session est terminée!
@@ -42,8 +50,7 @@ views/Post/viewAcceuil.html.twig
     </button>
   </div>
 
-  <!-- route: accueil?message=sendt -->
-
+  <!-- route: accueil?message=send -->
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
     Votre message est envoyé!
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

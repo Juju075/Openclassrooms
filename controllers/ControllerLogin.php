@@ -57,7 +57,7 @@ class ControllerLogin
 
     private function logout(){
         session_destroy();
-        header('Location: http://localhost/App_Blog_MVC/accueil');
+        header('Location: accueil?session=terminated');
     }
     private function alert(){
         

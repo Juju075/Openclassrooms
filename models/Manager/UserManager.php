@@ -16,20 +16,16 @@ class UserManager extends Model
 {
     // Mettre dans Model.php Rajouter des champs
     public function add(array $obj){ 
-        echo($obj);
-
         $table = 'User';
-
         //ceatedate
         //updatedate
-
         $username = $obj['username'];
         $password = $obj['password'];
         $email = $obj['email'];
         $activated = $obj['activated'];
         $validation_key = $obj['validation_key'];
         $usertype = $obj['usertype'];
-
+        $sentence = $obj['sentence'];
         $prenom = $obj['prenom'];
         $nom = $obj['nom'];
 
@@ -37,7 +33,7 @@ class UserManager extends Model
 
         $this->getBdd();
         //manque les attribut date
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (username, email, password, activated, validation_key, usertype, prenom, nom, avatar) VALUES (:username, :email, :password, :activated, :validation_key, :usertype, :prenom, :nom, :avatar)");
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (username, email, password, activated, validation_key, usertype, prenom, nom, avatar, sentence) VALUES (:username, :email, :password, :activated, :validation_key, :usertype, :prenom, :nom, :avatar, :sentence)");
         $req->execute(array(
             'username' => $username,
             'email' => $email,
@@ -47,6 +43,7 @@ class UserManager extends Model
             'usertype' => $usertype,
             'prenom' => $prenom,
             'nom' => $nom,
+            'sentence' => $sentence,
             'avatar' => $avatar));   
 
         $req->closeCursor();

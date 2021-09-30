@@ -4,11 +4,11 @@ namespace Entity;
 class Comment 
 {
  //use Timestampable
-    private $id_comment;
-    private $content;
-    private $id_user;
-    private $postId;
-    private $disabled;
+    private $_id_comment;
+    private $_content;
+    private $_disabled;
+    private $_id_article;
+    private $_id_user;
 
     
     public function __construct(array $data){
@@ -19,7 +19,7 @@ class Comment
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value){
-            $method = 'set'.ucfirst($key);  
+            $method = 'set'.ucfirst($key);  //function setContent  (attribut est la clé data est la valeur.)
 
             if(method_exists($this, $method)) 
             {  
@@ -27,55 +27,64 @@ class Comment
             }
         }
     }
+
+
     
     //Setters
     public function setId_comment($id_comment) 
     {
-        $this->id_comment = $id_comment;
+        $this->_id_comment = $id_comment;
     }
 
     public function setContent($content) 
     {
-        $this->content = $content;
+        $this->_content = $content;
     }
     
     public function setDisabled($disabled)
     {
-        $this->disabled = $disabled;
+        $this->_disabled = $disabled;
+    }
+    public function setId_article($id_article)
+    {
+        $this->_id_article = $id_article;
     }
 
-    //fkcomment_user
-    public function setId_user($id_user) 
+    public function setId_user($id_user)
     {
-        $this->userId = $id_user;
+        $this->_id_user = $id_user;
     }
+
+
+
+
+
 
 
 
     //Getters
-    public function getId(): ?int
+    public function getId_comment() 
     { 
-        return $this->id; 
+        return $this->_id_comment; 
     }
 
-    public function getContent(): ?string
+    public function getContent() 
     { 
-        return $this->content; 
+        return $this->_content; 
     }
 
-    public function getId_user(): ?User
-    { 
-        return $this->id_user; 
-    }
-
-    public function getPostId(): self
-    { 
-        return $this->postId; 
-    }
     
     public function getDisabled() 
     { 
-        return $this->disabled; 
+        return $this->_disabled; 
+    }
+        public function getId_article() 
+    { 
+        return $this->_id_article; 
+    }
+    public function getId_user() 
+    { 
+        return $this->_id_user; 
     }
 
 }

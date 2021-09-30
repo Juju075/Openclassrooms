@@ -29,6 +29,7 @@ class User
     private $avatar;
     private $prenom; // champs 
     private $nom; // champs
+    private $sentence;
 
 
     public function __construct(array $obj){
@@ -67,11 +68,6 @@ class User
 
 
 
-
-
-
-
-
     //Setters
 
     public function setId_user(int $id_user){
@@ -93,28 +89,32 @@ class User
     public function setEmail(string $email){
         $this->email = $email;
     }
-
-/*
+        public function setSentence(string $sentence){
+        $this->sentence = $sentence;
+    }
+    
+    /*
     private $activated;  par defaut a 0
     private $validationKey; genere une cle de validation
     private $userType; par defaut 1
-
-*/
-
+    
+    */
+    
     public function setActivated()
     {
         
     }
     public function setValidationKey()
     {
-    //generer un code hass simple
+        //generer un code hass simple
     }
-
+    
     public function setAvatar(string $avatar)
     {
         $this->avatar = $avatar;
     }    
 
+    
 
 
 
@@ -140,10 +140,12 @@ class User
     public function getEmail(){
         return $this->email;
     }
-        public function getAvatar(){
+    public function getAvatar(){
         return $this->avatar;
     }   
-
+    public function getSentence(){
+        return $this->sentence;
+    } 
 
 
     public function getRoles(): array

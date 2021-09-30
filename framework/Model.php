@@ -30,11 +30,11 @@ abstract class Model
     }
 
     protected function getBdd(){
+        echo('|Model.php getBdd ');
         if(self::$_bdd == null){
             self::setBdd();
             return self::$_bdd;
         }
-        echo('ok fin fonction getBdd');
     }
 
     //ERREUR Entité
@@ -52,35 +52,71 @@ abstract class Model
         $req->closeCursor();
     }
 
+
+
+
+
+
+
       
-        protected function getAllComments($table){
-        echo('| Model.php getAllComments ici');
+    protected function getAllComments($table){
+        echo('| Model.php getAllComments');
         $id_article = $_SESSION['id_article'];
 
         $this->getBdd();
         $var = [];
-        $req  = self::$_bdd->prepare('SELECT `id_comment`, `content`, `createdat`, `id_user` FROM '. $table.' WHERE $id_article'); 
+        //ORDER BY
+        //$req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM '. $table.' WHERE $id_article'); 
+        $req  = self::$_bdd->prepare('SELECT id_comment, content, id_user FROM comment'); 
         $req->execute();
 
-
-
+        //while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             //$var[] = new $obj($data);
-            $var[] = new Comment($data); //pour hydratation.
-        //echo($var);
-
-        //return $var;
-        $req->closeCursor();
+        
+            //Collection d'objets comments id_comment
+            $var[] = new Comment($data); //pour hydratation assignation des valeurs par cles.
+            var_dump($var);// assert collection de posts.
+            
+            return $var; 
+            echo('| jusquici tous vas bien 3');
+            $req->closeCursor();
     }    
-}
+
+
+
+
     
+}
+
+    protected function testGetAllComments($table){
+    echo('| Model.php testGetAllComments');
+    $id_article = $_SESSION['id_article'];
+    $this->getBdd();
+    $var= [];
+
+    $req  = self::$_bdd->prepare('SELECT id_comment, content, id_user FROM comment WHERE id_user'); 
+    $req->execute();
+    $var = $req->fetchall();
+
+    //eng tab dans une variable
+    return $var; 
+    }
+
+
+
+
+
+
+
+
     // corriger la date 
     /**
      * Article
      * Cette fonction cré
      */
     protected function createOne($table, $obj){
-        echo('model.php createOne');
+        echo('| model.php createOne');
 
         $this->getBdd();
         $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, chapo, content) VALUES (?, ?, ?)");
@@ -95,14 +131,15 @@ abstract class Model
      * Fonction qui insert le commentaire.
      */
     protected function createOneComment($table, $comment){
-        echo('| Model.php createOneComment');
+        echo(' >> Model.php createOneComment');
+        var_dump($_SESSION['id_article']. ' article & user '. $_SESSION['id_user']);
 
         $this->getBdd();
 
         $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article, id_user) VALUES (?, ?, ?)");
+        
         $req->execute(array($comment, $_SESSION['id_article'], $_SESSION['id_user']));
         $req->closeCursor();
-        echo('Fin de script');
     }
 
 
@@ -145,10 +182,6 @@ abstract class Model
         return $var;
         $req->closeCursor();  
     }
-
-
-
-    //DELETE
 
     protected function deleteOne($table, $id){
         $this->getBdd();  

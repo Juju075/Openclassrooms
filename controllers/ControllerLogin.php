@@ -2,7 +2,7 @@
 namespace Controllers;
 session_start();
 
-use user;
+use Entity\User;
 use View\View;
 use Manager\UserManager;
 
@@ -20,7 +20,7 @@ class ControllerLogin
             throw new \Exception("Page introuvable", 1);
         }
         elseif (isset($_GET['user'])){
-            $this->login();        
+            $this->formLogin();        
         }
         elseif (isset($_GET['logout'])){
             $this->logout();       
@@ -32,34 +32,32 @@ class ControllerLogin
         }
     }
 
-    private function login(){
-        echo('ControllerLoging.php login');
-
+    private function formLogin(){
+        echo('ControllerLoging.php formLogin');
         $this->_view = new View('Login', 'Login');
         $this->_view->displayForm('Login');       
     }
 
 
-    private function logon(){
+    private function logon(){ //Traite le form de login.
     echo('ControllerLogin.php logon');
     $credentials = array('username'=> $_POST['username'],'password'=> $_POST['password']);
     $this->_item = new UserManager;
     $this->_item->login($credentials);
-    
 
-    //creer la session user
-    //rech ds bdd
+    //Hack utiliser username et pass pour id user
+
     
+    //Recuperer et affecter  lid user
     $_SESSION['id_user'] = 14;
-    //$_SESSION['id_user'] = $this->_item->getId_user();
- 
 
-    
+
+    $_SESSION['connecte'] = 'i';
     }
 
     private function logout(){
         session_destroy();
-        header('Location: /accueil');
+        header('Location: http://localhost/App_Blog_MVC/accueil');
     }
 
     

@@ -35,7 +35,7 @@ class ControllerRegister
 
 
     private function create(){
-        
+        echo('ControllerRegister create');
         if(isset($_GET['create'])){
 
             $this->_view = new View('CreateUser', 'Registration');
@@ -44,10 +44,7 @@ class ControllerRegister
     }
 
     private function store(){
-        //debugging
-        echo('OK function store ctrl');
-        echo($_POST['prenom']);
-        echo($_POST['nom']);
+        echo('ControllerRegister store');
 
         if(!empty($_POST['email'] && $_POST['checkpassword'])){
             $email = $_POST['email'];

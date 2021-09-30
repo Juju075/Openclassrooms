@@ -32,8 +32,6 @@
             </div>
             <!-- post-info -->
 
-            <? var_dump($article);?>
-
             <h3 class="title">
               <a href="#"
                 ><b><?=$article[0]->getTitle()?></b></a
@@ -148,50 +146,14 @@
         </div>
         <!-- comment-form -->
 
-        <h4><b>COMMENTAIRES</b></h4>
-        FOREACH COMMENT FOR ARTICLE ID
         <!-- =================================================================== -->
         <!-- Affichage commentaires -->
         <!-- =================================================================== -->
-        <div class="commnets-area">
-          <!-- Exemple comment -->
-          Exemple:
-          <div class="comment">
-            <div class="post-info">
-              <div class="left-area">
-                <a class="avatar" href="#"
-                  ><img
-                    src="public/images/avatar-1-120x120.jpg"
-                    alt="Profile Image"
-                /></a>
-              </div>
-
-              <div class="middle-area">
-                <a class="name" href="#"><b>Katy Liu</b></a>
-                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-              </div>
-
-              <div class="right-area">
-                <h5 class="reply-btn">
-                  <a href="comment&status=delete"><b>DELETE</b></a>
-                </h5>
-                <h5 class="reply-btn">
-                  <a href="comment&status=update"><b>UPDATE</b></a>
-                </h5>
-              </div>
-            </div>
-            <!-- post-info -->
-
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-              ipsum dolor sit amet, consectetur Ut enim ad minim veniam
-            </p>
-          </div>
-          <!-- Fin exemple comment -->
-          <!-- $comment = Model getAllComments -->
-
-          {% include '/views/Comment/listComments.html.twig' %}
+        <h4><b>COMMENTAIRES</b></h4>
+        <!-- =================================================================== -->
+        <!-- Affichage commentaires -->
+        <!-- =================================================================== -->
+        <?= include 'views/Comment/listComments.html.twig'; ?>
         </div>
         <!-- commnets-area -->
       </div>

@@ -1,20 +1,21 @@
 <?php
 namespace controllers;
 session_start();
+echo('ControllerComment.php user session | ');
+var_dump($_SESSION['id_user']);
 
-use View\View;
 use Manager\CommentManager;
 
 class ControllerComment
 {
     
         private $_commentManager;
-        private $_view; 
+        public $comments;
 
         public function __construct(){
             if(isset($url) && count($url) < 1){
                 throw new \Exception("Page introuvable", 1);
-                echo('ControllerComment.php construct');
+                echo('ControllerComment.php construct |');
         }    
         elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ 
             $this->storeComment();
@@ -43,15 +44,18 @@ class ControllerComment
         $comment = $this->_commentManager->createComment($_POST['comment']);
 //
         
-        //Afficher les commentaire
-        echo('Maintenant affichage aditionnel des comments foreach');
-        $comments = $this->_commentManager->getComments(); //
-        
-        // $this->_view = new View('Post','Comment');
-        // $this->_view->generatePost(array('comments' =>$comments));
-    }
-    
+        //Afficher les commentaires conserver la variable
+        echo('| 2st partie storeComment - Affichage foreach ');
 
+        global $comments;
+        $this->_commentManager = new CommentManager;
+        $comments = $this->_commentManager->getComments(); //$comments = var[]
+        
+
+        //Pb id article et id user non enregistre
+        echo('OK -- voici le resultat de l insertion');
+        var_dump($comments); //recuperation des datas de comment table.
+    }
 
 
     private function updateComment(){
@@ -59,7 +63,6 @@ class ControllerComment
         
     }
     
-
 
     private function deleteOneComment(){
         echo('| ControllerComment.php function deleteComment');

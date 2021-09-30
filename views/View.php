@@ -21,7 +21,7 @@ class View
      * Cette fonction sert à generer le listing des Post (All). template.php 
      */
     public function generate($data){  
-        echo('View.php generate');
+        echo('| View.php generate');
         $content = $this->generateFile($this->_file,$data);
         $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t, 'content' => $content));
         echo $view;
@@ -31,7 +31,7 @@ class View
      * Cette fonction sert generer la page de detail Post(One). templateSingle.php
      */
     public function generatePost($data){
-        echo('View.php generatePost');
+        echo('| View.php generatePost');
         $content = $this->generateFile($this->_file,$data);
         //ajouter chapo 
         //$view = $this->generateFile('views/templateSingle.php', array('t'=>$this->_t, 'content'=>$content));
@@ -59,7 +59,7 @@ class View
      * views/template
      */
     public function displayForm($action){ 
-        echo('View.php displayForm');
+        echo('| View.php displayForm');
         $page = 'views/template'.$action .'.html.twig';
         $view = $this->generateFileSimple($page);
         echo $view;

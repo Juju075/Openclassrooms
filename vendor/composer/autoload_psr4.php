@@ -47,5 +47,5 @@ return array(
     'Fidry\\PsyshBundle\\' => array($vendorDir . '/theofidry/psysh-bundle/src'),
     'Entity\\' => array($baseDir . '/models/Entity'),
     'Controllers\\' => array($baseDir . '/controllers'),
-    'App\\' => array('/'),
+    'App\\' => array($baseDir . '/src'),
 );

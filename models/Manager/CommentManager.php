@@ -5,6 +5,7 @@ use Tools\Model;
 
 class CommentManager extends Model
 {
+   //return $var[]
    public function getComments(){
       return $this->getAllComments('comment');
    }
@@ -16,6 +17,9 @@ class CommentManager extends Model
       echo('|CommentManager createComment');
       return $this->CreateOneComment('comment', $comment);
    } 
+      public function testGetComments(){
+      return $this->testGetAllComments('comment');
+   }
 
 
 

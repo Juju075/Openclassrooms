@@ -65,18 +65,39 @@ use Manager\ArticleManager;
     }
     
 
+    private function noDuplicate(){
+
+        // bdd all title comparatif avec la nouvelle saisie titre
+         //si titre existe deja
+        $title = $_POST['title'];
+        //getAlltitle
+
+        //cpt le nombre de ligne
+        //Boucle de verification
+        //while
+        //check if title = $title
+        //bool 0 $this->store() 1 Alerte rouge c article existe deja
+
+
+        
+    }
 
     //Traitement add article.
     // Affectation $articles pour le foreach $content
     private function store(){
         echo('controllerPost.php function store');
-
+//Ajouter condition (non doublon)
         $this->_articleManager = new ArticleManager;
         $article = $this->_articleManager->createArticle();
         $articles = $this->_articleManager->getArticles();
 
         $this->_view = new View('Accueil','Post');
         $this->_view->generate(array('articles' =>$articles));
+
+         //Affichage des commentaires
+        //$comments = var[]
+        // $ici = new ControllerComment();
+        // $this->ici->$comments
     }
 
 

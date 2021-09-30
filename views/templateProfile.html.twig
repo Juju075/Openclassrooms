@@ -30,14 +30,24 @@
 
         <?php include("public/partials/_nav.php"); ?>
       </div>
-      <!-- conatiner -->
+      <!-- container -->
     </header>
 
     <h1>Example heading <span class="badge badge-secondary">New</span></h1>
     <!-- contenu cidessous -->
-    templateProfile.php<br /><br />
-    <?= var_dump($_SESSION['id_user']); ?>
-    nom et prénom ;<br />
+    templateProfile.html.twig<br /><br />
+    <?= var_dump($_SESSION['id_user']); 
+    
+    
+    
+    
+    ?>
+    <ul>
+      {% for word in words %}
+      <li>{{ word }}</li>
+      {% endfor %}
+    </ul>
+    {% user.prenom %} nom et prénom ;<br />
     fullname<br />
 
     une photo et/ou un logo ;<br /><br />

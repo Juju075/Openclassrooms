@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 session_start();
-var_dump($_SESSION['id_user']);
+
 
 use View\View;
 use Manager\ArticleManager;
@@ -25,6 +25,7 @@ use Manager\ArticleManager;
      */
     private function articles(){
         echo('ControllerAcceuil.php articles');
+
         $this->_articleManager = new ArticleManager(); 
         $articles = $this->_articleManager->getArticles();
 

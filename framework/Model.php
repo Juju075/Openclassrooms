@@ -90,17 +90,36 @@ abstract class Model
 }
 
     protected function testGetAllComments($table){
-    echo('| Model.php testGetAllComments');
-    $id_article = $_SESSION['id_article'];
-    $this->getBdd();
-    $var= [];
+        echo('| Model.php testGetAllComments');
+        $result = [];
+        //liste id_article existant 
+        $this->getBdd();
+        $req0  = self::$_bdd->prepare('SELECT id_article FROM comment'); 
+        $req0->execute();
+        $result = $req0->fetchall();
+        
+        $nb = count($result);
+        var_dump($nb . $result);
 
-    $req  = self::$_bdd->prepare('SELECT id_comment, content, id_user FROM comment WHERE id_user'); 
-    $req->execute();
-    $var = $req->fetchall();
+        exit();
+        //si id article = result alors on execute 
+        for ($i=0; $i=$nb; $i++) { 
 
-    //eng tab dans une variable
-    return $var; 
+            $id_article = 86; //
+
+            if ($_SESSION['id_article'] === $id_article ) {
+                $id_article = $_SESSION['id_article'];
+                $this->getBdd();
+                $var= [];
+                
+                $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = 12'); 
+                $req->execute(array($id_article));
+                $var = $req->fetchall();
+                return $var; 
+                break;
+            }else{}
+            
+        }
     }
 
 

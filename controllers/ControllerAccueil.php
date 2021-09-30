@@ -28,6 +28,8 @@ use Manager\ArticleManager;
 
         $this->_articleManager = new ArticleManager(); 
         $articles = $this->_articleManager->getArticles();
+        
+        //Affectation de comments
 
         $this->_view = new View('Accueil', 'Post');
         $this->_view->generate(array('articles'=>$articles));

@@ -22,6 +22,9 @@ class ControllerLogin
         elseif (isset($_GET['user'])){
             $this->formLogin();        
         }
+        elseif (isset($_GET['login']) && isset($_GET['login']) =="notconnected"){  
+            $this->alert();       
+        }         
         elseif (isset($_GET['logout'])){
             $this->logout();       
         }        
@@ -50,14 +53,14 @@ class ControllerLogin
     
     //Recuperer et affecter  lid user
     $_SESSION['id_user'] = 14;
-
-
-    $_SESSION['connecte'] = 'i';
     }
 
     private function logout(){
         session_destroy();
         header('Location: http://localhost/App_Blog_MVC/accueil');
+    }
+    private function alert(){
+        
     }
 
     

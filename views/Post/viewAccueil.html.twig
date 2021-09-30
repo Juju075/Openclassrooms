@@ -1,10 +1,30 @@
 <div class="slider"></div>
-<b>views/Post/viewAcceuil.php</b>
+views/Post/viewAcceuil.html.twig
+
 <section class="blog-area section">
+  <!-- route: post&register=created -->
+  <div class="alert alert-success" role="alert">Votre compte est crée!</div>
+
+  <!-- route: post&post=created -->
+  <div class="alert alert-success" role="alert">Votre article est crée!</div>
+
+  <!-- route: post&login=connected -->
+  <div class="alert alert-success" role="alert">Vous étes connecté!</div>
+
+  <!-- route: post&comment=notconnected -->
+  <div class="alert alert-danger" role="alert">
+    Vous devez vous connectez pour cette action!
+  </div>
+
+  <!-- route: post&session=terminated -->
+  <div class="alert alert-danger" role="alert">Votre session est terminée!</div>
+
+  <!-- route: post&message=send -->
+  <div class="alert alert-warning" role="alert">Votre message est envoyé!</div>
+
   <div class="container">
     <div class="row">
       <?php
-      
 					//foreach ($array as $value)
 					foreach ($articles as $article): ?>
 

@@ -1,4 +1,5 @@
 <?php ?>
+register.html.twig
 <h1 class="my-5 text-center">Ajouter un utilisateur.</h1>
 
 <form method="post" action="register&status=new">
@@ -68,22 +69,12 @@
     </div>
 
     <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroupFileAddon01"
-          >Upload Avator or logo.</span
-        >
-      </div>
-      <div class="custom-file">
-        <input
-          type="file"
-          class="custom-file-input"
-          id="inputGroupFile01"
-          aria-describedby="inputGroupFileAddon01"
-        />
-        <label class="custom-file-label" for="inputGroupFile01"
-          >Choose file</label
-        >
-      </div>
+      <form>
+        <div class="form-group">
+          <label for="upload_file">Télecharger un avator ou un logo.</label>
+          <input type="file" class="form-control-file" id="upload_file" />
+        </div>
+      </form>
     </div>
 
     <div class="button">

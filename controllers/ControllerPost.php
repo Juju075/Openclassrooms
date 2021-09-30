@@ -4,8 +4,9 @@ session_start();
 
 use View\View;
 use Manager\ArticleManager;
+use Manager\CommentManager;
 
- class ControllerPost
+class ControllerPost
  {
     private $_articleManager;
     private $_commentManager;
@@ -121,9 +122,14 @@ use Manager\ArticleManager;
 
             $this->_articleManager = new ArticleManager;
             $article = $this->_articleManager->getArticle($_GET['id_article']);
-
+            
             $this->_view = new View('singlePost','Post');
             $this->_view->generatePost(array('article'=>$article));
+
+
+            //Recuperer la liste des comments.
+            $this->_commentManager = new CommentManager;
+            $_SESSION['comments'] = $this->_commentManager->testGetComments();
         }
     }
 }

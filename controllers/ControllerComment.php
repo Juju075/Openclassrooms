@@ -39,22 +39,31 @@ class ControllerComment
     private function storeComment(){
         echo('| ControllerComment.php storeComment');
 
+    //visiteur doit etre connecte
+    if(isset($_SESSION['id_user'])){
+
         //Parie 1 - ok fonctionne
         $this->_commentManager = new CommentManager;
         $comment = $this->_commentManager->createComment($_POST['comment']);
-//
+    //
         
         //Afficher les commentaires conserver la variable
         echo('| 2st partie storeComment - Affichage foreach ');
-
-        global $comments;
+    
+        //global $comments;
         $this->_commentManager = new CommentManager;
         $comments = $this->_commentManager->getComments(); //$comments = var[]
         
-
+    
         //Pb id article et id user non enregistre
         echo('OK -- voici le resultat de l insertion');
         var_dump($comments); //recuperation des datas de comment table.
+    }else{
+        header('Location: /login&user=notconnected');
+    }
+
+
+
     }
 
 

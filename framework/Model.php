@@ -46,8 +46,8 @@ abstract class Model
         $req->execute();
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            $var[] = new $obj($data);
-            //$var[] = new Article($data); //fonctionne !!!
+            //$var[] = new $obj($data);
+            $var[] = new Article($data); //fonctionne !!!
         }
         return $var;
         $req->closeCursor();
@@ -120,15 +120,40 @@ abstract class Model
 
     // corriger la date 
     /**
-     * Article
-     * Cette fonction cré
+     * Article 
+    * Methods inside Model.php shouldn't be specific to any entity issue 38
      */
     protected function createOne($table, $obj){
-        echo('| model.php createOne');
+    echo('| model.php createOne');
+        $array=(array)$obj;
+        $classFullName=get_class($obj);
 
+        $keys=[];
+        $values=[];
+        $data=[];
+        $interrogation=[];
+
+        foreach ($array as $key=>$value){
+            
+            array_push($keys, strtolower(substr(str_replace($classFullName,"",$key),3)));
+            array_push($values, $value);
+            array_push($interrogation,'?');
+            $data[strtolower($key)]=$value;
+        }
+ 
+
+        $keysString=implode(' , ',$keys);
+        $interrogationString=implode(' , ',$interrogation);
         $this->getBdd();
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (title, chapo, content) VALUES (?, ?, ?)");
-        $req->execute(array($_POST['title'], $_POST['chapo'], $_POST['content']));
+        $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
+        echo $sql;
+        try {$req = self::$_bdd->prepare($sql);
+            $req->execute($values);}
+            catch(\PDOException $e)
+            {
+                $e->errorInfo;
+            }
+        
         $req->closeCursor();
     }
 

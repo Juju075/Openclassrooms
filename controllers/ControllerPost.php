@@ -3,6 +3,7 @@ namespace controllers;
 session_start();
 
 use View\View;
+use Entity\Article;
 use Manager\ArticleManager;
 use Manager\CommentManager;
 
@@ -85,20 +86,18 @@ class ControllerPost
 
     //Traitement add article.
     // Affectation $articles pour le foreach $content
+
+
     private function store(){
-        echo('controllerPost.php function store');
-//Ajouter condition (non doublon)
-        $this->_articleManager = new ArticleManager;
-        $article = $this->_articleManager->createArticle();
-        $articles = $this->_articleManager->getArticles();
-
-        $this->_view = new View('Accueil','Post');
-        $this->_view->generate(array('articles' =>$articles));
-
-         //Affichage des commentaires
-        //$comments = var[]
-        // $ici = new ControllerComment();
-        // $this->ici->$comments
+    echo('controllerPost.php function store');
+        if (isset($_POST)){
+            $article= new Article($_POST);
+            $this->_articleManager = new ArticleManager;
+            $article = $this->_articleManager->createArticle($article);
+            $articles = $this->_articleManager->getArticles();
+            $this->_view = new View('Accueil','Post');
+            $this->_view->generate(array('articles' =>$articles));
+        }
     }
 
 

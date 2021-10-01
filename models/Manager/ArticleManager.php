@@ -13,8 +13,8 @@ class ArticleManager extends Model
    public function getArticle($id){
       return $this->GetOne('article','Article', $id);
    }
-   public function createArticle(){
-      return $this->CreateOne('article','Article');
+   public function createArticle($article){
+      return $this->CreateOne('article',$article);
    } 
 
    //Admin delete post

@@ -5,6 +5,7 @@ session_start();
 use Entity\User;
 use View\View;
 use Manager\UserManager;
+use Tools\security;
 
 class ControllerLogin
 {
@@ -42,18 +43,21 @@ class ControllerLogin
     }
 
 
-    private function logon(){ //Traite le form de login.
-    echo('ControllerLogin.php logon');
-    $credentials = array('username'=> $_POST['username'],'password'=> $_POST['password']);
-    $this->_item = new UserManager;
-    $this->_item->login($credentials);
+    private function logon(){
 
-    //Hack utiliser username et pass pour id user
-
-    
-    //Recuperer et affecter  lid user
-    $_SESSION['id_user'] = 14;
+    if(($user=Security::login(1))!=null){
+        echo('| ControllerLoging.php logon true');
+        //access granted make some business logic here 
+        var_dump($user);
     }
+    else
+    {
+        echo('| ControllerLoging.php logon else ');
+        //redirection or error message
+        var_dump($user);
+    }
+    }
+
 
     private function logout(){
         session_destroy();

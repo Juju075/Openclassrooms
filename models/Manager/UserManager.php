@@ -15,6 +15,7 @@ use Tools\Model;
 class UserManager extends Model
 {
     // Mettre dans Model.php Rajouter des champs
+    //utiliser createOne
     public function add(array $obj){ 
         $table = 'User';
         //ceatedate
@@ -55,27 +56,9 @@ class UserManager extends Model
     public function update(){
     }
     
-    public function login($obj){
-
-        $this->getBdd();
-        $req = self::$_bdd->prepare('SELECT password, activated  FROM user WHERE username = ?');
-        $req->execute(array($obj['username']));
-        $resultat = $req->fetch();
-
-
-        $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
-
-        if ($Verif_pass == TRUE && $resultat['activated'] == 1) {
-
-            header('location: accueil?passe=valide');
-            
-        }else{
-            $smg = 'Mauvais mot de pass ou login ou cpt non valide.';
-            header('location: accueil?passe=non_valide');
-        }     
-        return $this;   
-    }
-    public function contact(){
-    }
+    public function logon($user,$usertype){
+        echo('| UserManager.php logon');
+      return $this->authenticationRequest($user,$usertype);
+   }
 
 }

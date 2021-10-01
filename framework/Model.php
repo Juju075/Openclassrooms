@@ -46,8 +46,8 @@ abstract class Model
         $req->execute();
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            //$var[] = new $obj($data);
-            $var[] = new Article($data); //fonctionne !!!
+            $obj2="\\Entity\\".$obj;
+            $var[] = new $obj2($data);
         }
         return $var;
         $req->closeCursor();
@@ -113,7 +113,20 @@ abstract class Model
 
 
 
-
+protected function authenticationRequest($obj,$usertype){
+        $this->getBdd();
+        $req = self::$_bdd->prepare('SELECT id_user, password, activated, usertype  FROM user WHERE username = ?');
+        $req->execute(array($obj['username']));
+        $resultat = $req->fetch();
+        $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
+        if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype) {
+            $id_user=$resultat['id_user'];
+            $user=$this->getOne('user','User',$id_user);
+            return $user;  
+        }else{
+            return false;
+        }     
+    }
 
 
 
@@ -228,6 +241,8 @@ abstract class Model
         $req->execute(array());
 
     } 
+
+ 
 
   
 }

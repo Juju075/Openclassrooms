@@ -10,7 +10,6 @@ use Entity\Comment;
 abstract class Model
 {
     protected static $_bdd;
- 
 
     private static function setBdd(){   
         try {
@@ -46,8 +45,8 @@ abstract class Model
         $req->execute();
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            $var[] = new $obj($data);
-            //$var[] = new Article($data); //fonctionne !!!
+            //$var[] = new $obj($data);
+            $var[] = new Article($data); //fonctionne !!!
         }
         return $var;
         $req->closeCursor();

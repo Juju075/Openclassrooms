@@ -52,8 +52,8 @@ class UserManager extends Model
     public function update(){
     }
     
-    public function logon($user,$usertype){
-        echo('| UserManager.php logon');
+    public function logonManager($user,$usertype){
+        echo('| UserManager.php logonManager');
       return $this->authenticationRequest($user,$usertype);
    }
 

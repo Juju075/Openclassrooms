@@ -2,14 +2,16 @@
 views/Post/viewAcceuil.html.twig
 
 <section class="blog-area section">
+  {% if alert = 1 %}
   <!-- route: accueil?register=created -->
+  <!-- alert=1 -->
   <div class="alert alert-success alert-dismissible fade show" role="alert">
     Votre compte est crée!
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
+  {% else if alert = 2%}
   <!-- route: accueil?post=created -->
   <div class="alert alert-success alert-dismissible fade show" role="alert">
     Votre article est crée!
@@ -17,7 +19,7 @@ views/Post/viewAcceuil.html.twig
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
+  {% else if alert = 3%}
   <!-- route: accueil?passe=valide -->
   <div class="alert alert-success alert-dismissible fade show" role="alert">
     Vous étes connecté!
@@ -25,7 +27,7 @@ views/Post/viewAcceuil.html.twig
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
+  {% else if alert = 4%}
   <!-- route: accueil?comment=notconnected -->
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
     Vous devez vous connecter pour cette action!
@@ -33,7 +35,15 @@ views/Post/viewAcceuil.html.twig
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
+  {% else if alert = 5%}
+  <!-- route: accueil?login=error -->
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Vos credentials sont erronée!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% else if alert = 6%}
   <!-- route: accueil?register=error -->
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
     Votre soumission est erronée!
@@ -41,7 +51,7 @@ views/Post/viewAcceuil.html.twig
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
+  {% else if alert = 7%}
   <!-- route: accueil?session=terminated -->
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
     Votre session est terminée!
@@ -49,7 +59,7 @@ views/Post/viewAcceuil.html.twig
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
+  {% else if alert = 8%}
   <!-- route: accueil?message=send -->
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
     Votre message est envoyé!
@@ -57,6 +67,7 @@ views/Post/viewAcceuil.html.twig
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  {% endif %}
 
   <div class="container">
     <div class="row">

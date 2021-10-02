@@ -30,4 +30,9 @@ class ArticleManager extends Model
       echo('ArticleManager updateArticle');
       //return $this->updateOne('article', $id);
    }
+   
+   public function articleVerif(){
+      echo('ArticleManager rticleVerif');
+      return $this->postIfExist();
+   }
 }

@@ -120,16 +120,26 @@ class ControllerPost
             $_SESSION['id_article'] = $_GET['id_article'];
 
             $this->_articleManager = new ArticleManager;
-            $article = $this->_articleManager->getArticle($_GET['id_article']);
+            $articleVerif = $this->_articleManager->articleVerif();
+
+            if ($articleVerif == true ){
+                $article = $this->_articleManager->getArticle($_GET['id_article']);
+                
+                $this->_view = new View('singlePost','Post');
+                $this->_view->generatePost(array('article'=>$article));
+                
+                
+                //Recuperer la liste des comments.
+                $this->_commentManager = new CommentManager;
+                $_SESSION['comments'] = $this->_commentManager->testGetComments();
+                var_dump($_SESSION['comments']);
+            }
             
-            $this->_view = new View('singlePost','Post');
-            $this->_view->generatePost(array('article'=>$article));
-
-
-            //Recuperer la liste des comments.
-            $this->_commentManager = new CommentManager;
-            $_SESSION['comments'] = $this->_commentManager->testGetComments();
-            var_dump($_SESSION['comments']);
+            elseif ($articleVerif == false){
+                header('location: accueil');
+            }else{
+                header('location: accueil');
+            }
         }
     }
 }

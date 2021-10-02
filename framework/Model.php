@@ -111,6 +111,31 @@ abstract class Model
         }
     }
 
+protected function testGetAllCommentsRefactoring($table){
+    echo('| Model.php testGetAllCommentsRefactoring');
+
+        $id_article = $_SESSION['id_article'];
+
+        //Est ce que lid_article possede au moins un commentaire.
+        $this->getBdd();
+        $req0  = self::$_bdd->prepare('SELECT id_article FROM comment WHERE id_article = ?'); 
+        $req0->execute(array($id_article));
+        $result = $req0->fetchall();
+
+        // if (){
+        //         $this->getBdd();
+        //         $var= [];
+                
+        //         $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ?'); 
+        //         $req->execute(array($id_article));
+        //         $var = $req->fetchall();
+        //         return $var; 
+        // }else{}
+
+}
+
+    
+
 
 
 protected function authenticationRequest($obj,$usertype){
@@ -128,7 +153,29 @@ protected function authenticationRequest($obj,$usertype){
         }     
     }
 
+protected function postIfExist(){
+    echo('| Model.php postIfExist');
 
+    //lister les id articles encours.
+        $id_article = $_SESSION['id_article'];
+        $this->getBdd();
+        $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
+        $req0->execute(array($id_article));
+        return $req0->fetchall();
+}
+
+
+protected function noDuplicatePost($table, $obj){
+echo('| model.php createOne');
+
+//titre
+//verif si titre existe deja
+        $this->getBdd();
+
+        $req = self::$_bdd->prepare("SELECT title FROM " .$table. " WHERE title = ?");
+        $req->execute(array($title));
+        return $req->fetchall();
+}
 
 
     // corriger la date 

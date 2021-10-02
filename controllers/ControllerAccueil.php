@@ -19,7 +19,6 @@ use Manager\ArticleManager;
         //Refactoring get $attribut1 et $attribut2
 
 
-
         elseif (isset($_GET['acceuil']) && isset($_GET['login']) =="notconnected"){  
             $this->$this->articles(1);       
         }  

@@ -45,29 +45,25 @@ class ControllerLogin
 
     // we can verify session using login methode and we can make decision according to returned response for
     private function logon(){
-    if(($user=Security::login(1))!=null){
-        echo('| ControllerLoging.php logon true');
-        //access granted make some business logic here 
-        var_dump($user);
-        header('Location: accueil?passe=valide');
-    }
+        if(($user=Security::login(1))!=null){
+            echo('| ControllerLoging.php logon true');
+            //access granted make some business logic here 
+
+            //if return $user
+            var_dump($user);
+            header('Location: accueil?passe=valide');
+        }
     else
-    {
-        echo('| ControllerLoging.php logon else ');
-        //redirection or error message
-        var_dump($user);
-        header('Location: accueil?login=error');
+        {
+            //if return false
+            echo('| ControllerLoging.php logon else ');
+            //redirection or error message
+            var_dump($user);
+            header('Location: accueil?login=error');
+        }
     }
-    }
-
-
     private function logout(){
         session_destroy();
         header('Location: accueil?session=terminated');
-    }
-    private function alert(){
-        
-    }
-
-    
+    } 
 }

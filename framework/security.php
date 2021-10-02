@@ -2,7 +2,8 @@
 namespace Tools;
 use Manager\UserManager;
 
-class Security{
+class Security
+{
 
 public static function login($usertype){
     

@@ -5,12 +5,6 @@ use Entity\User;
 use Manager\UserManager;
 use View\View;
 
-/**
-* require_once 'views/View.php';
-* require_once('models/Manager/UserManager.php'); // à enlever bizarre
-* require_once('models/Entity/User.php'); // à enlever bizarre
- */
-
 class ControllerRegister
  {
      private $user;
@@ -22,14 +16,11 @@ class ControllerRegister
         }
         elseif (isset($_GET['create'])){
             $this->create();       
-            //echo('controller option 1');
         }
-        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){
+        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ //Traitement du form
             $this->store();       
-            //echo('controller option 2');
         }
         else{
-            //echo('controller option 3');
         }
     }
 
@@ -44,6 +35,26 @@ class ControllerRegister
     }
 
     private function store(){
+        echo('ControllerRegister store2');
+
+
+        $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $token = '123456'; //random_bytes (10); // a corriger
+        $default_avatar = 'default_avatar.jpg';
+
+        $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $default_avatar);
+        
+        var_dump($obj);
+        $transfert = new UserManager;       	
+        $transfert->add2($obj);
+
+
+        //si creer          header('location: accueil?register=created');
+        //si erreur divers  header('location: accueil?register=error');
+
+    }
+ 
+    private function storeBackup(){
         echo('ControllerRegister store');
 
         if(!empty($_POST['email'] && $_POST['checkpassword'])){
@@ -63,6 +74,7 @@ class ControllerRegister
                     $this->_user = new User($obj); 
                  
                     $transfert = new UserManager;       	
+                    //$transfert->add($obj);
                     $transfert->add($obj);
 
                     header('location: accueil?register=created');

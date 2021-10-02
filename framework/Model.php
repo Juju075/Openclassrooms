@@ -73,7 +73,7 @@ abstract class Model
             var_dump($var);// assert collection de posts.
             
             return $var; 
-            echo('| jusquici tous vas bien 3');
+            echo('| jusqu ici tous vas bien 3');
             $req->closeCursor();
     }    
 }

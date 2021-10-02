@@ -2,16 +2,6 @@
 namespace Manager;
 use Tools\Model;
 
-/**
- * Toute les fonctionnalités.
- * getList()
- * get()
- * add()
- * delete()
- * update()
- * login()
- */
-
 class UserManager extends Model
 {
     // Mettre dans Model.php Rajouter des champs
@@ -50,6 +40,12 @@ class UserManager extends Model
         $req->closeCursor();
         return $this;
     }
+
+    public function add2($obj){
+        echo('| UserManager.php logon');
+      return $this->createOne('user', $obj);
+   }
+
 
     public function delete(){
     }

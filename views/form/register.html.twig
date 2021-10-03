@@ -69,10 +69,18 @@ register.html.twig
     </div>
 
     <div class="input-group mb-3">
-      <form>
+      <form method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="upload_file">Télecharger un avator ou un logo.</label>
-          <input type="file" class="form-control-file" id="upload_file" />
+          <input
+            type="file"
+            class="form-control-file"
+            id="upload_file"
+            name="foo"
+            value="Upload File"
+          />
+
+          <input type="submit" value="Upload File" />
         </div>
       </form>
     </div>

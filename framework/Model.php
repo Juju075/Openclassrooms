@@ -139,16 +139,23 @@ protected function testGetAllCommentsRefactoring($table){
 
 
 protected function authenticationRequest($obj,$usertype){
+    echo('| Model.php authenticationRequest');
         $this->getBdd();
         $req = self::$_bdd->prepare('SELECT id_user, password, activated, usertype  FROM user WHERE username = ?');
         $req->execute(array($obj['username']));
         $resultat = $req->fetch();
         $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
+
         if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype) {
+            echo('Condition verifie a true');
+
+
             $id_user=$resultat['id_user'];
             $user=$this->getOne('user','User',$id_user);
+            
             return $user;  
         }else{
+            echo('condition else false');
             return false;
         }     
     }

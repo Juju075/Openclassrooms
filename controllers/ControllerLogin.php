@@ -24,7 +24,7 @@ class ControllerLogin
             $this->formLogin();        
         }
         elseif (isset($_GET['login']) && isset($_GET['login']) =="notconnected"){  
-            $this->alert();       
+            //$this->alert();       
         }         
         elseif (isset($_GET['logout'])){
             $this->logout();       
@@ -48,17 +48,14 @@ class ControllerLogin
         if(($user=Security::login(1))!=null){
             echo('| ControllerLoging.php logon true');
             //access granted make some business logic here 
-
-            //if return $user
-            var_dump($user);
+                     
+            var_dump($user); //if return $user
             header('Location: accueil?passe=valide');
         }
     else
         {
             //if return false
             echo('| ControllerLoging.php logon else ');
-            //redirection or error message
-            var_dump($user);
             header('Location: accueil?login=error');
         }
     }

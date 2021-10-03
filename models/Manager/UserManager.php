@@ -52,6 +52,9 @@ class UserManager extends Model
     public function update(){
     }
     
+    /**
+     * should just send request and return result of verification
+     */
     public function logonManager($user,$usertype){
         echo('| UserManager.php logonManager');
       return $this->authenticationRequest($user,$usertype);

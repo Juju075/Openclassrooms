@@ -210,6 +210,7 @@ echo('| model.php createOne');
  
 
         $keysString=implode(' , ',$keys);
+        var_dump($keysString);
         $interrogationString=implode(' , ',$interrogation);
         $this->getBdd();
         $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";

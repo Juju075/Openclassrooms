@@ -47,8 +47,9 @@ class ControllerLogin
     private function logon(){
         if(($user=Security::login(1))!=null){
             echo('| ControllerLoging.php logon true');
+
             //access granted make some business logic here 
-                     
+ 
             var_dump($user); //if return $user
             header('Location: accueil?passe=valide');
         }

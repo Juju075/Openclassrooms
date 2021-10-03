@@ -51,7 +51,7 @@ class ControllerRegister
 // CODE CODEGUY UPLOAD
 // can validate and upload the file like this
 
-$storage = new \Upload\Storage\FileSystem('/public/images/upload');
+$storage = new \Upload\Storage\FileSystem('/public/images/upload');  //dans vendor
 $file = new \Upload\File('foo', $storage);
 
 // Optionally you can rename the file on upload

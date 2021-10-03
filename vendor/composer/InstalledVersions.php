@@ -30,11 +30,20 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'a5f96970304828e697bc7fcd046691f701aa55e3',
+    'reference' => 'cf6feb3c349b11f1464d11cb2433789ca05616a7',
     'name' => 'openclassrooms/app_blog_mvc',
   ),
   'versions' => 
   array (
+    'codeguy/upload' => 
+    array (
+      'pretty_version' => '1.3.2',
+      'version' => '1.3.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6a9e5e1fb58d65346d0e557db2d46fb25efd3e37',
+    ),
     'nikic/php-parser' => 
     array (
       'pretty_version' => 'v4.12.0',
@@ -51,7 +60,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'a5f96970304828e697bc7fcd046691f701aa55e3',
+      'reference' => 'cf6feb3c349b11f1464d11cb2433789ca05616a7',
     ),
     'phpmailer/phpmailer' => 
     array (

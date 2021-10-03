@@ -264,6 +264,16 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'U' => 
+        array (
+            'Upload' => 
+            array (
+                0 => __DIR__ . '/..' . '/codeguy/upload/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -280,6 +290,7 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68::$classMap;
 
         }, null, ClassLoader::class);

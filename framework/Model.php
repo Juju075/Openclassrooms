@@ -194,6 +194,7 @@ echo('| model.php createOne');
     echo('| model.php createOne');
         $array=(array)$obj;
         $classFullName=get_class($obj);
+        var_dump($classFullName);
 
         $keys=[];
         $values=[];

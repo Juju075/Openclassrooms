@@ -4,10 +4,10 @@ namespace Entity;
 class Article
 {
 
-    private $_id_article;
-    private $_title;
-    private $_chapo;
-    private $_content;
+    private $id_article;
+    private $title;
+    private $chapo;
+    private $content;
 
 
     //verifie ds video si il a mis incrementation pour ID
@@ -36,14 +36,14 @@ class Article
     {  
         $id = (int) $id_article;
         if ($id > 0){
-            $this->_id_article = $id_article;
+            $this->id_article = $id_article;
         }
     }
 
     public function setTitle(?string $title) 
     {
         if(is_string($title)){
-            $this->_title = $title;
+            $this->title = $title;
         }
     }
 
@@ -51,14 +51,14 @@ class Article
     public function setChapo(?string $chapo) 
     {
         if(is_string($chapo)){
-            $this->_chapo = $chapo;
+            $this->chapo = $chapo;
         }
     }
 
     public function setContent(?string $content) 
     {
         if(is_string($content)){
-            $this->_content = $content;
+            $this->content = $content;
         }
     }
 
@@ -68,25 +68,25 @@ class Article
     //Getters
     public function getId_article()
     {
-        return $this->_id_article;
+        return $this->id_article;
     }
     
 
     public function getTitle(): ?string
     {
-        return $this->_title;
+        return $this->title;
     }    
 
 
     public function getChapo(): ?string 
     {
-    return $this->_chapo;
+    return $this->chapo;
     }
 
 
     public function getContent(): ?string
     { 
-        return $this->_content;
+        return $this->content;
     }
     
     //here Foreign key

@@ -1,11 +1,6 @@
 <?php
 namespace Entity;
 
-/**
- * require_once('models/Manager/UserManager.php'); // à enlever bizarre
- */
-
-
 class User  
 {
     // use Timestampable;
@@ -23,7 +18,7 @@ class User
 
     private $activated; //defaut 0
     private $validationKey; //genere
-    private $userType; // defaut 1
+    //private $_userType; // defaut 1
     
 
     private $avatar;
@@ -33,33 +28,24 @@ class User
 
 
     public function __construct(array $obj){
-    
         if(!empty($obj)){
-
             $this->hydrate($obj);
+            var_dump($obj);
         }
     }
   
+
     public function hydrate(array $obj)
     {
-
 		foreach ($obj as $key => $value)
 		{
-
-            $key = lcfirst(str_replace('_', '', ucwords($key, '_')));
-            
 			$method = 'set'.ucfirst($key);
-
-
 			if (method_exists($this, $method))
 			{
-
 				$this->$method($value);
             }
-
         }
     }
-
 
 
     private function addUser($table, $obj){
@@ -69,13 +55,20 @@ class User
 
 
     //Setters
+        public function setId_article(?int $id_user)
+    {  
+        $id = (int) $id_user;
+        if ($id > 0){
+            $this->id_user = $id_user;
+        }
+    }
 
     public function setId_user(int $id_user){
         $this->id_user = $id_user;
     }
     public function setPrenom(string $prenom){
         $this->prenom = $prenom;
-    }
+    
     public function setNom(string $nom){
         $this->nom = $nom;
     }
@@ -100,9 +93,9 @@ class User
     
     */
     
-    public function setActivated()
+    public function setActivated(int = 0)
     {
-        
+        $this->Activated = $Activated;
     }
     public function setValidationKey()
     {
@@ -135,7 +128,7 @@ class User
         return $this->username;
     }
     public function getPassword(){
-        return $this->password;
+        return $this->_password;
     }
     public function getEmail(){
         return $this->email;

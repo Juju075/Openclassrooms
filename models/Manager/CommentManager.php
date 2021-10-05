@@ -24,7 +24,9 @@ class CommentManager extends Model
    public function deleteThisComment(){
       return $this ->deleteOneComment('comment');
    }
-
+   public function validationByAdmin($id_comment, $token){
+      return $this ->commentValidation($id_comment);
+   }
 
 
 

@@ -221,7 +221,7 @@ protected function noDuplicatePost($table, $title, $content){
 
         foreach ($array as $key=>$value){
             
-            array_push($keys, strtolower(substr(str_replace($classFullName,"",$key),3)));
+            array_push($keys, strtolower(substr(str_replace($classFullName,"",$key),2)));
             array_push($values, $value);
             array_push($interrogation,'?');
             $data[strtolower($key)]=$value;
@@ -234,6 +234,7 @@ protected function noDuplicatePost($table, $title, $content){
         $this->getBdd();
         $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
         echo $sql;
+        var_dump($sql);
         try {$req = self::$_bdd->prepare($sql);
             $req->execute($values);}
             catch(\PDOException $e)
@@ -316,7 +317,7 @@ protected function noDuplicatePost($table, $title, $content){
         $req->execute(array());
     } 
 
-    protected function commentValidation($id_comment){
+    protected function commentValidation($id_comment, $token){
         //verification de role
         //verification de id_comment & token associé.
         //si id_comment dans comment non valider 0>1 ()

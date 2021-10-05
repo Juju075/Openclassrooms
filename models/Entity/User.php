@@ -5,27 +5,27 @@ class User
 {
     // use Timestampable;
 
-    const USERTYPE = [
+    const USERTYPE = [ //                       var_dump obj >1
         1 => 'Membre',
         2 => 'Admin'
         
     ];
 
     // created_date et modified_date dans timestampable  $createdAt $updatedAt
-    private $id_user;
+    private $id_user;   //                      var_dump obj >null
     private $username;
     private $password;
     private $email;
 
-    private $activated; //defaut 0
-    private $validationKey; //genere
-    //private $_userType; // defaut 1
+    private $activated; //defaut 0              var_dump obj >int 1
+    private $validation_key; //a genere          var_dump obj >null
+
     
 
     private $avatar;
     private $prenom; // champs 
     private $nom; // champs
-    private $sentence;
+    private $sentence; //                       var_dump obj >null         
 
 
     public function __construct(array $obj){
@@ -49,14 +49,8 @@ class User
     }
 
 
-    private function addUser($table, $obj){
-        $this->_user;
-    }
-
-
-
     //Setters
-        public function setId_article(?int $id_user)
+        public function setId_user(?int $id_user)
     {  
         $id = (int) $id_user;
         if ($id > 0){
@@ -64,11 +58,9 @@ class User
         }
     }
 
-    public function setId_user(int $id_user){
-        $this->id_user = $id_user;
-    }
     public function setPrenom(string $prenom){
         $this->prenom = $prenom;
+    }
     
     public function setNom(string $nom){
         $this->nom = $nom;
@@ -86,6 +78,9 @@ class User
         public function setSentence(string $sentence){
         $this->sentence = $sentence;
     }
+    public function setUsertYpe(int $usertype){
+        $this->usertype=$usertype;
+    }
     
     /*
     private $activated;  par defaut a 0
@@ -94,13 +89,13 @@ class User
     
     */
     
-    public function setActivated(int = 0)
+    public function setActivated(int $Activated)
     {
-        $this->Activated = $Activated;
+        $this->activated = $Activated;
     }
-    public function setValidationKey()
+    public function setValidation_key($validation_key)
     {
-        //generer un code hass simple
+        $this->validation_key = $validation_key;
     }
     
     public function setAvatar(string $avatar)
@@ -129,7 +124,7 @@ class User
         return $this->username;
     }
     public function getPassword(){
-        return $this->_password;
+        return $this->password;
     }
     public function getEmail(){
         return $this->email;
@@ -140,6 +135,15 @@ class User
     public function getSentence(){
         return $this->sentence;
     } 
+    public function getUsertype(){
+        return $this->userType;
+    }
+    public function getActivated(){
+        return $this->activated;
+    }
+    public function getValidation_key(){
+        return $this->validation_key;
+    }
 
 
     public function getRoles(): array

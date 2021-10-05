@@ -9,7 +9,6 @@ class ControllerRegister
  {
      private $user;
 
-    //Hydratation de obj 
     public function __construct(){
         if(isset($url) && count($url) < 1){
             throw new \Exception("Page introuvable", 1);
@@ -93,7 +92,7 @@ try {
 
         var_dump($obj);
         $transfert = new UserManager;       	
-        $transfert->add2($obj);
+        $transfert->addUser($obj);
 
 
         //si creer          header('location: accueil?register=created');
@@ -102,53 +101,22 @@ try {
     }
 
     private function store(){
-        echo('ControllerRegister store2');
-
-
-        $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $token = '123456'; //random_bytes (10); // a corriger
-        $default_avatar = 'default_avatar.jpg';
-
-        $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $default_avatar);
-        
-        var_dump($obj);
-        $transfert = new UserManager;       	
-        $transfert->add2($obj);
-
-
-        //si creer          header('location: accueil?register=created');
-        //si erreur divers  header('location: accueil?register=error');
-
-    }
- 
-    private function storeBackup(){
         echo('ControllerRegister store');
 
-        if(!empty($_POST['email'] && $_POST['checkpassword'])){
-            $email = $_POST['email'];
+        if (isset($_POST)){
+            ;
+                $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $token = md5($_POST['prenom'].$_POST['nom']); 
+                $default_avatar = 'default_avatar.jpg';
 
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)){
-
-                if ($_POST["password"] == $_POST["checkpassword"]){
-                    $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                    $username = ucfirst($_POST['username']);
-                    $token = '123456'; //random_bytes (10); // a corriger
-
-                    //ajouter le fichier dans publid    
-                    $default_avatar = 'default_avatar.jpg';
-                    $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $default_avatar);
-
-                    $this->_user = new User($obj); 
-                 
-                    $transfert = new UserManager;       	
-                    //$transfert->add($obj);
-                    $transfert->add($obj);
-
-                    header('location: accueil?register=created');
-                }
-            }
-        }else{
+                $array = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $default_avatar,'sentence'=>$_POST['sentence']);
+                $user= new User($array);
+                $userManager= new UserManager();
+                var_dump($user);
+                $userManager->addUser($user);
+                header('location: accueil?register=created');
+            }else{
             header('location: accueil?register=error');
-        }
+        }           
     }
  }

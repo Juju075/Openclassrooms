@@ -4,6 +4,7 @@ session_start();
 
 use View\View;
 use Entity\Article;
+use Entity\Comment;
 use Manager\ArticleManager;
 use Manager\CommentManager;
 
@@ -11,6 +12,7 @@ class ControllerPost
  {
     private $_articleManager;
     private $_commentManager;
+    private $_comment;
 
     private $_view; 
 
@@ -36,6 +38,10 @@ class ControllerPost
             $this->storeUpdate($_GET['update_id']); 
             //recuperer les valeurs du formulaire
         }
+         elseif (isset($_GET['validation'])){
+            //id_comment
+            $this->adminCommentValidation($_GET['id_comment'],$_GET['token']); 
+        }       
         else{
             $this->article();
         }
@@ -68,23 +74,6 @@ class ControllerPost
     }
     
 
-    private function noDuplicate(){
-
-        // bdd all title comparatif avec la nouvelle saisie titre
-         //si titre existe deja
-        $title = $_POST['title'];
-        //getAlltitle
-
-        //cpt le nombre de ligne
-        //Boucle de verification
-        //while
-        //check if title = $title
-        //bool 0 $this->store() 1 Alerte rouge c article existe deja
-
-
-        
-    }
-
     //Traitement add article.
     // Affectation $articles pour le foreach $content
 
@@ -93,7 +82,7 @@ class ControllerPost
         echo('| controllerPost.php function store');
 
         $this->_articleManager = new ArticleManager;
-        $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']); // true or fals
+        $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
 
         if ($articleVerifNoDuplicate === false) {
             if (isset($_POST)){
@@ -148,5 +137,13 @@ class ControllerPost
                 header('location: accueil');
             }
         }
+    }
+    
+    private function adminCommentValidation($id_comment, $token){
+        //disabled 0>1
+        $this->_comment = new CommentManager;
+        $this->_comment->validationByAdmin($id_comment, $token);
+
+
     }
 }

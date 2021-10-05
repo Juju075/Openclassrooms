@@ -25,7 +25,7 @@ class ControllerComment
         }         
 
         elseif (isset($_GET['delete'])){
-            $this->deleteOneComment(); 
+            $this->deleteOneComment($id); 
         }
 
         else{
@@ -74,8 +74,15 @@ class ControllerComment
     }
     
 
-    private function deleteOneComment(){
+    private function deleteOneComment($id){
         echo('| ControllerComment.php function deleteComment');
+
+        // lien bouton commentaire X supprimer html a l'affichage
+        //
+
+        $this->_CommentManager = new CommentManager;
+        $this->_CommentManager->deleteThisComment();
+        header('Location: post&id_article='.$_SESSION['id_article']);       
 
     }
 

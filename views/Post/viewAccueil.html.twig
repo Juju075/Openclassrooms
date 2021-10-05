@@ -11,8 +11,6 @@ views/Post/viewAcceuil.html.twig
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-
-    
   </div>
   {% else if alert = 2%}
   <!-- route: accueil?post=created -->
@@ -63,6 +61,14 @@ views/Post/viewAcceuil.html.twig
     </button>
   </div>
   {% else if alert = 8%}
+  <!-- route: accueil?session=terminated -->
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Cet Article existe déjà!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% else if alert = 9%}
   <!-- route: accueil?message=send -->
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
     Votre message est envoyé!

@@ -172,16 +172,34 @@ protected function postIfExist(){
 }
 
 
-protected function noDuplicatePost($table, $obj){
-echo('| model.php createOne');
+protected function noDuplicatePost($table, $title, $content){
+    echo('| model.php createOne');
+            $titleresult[]='';
+            $this->getBdd();
+            $req = self::$_bdd->prepare("SELECT id_article FROM " .$table. " WHERE title = ?");
+            $req->execute(array($title));
+            $titleresult = $req->fetchall(); // assert list 0 or >=1 id_article
+            var_dump($titleresult);
 
-//titre
-//verif si titre existe deja
-        $this->getBdd();
+    if (!empty($titleresult)) { //Ce titre existe. > recuperer l'id de l'article 
+            $req = self::$_bdd->prepare("SELECT content FROM " .$table. " WHERE id_article = ?");
+            var_dump($titleresult[0]);
 
-        $req = self::$_bdd->prepare("SELECT title FROM " .$table. " WHERE title = ?");
-        $req->execute(array($title));
-        return $req->fetchall();
+            $req->execute(array($titleresult[0]));
+            $contentresult = $req->fetchall(); // error  Array to string conversion
+            var_dump($contentresult);
+                if ($contentresult === $content) {
+                    echo('contenu identique');
+                    return true;
+                }
+                else{
+                    return false;
+                }
+    }
+    else{
+        return false;
+    }
+
 }
 
 
@@ -290,15 +308,24 @@ echo('| model.php createOne');
     } 
 
     protected function deleteOneComment($table){
+        //verification du role
+        
         $id_comment = $_SESSION['id_comment'];
-
         $this->getBdd();  
         $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_comment = $id_comment");
         $req->execute(array());
-
     } 
 
- 
+    protected function commentValidation($id_comment){
+        //verification de role
+        //verification de id_comment & token associé.
+        //si id_comment dans comment non valider 0>1 ()
+        //
+         $this->getBdd();  
+        $req = self::$_bdd->prepare("UPDATE  FROM comment SET comment value = 1 WHERE id_comment = $id_comment");
+        $req->execute(array());       
+
+    }
 
   
 }

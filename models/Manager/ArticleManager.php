@@ -27,12 +27,16 @@ class ArticleManager extends Model
     * Cette fonction modifie le post actuel.
     */
    public function updateArticle($id){
-      echo('ArticleManager updateArticle');
+      echo('| ArticleManager updateArticle');
       //return $this->updateOne('article', $id);
    }
-   
+    public function articleAlreadyExist($title, $content){
+      echo('| ArticleManager articleVerif');
+      var_dump($title. $content);
+      return $this->noDuplicatePost('article', $title, $content);
+   }  
    public function articleVerif(){
-      echo('ArticleManager rticleVerif');
+      echo('| ArticleManager rticleVerif');
       return $this->postIfExist();
    }
 }

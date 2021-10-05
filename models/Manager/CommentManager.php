@@ -21,6 +21,10 @@ class CommentManager extends Model
       return $this->testGetAllComments('comment');
    }
 
+   public function deleteThisComment(){
+      return $this ->deleteOneComment('comment');
+   }
+
 
 
 

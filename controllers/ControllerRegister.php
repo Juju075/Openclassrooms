@@ -46,8 +46,6 @@ class ControllerRegister
         $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $default_avatar);
         
 
-
-
 // CODE CODEGUY UPLOAD
 // can validate and upload the file like this
 
@@ -91,27 +89,6 @@ try {
 }
 
 // FIN CODE CODEGUY UPLOAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         var_dump($obj);

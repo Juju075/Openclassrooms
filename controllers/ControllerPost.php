@@ -25,6 +25,7 @@ class ControllerPost
             $this->store();
         }   
         elseif (isset($_GET['delete'])){
+            //id_article
             $this->delete($_GET['delete']); 
         }
         elseif (isset($_GET['update'])){ //App_Blog_MVC/post&update_id=29
@@ -89,17 +90,25 @@ class ControllerPost
 
 
     private function store(){
-    echo('controllerPost.php function store');
-        if (isset($_POST)){
-            $article= new Article($_POST);
-            $this->_articleManager = new ArticleManager;
-            $article = $this->_articleManager->createArticle($article);
-            $articles = $this->_articleManager->getArticles();
-            $this->_view = new View('Accueil','Post');
-            $this->_view->generate(array('articles' =>$articles));
-        }
-    }
+        echo('| controllerPost.php function store');
 
+        $this->_articleManager = new ArticleManager;
+        $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']); // true or fals
+
+        if ($articleVerifNoDuplicate === false) {
+            if (isset($_POST)){
+                $article= new Article($_POST);    
+                $this->_articleManager = new ArticleManager;
+                $article = $this->_articleManager->createArticle($article);
+                $articles = $this->_articleManager->getArticles();
+                $this->_view = new View('Accueil','Post');
+                $this->_view->generate(array('articles' =>$articles));
+            }else {
+                header('location; accueil');
+            }
+        }
+
+    }
 
     public function storeUpdate($id){
         echo('ControllerPost.php  storeUpdate()');
@@ -112,7 +121,6 @@ class ControllerPost
         //une fois fini script
         //header('Location: App_Blog_MVC/accueil');
 }
-
 
     private function article(){
         echo('ControllerPost.php  article()');
@@ -134,7 +142,6 @@ class ControllerPost
                 $_SESSION['comments'] = $this->_commentManager->testGetComments();
                 var_dump($_SESSION['comments']);
             }
-            
             elseif ($articleVerif == false){
                 header('location: accueil');
             }else{

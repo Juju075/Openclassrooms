@@ -8,6 +8,7 @@ class User
     const USERTYPE = [
         1 => 'Membre',
         2 => 'Admin'
+        
     ];
 
     // created_date et modified_date dans timestampable  $createdAt $updatedAt

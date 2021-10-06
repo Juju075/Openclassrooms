@@ -78,14 +78,17 @@ class ControllerPost
 
 
     private function store(){
-        echo('| controllerPost.php function store');
+        echo('| controllerPost.php store');
 
         $this->_articleManager = new ArticleManager;
         $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
 
         if ($articleVerifNoDuplicate === false) {
             if (isset($_POST)){
-                $article= new Article($_POST);    
+                //ajouter id_user dans array post
+                //array_push($_POST,'id_user'=>$_SESSION['id_user']);
+                $article= new Article($_POST);   
+                var_dump($article); 
                 $this->_articleManager = new ArticleManager;
                 $article = $this->_articleManager->createArticle($article);
                 $articles = $this->_articleManager->getArticles();
@@ -110,6 +113,7 @@ class ControllerPost
         //header('Location: App_Blog_MVC/accueil');
 }
 
+
     private function article(){
         echo('ControllerPost.php  article()');
 
@@ -121,12 +125,21 @@ class ControllerPost
 
             if ($articleVerif == true ){
                 $article = $this->_articleManager->getArticle($_GET['id_article']);
-
                 $this->commentManager = new CommentManager;
-                $_SESSION['comments'] = $this->commentManager->getComments(); 
-                
+                var_dump($article); // object(Entity\Article)[8]
+
+                $comments = $this->commentManager->getComments();  // array string
+                var_dump($comments);
+                //$_SESSION['comments'] = $this->commentManager->getComments(); //supprimer cette ligne
+
+                //Vue
+                $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+                $twig = new \Twig\Environment($loader, ['cache'=> false]);   
+                //echo $twig->render('/Post/viewAccueil.html.twig');
+                echo $twig->render('/Comment/listComments.html.twig',['comments' => $comments]);
+
                 $this->_view = new View('singlePost','Post');
-                $this->_view->generatePost(array('article'=>$article,'comments'=>$_SESSION['comments']));
+                $this->_view->generatePost(array('article'=>$article));
 
             }
             elseif ($articleVerif == false){
@@ -144,4 +157,11 @@ class ControllerPost
 
 
     }
+
+
+
+
+
+
+    
 }

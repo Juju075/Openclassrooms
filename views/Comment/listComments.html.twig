@@ -1,12 +1,6 @@
 listComments.html.twig<br />
-<!-- Exemple comment -->
-<!--  a lajout d'un commentaire ok -->
-<? session_start(); $comments= $_SESSION['comments'];
-var_dump($comments);
-echo('ici');
- ?>
-<!-- simple visiteur -->
-<!-- appel de la fonction getComment a l'ouverture de la page -->
+
+{{ comments }}
 
 <!-- =================================================================== -->
 <!-- ?= foreach ($comments as $comment): ? -->

@@ -164,7 +164,8 @@ protected function postIfExist(){
         $interrogationString=implode(' , ',$interrogation);
         $this->getBdd();
         $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
-        echo $sql;
+        var_dump($sql);
+        
         try {$req = self::$_bdd->prepare($sql);
             $req->execute($values);}
             catch(\PDOException $e)
@@ -186,7 +187,7 @@ protected function postIfExist(){
     }
 ///////////////////////////////////
 
-protected function noDuplicatePost($table, $title, $content){
+protected function noDuplicatePost($table, $title, $content){ // ok fonctionne
     echo('| model.php noDuplicatePost');
             $titleresult[]='';
             $this->getBdd();
@@ -206,7 +207,7 @@ protected function noDuplicatePost($table, $title, $content){
                     echo('contenu identique');
                     return true;
                 }
-                else{
+                else{ //Ce titre n'existe pas. > creer l'article
                     return false;
                 }
     }

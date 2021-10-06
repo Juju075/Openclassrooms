@@ -47,7 +47,6 @@ class ControllerComment
                 $commentManager = new CommentManager;
                 $commentManager->addComment($comment);
                 $commentManager->getComments(); 
-                //revenir dans l'article
                 header('location: post&id_article='.$_SESSION['id_article']);
             }else{
                 header('location: accueil?login=connected');

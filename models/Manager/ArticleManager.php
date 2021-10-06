@@ -31,12 +31,12 @@ class ArticleManager extends Model
       //return $this->updateOne('article', $id);
    }
     public function articleAlreadyExist($title, $content){
-      echo('| ArticleManager articleVerif');
+      echo('| ArticleManager articleAlreadyExist');
       var_dump($title. $content);
       return $this->noDuplicatePost('article', $title, $content);
    }  
-   public function articleVerif(){
-      echo('| ArticleManager rticleVerif');
+   public function articleVerif(){ //effacer cette fonction non utilise.
+      echo('| ArticleManager articleVerif');
       return $this->postIfExist();
    }
 }

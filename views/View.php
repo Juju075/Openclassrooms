@@ -23,7 +23,7 @@ class View
     public function generate($data){  
         echo('| View.php generate');
         $content = $this->generateFile($this->_file,$data);
-        $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t, 'content' => $content));
+        $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t,'content' => $content));
         echo $view;
     }
 
@@ -33,6 +33,12 @@ class View
     public function generatePost($data){
         echo('| View.php generatePost');
         $content = $this->generateFile($this->_file,$data);
+
+ 
+
+
+
+
         //ajouter chapo 
         //$view = $this->generateFile('views/templateSingle.php', array('t'=>$this->_t, 'content'=>$content));
         $view = $this->generateFile('views/templateSingle.html.twig', array('t'=>$this->_t, 'content'=>$content));  

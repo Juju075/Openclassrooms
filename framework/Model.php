@@ -61,8 +61,8 @@ abstract class Model
         $var = [];
         //ORDER BY
         //$req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM '. $table.' WHERE $id_article'); 
-        $req  = self::$_bdd->prepare('SELECT id_comment, content, id_user FROM comment'); 
-        $req->execute();
+        $req  = self::$_bdd->prepare('SELECT id_comment, content, id_user FROM comment WHERE id_article = ?'); 
+        $req->execute($id_article);
 
         //while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
@@ -78,63 +78,33 @@ abstract class Model
     }    
 }
 
-    protected function testGetAllComments($table){
-        echo('| Model.php testGetAllComments');
+    protected function testGetAllComments(){
+        echo('| Model.php testGetAllComments2');
 
         $result = [];
-        $id_article = $_SESSION['id_article'];
+        //$id_article = $_SESSION['id_article'];
 
-        //liste id_article existant 
-        $this->getBdd();
-        $req0  = self::$_bdd->prepare('SELECT id_article FROM comment'); 
-        $req0->execute();
-        $result = $req0->fetchall();
-        
-        $nb = count($result);
-        //var_dump($result);
-        //exit();
-
-        //si id article = result alors on execute 
-        for ($i=0; $i<=$nb; $i++) { 
-
-            if ($_SESSION['id_article'] === $id_article ) {         
-                $this->getBdd();
-                $var= [];
-                
-                $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ?'); 
-                $req->execute(array($id_article));
-                $var = $req->fetchall();
-                return $var; 
-                break;
-            }else{}
-            
-        }
-    }
-
-protected function testGetAllCommentsRefactoring($table){
-    echo('| Model.php testGetAllCommentsRefactoring');
-
-        $id_article = $_SESSION['id_article'];
-
-        //Est ce que lid_article possede au moins un commentaire.
+        //liste tous les articles comments.
         $this->getBdd();
         $req0  = self::$_bdd->prepare('SELECT id_article FROM comment WHERE id_article = ?'); 
-        $req0->execute(array($id_article));
+        $req0->execute(array($_SESSION['id_article']));
         $result = $req0->fetchall();
+        
+        //$nb = count($result);
+        var_dump($result);
+        
+        //si empty aucun commentaire pour cet article exit;
+        if(!empty($result)){
+                $var= [];
+                $this->getBdd();
+                $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ?'); 
+                $req->execute(array($_SESSION['id_article']));
+                $var = $req->fetchall();
+                return $var; 
+        }else{}
+        
+    }
 
-        // if (){
-        //         $this->getBdd();
-        //         $var= [];
-                
-        //         $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ?'); 
-        //         $req->execute(array($id_article));
-        //         $var = $req->fetchall();
-        //         return $var; 
-        // }else{}
-
-}
-
-    
 protected function authenticationRequest($obj,$usertype){
     echo('| Model.php authenticationRequest');
         $this->getBdd();
@@ -203,6 +173,7 @@ protected function postIfExist(){
             }
         
         $req->closeCursor();
+        echo('Script End');
     }
 
     protected function createOneComment($table, $comment){

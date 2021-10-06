@@ -36,64 +36,37 @@ class ControllerComment
 
     //Traitement add comment.
     private function storeComment(){
+                echo('| ControllerComment.php storeComment');
 
-/** comment entity
- *   private $content;
- *   private $disabled; defaut
- *   private $id_article;
- *   private $id_user;
- */
+            //visiteur doit etre connecte
+            if(isset($_SESSION['id_user'])){
+                //Parie 1 - ok fonctionne
+                $array = array('content'=> $_POST['content'],'disabled'=> '1','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
 
-
-        echo('| ControllerComment.php storeComment');
-
-    //visiteur doit etre connecte
-    if(isset($_SESSION['id_user'])){
-        //Parie 1 - ok fonctionne
-        $array = array('content'=> $_POST['content'],'id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
-        var_dump($array);
-
-        $comment = new Comment($array);
-        var_dump($comment);
-        $commentManager = new CommentManager;
-        $commentManager->addComment($comment);
-        
-        //Partie 2 - liste ok
-        
-        //Afficher les commentaires conserver la variable
-        echo('| 2st partie storeComment - Affichage foreach ');
-    
-        //global $comments;
-        $commentManager->getComments(); //$comments = var[]
-        
-    
-        //Pb id article et id user non enregistre
-        echo('OK -- voici le resultat de l insertion');
-    }else{
-         header('location: accueil?login=connected');
+                $comment = new Comment($array);
+                $commentManager = new CommentManager;
+                $commentManager->addComment($comment);
+                $commentManager->getComments(); 
+                //revenir dans l'article
+                header('location: post&id_article='.$_SESSION['id_article']);
+            }else{
+                header('location: accueil?login=connected');
+            }
     }
-
-
-
-    }
-
 
     private function updateComment(){
         echo('| ControllerComment.php function updateComment');
         
     }
     
-
     private function deleteOneComment($id){
         echo('| ControllerComment.php function deleteComment');
 
         // lien bouton commentaire X supprimer html a l'affichage
         //
-
         $this->CommentManager = new CommentManager;
         $this->CommentManager->deleteThisComment();
         header('Location: post&id_article='.$_SESSION['id_article']);       
-
     }
 
 

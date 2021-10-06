@@ -5,9 +5,9 @@ use Tools\Model;
 
 class CommentManager extends Model
 {
-   //return $var[]
+   //id article deja en session return $var[]
    public function getComments(){
-      return $this->getAllComments('comment');
+      return $this->testGetAllComments();
    }
 
    public function getOneComment($id){

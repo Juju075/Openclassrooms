@@ -4,15 +4,14 @@ session_start();
 
 use View\View;
 use Entity\Article;
-use Entity\Comment;
 use Manager\ArticleManager;
 use Manager\CommentManager;
 
 class ControllerPost
  {
     private $_articleManager;
-    private $_commentManager;
-    private $_comment;
+    private $commentManager;
+    private $comment;
 
     private $_view; 
 
@@ -113,6 +112,7 @@ class ControllerPost
 
     private function article(){
         echo('ControllerPost.php  article()');
+
         if(isset($_GET['id_article'])){
             $_SESSION['id_article'] = $_GET['id_article'];
 
@@ -121,18 +121,13 @@ class ControllerPost
 
             if ($articleVerif == true ){
                 $article = $this->_articleManager->getArticle($_GET['id_article']);
+
+                $this->commentManager = new CommentManager;
+                $_SESSION['comments'] = $this->commentManager->getComments(); 
                 
                 $this->_view = new View('singlePost','Post');
-                $this->_view->generatePost(array('article'=>$article));
-                
-                
-                //Recuperer la liste des comments.
-//getComments()
+                $this->_view->generatePost(array('article'=>$article,'comments'=>$_SESSION['comments']));
 
-
-                $this->_commentManager = new CommentManager;
-                $_SESSION['comments'] = $this->_commentManager->testGetComments();
-                var_dump($_SESSION['comments']);
             }
             elseif ($articleVerif == false){
                 header('location: accueil');
@@ -144,8 +139,8 @@ class ControllerPost
     
     private function adminCommentValidation($id_comment, $token){
         //disabled 0>1
-        $this->_comment = new CommentManager;
-        $this->_comment->validationByAdmin($id_comment, $token);
+        $this->comment = new CommentManager;
+        $this->comment->validationByAdmin($id_comment, $token);
 
 
     }

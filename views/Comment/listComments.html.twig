@@ -1,8 +1,9 @@
 listComments.html.twig<br />
 <!-- Exemple comment -->
 <!--  a lajout d'un commentaire ok -->
-<?= $comments = $_SESSION['comments']; // Notice: Array to string conversion
-echo('$comments [...]');
+<? session_start(); $comments= $_SESSION['comments'];
+var_dump($comments);
+echo('ici');
  ?>
 <!-- simple visiteur -->
 <!-- appel de la fonction getComment a l'ouverture de la page -->

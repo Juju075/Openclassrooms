@@ -135,9 +135,6 @@ protected function testGetAllCommentsRefactoring($table){
 }
 
     
-
-
-
 protected function authenticationRequest($obj,$usertype){
     echo('| Model.php authenticationRequest');
         $this->getBdd();
@@ -147,15 +144,15 @@ protected function authenticationRequest($obj,$usertype){
         $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
 
         if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype) {
-            echo('Condition verifie a true');
+            echo('| Model.php condition verifie a true'); // ok fonctionne
+            $id_user = $resultat['id_user'];
+            $_SESSION['id_user']=$id_user; //ajout junior
 
-
-            $id_user=$resultat['id_user'];
-            $user=$this->getOne('user','User',$id_user);
-            
+            $user=$this->getOne('user','User',$id_user); //ca sert a quoi?
+            var_dump($user);
             return $user;  
         }else{
-            echo('condition else false');
+            echo('| Model.php condition else false'); // ok fonctionne
             return false;
         }     
     }
@@ -172,8 +169,54 @@ protected function postIfExist(){
 }
 
 
-protected function noDuplicatePost($table, $title, $content){
+///////////////////////////////////
+    protected function createOne($table, $obj){
     echo('| model.php createOne');
+        $array=(array)$obj;
+        $classFullName=get_class($obj);
+
+        $keys=[];
+        $values=[];
+        $data=[];
+        $interrogation=[];
+
+        foreach ($array as $key=>$value){
+            
+            array_push($keys, strtolower(substr(str_replace($classFullName,"",$key),2)));
+            array_push($values, $value);
+            array_push($interrogation,'?');
+            $data[strtolower($key)]=$value;
+        }
+ 
+
+        $keysString=implode(' , ',$keys);
+        var_dump($keysString);
+        $interrogationString=implode(' , ',$interrogation);
+        $this->getBdd();
+        $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
+        echo $sql;
+        try {$req = self::$_bdd->prepare($sql);
+            $req->execute($values);}
+            catch(\PDOException $e)
+            {
+                $e->errorInfo;
+            }
+        
+        $req->closeCursor();
+    }
+
+    protected function createOneComment($table, $comment){
+        echo(' >> Model.php createOneComment');
+        $this->getBdd();
+
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article, id_user) VALUES (?, ?, ?)");
+        $req->execute(array($comment, $_SESSION['id_article'], $_SESSION['id_user']));
+        $req->closeCursor();
+    }
+///////////////////////////////////
+
+protected function noDuplicatePost($table, $title, $content){
+    echo('| model.php noDuplicatePost');
             $titleresult[]='';
             $this->getBdd();
             $req = self::$_bdd->prepare("SELECT id_article FROM " .$table. " WHERE title = ?");
@@ -203,65 +246,6 @@ protected function noDuplicatePost($table, $title, $content){
 }
 
 
-    // corriger la date 
-    /**
-     * Article 
-    * Methods inside Model.php shouldn't be specific to any entity issue 38
-     */
-    protected function createOne($table, $obj){
-    echo('| model.php createOne');
-        $array=(array)$obj;
-        $classFullName=get_class($obj);
-        var_dump($classFullName);
-
-        $keys=[];
-        $values=[];
-        $data=[];
-        $interrogation=[];
-
-        foreach ($array as $key=>$value){
-            
-            array_push($keys, strtolower(substr(str_replace($classFullName,"",$key),2)));
-            array_push($values, $value);
-            array_push($interrogation,'?');
-            $data[strtolower($key)]=$value;
-        }
- 
-
-        $keysString=implode(' , ',$keys);
-        var_dump($keysString);
-        $interrogationString=implode(' , ',$interrogation);
-        $this->getBdd();
-        $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
-        echo $sql;
-        var_dump($sql);
-        try {$req = self::$_bdd->prepare($sql);
-            $req->execute($values);}
-            catch(\PDOException $e)
-            {
-                $e->errorInfo;
-            }
-        
-        $req->closeCursor();
-    }
-
-
-
-    /**
-     * Comment
-     * Fonction qui insert le commentaire.
-     */
-    protected function createOneComment($table, $comment){
-        echo(' >> Model.php createOneComment');
-        $this->getBdd();
-
-        $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article, id_user) VALUES (?, ?, ?)");
-        $req->execute(array($comment, $_SESSION['id_article'], $_SESSION['id_user']));
-        $req->closeCursor();
-    }
-
-
-
     // protected function updateOne($table, $id){
     //     //$_POST['title'], $_POST['chapo'], $_POST['content']
     //     $this->getBdd();  
@@ -283,24 +267,50 @@ protected function noDuplicatePost($table, $title, $content){
     //     }
     // }
 
-    
-
-    //ERREUR Entité
-    protected function getOne($table, $obj, $id){ //Article
+        protected function getOneTest($table, $obj, $id){ 
+        echo(' >> Model.php getOne');
         $this->getBdd();
         $var = [];
 
+        //si obj article utilise ca
+        if ($obj === 'Article') {
+            $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
+        }elseif ($obj === 'User'){
+            $req = self::$_bdd->prepare("SELECT id_user FROM " .$table. " WHERE id_user= ?");   
+        }     
         $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
+       
+        
+        
         $req->execute(array($id));
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            //$var[] = new $obj($data);  // eg: Article || ERREUR
-            $var[] = new Article($data);
+            $obj2="\\Entity\\".$obj;
+            $var[] = new $obj2($data); 
         }
         return $var;
         $req->closeCursor();  
     }
 
+
+    protected function getOne($table, $obj, $id){ 
+        echo(' >> Model.php getOne');
+        $this->getBdd();
+        $var = [];
+        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
+        $req->execute(array($id));
+
+        while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
+            $obj2="\\Entity\\".$obj;
+            $var[] = new $obj2($data); 
+        }
+        return $var;
+        $req->closeCursor();  
+    }
+
+
+    //Universalisé cette function
+/////////////
     protected function deleteOne($table, $id){
         $this->getBdd();  
         $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_article = $id");
@@ -316,6 +326,8 @@ protected function noDuplicatePost($table, $title, $content){
         $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_comment = $id_comment");
         $req->execute(array());
     } 
+/////////////////
+
 
     protected function commentValidation($id_comment, $token){
         //verification de role

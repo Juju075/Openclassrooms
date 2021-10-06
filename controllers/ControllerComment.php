@@ -1,15 +1,14 @@
 <?php
 namespace controllers;
 session_start();
-echo('ControllerComment.php user session | ');
-var_dump($_SESSION['id_user']);
 
+use Entity\Comment;
 use Manager\CommentManager;
 
 class ControllerComment
 {
     
-        private $_commentManager;
+        private $commentManager;
         public $comments;
 
         public function __construct(){
@@ -25,7 +24,7 @@ class ControllerComment
         }         
 
         elseif (isset($_GET['delete'])){
-            $this->deleteOneComment($id); 
+            $this->deleteOneComment(); 
         }
 
         else{
@@ -37,14 +36,27 @@ class ControllerComment
 
     //Traitement add comment.
     private function storeComment(){
+
+/** comment entity
+ *   private $content;
+ *   private $disabled; defaut
+ *   private $id_article;
+ *   private $id_user;
+ */
+
+
         echo('| ControllerComment.php storeComment');
 
     //visiteur doit etre connecte
     if(isset($_SESSION['id_user'])){
-
         //Parie 1 - ok fonctionne
-        $this->_commentManager = new CommentManager;
-        $comment = $this->_commentManager->createComment($_POST['comment']);
+        $array = array('content'=> $_POST['content'],'id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
+        var_dump($array);
+
+        $comment = new Comment($array);
+        var_dump($comment);
+        $commentManager = new CommentManager;
+        $commentManager->addComment($comment);
         
         //Partie 2 - liste ok
         
@@ -52,13 +64,11 @@ class ControllerComment
         echo('| 2st partie storeComment - Affichage foreach ');
     
         //global $comments;
-        $this->_commentManager = new CommentManager;
-        $comments = $this->_commentManager->getComments(); //$comments = var[]
+        $commentManager->getComments(); //$comments = var[]
         
     
         //Pb id article et id user non enregistre
         echo('OK -- voici le resultat de l insertion');
-        var_dump($comments); //recuperation des datas de comment table.
     }else{
          header('location: accueil?login=connected');
     }
@@ -80,8 +90,8 @@ class ControllerComment
         // lien bouton commentaire X supprimer html a l'affichage
         //
 
-        $this->_CommentManager = new CommentManager;
-        $this->_CommentManager->deleteThisComment();
+        $this->CommentManager = new CommentManager;
+        $this->CommentManager->deleteThisComment();
         header('Location: post&id_article='.$_SESSION['id_article']);       
 
     }

@@ -4,11 +4,11 @@ namespace Entity;
 class Comment 
 {
  //use Timestampable
-    private $_id_comment;
-    private $_content;
-    private $_disabled;
-    private $_id_article;
-    private $_id_user;
+    private $id_comment;
+    private $content;
+    private $disabled;
+    private $id_article;
+    private $id_user;
 
     
     public function __construct(array $data){
@@ -33,58 +33,56 @@ class Comment
     //Setters
     public function setId_comment($id_comment) 
     {
-        $this->_id_comment = $id_comment;
+        $this->id_comment = $id_comment;
     }
 
+
+
+    
     public function setContent($content) 
     {
-        $this->_content = $content;
+        $this->content = $content;
     }
     
     public function setDisabled($disabled)
     {
-        $this->_disabled = $disabled;
+        $this->disabled = $disabled;
     }
     public function setId_article($id_article)
     {
-        $this->_id_article = $id_article;
+        $this->id_article = $id_article;
     }
 
     public function setId_user($id_user)
     {
-        $this->_id_user = $id_user;
+        $this->id_user = $id_user;
     }
-
-
-
-
-
 
 
 
     //Getters
     public function getId_comment() 
     { 
-        return $this->_id_comment; 
+        return $this->id_comment; 
     }
 
     public function getContent() 
     { 
-        return $this->_content; 
+        return $this->content; 
     }
 
     
     public function getDisabled() 
     { 
-        return $this->_disabled; 
+        return $this->disabled; 
     }
         public function getId_article() 
     { 
-        return $this->_id_article; 
+        return $this->id_article; 
     }
     public function getId_user() 
     { 
-        return $this->_id_user; 
+        return $this->id_user; 
     }
 
 }

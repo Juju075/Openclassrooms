@@ -127,6 +127,9 @@ class ControllerPost
                 
                 
                 //Recuperer la liste des comments.
+//getComments()
+
+
                 $this->_commentManager = new CommentManager;
                 $_SESSION['comments'] = $this->_commentManager->testGetComments();
                 var_dump($_SESSION['comments']);

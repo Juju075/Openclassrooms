@@ -5,7 +5,7 @@ class User
 {
     // use Timestampable;
 
-    const USERTYPE = [ //                       var_dump obj >1
+    private $usertype = [ //                       var_dump obj >1
         1 => 'Membre',
         2 => 'Admin'
         
@@ -50,12 +50,18 @@ class User
 
 
     //Setters
-        public function setId_user(?int $id_user)
+
+
+    
+    public function setId_user(?int $id_user)
     {  
         $id = (int) $id_user;
         if ($id > 0){
             $this->id_user = $id_user;
         }
+    }
+    public function setUsertype($usertype){
+        $this->usertype = $usertype;
     }
 
     public function setPrenom(string $prenom){
@@ -69,30 +75,24 @@ class User
     public function setUsername(string $username){
         $this->username = $username;
     }
+
     public function setPassword(string $password){
         $this->password =$password;
     }
+
     public function setEmail(string $email){
         $this->email = $email;
     }
+
         public function setSentence(string $sentence){
         $this->sentence = $sentence;
     }
-    public function setUsertYpe(int $usertype){
-        $this->usertype=$usertype;
-    }
-    
-    /*
-    private $activated;  par defaut a 0
-    private $validationKey; genere une cle de validation
-    private $userType; par defaut 1
-    
-    */
-    
+
     public function setActivated(int $Activated)
     {
         $this->activated = $Activated;
     }
+
     public function setValidation_key($validation_key)
     {
         $this->validation_key = $validation_key;
@@ -108,6 +108,9 @@ class User
 
 
     //Getters
+    public function getUsertype(){
+        return $this->usertype;
+    }
 
     public function getId_user(){
         return $this->id_user;
@@ -135,9 +138,6 @@ class User
     public function getSentence(){
         return $this->sentence;
     } 
-    public function getUsertype(){
-        return $this->userType;
-    }
     public function getActivated(){
         return $this->activated;
     }

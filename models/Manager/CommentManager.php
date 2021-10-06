@@ -13,9 +13,9 @@ class CommentManager extends Model
    public function getOneComment($id){
       return $this->GetOne('comment','Comment', $id);
    }
-   public function createComment($comment){
+   public function addComment($comment){
       echo('|CommentManager createComment');
-      return $this->CreateOneComment('comment', $comment);
+      return $this->createOne('comment', $comment);
    } 
       public function testGetComments(){
       return $this->testGetAllComments('comment');

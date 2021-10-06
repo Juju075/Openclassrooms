@@ -16,24 +16,27 @@ public static function login($usertype){
         $user['username']=$_POST['username'];
         $user['password']=$_POST['password'];
         $user['usertype']=$usertype;
-        echo('| security.php login ok form data');
+        echo('| security.php affectations');
  
-        //if ($userObj=$userMAnager->authenticationRequest($user,$usertype) != null){
-        // si la reponse n'est pas null il affecte les parametre de session user    
-        if ($userObj=$userMAnager->logonManager($user,$usertype) != null){
-            echo('security suite ok');
-            
-            $_SESSION['user'] = array(
-                'username' => $user['username'],
-                'password' => $user['password']
-            );
-            echo('| security.php login 1-b cas');
-            var_dump($userObj);
-            return $userObj; // c la reponse de authenticationRequest
-        }
-        else{
-            return false;
-        }
+            //if ($userObj=$userMAnager->authenticationRequest($user,$usertype) != null){
+            // si la reponse n'est pas null il affecte les parametre de session user    
+            var_dump($userMAnager->logonManager($user,$usertype));
+//verification role
+            if ($userObj=$userMAnager->logonManager($user,$usertype) != null){
+                echo('security suite ok');
+                
+                $_SESSION['user'] = array(
+                    'username' => $user['username'],
+                    'password' => $user['password']
+                );
+                echo('| security.php login 1-b cas');
+                var_dump($userObj);
+                return $userObj; // c la reponse de authenticationRequest
+                exit;
+            }
+            else{
+                return false;
+            }
     }
 }
 

@@ -11,7 +11,7 @@ class ArticleManager extends Model
    }
 
    public function getArticle($id){
-      return $this->GetOne('article','Article', $id);
+      return $this->getOneTest('article','Article', $id);
    }
    public function createArticle($article){
       return $this->CreateOne('article',$article);

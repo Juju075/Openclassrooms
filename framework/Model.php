@@ -245,14 +245,20 @@ protected function noDuplicatePost($table, $title, $content){ // ok fonctionne
         $var = [];
 
         //si obj article utilise ca
+        //Afficher ou detail article, mo
         if ($obj === 'Article') {
+            echo('requete prepare Article');
             $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
         }elseif ($obj === 'User'){
-            $req = self::$_bdd->prepare("SELECT id_user FROM " .$table. " WHERE id_user= ?");   
+            $req = self::$_bdd->prepare("SELECT prenom nom sentence FROM " .$table. " WHERE id_user= ?");   
+        }elseif ($obj === 'Comment') {
+            # code...
+            $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
+        }else{
+            echo('erreur');
         }     
-        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
        
-        
+        exit;
         
         $req->execute(array($id));
 

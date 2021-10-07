@@ -61,12 +61,17 @@ use Manager\ArticleManager;
      */
     private function articles($alertnumb){
         echo('ControllerAcceuil.php articles');
-        $alert = $alertnumb;
 
         $this->_articleManager = new ArticleManager(); 
         $articles = $this->_articleManager->getArticles();
         
         //Affectation de comments
+
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+        $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+        //get numero alert 
+        echo $twig->render('/Post/viewAcceuil.html.twig',$alertnumb);
 
         $this->_view = new View('Accueil', 'Post');
         $this->_view->generate(array('articles'=>$articles));

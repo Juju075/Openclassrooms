@@ -10,7 +10,7 @@
 						</ul>
 
 					</div><!-- footer-section -->
-					<p><a href="#"><b>Voux connecter en tant qu'Administrateur</b></a></p>
+					<p><a href="admin"><b>Voux connecter en tant qu'Administrateur</b></a></p>
 </div><!-- col-lg-4 col-md-6 -->
 
 				 

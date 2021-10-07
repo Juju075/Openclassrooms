@@ -2,11 +2,8 @@
 namespace Controllers;
 session_start();
 
-use Entity\User;
 use View\View;
-use Manager\UserManager;
 use Tools\security;
-
 class ControllerLogin
 {
 

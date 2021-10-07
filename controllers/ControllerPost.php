@@ -80,13 +80,20 @@ class ControllerPost
     private function store(){
         echo('| controllerPost.php store');
 
+        //Contrainte role administratue usertype
+        //1 rch usertype si usertype === 1 sinon alert
+   
+        var_dump($_POST);
+
         $this->_articleManager = new ArticleManager;
         $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
 
         if ($articleVerifNoDuplicate === false) {
             if (isset($_POST)){
-                //ajouter id_user dans array post
-                //array_push($_POST,'id_user'=>$_SESSION['id_user']);
+                $id_user = 1; // getIdUser() ou par defaut.
+                $_POST['id_user'] = $id_user;
+                var_dump($_POST);
+
                 $article= new Article($_POST);   
                 var_dump($article); 
                 $this->_articleManager = new ArticleManager;
@@ -135,7 +142,6 @@ class ControllerPost
                 //Vue
                 $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
                 $twig = new \Twig\Environment($loader, ['cache'=> false]);   
-                //echo $twig->render('/Post/viewAccueil.html.twig');
                 echo $twig->render('/Comment/listComments.html.twig',['comments' => $comments]);
 
                 $this->_view = new View('singlePost','Post');

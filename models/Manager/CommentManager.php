@@ -17,9 +17,6 @@ class CommentManager extends Model
       echo('|CommentManager createComment');
       return $this->createOne('comment', $comment);
    } 
-      public function testGetComments(){
-      return $this->testGetAllComments('comment');
-   }
 
    public function deleteThisComment(){
       return $this ->deleteOneComment('comment');

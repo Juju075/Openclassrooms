@@ -31,7 +31,7 @@ abstract class Model
     }
 
     protected function getBdd(){
-        echo('| Model.php getBdd ');
+        echo('| Connexion Bdd ');
         if(self::$_bdd == null){
             self::setBdd();
         }
@@ -114,12 +114,15 @@ protected function authenticationRequest($obj,$usertype){
         $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
 
         if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype) {
-            echo('| Model.php condition verifie a true'); // ok fonctionne
+            echo('| Model.php condition verifie à true'); // ok fonctionne
+            //affecter la session user
             $id_user = $resultat['id_user'];
+            var_dump($id_user);
             $_SESSION['id_user']=$id_user; //ajout junior
+            
 
-            $user=$this->getOne('user','User',$id_user); //ca sert a quoi?
-            var_dump($user);
+            $user=$this->getOne('user','User',$id_user); 
+            echo('/ Fin true authenticationRequest');
             return $user;  
         }else{
             echo('| Model.php condition else false'); // ok fonctionne
@@ -239,52 +242,35 @@ protected function noDuplicatePost($table, $title, $content){ // ok fonctionne
     //     }
     // }
 
-        protected function getOneTest($table, $obj, $id){ 
+        protected function getOne($table, $obj, $id){ 
         echo(' >> Model.php getOne');
         $this->getBdd();
         $var = [];
 
-        //si obj article utilise ca
-        //Afficher ou detail article, mo
         if ($obj === 'Article') {
-            echo('requete prepare Article');
+            echo('| requete prepare Article'); // ok fonctionne
             $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
         }elseif ($obj === 'User'){
-            $req = self::$_bdd->prepare("SELECT prenom nom sentence FROM " .$table. " WHERE id_user= ?");   
+            echo('| requete prepare User'); // Info display page profil
+            $req = self::$_bdd->prepare("SELECT prenom, nom FROM " .$table. " WHERE id_user= ?");   
         }elseif ($obj === 'Comment') {
+            echo('| requete prepare Comment'); //
             # code...
-            $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
+            $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_comment = ?");
         }else{
-            echo('erreur');
+            echo('| erreur');
         }     
-       
-        exit;
-        
+        echo('| requete success');
         $req->execute(array($id));
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             $obj2="\\Entity\\".$obj;
             $var[] = new $obj2($data); 
         }
-        return $var;
+        return $var; //ok 
         $req->closeCursor();  
     }
 
-
-    protected function getOne($table, $obj, $id){ 
-        echo(' >> Model.php getOne');
-        $this->getBdd();
-        $var = [];
-        $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
-        $req->execute(array($id));
-
-        while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            $obj2="\\Entity\\".$obj;
-            $var[] = new $obj2($data); 
-        }
-        return $var;
-        $req->closeCursor();  
-    }
 
 
     //Universalisé cette function

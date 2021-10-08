@@ -118,7 +118,8 @@ class ControllerPost
 
         //une fois fini script
         //header('Location: App_Blog_MVC/accueil');
-}
+    }
+
 
 
     private function article(){
@@ -136,13 +137,20 @@ class ControllerPost
                 var_dump($article); // object(Entity\Article)[8]
 
                 $comments = $this->commentManager->getComments();  // array string
+                echo('comment');
                 var_dump($comments);
                 //$_SESSION['comments'] = $this->commentManager->getComments(); //supprimer cette ligne
 
                 //Vue
+
                 $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
-                $twig = new \Twig\Environment($loader, ['cache'=> false]);   
-                echo $twig->render('/Comment/listComments.html.twig',['comments' => $comments]);
+                $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+
+                $commentManager = new CommentManager();
+                $comments= $this->commentManager->getComments($_GET['id_article']); 
+
+                //echo $twig->render('/Comment/listComments.html.twig',['article'=> $article]);
+
 
                 $this->_view = new View('singlePost','Post');
                 $this->_view->generatePost(array('article'=>$article));
@@ -163,11 +171,4 @@ class ControllerPost
 
 
     }
-
-
-
-
-
-
-    
 }

@@ -11,9 +11,6 @@ class ControllerLogin
 
     public function __construct(){
 
-
-         
-
         if(isset($url) && count($url) < 1){ 
             throw new \Exception("Page introuvable", 1);
         }
@@ -39,24 +36,16 @@ class ControllerLogin
         $this->_view->displayForm('Login');       
     }
 
-
-    // we can verify session using login methode and we can make decision according to returned response for
     private function logon(){
         if(($user=Security::login(1))!=null){
-            echo('| ControllerLoging.php logon true');
-
-            //access granted make some business logic here 
- 
-            var_dump($user); //if return $user
             header('Location: accueil?passe=valide');
         }
     else
         {
-            //if return false
-            echo('| ControllerLoging.php logon else ');
             header('Location: accueil?login=error');
         }
     }
+
     private function logout(){
         session_destroy();
         header('Location: accueil?session=terminated');

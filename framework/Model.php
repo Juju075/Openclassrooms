@@ -252,22 +252,21 @@ protected function noDuplicatePost($table, $title, $content){ // ok fonctionne
             $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
         }elseif ($obj === 'User'){
             echo('| requete prepare User'); // Info display page profil
-            $req = self::$_bdd->prepare("SELECT prenom, nom FROM " .$table. " WHERE id_user= ?");   
+            $req = self::$_bdd->prepare("SELECT prenom, nom, email FROM " .$table. " WHERE id_user= ?");   
         }elseif ($obj === 'Comment') {
             echo('| requete prepare Comment'); //
-            # code...
             $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_comment = ?");
         }else{
             echo('| erreur');
         }     
-        echo('| requete success');
         $req->execute(array($id));
+        echo('| requete success');
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             $obj2="\\Entity\\".$obj;
             $var[] = new $obj2($data); 
         }
-        return $var; //ok 
+        return $var; 
         $req->closeCursor();  
     }
 

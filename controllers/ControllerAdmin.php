@@ -43,5 +43,13 @@ use View\View;
         $this->_view->displayForm('Login');       
     }
 
+    private function validationComment(){
+        //verification de role
+        //verification existance id_comment 
+        //verification si comment deja publie 1 ou 0
+        //verification id_comment (user) = validation_key
+        // statut 1 bdd pour ce comment
+        
+    }
 
   }

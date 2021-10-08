@@ -18,7 +18,7 @@ class ControllerComment
         }    
         elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ 
             $this->storeComment();
-        }
+        }       
         elseif (isset($_GET['status']) && isset($_GET['status']) =="update"){  
             $this->updateComment();
         }         
@@ -67,6 +67,9 @@ class ControllerComment
         $this->CommentManager->deleteThisComment();
         header('Location: post&id_article='.$_SESSION['id_article']);       
     }
+
+
+
 
 
 }

@@ -2,14 +2,21 @@
 namespace Controllers;
 session_start();
 
+use Manager\UserManager;
 use View\View;
-
+use Entity\User;
+use Manager\ContactManager;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 class ControllerContact
 {
+
+    private $contactManager;
+    private $user;
+
+
     public function __construct(){
         if(isset($url) && count($url) < 1){  
             throw new \Exception("Page introuvable", 1);
@@ -24,17 +31,7 @@ class ControllerContact
         }
     }
 
-
-    /**
-     * un formulaire de contact (à la soumission de ce formulaire, 
-     * un e-mail avec toutes ces informations vous sera envoyé) 
-     * avec les champs suivants :
-     * nom/prénom,<br>
-     * e-mail de contact,<br>
-     * message,<br><br>
-     */
     
-    //Affichage
     private function Message(){ 
         echo('controllerContact function Message');
 
@@ -45,10 +42,29 @@ class ControllerContact
         }
     }
 
-    //Traitement du formulaire. //
     private function sendMessage(){ 
         //Create an instance; passing `true` enables exceptions
+        echo('controllerContact sendMessage');
+
+        
+        //recuperer data user
+        $this->contactManager = new ContactManager;
+        $user[] = $this->contactManager->getUser($_SESSION['id_user']);
+        var_dump($user);
+        var_dump($user[0]);
+
+        //ajout POST 
+        $_POST['prenom']= 'ajoute cidi';
+        $_POST['nom']= $user[0]['nom'];
+        $_POST['email']= $user[0]['email'];
+
+        var_dump($_POST);
+        exit;
+
+
+
         $mail = new PHPMailer(true);
+        
 
         try {
             //Server settings
@@ -72,6 +88,20 @@ class ControllerContact
             //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
             //Content
+            //ajouter automatiquement des information a message
+
+
+            /** INSERTION DANS POST     
+             * getFullname
+             * getEmail
+             * genere lien d'activation
+             */
+
+
+
+
+
+
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Here is the subject';
             $mail->Body    = $_POST['message'];

@@ -49,13 +49,16 @@ Class ControllerTest extends Model
 
 
     public function testComments(){
-        echo('| ControllerTest.php testComments');
-        $_SESSION['comments'] = [];
-        $_SESSION['id_article'] = 69;
+        //tester sur getAll()
 
-        $this->_testManager = new CommentManager(); 
-         $_SESSION['comments'] = $this->_testManager->testGetComments();
-        var_dump( $_SESSION['comments']);
+        //tester sur getOne()
+        echo('| ici test comment');
+        $this->contactManager = new ContactManager;
+        $comment[] = $this->contactManager->testComment(75);
+        var_dump($comment);
+
+
+
     }
 
     public function twigImplementation(){
@@ -72,4 +75,5 @@ Class ControllerTest extends Model
         //envoye le tableau à la vue
 
     }
+
 }

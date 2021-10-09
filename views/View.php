@@ -13,8 +13,6 @@ class View
         $this->_file = 'views/'.$dossier.'/view'.$action.'.html.twig';
     }
 
-
-
     //GENERATE PAGE $content
 
     /**
@@ -22,31 +20,43 @@ class View
      */
     public function generate($data){  
         echo('| View.php generate');
+
         $content = $this->generateFile($this->_file,$data);
         $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t,'content' => $content));
         echo $view;
+
+        //if content empty page erreur.
     }
+
+
+    // COPIE - Injection de Twig
+    public function generatePost($data){
+        echo('| View.php generatePost');
+
+        $content = $this->generateFile($this->_file,$data);
+
+        //Rendre disponible twig dans le fichier.
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+        $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+        $twig->render('templateSingle.html.twig',$data); //passage d'entite
+
+        $view = $this->generateFile('views/templateSingle.html.twig', array('t'=>$this->_t, 'content'=>$content)); 
+        echo $view;
+         
+    }
+
+
 
     /**
      * Cette fonction sert generer la page de detail Post(One). templateSingle.php
+     * Injecte du twig
      */
-    public function generatePost($data){
+    public function generatePostBackup($data){
         echo('| View.php generatePost');
         $content = $this->generateFile($this->_file,$data);
-
- 
-
-
-
-
-        //ajouter chapo 
-        //$view = $this->generateFile('views/templateSingle.php', array('t'=>$this->_t, 'content'=>$content));
         $view = $this->generateFile('views/templateSingle.html.twig', array('t'=>$this->_t, 'content'=>$content));  
         echo $view;
     }
-
-
-
 
 
 
@@ -103,8 +113,6 @@ class View
         throw new \Exception("Fichier".$file." introuvable", 1);
         }
     }
-
-
 
     /**
      * Cette fonction sert à 

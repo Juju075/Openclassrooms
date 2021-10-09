@@ -60,7 +60,6 @@ class ControllerPost
         header('Location: accueil');
     }
 
-
     private function update($id){
         echo('ControllerPost function update()');
 
@@ -71,16 +70,14 @@ class ControllerPost
             $this->_view->displayForm('Update');
         }        
     }
-    
 
     //Traitement add article.
     // Affectation $articles pour le foreach $content
 
-
     private function store(){
         echo('| controllerPost.php store');
 
-        //Contrainte role administratue usertype
+        //Contrainte role administrateur usertype
         //1 rch usertype si usertype === 1 sinon alert
    
         var_dump($_POST);
@@ -105,56 +102,45 @@ class ControllerPost
                 header('location; accueil');
             }
         }
-
     }
 
     public function storeUpdate($id){
         echo('ControllerPost.php  storeUpdate()');
 
-        //BDD 
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->updateArticle($id);
-
 
         //une fois fini script
         //header('Location: App_Blog_MVC/accueil');
     }
 
-
-
     private function article(){
-        echo('ControllerPost.php  article()');
+        echo('ControllerPost.php  article');
 
         if(isset($_GET['id_article'])){
             $_SESSION['id_article'] = $_GET['id_article'];
 
+
             $this->_articleManager = new ArticleManager;
             $articleVerif = $this->_articleManager->articleVerif();
 
+
+
             if ($articleVerif == true ){
+
+                //Return Post
                 $article = $this->_articleManager->getArticle($_GET['id_article']);
+
+                //Return Comments        
                 $this->commentManager = new CommentManager;
-                var_dump($article); // object(Entity\Article)[8]
-
                 $comments = $this->commentManager->getComments();  // array string
-                echo('comment');
-                var_dump($comments);
-                //$_SESSION['comments'] = $this->commentManager->getComments(); //supprimer cette ligne
 
-                //Vue
-
-                $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
-                $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-
-                $commentManager = new CommentManager();
-                $comments= $this->commentManager->getComments($_GET['id_article']); 
-
-                //echo $twig->render('/Comment/listComments.html.twig',['article'=> $article]);
-
-
+                //echo view
                 $this->_view = new View('singlePost','Post');
-                $this->_view->generatePost(array('article'=>$article));
-
+                //$this->_view->generatePost(array('article'=>$article)); //echo $view;
+                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments)); //echo $view;
+            
+                //$this->twigComments();
             }
             elseif ($articleVerif == false){
                 header('location: accueil');
@@ -162,13 +148,5 @@ class ControllerPost
                 header('location: accueil');
             }
         }
-    }
-    
-    private function adminCommentValidation($id_comment, $token){
-        //disabled 0>1
-        $this->comment = new CommentManager;
-        $this->comment->validationByAdmin($id_comment, $token);
-
-
     }
 }

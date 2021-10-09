@@ -7,7 +7,7 @@ class CommentManager extends Model
 {
    //id article deja en session return $var[]
    public function getComments(){
-      return $this->testGetAllComments();
+      return $this->getAllComments();
    }
 
    public function getOneComment($id){

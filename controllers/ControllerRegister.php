@@ -46,17 +46,20 @@ class ControllerRegister
             }
             //continue...
 
-                $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                $token = md5($_POST['prenom'].$_POST['nom']); 
-                //$default_avatar = 'default_avatar.jpg'; // 
-                $array = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'0','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
-                $user= new User($array);
-                $userManager= new UserManager();
-                $userManager->addUser($user);
-                header('location: accueil?register=created');
-            }else{
-            header('location: accueil?register=error');
-        }           
+        if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $token = md5($_POST['prenom'].$_POST['nom']); 
+            //$default_avatar = 'default_avatar.jpg'; // 
+            $array = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'0','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
+            $user= new User($array);
+            $userManager= new UserManager();
+            $userManager->addUser($user);
+            header('location: accueil?register=created');
+        }else{
+        header('location: accueil?register=error');
+         }           
+        }else{
+        }
     }
 
     private function imageUpload(){

@@ -51,5 +51,12 @@ use View\View;
         // statut 1 bdd pour ce comment
         
     }
+        private function adminCommentValidation($id_comment, $token){
+        //disabled 0>1
+        $this->comment = new CommentManager;
+        $this->comment->validationByAdmin($id_comment, $token);
+
+
+    }
 
   }

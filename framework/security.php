@@ -21,7 +21,8 @@ public static function login($usertype){
                 echo('security suite ok');           
                 $_SESSION['user'] = array(
                     'username' => $user['username'],
-                    'password' => $user['password']
+                    'password' => $user['password'],
+                    'email' => $user['email']
                 );
                 return $userObj; // c la reponse de authenticationRequest
             }

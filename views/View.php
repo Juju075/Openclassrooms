@@ -44,19 +44,15 @@ class View
     public function generatePost($data){
         echo('| View.php generatePost');
         var_dump($data);
+        $a = 'templateSingle.html.twig';
 
         $content = $this->generateFile($this->_file,$data);
 
-        //Rendre disponible twig dans le fichier.
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+        echo $twig->render($a,$data); 
 
-
-        $a = 'templateSingle.html.twig';
         //$echo1 = $this->generateFile('views/'.$a, array('t'=>$this->_t, 'content'=>$content)); 
-        $echo2 = $twig->render($a,$data); 
-        echo($echo2);
-         
     }
 
 

@@ -1,8 +1,6 @@
-<?php ?>
-register.html.twig
 <h1 class="my-5 text-center">Ajouter un utilisateur.</h1>
 
-<form method="post" action="register&status=new">
+<form method="post" action="register&status=new" enctype="multipart/form-data">
   <div class="row">
     <div class="col-md-6">
       <label for="username">Username</label>
@@ -76,25 +74,19 @@ register.html.twig
     </div>
 
     <div class="input-group mb-3">
-      <form method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-          <label for="upload_file">Télecharger un avator ou un logo.</label>
-
-          <input
-            type="file"
-            class="form-control-file"
-            id="upload_file"
-            name="foo"
-            value="Upload File"
-          />
-
-          <input type="submit" value="Upload File" />
-        </div>
-      </form>
+      <div class="form-group">
+        <label for="upload_file">Télecharger un avator ou un logo.</label>
+        <input type="file" name="foo" id="foo" />
+      </div>
     </div>
 
     <div class="button">
-      <button type="submit" class="btn btn-primary btn-lg btn-block">
+      <button
+        type="submit"
+        class="btn btn-primary btn-lg btn-block"
+        value="Upload Image"
+        name="submit"
+      >
         Soumettre
       </button>
     </div>

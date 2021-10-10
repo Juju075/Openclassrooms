@@ -54,8 +54,8 @@ class ControllerRegister
             $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $token = md5($_POST['prenom'].$_POST['nom']); 
             //$default_avatar = 'default_avatar.jpg'; // 
-            $array = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'0','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
-            $user= new User($array);
+            $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'0','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
+            $user= new User($obj);
             $userManager= new UserManager();
             $userManager->addUser($user);
             header('location: accueil?register=created');
@@ -71,50 +71,45 @@ class ControllerRegister
         
         var_dump($_FILES);
 
-        $storage = new \Upload\Storage\FileSystem('/public/images/upload');  //dans vendor
-        echo('jusqu\'ici tout vas bien');
-        $file = new \Upload\File('foo', $storage); //validation et enregistrement du fichier.
-        var_dump($file);
+    $storage = new \Upload\Storage\FileSystem('/public/images/upload'); //dans vendor
+    $file = new \Upload\File('foo', $storage);
 
-        var_dump($file); //ok
-        exit;
+    // Optionally you can rename the file on upload
+    $new_filename = uniqid();
+    $file->setName($new_filename);
 
-        // Optionally you can rename the file on upload
-        $new_filename = uniqid();
-        $file->setName($new_filename);
+    // Validate file upload
+    // MimeType List => http://www.iana.org/assignments/media-types/media-types.xhtml
+    $file->addValidations(array(
+    // Ensure file is of type "image/png"
+    new \Upload\Validation\Mimetype('image/png'),
 
-        // Validate file upload
-        // MimeType List => http://www.iana.org/assignments/media-types/media-types.xhtml
-        $file->addValidations(array(
-            // Ensure file is of type "image/png"
-            new \Upload\Validation\Mimetype('image/png'),
+    //You can also add multi mimetype validation
+    //new \Upload\Validation\Mimetype(array('image/png', 'image/gif'))
 
-            //You can also add multi mimetype validation
-            //new \Upload\Validation\Mimetype(array('image/png', 'image/gif'))
+    // Ensure file is no larger than 5M (use "B", "K", M", or "G")
+    new \Upload\Validation\Size('5M')
+    ));
 
-            // Ensure file is no larger than 5M (use "B", "K", M", or "G")
-            new \Upload\Validation\Size('5M')
-        ));
+    // Access data about the file that has been uploaded
+    $data = array(
+    'name' => $file->getNameWithExtension(),
+    'extension' => $file->getExtension(),
+    'mime' => $file->getMimetype(),
+    'size' => $file->getSize(),
+    'md5' => $file->getMd5(),
+    'dimensions' => $file->getDimensions()
+    );
 
-        // Access data about the file that has been uploaded
-        $data = array(
-            'name'       => $file->getNameWithExtension(),
-            'extension'  => $file->getExtension(),
-            'mime'       => $file->getMimetype(),
-            'size'       => $file->getSize(),
-            'md5'        => $file->getMd5(),
-            'dimensions' => $file->getDimensions()
-        );
-
-        // Try to upload file
-        try {
-            // Success!
-            $file->upload();
-            return $new_filename; //ajout junior
-        } catch (\Exception $e) {
-            // Fail!
-            $errors = $file->getErrors();
-        }
-        // FIN CODE CODEGUY UPLOAD
+    // Try to upload file
+    try {
+    // Success!
+    $file->upload();
+    } catch (\Exception $e) {
+    // Fail!
+    $errors = $file->getErrors();
     }
- }
+
+            // FIN CODE CODEGUY UPLOAD
+        }
+    }

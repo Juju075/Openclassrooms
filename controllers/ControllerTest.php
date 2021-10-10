@@ -5,7 +5,7 @@ session_start();
 use Tools\Model;
 use Manager\ArticleManager;
 use Manager\CommentManager;
-
+use Manager\ContactManager;
 
 //http://localhost/App_Blog_MVC/test&comment
 //http://localhost/App_Blog_MVC/test&comment
@@ -52,10 +52,23 @@ Class ControllerTest extends Model
         //tester sur getAll()
 
         //tester sur getOne()
-        echo('| ici test comment');
-        $this->contactManager = new ContactManager;
-        $comment[] = $this->contactManager->testComment(75);
-        var_dump($comment);
+        echo('| ControllerTest.php testComments');
+
+
+        $_articleManager = new ArticleManager();
+        $article= $_articleManager->getArticle(118); 
+        var_dump($article);
+
+        $this->contactManager = new CommentManager;
+        $comments[] = $this->contactManager->getComments();
+        var_dump($comments);
+
+         //Rendre disponible twig dans le fichier.
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../template');
+        $twig = new \Twig\Environment($loader, ['cache'=> false]);
+        
+        // comment fait appel a la vue generate
+        echo $twig->render('testTwig.html.twig',['article'=> $article, 'comments'=> $comments]);     
 
 
 
@@ -65,7 +78,10 @@ Class ControllerTest extends Model
         echo('| ControllerAcceuil.php twigImplementation');
         require_once('views/testTwig.html.twig');
         
-        
+        //Rendre disponible twig dans le fichier.
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+        $twig = new \Twig\Environment($loader, ['comments'=> $comments]);  
+        $twig->render('testTwig.html.twig',['cache'=> false]); //passage d'entite       
         //passer des objets à la vue
         echo('jusqu ici tout vas bien 1');
 

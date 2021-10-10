@@ -1,5 +1,6 @@
 <?php
 namespace controllers;
+session_start();
 
 use Entity\User;
 use Manager\UserManager;
@@ -35,16 +36,19 @@ class ControllerRegister
 
     private function store(){
         echo('ControllerRegister store');
-        var_dump($_POST['foo']);
 
+        //if (isset($_POST) && empty($_SESSION['user'])){
         if (isset($_POST)){
-            ;
+            echo('>> condition valide');
             if($_POST['foo'] && $_POST['foo'] !=''){  //Traitement de l'image en premier (pour recuperer nom de l'image).
-                $avatar = $this->imageUpload();
+                echo('| oui image telechargé');
+                var_dump($_POST['foo']);
+
+                $this->imageUpload();
+                
             }else{
                 $avatar = 'default_avatar.jpg'; 
             }
-            //continue...
 
         if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
             $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -63,11 +67,17 @@ class ControllerRegister
     }
 
     private function imageUpload(){
-        // CODE CODEGUY UPLOAD
-        // can validate and upload the file like this
+        echo('| ControllerRegister imageUpload');
+        
+        var_dump($_FILES);
 
         $storage = new \Upload\Storage\FileSystem('/public/images/upload');  //dans vendor
-        $file = new \Upload\File('foo', $storage);
+        echo('jusqu\'ici tout vas bien');
+        $file = new \Upload\File('foo', $storage); //validation et enregistrement du fichier.
+        var_dump($file);
+
+        var_dump($file); //ok
+        exit;
 
         // Optionally you can rename the file on upload
         $new_filename = uniqid();

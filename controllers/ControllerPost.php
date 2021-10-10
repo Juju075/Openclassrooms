@@ -39,7 +39,7 @@ class ControllerPost
         }
          elseif (isset($_GET['validation'])){
             //id_comment
-            $this->adminCommentValidation($_GET['id_comment'],$_GET['token']); 
+            //$this->adminCommentValidation($_GET['id_comment'],$_GET['token']); 
         }       
         else{
             $this->article();
@@ -87,17 +87,19 @@ class ControllerPost
 
         if ($articleVerifNoDuplicate === false) {
             if (isset($_POST)){
-                $id_user = 1; // getIdUser() ou par defaut.
-                $_POST['id_user'] = $id_user;
-                var_dump($_POST);
+                $_POST['id_user'] = $_SESSION['id_user'];
+                var_dump($_POST); //verification insertion
 
                 $article= new Article($_POST);   
-                var_dump($article); 
                 $this->_articleManager = new ArticleManager;
-                $article = $this->_articleManager->createArticle($article);
+                $article = $this->_articleManager->createArticle($article); //null
+
+                var_dump($article);
+
                 $articles = $this->_articleManager->getArticles();
                 $this->_view = new View('Accueil','Post');
                 $this->_view->generate(array('articles' =>$articles));
+
             }else {
                 header('location; accueil');
             }
@@ -124,10 +126,7 @@ class ControllerPost
             $this->_articleManager = new ArticleManager;
             $articleVerif = $this->_articleManager->articleVerif();
 
-
-
             if ($articleVerif == true ){
-
                 //Return Post
                 $article = $this->_articleManager->getArticle($_GET['id_article']);
 
@@ -139,8 +138,6 @@ class ControllerPost
                 $this->_view = new View('singlePost','Post');
                 //$this->_view->generatePost(array('article'=>$article)); //echo $view;
                 $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments)); //echo $view;
-            
-                //$this->twigComments();
             }
             elseif ($articleVerif == false){
                 header('location: accueil');

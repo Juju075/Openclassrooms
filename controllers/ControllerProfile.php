@@ -23,6 +23,7 @@ use View\View;
      //Affiche un contenu simple pas de repository
      private function myProfile(){
       echo('ControllerProfile.php myProfile');
+      
         $this->_view = new View('Profile', 'Profile');
         $this->_view->displayForm('Profile'); 
      }

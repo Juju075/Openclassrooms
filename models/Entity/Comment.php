@@ -36,9 +36,6 @@ class Comment
         $this->id_comment = $id_comment;
     }
 
-
-
-    
     public function setContent($content) 
     {
         $this->content = $content;
@@ -65,13 +62,10 @@ class Comment
     { 
         return $this->id_comment; 
     }
-
     public function getContent() 
     { 
         return $this->content; 
     }
-
-    
     public function getDisabled() 
     { 
         return $this->disabled; 
@@ -84,5 +78,4 @@ class Comment
     { 
         return $this->id_user; 
     }
-
 }

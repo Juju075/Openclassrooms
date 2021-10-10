@@ -130,9 +130,9 @@ abstract class Model
                 $data[strtolower($key)]=$value;
             }
     
-
             $keysString=implode(' , ',$keys);
             var_dump($keysString);
+
             $interrogationString=implode(' , ',$interrogation);
             $this->getBdd();
             $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";

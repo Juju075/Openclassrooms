@@ -14,11 +14,22 @@ class View
     }
 
     //GENERATE PAGE $content
+        public function generate($data){  
+        echo('| View.php generate');
+        var_dump($data);
+
+        $content = $this->generateFile($this->_file,$data);
+        $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t,'content' => $content));
+        echo $view;
+
+        //if content empty page erreur.
+    }
+
 
     /**
      * Cette fonction sert à generer le listing des Post (All). template.php 
      */
-    public function generate($data){  
+    public function generateBackup($data){  
         echo('| View.php generate');
 
         $content = $this->generateFile($this->_file,$data);
@@ -32,16 +43,19 @@ class View
     // COPIE - Injection de Twig
     public function generatePost($data){
         echo('| View.php generatePost');
+        var_dump($data);
 
         $content = $this->generateFile($this->_file,$data);
 
         //Rendre disponible twig dans le fichier.
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        $twig->render('templateSingle.html.twig',$data); //passage d'entite
 
-        $view = $this->generateFile('views/templateSingle.html.twig', array('t'=>$this->_t, 'content'=>$content)); 
-        echo $view;
+
+        $a = 'templateSingle.html.twig';
+        //$echo1 = $this->generateFile('views/'.$a, array('t'=>$this->_t, 'content'=>$content)); 
+        $echo2 = $twig->render($a,$data); 
+        echo($echo2);
          
     }
 

@@ -3,12 +3,11 @@
 <div class="slider">
   <div class="display-table center-text">
     <h1 class="title display-table-cell">
-      <b>PROJET OPENCLASSROOM BLOG MVC JJJJJ</b>
+      <b>PROJET OPENCLASSROOM BLOG MVC</b>
     </h1>
   </div>
 </div>
 <!-- slider -->
-
 <section class="post-area section">
   <div class="container">
     <div class="row">
@@ -26,20 +25,19 @@
               </div>
 
               <div class="middle-area">
-                <p>{{ user.fullname }}</p>
+                <p>{{ user.fullname }}</p> {# de quel id? #}
                 <p>twig latest modification</p>
                 <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
               </div>
             </div>
             <!-- post-info -->
-
             <h3 class="title">
               <a href="#"
-                ><b>{{ article.title }}</b></a
+                ><b>{{ article.title }}</b></a {# de quel id? #}
               >
             </h3>
 
-            <p class="para">{{ article.title }}</p>
+            <p class="para">{{ article.title }}</p> {# de quel id? #}
 
             <ul class="tags">
               <p>Admin uniquement</p>
@@ -147,6 +145,8 @@
         <!-- Affichage commentaires foreach en twig-->
         <!-- =================================================================== -->
         <h4><b>COMMENTAIRES(12)</b></h4>
+        <!-- Ajouter une condition si comments non vide afficher sinon ne rien faire -->
+
         {% for comment in comments %}
         <div class="commnets-area">
           <div class="comment">
@@ -170,9 +170,11 @@
               </div>
 
               <div class="right-area">
-                <h5 class="reply-btn">
-                  <a href="#"><b>REPLY</b></a>
-                </h5>
+                <h6 class="reply-btn">
+                  <a href="#"><b>UPDATE</b></a
+                  ><br />
+                  <a href="#"><b>DELETE</b></a>
+                </h6>
               </div>
             </div>
             <!-- post-info -->

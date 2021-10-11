@@ -9,6 +9,7 @@ use View\View;
 class ControllerRegister
  {
      private $user;
+     private $view;
 
     public function __construct(){
         if(isset($url) && count($url) < 1){
@@ -29,8 +30,8 @@ class ControllerRegister
         echo('ControllerRegister create');
         if(isset($_GET['create'])){
 
-            $this->_view = new View('CreateUser', 'Registration');
-            $this->_view->displayForm('Register');
+            $this->view = new View('CreateUser', 'Registration');
+            $this->view->displayForm('Register');
         }
     }
 

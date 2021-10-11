@@ -54,7 +54,7 @@ abstract class Model
     
 
     protected function getAllComments(){
-        echo('| Model.php testgetAllComments');
+        echo('| Model.php getAllComments');
 
         $result = [];
         //$id_article = $_SESSION['id_article'];
@@ -213,7 +213,7 @@ abstract class Model
         // }
 
     protected function getOne($table, $obj, $id){ 
-        echo(' >> Model.php getOne');
+        echo('| Model.php getOne');
         $this->getBdd();
         $var = [];
 
@@ -238,6 +238,12 @@ abstract class Model
         }
         return $var; 
         $req->closeCursor();  
+    }
+    protected function getAllUsersForComments(){ //$user
+        //list d id_user
+        //boucle for nb utilisateur 
+        //recup prenom nom 
+
     }
 
     //Universalisé cette function

@@ -33,7 +33,6 @@ class ControllerPost
             $this->update($_GET['update']); 
         }
         elseif (isset($_GET['update_id'])){ //Traitement update
-            // methode post
             $this->storeUpdate($_GET['update_id']); 
             //recuperer les valeurs du formulaire
         }
@@ -121,7 +120,6 @@ class ControllerPost
 
         if(isset($_GET['id_article'])){
             $_SESSION['id_article'] = $_GET['id_article'];
-
 
             $this->_articleManager = new ArticleManager;
             $articleVerif = $this->_articleManager->articleVerif();

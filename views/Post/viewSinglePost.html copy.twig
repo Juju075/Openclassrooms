@@ -1,5 +1,4 @@
-| Post/viewSinglePost.php | balise article: {{ article }} | balise comments:
-{{ comments }} | balise user: {{ user }}
+| Post/viewSinglePost.php
 
 <div class="slider">
   <div class="display-table center-text">
@@ -148,7 +147,42 @@
         <!-- Affichage commentaires foreach en twig-->
         <!-- =================================================================== -->
         <h4><b>COMMENTAIRES(12)</b></h4>
-        {{ comments }}
+        {% for comment in comments %}
+        <div class="commnets-area">
+          <div class="comment">
+            <div class="post-info">
+              <div class="left-area">
+                <a class="avatar" href="#"
+                  ><img
+                    src="public/images/avatar-1-120x120.jpg"
+                    alt="Profile Image"
+                  />
+                </a>
+              </div>
+
+              <div class="middle-area">
+                <a class="name" href="#"
+                  ><b>{{ user.fullname }}</b></a
+                >
+                <h6 class="date">
+                  {{ comment.date }}on Sep 29, 2017 at 9:48 am
+                </h6>
+              </div>
+
+              <div class="right-area">
+                <h5 class="reply-btn">
+                  <a href="#"><b>REPLY</b></a>
+                </h5>
+              </div>
+            </div>
+            <!-- post-info -->
+
+            <p>
+              {{ comment.content }}
+            </p>
+          </div>
+        </div>
+        {% endfor %}
 
         <!-- commnets-area -->
       </div>

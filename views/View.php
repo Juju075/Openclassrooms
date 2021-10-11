@@ -5,12 +5,15 @@ class View
 {
     private $_file; //
     private $_t; //
+    private $a;
+    private $b;
 
     /**
      * Affecte le nom du fichier $_file eg:viewAccueil.php
      */
     function __construct($action, $dossier){
         $this->_file = 'views/'.$dossier.'/view'.$action.'.html.twig';
+        $this->b = $dossier.'/view'.$action.'.html.twig';
     }
 
     //GENERATE PAGE $content
@@ -44,14 +47,16 @@ class View
 
 
     // COPIE - Injection de Twig
-    public function generatePost($data){
+    public function generatePost($data){ //tableau multidimentionnel 1article + comments
         echo('| View.php generatePost');
+        //var_dump($data);
         $a = 'templateSingle.html.twig';
 
         $content = $this->generateFile($this->_file,$data); //retourne du htl
-        $article='ok retour article';
-        $comments='ok retour comments';
-        $user='ok retour user';
+
+        $article=$data['article']; 
+        $comments= $data['comments']; 
+        $user='ok retour user'; 
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  

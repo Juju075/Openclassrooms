@@ -146,7 +146,6 @@ abstract class Model
                 }
             
             $req->closeCursor();
-            echo('Script End');
         }
 
         protected function createOneComment($table, $comment){

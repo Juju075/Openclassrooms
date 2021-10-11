@@ -2,12 +2,13 @@
 namespace Controllers;
 session_start();
 
+use Manager\UserManager;
 use View\View;
 
 
  class ControllerProfile
  {
-
+    private $userManager;
     private $_view; 
 
      public function __construct(){
@@ -23,9 +24,14 @@ use View\View;
      //Affiche un contenu simple pas de repository
      private function myProfile(){
       echo('ControllerProfile.php myProfile');
-      
+
+      //get User connected ok
+      $this->usermanager = new UserManager;
+      $data = $this->usermanager->ProfilUser();
+
+
+      //View
         $this->_view = new View('Profile', 'Profile');
         $this->_view->displayForm('Profile'); 
      }
-
 }

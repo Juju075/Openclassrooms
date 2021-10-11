@@ -30,22 +30,7 @@ class View
 
         //if content empty page erreur.
     }
-
-
-    /**
-     * Cette fonction sert à generer le listing des Post (All). template.php 
-     */
-    public function generateBackup($data){  
-        echo('| View.php generate');
-
-        $content = $this->generateFile($this->_file,$data);
-        $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t,'content' => $content));
-        echo $view;
-
-        //if content empty page erreur.
-    }
-
-
+    
     // COPIE - Injection de Twig
     public function generatePost($data){ //tableau multidimentionnel 1article + comments
         echo('| View.php generatePost');
@@ -66,18 +51,6 @@ class View
         //$echo1 = $this->generateFile('views/'.$a, array('t'=>$this->_t, 'content'=>$content)); 
     }
 
-
-
-    /**
-     * Cette fonction sert generer la page de detail Post(One). templateSingle.php
-     * Injecte du twig
-     */
-    public function generatePostBackup($data){
-        echo('| View.php generatePost');
-        $content = $this->generateFile($this->_file,$data);
-        $view = $this->generateFile('views/templateSingle.html.twig', array('t'=>$this->_t, 'content'=>$content));  
-        echo $view;
-    }
 
 
 
@@ -102,7 +75,7 @@ class View
         //$page = 'views/template'.$action .'.html.twig';
         $pagecopy = 'views/template'.$action .'Copy'.'.html.twig';
 
-        $page1 = 'template'.$action .'Copy'.'.html.twig';
+        $page1 = 'template'.$action.'.html.twig';
         var_dump($page1);
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
@@ -116,27 +89,21 @@ class View
         // correction faudrait template.html.twig {{ include $action .'.html.twig'}}
     }
 
-     /**
-     * Cette fonction sert à 
-     */
+
     public function generateForm(){
         $content = $this->generateFileSimple($this->_file);
         $view = $this->generateFile('views/form/templatePost.html.twig', array('t' => $this->_t, 'content' => $content));
         echo $view;
     }
-    //Call 
-    /**
-     * Cette fonction sert à ajouter un require variable.
-     */
+
+
     public function generateFileSimple($file){
         if(file_exists($file)){
             require $file;
         }
     }
 
-    /**
-     * Cette fonction sert mise en tampon des datas.
-     */
+
     private function generateFile($file, $data){  
         if(file_exists($file)){
             extract($data); 
@@ -148,12 +115,4 @@ class View
         throw new \Exception("Fichier".$file." introuvable", 1);
         }
     }
-
-    /**
-     * Cette fonction sert à 
-     */
-    public function displayFormUpdate(){
-        
-    }
-
 }

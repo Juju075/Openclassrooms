@@ -1,3 +1,4 @@
+templateRegisterCopy.html.twig
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,24 +30,26 @@
           <i class="ion-navicon"></i>
         </div>
 
-        <?php include("public/partials/_nav.php"); ?>
+        {% include 'partials/_nav.php' %}
       </div>
       <!-- conatiner -->
     </header>
 
+    <!-- =================================================================== -->
+    <!-- couper dessus -->
+    <!-- =================================================================== -->
+    <!-- form/re.php -->
+
     <!-- Ci-dessous contenu -->
     <div class="slider"></div>
-    <?php include("views/form/register.html.twig"); ?>
+    {{ ici }}
+    {% include 'form/registerCopy.html.twig' %}
 
-    <footer>
-      <div class="container">
-        <div class="row">
-          <?php include("public/partials/_footer.php"); ?>
-        </div>
-        <!-- row -->
-      </div>
-      <!-- container -->
-    </footer>
+    <!-- =================================================================== -->
+    <!-- couper dessous -->
+    <!-- =================================================================== -->
+
+    {% include 'partials/_footer-copy.php' %}
 
     <!-- SCIPTS -->
     <script src="public/common-js/jquery-3.1.1.min.js"></script>

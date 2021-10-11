@@ -40,25 +40,29 @@ class ControllerRegister
 
         //if (isset($_POST) && empty($_SESSION['user'])){
         if (isset($_POST)){
-            echo('>> condition valide');
+            var_dump($_POST['foo']);
+
             if($_POST['foo'] && $_POST['foo'] !=''){  //Traitement de l'image en premier (pour recuperer nom de l'image).
                 echo('| oui image telechargé');
-                var_dump($_POST['foo']);
+                var_dump($_FILES);
 
                 $this->imageUpload();
+                echo('Fin upload image');
                 
             }else{
                 $avatar = 'default_avatar.jpg'; 
             }
 
         if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            echo('Verif mail et new User');
             $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $token = md5($_POST['prenom'].$_POST['nom']); 
-            //$default_avatar = 'default_avatar.jpg'; // 
             $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'0','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
             $user= new User($obj);
             $userManager= new UserManager();
             $userManager->addUser($user);
+            var_dump($user);
+
             header('location: accueil?register=created');
         }else{
         header('location: accueil?register=error');
@@ -68,48 +72,50 @@ class ControllerRegister
     }
 
     private function imageUpload(){
-        echo('| ControllerRegister imageUpload');
-        
+        echo('| ControllerRegister imageUpload');          
         var_dump($_FILES);
 
-    $storage = new \Upload\Storage\FileSystem('/public/images/upload'); //dans vendor
-    $file = new \Upload\File('foo', $storage);
+        $storage = new \Upload\Storage\FileSystem('/public/images/upload'); 
+        var_dump($storage);
 
-    // Optionally you can rename the file on upload
-    $new_filename = uniqid();
-    $file->setName($new_filename);
+        $file = new \Upload\File('foo', $storage);
+        var_dump($file);
 
-    // Validate file upload
-    // MimeType List => http://www.iana.org/assignments/media-types/media-types.xhtml
-    $file->addValidations(array(
-    // Ensure file is of type "image/png"
-    new \Upload\Validation\Mimetype('image/png'),
+        // Optionally you can rename the file on upload
+        $new_filename = uniqid();
+        $file->setName($new_filename);
 
-    //You can also add multi mimetype validation
-    //new \Upload\Validation\Mimetype(array('image/png', 'image/gif'))
+        // Validate file upload
+        // MimeType List => http://www.iana.org/assignments/media-types/media-types.xhtml
+        $file->addValidations(array(
+        // Ensure file is of type "image/png"
+        new \Upload\Validation\Mimetype('image/png'),
 
-    // Ensure file is no larger than 5M (use "B", "K", M", or "G")
-    new \Upload\Validation\Size('5M')
-    ));
+        //You can also add multi mimetype validation
+        //new \Upload\Validation\Mimetype(array('image/png', 'image/gif'))
 
-    // Access data about the file that has been uploaded
-    $data = array(
-    'name' => $file->getNameWithExtension(),
-    'extension' => $file->getExtension(),
-    'mime' => $file->getMimetype(),
-    'size' => $file->getSize(),
-    'md5' => $file->getMd5(),
-    'dimensions' => $file->getDimensions()
-    );
+        // Ensure file is no larger than 5M (use "B", "K", M", or "G")
+        new \Upload\Validation\Size('5M')
+        ));
 
-    // Try to upload file
-    try {
-    // Success!
-    $file->upload();
-    } catch (\Exception $e) {
-    // Fail!
-    $errors = $file->getErrors();
-    }
+        // Access data about the file that has been uploaded
+        $data = array(
+        'name' => $file->getNameWithExtension(),
+        'extension' => $file->getExtension(),
+        'mime' => $file->getMimetype(),
+        'size' => $file->getSize(),
+        'md5' => $file->getMd5(),
+        'dimensions' => $file->getDimensions()
+        );
+
+        // Try to upload file
+        try {
+        // Success!
+        $file->upload();
+        } catch (\Exception $e) {
+        // Fail!
+        $errors = $file->getErrors();
+        }
 
             // FIN CODE CODEGUY UPLOAD
         }

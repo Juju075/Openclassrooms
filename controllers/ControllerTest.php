@@ -32,6 +32,9 @@ Class ControllerTest extends Model
         elseif (isset($_GET['twig'])){
             $this->twigImplementation(); 
         }
+         elseif (isset($_GET['image'])){
+            $this->codeguyUpload(); 
+        }       
         else{
             header('location: /accueuil');
         }
@@ -89,6 +92,15 @@ Class ControllerTest extends Model
         echo $twig->render('testTwig.html.twig', ['person'=>['name'=>'Marc','age'=>'13']]);
 
         //envoye le tableau à la vue
+
+    }
+
+    public function codeguyUpload(){
+        //afficher le formulaire
+        readfile("views/form/registerCopy.html.twig");
+        var_dump($_POST);
+        var_dump($_FILES);
+        var_dump($_POST['foo']);
 
     }
 

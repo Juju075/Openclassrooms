@@ -18,6 +18,7 @@
     <link href="public/common-css/ionicons.css" rel="stylesheet" />
     <link href="public/layout-1/css/styles.css" rel="stylesheet" />
     <link href="public/layout-1/css/responsive.css" rel="stylesheet" />
+    <link href="public/css/alert.css" rel="stylesheet" />
   </head>
   <body>
     <header>
@@ -29,26 +30,24 @@
           <i class="ion-navicon"></i>
         </div>
 
-        {% include 'partials/_nav.php' %}
+        <?php include("public/partials/_nav.php"); ?>
       </div>
       <!-- conatiner -->
     </header>
 
-    <!-- =================================================================== -->
-    <!-- couper dessus -->
-    <!-- =================================================================== -->
-    <!-- form/re.php -->
-
+    <b>view/template.html.twig</b>
     <!-- Ci-dessous contenu -->
-    <div class="slider"></div>
-    <?php include("views/form/register.html.twig"); ?>
-    {% include 'form/registerCopy.html.twig' %}
+    <?= $content ?>
 
-    <!-- =================================================================== -->
-    <!-- couper dessous -->
-    <!-- =================================================================== -->
-
-    {% include 'partials/_footer-copy.php' %}
+    <footer>
+      <div class="container">
+        <div class="row">
+          <?php include("public/partials/_footer.php"); ?>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
+    </footer>
 
     <!-- SCIPTS -->
     <script src="public/common-js/jquery-3.1.1.min.js"></script>

@@ -16,4 +16,7 @@ class UserManager extends Model
         echo('| UserManager.php logonManager');
       return $this->authenticationRequest($user,$usertype);
    }
+   public function ProfilUser(){
+     return $this->getOne('user','User', $_SESSION['id_user']);
+   }
 }

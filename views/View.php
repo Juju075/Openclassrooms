@@ -19,6 +19,9 @@ class View
         var_dump($data);
 
         $content = $this->generateFile($this->_file,$data);
+        // {% include 'Post/viewSinglePost.html copy.twig' %} vas aussi recuperer le html et on passe les data directment
+        // dans la page en 
+
         $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t,'content' => $content));
         echo $view;
 
@@ -43,14 +46,17 @@ class View
     // COPIE - Injection de Twig
     public function generatePost($data){
         echo('| View.php generatePost');
-        var_dump($data);
         $a = 'templateSingle.html.twig';
 
-        $content = $this->generateFile($this->_file,$data);
+        $content = $this->generateFile($this->_file,$data); //retourne du htl
+        $article='ok retour article';
+        $comments='ok retour comments';
+        $user='ok retour user';
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        echo $twig->render($a,$data); 
+        //echo $twig->render($a,$data); 
+        echo $twig->render($a,['content'=>$content,'article'=>$article,'comments'=>$comments,'user'=>$user]); 
 
         //$echo1 = $this->generateFile('views/'.$a, array('t'=>$this->_t, 'content'=>$content)); 
     }

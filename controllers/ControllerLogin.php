@@ -32,22 +32,23 @@ class ControllerLogin
 
     private function formLogin(){
         echo('ControllerLoging.php formLogin');
+        $data ='';
         $this->_view = new View('Login', 'Login');
-        $this->_view->displayForm('Login');       
+        $this->_view->displayForm('Login',$data);       
     }
 
     private function logon(){
         if(($user=Security::login(1))!=null){
-            header('Location: accueil?passe=valide');
+            header('Location: accueil&passe=valide');
         }
     else
         {
-            header('Location: accueil?login=error');
+            header('Location: accueil&login=error');
         }
     }
 
     private function logout(){
         session_destroy();
-        header('Location: accueil?session=terminated');
+        header('Location: accueil&session=terminated');
     } 
 }

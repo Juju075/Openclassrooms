@@ -30,24 +30,26 @@
           <i class="ion-navicon"></i>
         </div>
 
-        <?php include("public/partials/_nav.php"); ?>
+        {% include 'partials/_nav.html.twig' %}
       </div>
       <!-- conatiner -->
     </header>
 
-    <b>view/template.html.twig</b>
     <!-- Ci-dessous contenu -->
-    <?= $content ?>
 
-    <footer>
-      <div class="container">
-        <div class="row">
-          <?php include("public/partials/_footer.php"); ?>
-        </div>
-        <!-- row -->
-      </div>
-      <!-- container -->
-    </footer>
+    <!-- =================================================================== -->
+    <!-- couper dessus -->
+    <!-- =================================================================== -->
+    <!-- form/re.php -->
+
+    <!-- Ci-dessous contenu -->
+    <b>view/template.html.twig</b>
+    {% include 'Post/viewAccueil.html.twig' %}
+    <!-- =================================================================== -->
+    <!-- -->
+    <!-- =================================================================== -->
+
+    {% include 'partials/_footer.html.twig' %}
 
     <!-- SCIPTS -->
     <script src="public/common-js/jquery-3.1.1.min.js"></script>

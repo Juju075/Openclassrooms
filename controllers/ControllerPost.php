@@ -2,6 +2,7 @@
 namespace controllers;
 session_start();
 
+use Controllers\ControllerContact;
 use View\View;
 use Entity\Article;
 use Manager\ArticleManager;
@@ -48,15 +49,16 @@ class ControllerPost
     //CRUD
     private function create(){
         if(isset($_GET['create'])){
+            $data ='';
             $this->_view = new View('CreatePost', 'Post');
-            $this->_view->displayForm('Post');
+            $this->_view->displayForm('Post',$data);
         }
     }   
 
     private function delete($id){
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->deleteArticle($id);
-        header('Location: accueil');
+        header('Location: accueil&article=deleted');
     }
 
     private function update($id){
@@ -64,9 +66,9 @@ class ControllerPost
 
         //View ok template + formulaire update ok
         if(isset($_GET['update'])){
-            
+            $data ='';
             $this->_view = new View('UpdatePost', 'Post'); //construct
-            $this->_view->displayForm('Update');
+            $this->_view->displayForm('Update', $data);
         }        
     }
 
@@ -115,6 +117,7 @@ class ControllerPost
         //header('Location: App_Blog_MVC/accueil');
     }
 
+    //Use TemplateSingle.html.twig
     private function article(){
         echo('ControllerPost.php  article');
 
@@ -135,7 +138,7 @@ class ControllerPost
                 //echo view
                 $this->_view = new View('singlePost','Post');
                 //$this->_view->generatePost(array('article'=>$article)); //echo $view;
-                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments)); //echo $view;
+                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments),'PostsinglePost'); //echo $view;
             }
             elseif ($articleVerif == false){
                 header('location: accueil');

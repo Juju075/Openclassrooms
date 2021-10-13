@@ -16,39 +16,42 @@ class View
         $this->b = $dossier.'/view'.$action.'.html.twig';
     }
 
-    //GENERATE PAGE $content
+    // /accueil 
         public function generate($data){  
         echo('| View.php generate');
+        $a = 'template.html.twig';
         var_dump($data);
+        $user = 'test user';
+        $articles = $data['article'][0]; // ok
+        $getalert = $data['routename']; // ok
 
-        $content = $this->generateFile($this->_file,$data);
-        // {% include 'Post/viewSinglePost.html copy.twig' %} vas aussi recuperer le html et on passe les data directment
-        // dans la page en 
-
-        $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t,'content' => $content));
-        echo $view;
-
-        //if content empty page erreur.
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+        $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+        echo $twig->render($a,['getalert'=>$getalert,'user'=>$user, 'articles'=>$articles]); 
     }
     
-    // COPIE - Injection de Twig
+
+
+
+    // detail article
     public function generatePost($data){ //tableau multidimentionnel 1article + comments
         echo('| View.php generatePost');
         $a = 'templateSingle.html.twig';
 
-        $content = $this->generateFile($this->_file,$data); //retourne du htl
-
         $article = $data['article']; 
-        var_dump($article);
+       
         $comments = $data['comments']; 
+        
         $user = 'ok retour user'; 
+        //var_dump($article);
+        //var_dump($comments);
+        //var_dump($user);
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         //echo $twig->render($a,$data); 
-        echo $twig->render($a,['content'=>$content,'article'=>$article,'comments'=>$comments,'user'=>$user]); 
-
-        //$echo1 = $this->generateFile('views/'.$a, array('t'=>$this->_t, 'content'=>$content)); 
+        // article ? id_user uniquement | comment foreach tts les ligns ok | user quel id_user
+        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user]); 
     }
 
 
@@ -68,25 +71,49 @@ class View
      * Cette fonction sert à afficher le formulaire souhaité.
      * views/template
      */
-    public function displayForm($action){ 
+    public function displayForm($action,$data){ 
         echo('| View.php displayForm');
-
-        //issue multipages
-        //$page = 'views/template'.$action .'.html.twig';
-        $pagecopy = 'views/template'.$action .'Copy'.'.html.twig';
 
         $page1 = 'template'.$action.'.html.twig';
         var_dump($page1);
-
+        
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
 
-        //$view = $this->generateFileSimple($pagecopy); //$page  verifie et require
-        //echo $view;
+        //router twig params
+        if($action === 'Register'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }
+        elseif($action === 'Login'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }
+        elseif($action === 'Profile'){
+            $user = $data[0];
+            var_dump($user);
+            echo $twig->render($page1,['user'=>$user]);
+        }
+        elseif($action === 'Post'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }        
+        else{
+        throw new \Exception("Route inconnue", 1);
 
-        $ici = 'ok loader twig';
-        echo $twig->render($page1,['ici'=>$ici]); 
-        // correction faudrait template.html.twig {{ include $action .'.html.twig'}}
+        }
     }
 
 

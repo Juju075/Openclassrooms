@@ -1,22 +1,20 @@
 <h1>Example heading <span class="badge badge-secondary">New</span></h1>
-    <!-- contenu cidessous -->
-    templateProfile.html.twig<br /><br />
+<!-- contenu cidessous -->
+vieProfile.html.twig<br /><br />
 
-    <?= $_SESSION['id_user'] ?>
-    <ul>
-      {% for word in words %}
-      <li>{{ word }}</li>
-      {% endfor %}
-    </ul>
-    {% user.prenom %} nom et prénom ;<br />
-    fullname<br />
+<ul></ul>
+{{ user.prenom }}
+{{ user.nom }}
+<br />
+fullname<br />
 
-    une photo et/ou un logo ;<br /><br />
-    Avatar ici<br />
+une photo et/ou un logo ;<br /><br />
+Avatar ici<br />
 
-    une phrase d’accroche;<br /><br />
-    sentence ici<br />
+Ma phrase d’accroche;<br /><br />
+{{ user.sentence }}<br />
 
-    un lien vers votre CV au format PDF ; lien vers curl_version<br />
+un lien vers votre CV au format PDF ; lien vers curl_version<br />
+a
 
-    un lien vers votre CV au format PDF ;<br />
+un lien vers votre CV au format PDF ;<br />

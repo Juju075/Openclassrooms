@@ -29,7 +29,7 @@
           <i class="ion-navicon"></i>
         </div>
 
-        {% include 'partials/_nav.php' %}
+        {% include 'partials/_nav.html.twig' %}
       </div>
       <!-- conatiner -->
     </header>
@@ -37,16 +37,17 @@
     <!-- couper dessus -->
     <!-- =================================================================== -->
     <!-- templateLogin.html.twig -->
-
-    <!-- =================================================================== -->
-    <!-- couper dessous -->
-    <!-- =================================================================== -->
+    templateLogin.html.twig
+    <div class="slider"></div>
     <b>form/login.html.twig </b>
     {% include 'form/login.html.twig' %}
     <!-- =================================================================== -->
     <!-- couper dessous -->
     <!-- =================================================================== -->
-    {% include 'partials/_footer-copy.php' %}
+    <!-- =================================================================== -->
+    <!-- couper dessous -->
+    <!-- =================================================================== -->
+    {% include 'partials/_footer.html.twig' %}
 
     <!-- SCIPTS -->
     <script src="public/common-js/jquery-3.1.1.min.js"></script>

@@ -56,7 +56,7 @@ class ControllerComment
                 var_dump($result);
 
                 //envoie email admin pour validation.
-                $admin = $this->sendCommentRequest();
+                $admin = $this->sendMessage();
                     if ($admin === true) {
                         $this->commentManager->getComments(); 
                         header('location: post&id_article='.$_SESSION['id_article']);
@@ -66,85 +66,5 @@ class ControllerComment
                 }
             else{}
     }
-
-    private function sendCommentRequest()
-    {
-         
-        $mail = new PHPMailer(true);
-        
-        try {
-            //Server settings
-            //SMTP::DEBUG_SERVER
-            $mail->SMTPDebug = 0;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'transferts10plus@gmail.com';            //SMTP username
-            $mail->Password   = 'b:6W[7Jx4';                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-            //Recipients
-            //mettre email expedi
-            $mail->setFrom($_SESSION['email'], 'Mailer');
-            $mail->addAddress('checkout.enterprise@gmail.com', 'Administrateur joe');     //Add a recipient
-           
-
-            //Attachments
-            //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-            //Content
-            //ajouter automatiquement des information a message
-
-
-            /** INSERTION DANS POST     
-             * getFullname
-             * getEmail
-             * genere lien d'activation
-             */
-
-
-             //
-
-
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Demande de validation de commentaire';
-            $lienValidation ='admin?commentvalidation=id_comment&validation_key=7d7d0084752f82f54a40eadc40741e08'; 
-            $mail->Body    = 'Bonjour Mr l\'administrateur voici mon commentaire concernant l\'article '. "". $_SESSION['id_article'] ."".$_POST['content'].
-            'voici le lien pour le valider'."    ".$lienValidation;
-
-
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-            $mail->send();
-            echo 'Message has been sent';
-            header('location: accueil?message=send');
-
-
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-            
-    }
-
-    private function updateComment(){
-        echo('| ControllerComment.php function updateComment');
-        
-    }
-    
-    private function deleteOneComment($id){
-        echo('| ControllerComment.php function deleteComment');
-
-        // lien bouton commentaire X supprimer html a l'affichage
-        //
-        $this->CommentManager = new CommentManager;
-        $this->CommentManager->deleteThisComment();
-        header('Location: post&id_article='.$_SESSION['id_article']);       
-    }
-
-
-
-
 
 }

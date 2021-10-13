@@ -37,8 +37,9 @@ class ControllerContact
 
         if(isset($_GET['create'])){
             //View
+            $data ='';
             $this->_view = new View('Contact', 'Contact'); 
-            $this->_view->displayForm('Contact');       
+            $this->_view->displayForm('Contact', $data);       
         }
     }
 

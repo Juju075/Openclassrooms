@@ -30,8 +30,9 @@ class ControllerRegister
         echo('ControllerRegister create');
         if(isset($_GET['create'])){
 
+            $data = '';
             $this->view = new View('CreateUser', 'Registration');
-            $this->view->displayForm('Register');
+            $this->view->displayForm('Register',$data);
         }
     }
 
@@ -40,29 +41,26 @@ class ControllerRegister
 
         //if (isset($_POST) && empty($_SESSION['user'])){
         if (isset($_POST)){
-            var_dump($_POST['foo']);
 
-            if($_POST['foo'] && $_POST['foo'] !=''){  //Traitement de l'image en premier (pour recuperer nom de l'image).
-                echo('| oui image telechargé');
-                var_dump($_FILES);
+            if($_FILES !=''){  //Traitement de l'image en premier (pour recuperer nom de l'image).
+                echo('/ oui image telechargé');
 
                 $this->imageUpload();
-                echo('Fin upload image');
-                
+                echo('/ Fin upload image');
+               exit; 
             }else{
+                echo('/ image non telechargé');
                 $avatar = 'default_avatar.jpg'; 
             }
-
+exit;
         if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-            echo('Verif mail et new User');
+            echo(' / Verif mail et new User');
             $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $token = md5($_POST['prenom'].$_POST['nom']); 
             $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'0','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
             $user= new User($obj);
             $userManager= new UserManager();
             $userManager->addUser($user);
-            var_dump($user);
-
             header('location: accueil?register=created');
         }else{
         header('location: accueil?register=error');
@@ -73,14 +71,13 @@ class ControllerRegister
 
     private function imageUpload(){
         echo('| ControllerRegister imageUpload');          
-        var_dump($_FILES);
-
-        $storage = new \Upload\Storage\FileSystem('/public/images/upload'); 
+        $storage = new \Upload\Storage\FileSystem(''); 
+        echo('jusqu\'ici tout vas bien');
         var_dump($storage);
 
         $file = new \Upload\File('foo', $storage);
         var_dump($file);
-
+exit;
         // Optionally you can rename the file on upload
         $new_filename = uniqid();
         $file->setName($new_filename);

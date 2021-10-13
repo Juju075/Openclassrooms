@@ -32,6 +32,6 @@ use View\View;
 
       //View
         $this->_view = new View('Profile', 'Profile');
-        $this->_view->displayForm('Profile'); 
+        $this->_view->displayForm('Profile',$data); 
      }
 }

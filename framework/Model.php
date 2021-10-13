@@ -67,7 +67,7 @@ abstract class Model
           
         if(!empty($result)){
                 $var= [];
-                $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ?'); 
+                $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ? AND disabled = 1'); 
                 $req->execute(array($_SESSION['id_article']));
                 $var = $req->fetchall();
                 return $var; 

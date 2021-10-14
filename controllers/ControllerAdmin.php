@@ -3,6 +3,7 @@ namespace Controllers;
 session_start();
 
 use View\View;
+use Manager\CommentManager;
 
 /**
  * Toute les fonctionnalites
@@ -26,35 +27,43 @@ use View\View;
   {
     private $adminManager;
     private $_view;
+    private $commentManager;
+    private $userManager;
 
 
     public function __construct(){
         if(isset($url) && count($url) < 1){
             throw new \Exception("Page introuvable", 1);
-        }else{
-            $this->login();
-        }      
+        }    
+        elseif(isset($_GET['validation']) && isset($_GET['validation']) =="comment"){
+            $id_comment = $_GET['id'];
+            $token = $_GET['token'];
+                $this->adminCommentValidation($id_comment,$token);
+        }
+        else{
+           //$this->login();
     }
+}
 
 
     private function login(){
-         echo('ControllerAdmin.php login');
+        echo('ControllerAdmin.php login');
+        $data = '';
         $this->_view = new View('Login', 'Login');
-        $this->_view->displayForm('Login');       
+        $this->_view->displayForm('Login', $data);       
     }
 
-    private function validationComment(){
-        //verification de role
-        //verification existance id_comment 
-        //verification si comment deja publie 1 ou 0
-        //verification id_comment (user) = validation_key
-        // statut 1 bdd pour ce comment
-        
-    }
-        private function adminCommentValidation($id_comment, $token){
-        //disabled 0>1
-        $this->comment = new CommentManager;
-        $this->comment->validationByAdmin($id_comment, $token);
+    //retour du lien de validation
+    private function adminCommentValidation($id_comment, $token){
+    echo('ControllerAdmin.php adminCommentValidation');
+
+    $this->comment = new CommentManager;
+    $validation = $this->comment->validationByAdmin($id_comment, $token);
+exit;
+    //View  Alert le commentaire utilisateur est ajouté!!!
+    $this->_view = new View('','');
+    $this->view->displayForm('Admin',$data);
+
 
 
     }

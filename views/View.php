@@ -81,6 +81,8 @@ class View
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
 
         //router twig params
+
+ 
         if($action === 'Register'){
             if (!empty($data)) {
                 $var = $data[0];
@@ -109,7 +111,23 @@ class View
               $var = '';  
             }
             echo $twig->render($page1,['var'=>$var]);
-        }        
+        }
+         elseif($action === 'Contact'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }       
+        elseif($action === 'Admin'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }                 
         else{
         throw new \Exception("Route inconnue", 1);
 

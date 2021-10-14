@@ -22,7 +22,7 @@ class CommentManager extends Model
       return $this ->deleteOneComment('comment');
    }
    public function validationByAdmin($id_comment, $token){
-      return $this ->commentValidation($id_comment);
+      return $this ->commentValidation($id_comment, $token);
    }
 
 

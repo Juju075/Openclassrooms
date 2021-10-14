@@ -264,15 +264,48 @@ abstract class Model
     } 
     /////////////////
 
+    //Serie d\'interogation
+    protected function commentValidation($id_comment, $validation_key){
 
-    protected function commentValidation($id_comment, $token){
-        //verification de role
-        //verification de id_comment & token associé.
-        //si id_comment dans comment non valider 0>1 ()
-        //
-            $this->getBdd();  
-        $req = self::$_bdd->prepare("UPDATE  FROM comment SET comment value = 1 WHERE id_comment = $id_comment");
-        $req->execute(array());       
+        $this->getBdd();  
+
+        //Est ce que le token est bien celui de l'utilisateur
+        $req = self::$_bdd->prepare("SELECT id_user  FROM user WHERE validation_key = ?");
+        $user = $req->execute(array($validation_key)); 
+
+        echo($user);
+
+        //Verification d'identite prenom nom correspondance id_user (Anti Manipulation). crsf token 
+        $req = self::$_bdd->prepare("SELECT prenom, nom  FROM user WHERE id_user = ?");
+        $req->execute(array($user));
+        $result = $req->fetch(); //bool ?
+        
+        var_dump($result);
+        $prenom = $result['prenom'];
+        var_dump($prenom);
+        
+        $nom = $result['nom'];
+        var_dump($nom);
+
+        if (md5($result['prenom'].$result['nom']) === $validation_key){
+            if(!empty($user)){
+                //Est ce que cet id existe pour cet utilisateur si non vide affiche le content contenu non vide.
+                $req = self::$_bdd->prepare("SELECT content  FROM comment WHERE id_comment = ? AND id_user = ?");
+                $content = $req->execute(array($user));  
+    
+                    if(!empty($content)){
+                        //valider l'affichage
+                        $req = self::$_bdd->prepare("UPDATE FROM comment SET disabled value = 1 WHERE id_comment = ?");
+                        $req->execute(array($id_comment)); 
+                        return true;      
+                    }else{
+                        return false; 
+                    }
+            }else{
+                return false; 
+            }  
+        }else{
+            return false;
+        }
     }
-  
 }

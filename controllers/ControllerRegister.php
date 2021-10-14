@@ -46,13 +46,14 @@ class ControllerRegister
                 echo('/ oui image telechargé');
 
                 $this->imageUpload();
+                //nom du fichier  protected 'originalName' => string '17794632_500_D.jpg' (length=18)
+                // le fichier est un objet $file 
                 echo('/ Fin upload image');
-               exit; 
+                $avatar = 'image_telecharge.jpg'; 
             }else{
                 echo('/ image non telechargé');
                 $avatar = 'default_avatar.jpg'; 
             }
-exit;
         if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
             echo(' / Verif mail et new User');
             $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -61,9 +62,9 @@ exit;
             $user= new User($obj);
             $userManager= new UserManager();
             $userManager->addUser($user);
-            header('location: accueil?register=created');
+            header('location: accueil&register=created');
         }else{
-        header('location: accueil?register=error');
+        header('location: accueil&register=error');
          }           
         }else{
         }
@@ -71,13 +72,9 @@ exit;
 
     private function imageUpload(){
         echo('| ControllerRegister imageUpload');          
-        $storage = new \Upload\Storage\FileSystem(''); 
-        echo('jusqu\'ici tout vas bien');
-        var_dump($storage);
-
+        $storage = new \Upload\Storage\FileSystem('public\images\upload'); 
         $file = new \Upload\File('foo', $storage);
-        var_dump($file);
-exit;
+
         // Optionally you can rename the file on upload
         $new_filename = uniqid();
         $file->setName($new_filename);
@@ -105,10 +102,12 @@ exit;
         'dimensions' => $file->getDimensions()
         );
 
+        $imageName = $data['name'];
         // Try to upload file
         try {
         // Success!
         $file->upload();
+
         } catch (\Exception $e) {
         // Fail!
         $errors = $file->getErrors();

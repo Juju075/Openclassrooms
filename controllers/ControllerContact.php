@@ -33,21 +33,20 @@ class ControllerContact
 
     
     private function Message(){ 
-        echo('controllerContact function Message');
-
-        if(isset($_GET['create'])){
+        echo('| controllerContact Message');
             //View
             $data ='';
             $this->_view = new View('Contact', 'Contact'); 
             $this->_view->displayForm('Contact', $data);       
-        }
+
     }
 
     private function sendMessage(){ 
         //Create an instance; passing `true` enables exceptions
-        echo('controllerContact sendMessage');
+        echo('| controllerContact sendMessage');
 
-        
+        if(isset($_SESSION['id_user'])){
+
         //recuperer data user
         $this->contactManager = new ContactManager;
         $user[] = $this->contactManager->getUser($_SESSION['id_user']);
@@ -116,6 +115,16 @@ class ControllerContact
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
+
+        }else{ // si non connecté
+            header('location: accueil&notconnected');
+        }
+
+
+
+
+
+
             
     }
 

@@ -97,7 +97,7 @@ abstract class Model
                 echo('| Model.php condition verifie à true'); // ok fonctionne
                 //affecter la session user
                 $id_user = $resultat['id_user'];
-                var_dump($id_user);
+
                 $_SESSION['id_user']=$id_user; //ajout junior
                 
 
@@ -118,7 +118,6 @@ abstract class Model
             $req = self::$_bdd->prepare("SELECT usertype FROM user WHERE id_user = ?");
             $req->execute(array($_SESSION['id_user']));
             $result = $req->fetch();
-            var_dump($result);
             
             if(isset($result) && $result == 2){
                 $_SESSION['usertype']= $result;
@@ -163,13 +162,11 @@ abstract class Model
         }
 
         $keysString=implode(' , ',$keys);
-        var_dump($keysString);
 
         $interrogationString=implode(' , ',$interrogation);
         $this->getBdd();
         $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
-        var_dump($sql);
-        
+
         try {$req = self::$_bdd->prepare($sql);
             $req->execute($values);}
             catch(\PDOException $e)
@@ -198,15 +195,15 @@ abstract class Model
                 $req = self::$_bdd->prepare("SELECT id_article FROM " .$table. " WHERE title = ?");
                 $req->execute(array($title));
                 $titleresult = $req->fetchall(); // assert list 0 or >=1 id_article
-                var_dump($titleresult);
+
 
         if (!empty($titleresult)) { //Ce titre existe. > recuperer l'id de l'article 
                 $req = self::$_bdd->prepare("SELECT content FROM " .$table. " WHERE id_article = ?");
-                var_dump($titleresult[0]);
+
 
                 $req->execute(array($titleresult[0]));
                 $contentresult = $req->fetchall(); // error  Array to string conversion
-                var_dump($contentresult);
+
                     if ($contentresult === $content) {
                         echo('contenu identique');
                         return true;
@@ -280,10 +277,6 @@ abstract class Model
     //verifier si le token est l'auteur du comment specifie.
     //Serie d\'interogation
     protected function commentValidation($id_comment, $validation_key){
-
-        var_dump($id_comment);
-        var_dump($validation_key);
-
         $this->getBdd();  
         //Est ce que le token est bien celui de l'utilisateur
         //

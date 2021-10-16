@@ -26,12 +26,7 @@ class View
         $getalert = $data['routename']; // ok
         //$articles = $data['article'][0]; // ok
         $articles = $data['articles']; // ok
-
-
-        var_dump($articles);
-        echo('fin var_dump');
  
-
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         echo $twig->render($a,['getalert'=>$getalert,'user'=>$user, 'articles'=>$articles]); 
@@ -53,13 +48,7 @@ class View
         }else{
             $comments ='';
         }
-        
         $user = 'ok retour user'; 
-        var_dump($article);
-        var_dump($comments);
-        var_dump($user);
-        var_dump($count);
-        echo('Fin de var_dump');
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
@@ -89,7 +78,6 @@ class View
         echo('| View.php displayForm');
 
         $page1 = 'template'.$action.'.html.twig';
-        var_dump($page1);
         
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
@@ -113,7 +101,6 @@ class View
         }
         elseif($action === 'Profile'){
             $user = $data[0];
-            var_dump($user);
             echo $twig->render($page1,['user'=>$user]);
         }
         elseif($action === 'Post'){

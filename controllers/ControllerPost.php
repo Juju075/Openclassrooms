@@ -135,12 +135,15 @@ class ControllerPost
 
                 //Return Comments        
                 $this->commentManager = new CommentManager;
-                $comments = $this->commentManager->getComments();  // array string
+                $comments = $this->commentManager->getComments();
+                $nbrcomments = $this->commentManager->displaynumber($comments);
+
+                var_dump($nbrcomments);
 
                 //echo view
                 $this->_view = new View('singlePost','Post');
                 //$this->_view->generatePost(array('article'=>$article)); //echo $view;
-                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments),'PostsinglePost'); //echo $view;
+                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments),'PostsinglePost'); //echo $view;
             }
             elseif ($articleVerif == false){
                 header('location: accueil');

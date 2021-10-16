@@ -46,19 +46,26 @@ class View
         $a = 'templateSingle.html.twig';
 
         //route
-        $article = $data['article']; 
-        $comments = $data['comments']; 
+        $article = $data['article'][0];    
+        $count =  $data['nbrcomments'];
+        if($count != 0){
+            $comments = $data['comments'][0];
+        }else{
+            $comments ='';
+        }
         
         $user = 'ok retour user'; 
-        //var_dump($article);
-        //var_dump($comments);
-        //var_dump($user);
+        var_dump($article);
+        var_dump($comments);
+        var_dump($user);
+        var_dump($count);
+        echo('Fin de var_dump');
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         //echo $twig->render($a,$data); 
         // article ? id_user uniquement | comment foreach tts les ligns ok | user quel id_user
-        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user]); 
+        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count]); 
     }
 
 

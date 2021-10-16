@@ -24,6 +24,10 @@ use View\View;
      //Affiche un contenu simple pas de repository
      private function myProfile(){
       echo('ControllerProfile.php myProfile');
+      if(isset($_SESSION['id_user'])){
+      }else{
+          header('Location: accueil&comment=notconnected' );
+      }
 
       //get User connected ok
       $this->usermanager = new UserManager;

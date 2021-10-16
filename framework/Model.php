@@ -74,6 +74,16 @@ abstract class Model
         }else{}
         
     }
+    protected function getCommentsCount($comments){
+        if(isset($comments) && $comments != null){
+            count($comments);
+        }else{
+            return 0;
+        } 
+
+
+
+    }
 
     protected function authenticationRequest($obj,$usertype){
         echo('| Model.php authenticationRequest');
@@ -219,13 +229,13 @@ abstract class Model
         if ($obj === 'Article') {
             echo('| requete prepare Article'); // ok fonctionne
             //$req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
-            $req = self::$_bdd->prepare("SELECT id_article, title, chapo, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
+            $req = self::$_bdd->prepare("SELECT id_article, title, chapo, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %T') AS date FROM " .$table. " WHERE id_article = ?");   
         }elseif ($obj === 'User'){
             echo('| requete prepare User'); // Info display page profil
             $req = self::$_bdd->prepare("SELECT prenom, nom, email FROM " .$table. " WHERE id_user= ?");   
         }elseif ($obj === 'Comment') {
             echo('| requete prepare Comment'); //
-            $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_comment = ?");
+            $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %T') AS date FROM " .$table. " WHERE id_comment = ?");
         }else{
             echo('| erreur');
         }     

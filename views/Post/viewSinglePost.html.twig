@@ -36,7 +36,7 @@
               >
             </h3>
 
-            <p class="para">{{ article.content}}</p> {# de quel id? #}
+            <p class="para">{{ article.content }}</p> {# de quel id? #}
 
             <ul class="tags">
               <p>Admin uniquement</p>
@@ -111,7 +111,6 @@
           <!-- Recuperer GET id de l'article -->
           <!-- =================================================================== -->
           <?  echo($_GET['id_article']); ?>
-
           <form method="post" action="comment&status=new">
             <div class="row">
               <div class="col-sm-12">
@@ -143,7 +142,7 @@
         <!-- =================================================================== -->
         <!-- Affichage commentaires foreach en twig-->
         <!-- =================================================================== -->
-        <h4><b>COMMENTAIRES</b></h4>
+        <h4><b>COMMENTAIRES ({{ count }})</b></h4>
         <!-- Ajouter une condition si comments non vide afficher sinon ne rien faire -->
 
         {% for comment in comments %}

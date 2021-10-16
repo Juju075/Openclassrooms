@@ -9,7 +9,9 @@ class CommentManager extends Model
    public function getComments(){
       return $this->getAllComments();
    }
-
+   public function displaynumber($comments){
+      return $this->getCommentsCount($comments);
+   }
    public function getOneComment($id){
       return $this->GetOne('comment','Comment', $id);
    }

@@ -64,7 +64,9 @@ class ControllerComment
                         header('location: accueil?login=connected');
                     }
                 }
-            else{}
+            else{
+                header('Location: login&user' );
+            }
     }
 
 }

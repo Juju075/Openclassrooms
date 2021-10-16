@@ -42,7 +42,7 @@ class ControllerRegister
         //if (isset($_POST) && empty($_SESSION['user'])){
         if (isset($_POST)){
 
-            if($_FILES !=''){  //Traitement de l'image en premier (pour recuperer nom de l'image).
+            if(!empty($_FILES)){  //Traitement de l'image en premier (pour recuperer nom de l'image).
                 echo('/ oui image telechargé');
 
                 $this->imageUpload();

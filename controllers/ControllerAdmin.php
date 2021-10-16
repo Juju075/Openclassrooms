@@ -4,24 +4,7 @@ session_start();
 
 use View\View;
 use Manager\CommentManager;
-
-/**
- * Toute les fonctionnalites
- * postManagement()
- * addPost()
- * deletePost()
- * postEdit()
- * updatePost()
- * usersManagement()
- * enableComment()
- * deleteComment()
- */
-
- /**
-  * routes
-  * login
-  *
-  */
+use Manager\ArticleManager;
 
   class ControllerAdmin
   {
@@ -35,11 +18,19 @@ use Manager\CommentManager;
         if(isset($url) && count($url) < 1){
             throw new \Exception("Page introuvable", 1);
         }    
-        elseif(isset($_GET['validation']) && isset($_GET['validation']) =="comment"){
+        elseif(isset($_GET['validation']) && isset($_GET['validation']) =="comment"){ //admin&validation=comment&id=75&token=63aee5f60929e7e2aac8b25a3e826f0e
             $id_comment = $_GET['id'];
             $token = $_GET['token'];
                 $this->adminCommentValidation($id_comment,$token);
         }
+          elseif (isset($_GET['login'])){ //admin&login
+            $this->login();       
+        }         
+         elseif (isset($_GET['update'])){ //admin&update=78
+             
+            $id = $_GET['update'];
+            $this->formUpdate($id);       
+        }       
         else{
            //$this->login();
     }
@@ -49,23 +40,49 @@ use Manager\CommentManager;
     private function login(){
         echo('ControllerAdmin.php login');
         $data = '';
-        $this->_view = new View('Login', 'Login');
+        $this->_view = new View('Login', 'Admin');
         $this->_view->displayForm('Login', $data);       
     }
 
     //retour du lien de validation
     private function adminCommentValidation($id_comment, $token){
-    echo('ControllerAdmin.php adminCommentValidation');
+    echo('|ControllerAdmin.php adminCommentValidation');
 
     $this->comment = new CommentManager;
     $validation = $this->comment->validationByAdmin($id_comment, $token);
-exit;
-    //View  Alert le commentaire utilisateur est ajouté!!!
-    $this->_view = new View('','');
-    $this->view->displayForm('Admin',$data);
-
-
-
+    if($validation == true){
+    }else{
+        header('location: accueil alert');       
     }
+    header('location: accueil alert');
+    }
+
+        public function formUpdate($id){
+        echo('ControllerPost.php  formUpdate');
+
+        $this->_articleManager = new ArticleManager;
+        $prepopuler = $this->_articleManager->getArticle($id);
+        var_dump($prepopuler[0]);
+        var_dump($prepopuler[0]['title']);
+
+        exit;
+        //data pour prepopopuler champs
+        // $title = $prepopuler[][];
+        // $chapo = $prepopuler[][];
+        // $content = $prepopuler[][];
+            // $data[] = array('titre'=>$title,'chapo'=>$chapo,'content'=>$content);
+
+            //View
+            $this->view = new View('update', 'Admin');
+            $this->view->displayForm('Update',$data);
+        }
+    public function storeUpdate($id, $content){
+        echo('ControllerPost.php  storeUpdate');
+        $this->_articleManager = new ArticleManager;
+        $this->_articleManager->updateArticle($id, $content);
+
+        header('location: acceuil alert');
+    }
+
 
   }

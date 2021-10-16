@@ -51,7 +51,7 @@ class ControllerPost
         if(isset($_GET['create'])){
             $data ='';
             $this->_view = new View('CreatePost', 'Post');
-            $this->_view->displayForm('Post',$data);
+            $this->_view->displayForm('Post',$data); //data ok vide (dispo si besoin).
         }
     }   
 
@@ -79,42 +79,44 @@ class ControllerPost
         echo('| controllerPost.php store');
 
         //Contrainte role administrateur usertype
-        //1 rch usertype si usertype === 1 sinon alert
-   
+
+        
         var_dump($_POST);
+        //if(isset($_)
 
         $this->_articleManager = new ArticleManager;
-        $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
-
-        if ($articleVerifNoDuplicate === false) {
-            if (isset($_POST)){
-                $_POST['id_user'] = $_SESSION['id_user'];
-                var_dump($_POST); //verification insertion
-
-                $article= new Article($_POST);   
-                $this->_articleManager = new ArticleManager;
-                $article = $this->_articleManager->createArticle($article); //null
-
-                var_dump($article);
-
-                $articles = $this->_articleManager->getArticles();
-                $this->_view = new View('Accueil','Post');
-                $this->_view->generate(array('articles' =>$articles));
-
-            }else {
-                header('location; accueil');
+        //verification de role ok
+        $adminOnly = $this->_articleManager->roleverif();
+        if($adminOnly === true){
+             //verification si existe deja ok
+             $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
+     
+             if ($articleVerifNoDuplicate === false) {
+                 if (isset($_POST)){
+                     $_POST['id_user'] = $_SESSION['id_user'];
+                     var_dump($_POST); //verification insertion
+     
+                     $article= new Article($_POST);   
+                     $this->_articleManager = new ArticleManager;
+                     $article = $this->_articleManager->createArticle($article); //null
+     
+                     var_dump($article);
+     
+                     $articles = $this->_articleManager->getArticles();
+                     $this->_view = new View('Accueil','Post');
+                     $this->_view->generate(array('articles' =>$articles));
+     
+                 }else {
+                     header('location; accueil');
+                 }
+             }
+            else{
+                echo('Alert pas autosi a effectuer cette action.');
             }
         }
-    }
 
-    public function storeUpdate($id){
-        echo('ControllerPost.php  storeUpdate()');
 
-        $this->_articleManager = new ArticleManager;
-        $this->_articleManager->updateArticle($id);
 
-        //une fois fini script
-        //header('Location: App_Blog_MVC/accueil');
     }
 
     //Use TemplateSingle.html.twig

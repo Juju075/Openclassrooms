@@ -1,6 +1,4 @@
-<div class="slider"></div>
-views/Post/viewAcceuil.html.twig
-
+viewAccueil.html.twig
 <section class="blog-area section">
   <!-- get alerts ici -->
   {% if getalert == 'accueil&register=created' %}
@@ -80,12 +78,9 @@ views/Post/viewAcceuil.html.twig
   {% elseif getalert == 'accueil&article=deleted' %}
   <!-- route: accueil&message=send -->
   {% endif %}
-
   <!-- liste des aricles -->
   <div class="container">
     <div class="row">
-      <p>ici boucle for twig articles</p>
-      {{ articles.id_article }}
       {% for article in articles %}
       <div class="col-lg-4 col-md-6">
         <div class="card h-100">
@@ -96,28 +91,24 @@ views/Post/viewAcceuil.html.twig
                 alt="Blog Image"
               />
             </div>
-
-            <!-- retrouver l'avatar de l'id user grace a la fk de l'article 
-							l'utilisateur doit etre connecter pour attribuer son id
-							-->
             <div class="avatar">
               <img
                 src="public/images/icons8-team-355979.jpg"
                 alt="Profile Image"
               />
             </div>
-
             <div class="blog-info">
               <h4 class="title">
-                <a href="post&id_article=<?= $article->getId_article() ?>"
+                <a
+                  href="post&id_article=<?= $article->getId_article() ?>"
+                  {{
+                  article.id_article
+                  }}
                   ><b>{{ article.title }}</b></a
                 >
               </h4>
               <h6>{{ article.chapo }}</h6>
             </div>
-
-            <!--                                       -->
-
             <!-- blog-info -->
           </div>
           <!-- single-post -->

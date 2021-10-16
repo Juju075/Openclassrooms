@@ -100,6 +100,28 @@ abstract class Model
             }     
         }
 
+
+    protected function roleVerification(){
+        echo('| Model roleVerification');
+        $this->getBdd();
+        if(isset($_SESSION['id_user'])){
+            $req = self::$_bdd->prepare("SELECT usertype FROM user WHERE id_user = ?");
+            $req->execute(array($_SESSION['id_user']));
+            $result = $req->fetch();
+            var_dump($result);
+            
+            if(isset($result) && $result == 2){
+                $_SESSION['usertype']= $result;
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        echo('le resultat est false 1');
+        return false;
+    }
+
     protected function postIfExist(){
         echo('| Model.php postIfExist');
 
@@ -112,50 +134,50 @@ abstract class Model
 
 
     ///////////////////////////////////
-        protected function createOne($table, $obj){
-        echo('| model.php createOne');
-            $array=(array)$obj;
-            $classFullName=get_class($obj);
+    protected function createOne($table, $obj){
+    echo('| model.php createOne');
+        $array=(array)$obj;
+        $classFullName=get_class($obj);
 
-            $keys=[];
-            $values=[];
-            $data=[];
-            $interrogation=[];
+        $keys=[];
+        $values=[];
+        $data=[];
+        $interrogation=[];
 
-            foreach ($array as $key=>$value){
-                
-                array_push($keys, strtolower(substr(str_replace($classFullName,"",$key),2)));
-                array_push($values, $value);
-                array_push($interrogation,'?');
-                $data[strtolower($key)]=$value;
+        foreach ($array as $key=>$value){
+            
+            array_push($keys, strtolower(substr(str_replace($classFullName,"",$key),2)));
+            array_push($values, $value);
+            array_push($interrogation,'?');
+            $data[strtolower($key)]=$value;
+        }
+
+        $keysString=implode(' , ',$keys);
+        var_dump($keysString);
+
+        $interrogationString=implode(' , ',$interrogation);
+        $this->getBdd();
+        $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
+        var_dump($sql);
+        
+        try {$req = self::$_bdd->prepare($sql);
+            $req->execute($values);}
+            catch(\PDOException $e)
+            {
+                $e->errorInfo;
             }
-    
-            $keysString=implode(' , ',$keys);
-            var_dump($keysString);
+        
+        $req->closeCursor();
+    }
 
-            $interrogationString=implode(' , ',$interrogation);
-            $this->getBdd();
-            $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
-            var_dump($sql);
-            
-            try {$req = self::$_bdd->prepare($sql);
-                $req->execute($values);}
-                catch(\PDOException $e)
-                {
-                    $e->errorInfo;
-                }
-            
-            $req->closeCursor();
-        }
+    protected function createOneComment($table, $comment){
+        echo(' >> Model.php createOneComment');
+        $this->getBdd();
 
-        protected function createOneComment($table, $comment){
-            echo(' >> Model.php createOneComment');
-            $this->getBdd();
-
-            $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article, id_user) VALUES (?, ?, ?)");
-            $req->execute(array($comment, $_SESSION['id_article'], $_SESSION['id_user']));
-            $req->closeCursor();
-        }
+        $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article, id_user) VALUES (?, ?, ?)");
+        $req->execute(array($comment, $_SESSION['id_article'], $_SESSION['id_user']));
+        $req->closeCursor();
+    }
     ///////////////////////////////////
 
     // creation d'un article ou reload article new url.
@@ -189,28 +211,6 @@ abstract class Model
 
     }
 
-
-        // protected function updateOne($table, $id){
-        //     //$_POST['title'], $_POST['chapo'], $_POST['content']
-        //     $this->getBdd();  
-        //     $req = self::$_bdd->prepare("UPDATE $table SET title = '$_POST['title']', chapo = '$_POST['chapo']', content = '$_POST['content']' WHERE id_article = $id");
-
-
-        //     //$req->execute(array($_POST['title'], $_POST['chapo'], $_POST['content']));
-
-        // } 
-
-        // protected function updateOneComment($table, $id){
-        //     try{
-        //         $this->getBdd(); 
-        //         $req = self::$_bdd->prepare("UPDATE ".$table." SET content = $_POST['content']');
-        //         $req->execute(array();
-        //     }
-        //     catch(\PDOException $e){
-        //         echo($e->getMessage);
-        //     }
-        // }
-
     protected function getOne($table, $obj, $id){ 
         echo('| Model.php getOne');
         $this->getBdd();
@@ -218,7 +218,8 @@ abstract class Model
 
         if ($obj === 'Article') {
             echo('| requete prepare Article'); // ok fonctionne
-            $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
+            //$req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
+            $req = self::$_bdd->prepare("SELECT id_article, title, chapo, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
         }elseif ($obj === 'User'){
             echo('| requete prepare User'); // Info display page profil
             $req = self::$_bdd->prepare("SELECT prenom, nom, email FROM " .$table. " WHERE id_user= ?");   
@@ -254,6 +255,7 @@ abstract class Model
 
     } 
 
+
     protected function deleteOneComment($table){
         //verification du role
         
@@ -264,48 +266,61 @@ abstract class Model
     } 
     /////////////////
 
+//
+    //verifier si le token est l'auteur du comment specifie.
     //Serie d\'interogation
     protected function commentValidation($id_comment, $validation_key){
 
+        var_dump($id_comment);
+        var_dump($validation_key);
+
         $this->getBdd();  
-
         //Est ce que le token est bien celui de l'utilisateur
+        //
         $req = self::$_bdd->prepare("SELECT id_user  FROM user WHERE validation_key = ?");
-        $user = $req->execute(array($validation_key)); 
-
-        echo($user);
-
-        //Verification d'identite prenom nom correspondance id_user (Anti Manipulation). crsf token 
-        $req = self::$_bdd->prepare("SELECT prenom, nom  FROM user WHERE id_user = ?");
-        $req->execute(array($user));
-        $result = $req->fetch(); //bool ?
+        $req->execute(array($validation_key)); 
+        $user = $req->fetch();
         
-        var_dump($result);
-        $prenom = $result['prenom'];
-        var_dump($prenom);
         
-        $nom = $result['nom'];
-        var_dump($nom);
+        //Verifie si c bien lauteur du comment
+        if(isset($user) && $user != null){
+            echo('user not empty');
+            $req = self::$_bdd->prepare("SELECT id_user  FROM comment WHERE id_comment = ?");
+            $req->execute(array($id_comment)); 
+            $result = $req->fetchall(); 
 
-        if (md5($result['prenom'].$result['nom']) === $validation_key){
-            if(!empty($user)){
-                //Est ce que cet id existe pour cet utilisateur si non vide affiche le content contenu non vide.
-                $req = self::$_bdd->prepare("SELECT content  FROM comment WHERE id_comment = ? AND id_user = ?");
-                $content = $req->execute(array($user));  
-    
-                    if(!empty($content)){
-                        //valider l'affichage
-                        $req = self::$_bdd->prepare("UPDATE FROM comment SET disabled value = 1 WHERE id_comment = ?");
-                        $req->execute(array($id_comment)); 
-                        return true;      
-                    }else{
-                        return false; 
-                    }
+            var_dump($result[0]['id_user']);
+            var_dump($user[0]);
+
+            if ($result[0]['id_user'] == $user[0]){ // pb ici
+                echo('user correspondance ok');
+                //valider l'affichage
+                $req = self::$_bdd->prepare("UPDATE comment SET disabled = 1 WHERE id_comment = ?");
+                $req->execute(array($id_comment)); 
+                echo('activer le commentaire ok');
+                return true;  
             }else{
-                return false; 
-            }  
+                echo('return false 2');
+                return false;
+            }
         }else{
+            echo('return false 1');
             return false;
         }
+    }
+
+    protected function updateOne($table, $id, $content){
+        $this->getBdd();
+
+
+//Selon action
+        $req = self::$_bdd->prepare("UPDATE " .$table. " SET content = ?  WHERE id_article = ?");
+        $req->execute(array($id, $content));
+
+//
+
+
+        $req->fetch();
+
     }
 }

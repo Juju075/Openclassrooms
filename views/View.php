@@ -20,10 +20,17 @@ class View
         public function generate($data){  
         echo('| View.php generate');
         $a = 'template.html.twig';
-        var_dump($data);
+
+        //route
         $user = 'test user';
-        $articles = $data['article'][0]; // ok
         $getalert = $data['routename']; // ok
+        //$articles = $data['article'][0]; // ok
+        $articles = $data['articles']; // ok
+
+
+        var_dump($articles);
+        echo('fin var_dump');
+ 
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
@@ -38,8 +45,8 @@ class View
         echo('| View.php generatePost');
         $a = 'templateSingle.html.twig';
 
+        //route
         $article = $data['article']; 
-       
         $comments = $data['comments']; 
         
         $user = 'ok retour user'; 
@@ -80,9 +87,7 @@ class View
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
 
-        //router twig params
-
- 
+        //route twig params
         if($action === 'Register'){
             if (!empty($data)) {
                 $var = $data[0];
@@ -127,7 +132,15 @@ class View
               $var = '';  
             }
             echo $twig->render($page1,['var'=>$var]);
-        }                 
+        }
+        elseif($action === 'Update'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }                           
         else{
         throw new \Exception("Route inconnue", 1);
 

@@ -16,10 +16,7 @@ class ControllerLogin
         }
         elseif (isset($_GET['user'])){
             $this->formLogin();        
-        }
-        elseif (isset($_GET['login']) && isset($_GET['login']) =="notconnected"){  
-            //$this->alert();       
-        }         
+        }      
         elseif (isset($_GET['logout'])){
             $this->logout();       
         }        

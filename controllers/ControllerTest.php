@@ -17,6 +17,8 @@ Class ControllerTest extends Model
 {
 
     private $_testManager;
+    private $_articleManager;
+ 
 
         public function __construct(){
         //Ajouter contrainte Admin.
@@ -34,7 +36,13 @@ Class ControllerTest extends Model
         }
          elseif (isset($_GET['image'])){
             $this->codeguyUpload(); 
-        }       
+        } 
+         elseif (isset($_GET['usertype'])){
+            $this->usertype(); 
+        }  
+         elseif (isset($_GET['listarticle'])){
+            $this->loopFor(); 
+        }                        
         else{
             header('location: /accueuil');
         }
@@ -102,6 +110,27 @@ Class ControllerTest extends Model
         var_dump($_FILES);
         var_dump($_POST['foo']);
 
+    }
+
+    public function usertype(){
+        echo('ControllerTest.php usertype');
+        //quel sont les moment ou on doit verifier le role
+        // creation article
+        // validation commentaire
+        //affichage boutons su
+        
+        return $this->roleVerification();
+    }
+    public function loopFor(){
+        echo('ControllerTest.php loopFor');
+        $this->_articleManager = new ArticleManager(); 
+        $articles = $this->_articleManager->getArticles();
+        var_dump($articles);
+
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+        $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+        echo $twig->render('test.html.twig',['articles'=>$articles]); 
     }
 
 }

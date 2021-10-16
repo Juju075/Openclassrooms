@@ -21,20 +21,21 @@ class ArticleManager extends Model
    public function deleteArticle($id){
       return $this->deleteOne('article', $id);
    }
-   
-   
-   /**
-    * Cette fonction modifie le post actuel.
-    */
-   public function updateArticle($id){
+   public function updateArticle($id, $content){
       echo('| ArticleManager updateArticle');
-      //return $this->updateOne('article', $id);
+      return $this->updateOne('article', $id, $content);
    }
     public function articleAlreadyExist($title, $content){
       echo('| ArticleManager articleAlreadyExist');
       var_dump($title. $content);
       return $this->noDuplicatePost('article', $title, $content);
    }  
+
+
+   public function roleverif(){
+     echo('| ArticleManager roleverif'); 
+     return $this->roleVerification();
+   } 
    public function articleVerif(){ //effacer cette fonction non utilise.
       echo('| ArticleManager articleVerif');
       return $this->postIfExist();

@@ -66,12 +66,11 @@ use Manager\ArticleManager;
 
         //Repository    
         $this->_articleManager = new ArticleManager(); 
-        $article = $this->_articleManager->getArticles();
+        $articles = $this->_articleManager->getArticles();
         
         //View
-        var_dump($routename);
         $this->_view = new View('Accueil', 'Post');
-        $this->_view->generate(array('routename'=>$routename, 'article'=>$article));
+        $this->_view->generate(array('routename'=>$routename, 'articles'=>$articles));
     }
 
 }

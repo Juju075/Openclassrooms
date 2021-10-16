@@ -54,7 +54,7 @@ class ControllerContact
         var_dump($user[0]);
 
         //ajout POST 
-        $_POST['prenom']= 'ajoute cidi';
+        $_POST['prenom']= $user[0]['prenom'];
         $_POST['nom']= $user[0]['nom'];
         $_POST['email']= $user[0]['email'];
 
@@ -117,7 +117,7 @@ class ControllerContact
             }
 
         }else{ // si non connecté
-            header('location: accueil&notconnected');
+            header('location: accueil&comment=notconnected');
         }
 
 

@@ -1,0 +1,59 @@
+update.html.twig
+<div class="container-contact100">
+  <div class="wrap-contact100">
+    <form
+      method="post"
+      action="post&status=new"
+      class="contact100-form validate-form"
+    >
+      <span class="contact100-form-title">
+        <b>form/post.html.twig</b>
+      </span>
+
+      <div class="" type="text" data-validate="Title is required">
+        <span class="">Titre</span>
+        <input
+          class="form-control"
+          type="text"
+          name="title"
+          placeholder="Entrez un titre"
+          required="required"
+        />
+        <span class=""></span>
+      </div>
+      <div class="" data-validate="Chapo is required">
+        <span class="" type="text">Chapo</span>
+        <input
+          class="form-control"
+          type="text"
+          name="chapo"
+          placeholder="Entrez un chapo"
+          required="required"
+        />
+        <span class=""></span>
+      </div>
+
+      <div class="form-group" data-validate="Contenu is required">
+        <span class="">Contenu de l'Article</span>
+        <textarea
+          class="form-control"
+          name="content"
+          placeholder="Votre texte ici..."
+          required
+        ></textarea>
+        <span class=""></span>
+      </div>
+
+      <div class="">
+        <div class="">
+          <div class=""></div>
+          <div class="button">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Soumettre
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

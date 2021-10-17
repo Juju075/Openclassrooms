@@ -237,7 +237,6 @@ abstract class Model
             echo('| erreur');
         }     
         $req->execute(array($id));
-        echo('| requete success');
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             $obj2="\\Entity\\".$obj;
@@ -253,23 +252,31 @@ abstract class Model
 
     }
 
-    //Universalisé cette function
+    //Cannot delete or update a parent row: a foreign key constraint fails
     /////////////
     protected function deleteOne($table, $id){
         $this->getBdd();  
-        $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_article = $id");
-        $req->execute(array());
+        $req = self::$_bdd->prepare('SELECT * FROM comment WHERE id_article = ?');
+        $req->execute(array($id));
+        $comments = $req->fetchall();
 
+        if (count($comments) != 0) {
+            $req = self::$_bdd->prepare('DELETE  FROM comment WHERE id_article = ?');
+            $req->execute(array($id)); 
+        }else{
+        }   
+        $req = self::$_bdd->prepare("DELETE FROM " .$table. " WHERE id_article = ?");
+        $req->execute(array($id));
     } 
-
+    
 
     protected function deleteOneComment($table){
-        //verification du role
-        
+        //verification du role       
         $id_comment = $_SESSION['id_comment'];
         $this->getBdd();  
-        $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_comment = $id_comment");
+        $req = self::$_bdd->prepare("DELETE FROM " .$table. " WHERE id_comment = $id_comment");
         $req->execute(array());
+        $req->closeCursor();
     } 
     /////////////////
 
@@ -277,6 +284,7 @@ abstract class Model
     //verifier si le token est l'auteur du comment specifie.
     //Serie d\'interogation
     protected function commentValidation($id_comment, $validation_key){
+
         $this->getBdd();  
         //Est ce que le token est bien celui de l'utilisateur
         //
@@ -290,7 +298,8 @@ abstract class Model
             echo('user not empty');
             $req = self::$_bdd->prepare("SELECT id_user  FROM comment WHERE id_comment = ?");
             $req->execute(array($id_comment)); 
-            $result = $req->fetchall(); 
+            $result = $req->fetchall();
+            $req->closeCursor(); 
 
             var_dump($result[0]['id_user']);
             var_dump($user[0]);
@@ -299,7 +308,8 @@ abstract class Model
                 echo('user correspondance ok');
                 //valider l'affichage
                 $req = self::$_bdd->prepare("UPDATE comment SET disabled = 1 WHERE id_comment = ?");
-                $req->execute(array($id_comment)); 
+                $req->execute(array($id_comment));
+                $req->closeCursor(); 
                 echo('activer le commentaire ok');
                 return true;  
             }else{
@@ -319,6 +329,7 @@ abstract class Model
 //Selon action
         $req = self::$_bdd->prepare("UPDATE " .$table. " SET content = ?  WHERE id_article = ?");
         $req->execute(array($id, $content));
+        $req->closeCursor();
 
 //
 

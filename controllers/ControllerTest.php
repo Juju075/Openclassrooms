@@ -42,7 +42,10 @@ Class ControllerTest extends Model
         }  
          elseif (isset($_GET['listarticle'])){
             $this->loopFor(); 
-        }                        
+        }
+          elseif (isset($_GET['deleteone'])){
+            $this->deleteTest(); 
+        }                                 
         else{
             header('location: /accueuil');
         }
@@ -132,5 +135,10 @@ Class ControllerTest extends Model
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         echo $twig->render('test.html.twig',['articles'=>$articles]); 
     }
+   public function deleteTest(){
+        echo('ControllerTest.php deleteTest');
+
+        $this->deleteOne('article', 118); 
+   } 
 
 }

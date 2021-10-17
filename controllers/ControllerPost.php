@@ -30,8 +30,11 @@ class ControllerPost
             //id_article
             $this->delete($_GET['delete']); 
         }
-        elseif (isset($_GET['update'])){ //App_Blog_MVC/post&update_id=29
-            $this->update($_GET['update']); 
+        elseif (isset($_GET['update'])){ //Show update form behind article.
+            $routename = 'postUpdateRequest';
+            $this->article($routename); 
+
+
         }
         elseif (isset($_GET['update_id'])){ //Traitement update
             $this->storeUpdate($_GET['update_id']); 
@@ -42,7 +45,7 @@ class ControllerPost
             //$this->adminCommentValidation($_GET['id_comment'],$_GET['token']); 
         }       
         else{
-            $this->article();
+            $this->article('');
         }
     }
 
@@ -61,15 +64,13 @@ class ControllerPost
         header('Location: accueil&article=deleted');
     }
 
-    private function update($id){
+    private function update($id, $routename){
         echo('ControllerPost function update()');
 
-        //View ok template + formulaire update ok
-        if(isset($_GET['update'])){
-            $data ='';
-            $this->_view = new View('UpdatePost', 'Post'); //construct
-            $this->_view->displayForm('Update', $data);
-        }        
+        //View
+        $this->_view = new View('Accueil', 'Post');
+        $this->_view->generate(array('routename'=>$routename, 'articles'=>$articles));
+      
     }
 
     //Traitement add article.
@@ -120,7 +121,7 @@ class ControllerPost
     }
 
     //Use TemplateSingle.html.twig
-    private function article(){
+    private function article($routename){
         echo('ControllerPost.php  article');
 
         if(isset($_GET['id_article'])){
@@ -138,12 +139,9 @@ class ControllerPost
                 $comments = $this->commentManager->getComments();
                 $nbrcomments = $this->commentManager->displaynumber($comments);
 
-                var_dump($nbrcomments);
-
-                //echo view
+                //View
                 $this->_view = new View('singlePost','Post');
-                //$this->_view->generatePost(array('article'=>$article)); //echo $view;
-                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments),'PostsinglePost'); //echo $view;
+                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename),'PostsinglePost');
             }
             elseif ($articleVerif == false){
                 header('location: accueil');

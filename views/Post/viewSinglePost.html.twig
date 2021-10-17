@@ -38,19 +38,34 @@
 
             <p class="para">{{ article.content }}</p> {# de quel id? #}
 
-            <ul class="tags">
-              <p>Admin uniquement</p>
 
-              <!-- Recupere Get-->
+
+            <!-- Session role usertype -->
+            <ul class="tags">
               <li>
-                <a href="post&delete=<?= $_GET['id_article']?>">Supprimer</a>
+                <a href="post&delete={{ article.id_article }}">Supprimer</a>
               </li>
-              <!-- post&delete-->
               <li>
-                <a href="post&update=<?= $_GET['id_article']?>">Modifier</a>
+                <!-- pas une route met un parametre dsn -->
+                <a href="post&id_article={{ article.id_article }}&update">Modifier</a>
+
               </li>
-              <!-- post&update -->
             </ul>
+
+<!-- afficher si update -->
+{# {% if update == 'post&id_article='{{ article.id_article }}'&update' %}
+<form action="">
+  <label for="prenom">Nouveau titre</label>
+  <input type="text" name="title" class="form-control" >
+  <label for="prenom">Nouveau texte</label>
+  <input type="textaera" name="content" class="form-control" id="">
+<br>
+
+  <input type="button" value="soumettre" class="btn btn-primary">
+</form>
+{% endif %} #}
+
+
           </div>
           <!-- blog-post-inner -->
 

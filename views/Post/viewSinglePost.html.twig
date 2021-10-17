@@ -51,21 +51,18 @@
 
               </li>
             </ul>
+            <!-- afficher si update -->
+            {% if routename == 'postUpdateRequest' %}
+            <form action="">
+              <label for="prenom">Nouveau titre</label>
+              <input type="text" name="title" class="form-control" >
+              <label for="prenom">Nouveau texte</label>
+              <input type="textaera" name="content" class="form-control" id="">
+            <br>
 
-<!-- afficher si update -->
-{% if routename == 'postUpdateRequest' %}
-<form action="">
-  <label for="prenom">Nouveau titre</label>
-  <input type="text" name="title" class="form-control" >
-  <label for="prenom">Nouveau texte</label>
-  <input type="textaera" name="content" class="form-control" id="">
-<br>
-
-  <input type="button" value="soumettre" class="btn btn-primary">
-</form>
-{% endif %}
-
-
+              <input type="button" value="soumettre" class="btn btn-primary">
+            </form>
+            {% endif %}
           </div>
           <!-- blog-post-inner -->
 

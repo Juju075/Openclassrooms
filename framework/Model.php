@@ -322,19 +322,24 @@ abstract class Model
         }
     }
 
-    protected function updateOne($table, $id, $content){
+    protected function updateOne($table, $data){ // article ou comment 
         $this->getBdd();
-
-
-//Selon action
-        $req = self::$_bdd->prepare("UPDATE " .$table. " SET content = ?  WHERE id_article = ?");
-        $req->execute(array($id, $content));
-        $req->closeCursor();
-
-//
-
-
-        $req->fetch();
-
+        $title = $data['title'];
+        $content = $data['content'];
+        if ($table === 'article') { 
+            if(isset($title) && $title != ''){
+                $req = self::$_bdd->prepare("UPDATE " .$table. " SET title = ?  WHERE id_article = ?");
+                $req->execute(array($title, $_SESSION['id_article']));
+                $req->closeCursor();
+            }else{}
+            if(isset($content) && $content != ''){
+                $req = self::$_bdd->prepare("UPDATE " .$table. " SET content = ?  WHERE id_article = ?");
+                $req->execute(array($content, $_SESSION['id_article']));
+                $req->closeCursor();
+            }else{}
+        }
+        if ($table === 'comment') {
+            # code...
+        }
     }
 }

@@ -21,9 +21,9 @@ class ArticleManager extends Model
    public function deleteArticle($id){
      $this->deleteOne('article', $id);
    }
-   public function updateArticle($id, $content){
+   public function updateArticle($content){
       echo('| ArticleManager updateArticle');
-      return $this->updateOne('article', $id, $content);
+      $this->updateOne('article', $content);
    }
     public function articleAlreadyExist($title, $content){
       echo('| ArticleManager articleAlreadyExist');

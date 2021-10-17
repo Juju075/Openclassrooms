@@ -2,7 +2,8 @@
 <div class="slider">
   <div class="display-table center-text">
     <h1 class="title display-table-cell">
-      <b>PROJET OPENCLASSROOM BLOG MVC</b>
+      <b>L' <span>"AFRIQUE"</span> UN PARADIS PERDU.</b><br>
+      <em>de son vrai nom kemet</em>
     </h1>
   </div>
 </div>
@@ -53,14 +54,14 @@
             </ul>
             <!-- afficher si update -->
             {% if routename == 'postUpdateRequest' %}
-            <form action="">
+            <form action="post&article=update" method="post">
               <label for="prenom">Nouveau titre</label>
               <input type="text" name="title" class="form-control" >
               <label for="prenom">Nouveau texte</label>
               <input type="textaera" name="content" class="form-control" id="">
             <br>
 
-              <input type="button" value="soumettre" class="btn btn-primary">
+              <input type="submit" value="soumettre" class="btn btn-primary">
             </form>
             {% endif %}
           </div>
@@ -88,7 +89,7 @@
       <div class="col-lg-4 col-md-12 no-left-padding">
         <div class="single-post info-area">
           <div class="sidebar-area about-area">
-            <h4 class="title"><b>PROJET BLOG MVC</b></h4>
+            <h4 class="title"><b>Kemet un paradis perdu!</b></h4>
             <p>
               Ce blog est construit autour d'une architecture PHP MVC.<br /><br />
               Retouvez la documentation sur github<b> </b>

@@ -25,7 +25,6 @@ class ControllerRegister
         }
     }
 
-
     private function create(){
         echo('ControllerRegister create');
         if(isset($_GET['create'])){
@@ -42,20 +41,23 @@ class ControllerRegister
         //if (isset($_POST) && empty($_SESSION['user'])){
         if (isset($_POST)){
 
-            if(!empty($_FILES)){  //Traitement de l'image en premier (pour recuperer nom de l'image).
+            var_dump($_FILES);
+            var_dump($_FILES['foo']['size']);
+
+            if(!empty($_FILES) && $_FILES['foo']['size'] != 0){  //Traitement de l'image en premier (pour recuperer nom de l'image).
                 echo('/ oui image telechargé');
 
                 $this->imageUpload();
                 //nom du fichier  protected 'originalName' => string '17794632_500_D.jpg' (length=18)
                 // le fichier est un objet $file 
                 echo('/ Fin upload image');
-                $avatar = 'image_telecharge.jpg'; 
+                $avatar = $_FILES['foo']['name']; 
             }else{
                 echo('/ image non telechargé');
                 $avatar = 'default_avatar.jpg'; 
             }
+
         if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-            echo(' / Verif mail et new User');
             $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $token = md5($_POST['prenom'].$_POST['nom']); 
             $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'0','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);

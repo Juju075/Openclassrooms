@@ -33,11 +33,10 @@ class ControllerPost
         elseif (isset($_GET['update'])){ //Show update form behind article.
             $routename = 'postUpdateRequest';
             $this->article($routename); 
-
-
         }
-        elseif (isset($_GET['update_id'])){ //Traitement update
-            $this->storeUpdate($_GET['update_id']); 
+        elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ //Traitement update
+            echo('Traitement du formulaire');
+            $this->storeUpdate($_POST); 
             //recuperer les valeurs du formulaire
         }
          elseif (isset($_GET['validation'])){
@@ -51,11 +50,10 @@ class ControllerPost
 
     //CRUD
     private function create(){
-        if(isset($_GET['create'])){
+        echo('ControllerPost.php create');
             $data ='';
             $this->_view = new View('CreatePost', 'Post');
             $this->_view->displayForm('Post',$data); //data ok vide (dispo si besoin).
-        }
     }   
 
     private function delete($id){
@@ -64,32 +62,11 @@ class ControllerPost
         header('Location: accueil&article=deleted');
     }
 
-    private function update($id, $routename){
-        echo('ControllerPost function update()');
-
-        //View
-        $this->_view = new View('Accueil', 'Post');
-        $this->_view->generate(array('routename'=>$routename, 'articles'=>$articles));
-      
-    }
-
-    //Traitement add article.
-    // Affectation $articles pour le foreach $content
-
     private function store(){
-        echo('| controllerPost.php store');
-
-        //Contrainte role administrateur usertype
-
-        
-        var_dump($_POST);
-        //if(isset($_)
-
+        echo('| controllerPost.php store'); // creation article
         $this->_articleManager = new ArticleManager;
-        //verification de role ok
         $adminOnly = $this->_articleManager->roleverif();
         if($adminOnly === true){
-             //verification si existe deja ok
              $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
      
              if ($articleVerifNoDuplicate === false) {
@@ -106,19 +83,24 @@ class ControllerPost
                      $articles = $this->_articleManager->getArticles();
                      $this->_view = new View('Accueil','Post');
                      $this->_view->generate(array('articles' =>$articles));
-     
                  }else {
-                     header('location; accueil');
+                     header('location; accueil');//sucess
                  }
              }
             else{
-                echo('Alert pas autosi a effectuer cette action.');
+                header('location; accueil');// article already exist
             }
+        }else{
+            header('location: accueil'); //not admin
         }
-
-
-
     }
+
+    private function storeUpdate($data){
+        $this->_articleManager = new ArticleManager;
+        $this->_articleManager->updateArticle($data);
+        header('location: post&id_article='.$_SESSION['id_article']);
+    }
+
 
     //Use TemplateSingle.html.twig
     private function article($routename){

@@ -39,7 +39,6 @@ class View
     public function generatePost($data){ //tableau multidimentionnel 1article + comments
         echo('| View.php generatePost');
         $a = 'templateSingle.html.twig';
-
         //route
         $article = $data['article'][0];    
         $count =  $data['nbrcomments'];
@@ -48,13 +47,14 @@ class View
         }else{
             $comments ='';
         }
-        $user = 'ok retour user'; 
+        $user = 'ok retour user';
+        $routename = $data['routename'];
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         //echo $twig->render($a,$data); 
         // article ? id_user uniquement | comment foreach tts les ligns ok | user quel id_user
-        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count]); 
+        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename]); 
     }
 
 

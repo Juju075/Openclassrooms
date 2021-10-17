@@ -53,7 +53,7 @@
             </ul>
 
 <!-- afficher si update -->
-{# {% if update == 'post&id_article='{{ article.id_article }}'&update' %}
+{% if routename == 'postUpdateRequest' %}
 <form action="">
   <label for="prenom">Nouveau titre</label>
   <input type="text" name="title" class="form-control" >
@@ -63,7 +63,7 @@
 
   <input type="button" value="soumettre" class="btn btn-primary">
 </form>
-{% endif %} #}
+{% endif %}
 
 
           </div>

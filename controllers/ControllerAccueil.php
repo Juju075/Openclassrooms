@@ -58,12 +58,7 @@ use Manager\ArticleManager;
         }
     }
     
-    /**
-     * Fonction d'affichage de tous les articles.
-     */
     private function articles($routename){
-        echo('ControllerAcceuil.php articles');
-
         //Repository    
         $this->_articleManager = new ArticleManager(); 
         $articles = $this->_articleManager->getArticles();
@@ -72,5 +67,4 @@ use Manager\ArticleManager;
         $this->_view = new View('Accueil', 'Post');
         $this->_view->generate(array('routename'=>$routename, 'articles'=>$articles));
     }
-
 }

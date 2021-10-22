@@ -8,6 +8,7 @@ class Article
     private $title;
     private $chapo;
     private $content;
+    private $id_user;
 
 
     //verifie ds video si il a mis incrementation pour ID
@@ -46,6 +47,11 @@ class Article
             $this->title = $title;
         }
     }
+public function setId_user(?int $id_user){
+    $this->id_user = $id_user;
+}
+
+
 
     //chapo bizzard
     public function setChapo(?string $chapo) 
@@ -87,6 +93,9 @@ class Article
     public function getContent(): ?string
     { 
         return $this->content;
+    }
+    public function getId_user(){
+        return $this->id_user;
     }
     
     //here Foreign key

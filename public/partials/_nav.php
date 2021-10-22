@@ -6,8 +6,10 @@
 				<li><a href="profile">Mon profil</a></li>
 				<li><a href="accueil">Listing des articles</a></li>
 				
-				<!-- Twig si connecte-->
+				<!-- Twig si connecte as Admin-->
+				{% if user == 'ADMIN' %}
 				<li><a href="post&create">Créer un article</a></li>
+				{% endif %}
 				<li><a href="contact&create">Nous contacter</a></li>
 				<li><a href="login&logout">Me deconnecter</a></li>
 				

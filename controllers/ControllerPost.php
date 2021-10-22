@@ -7,12 +7,13 @@ use View\View;
 use Entity\Article;
 use Manager\ArticleManager;
 use Manager\CommentManager;
+use Tools\Security;
+
 
 class ControllerPost
  {
     private $_articleManager;
     private $commentManager;
-    private $comment;
 
     private $_view; 
 
@@ -23,7 +24,7 @@ class ControllerPost
         elseif (isset($_GET['create'])){
             $this->create(); 
         }
-        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ //Traitement
+        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){
             $this->store();
         }   
         elseif (isset($_GET['delete'])){
@@ -37,7 +38,7 @@ class ControllerPost
         elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ //Traitement update
             echo('Traitement du formulaire');
             $this->storeUpdate($_POST); 
-            //recuperer les valeurs du formulaire
+
         }
          elseif (isset($_GET['validation'])){
             //id_comment
@@ -48,9 +49,10 @@ class ControllerPost
         }
     }
 
+    
+
     //CRUD
     private function create(){
-        echo('ControllerPost.php create');
             $data ='';
             $this->_view = new View('CreatePost', 'Post');
             $this->_view->displayForm('Post',$data); //data ok vide (dispo si besoin).
@@ -63,34 +65,28 @@ class ControllerPost
     }
 
     private function store(){
-        echo('| controllerPost.php store'); // creation article
-        $this->_articleManager = new ArticleManager;
-        $adminOnly = $this->_articleManager->roleverif();
-        if($adminOnly === true){
-             $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
-     
-             if ($articleVerifNoDuplicate === false) {
-                 if (isset($_POST)){
-                     $_POST['id_user'] = $_SESSION['id_user'];
-                     var_dump($_POST); //verification insertion
-     
-                     $article= new Article($_POST);   
-                     $this->_articleManager = new ArticleManager;
-                     $article = $this->_articleManager->createArticle($article); //null
-     
-                     var_dump($article);
-     
-                     $articles = $this->_articleManager->getArticles();
-                     $this->_view = new View('Accueil','Post');
-                     $this->_view->generate(array('articles' =>$articles));
-                 }else {
-                     header('location; accueil');//sucess
-                 }
-             }
-            else{
-                header('location; accueil');// article already exist
-            }
-        }else{
+        if(($user=Security::retrieveUserObj('ADMIN'))!=null){ // return boll
+            //user->getid_User(); // Expected type 'object'. Found 'bool'
+                $this->_articleManager = new ArticleManager;
+                $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
+               
+                if ($articleVerifNoDuplicate === false){
+                    if (isset($_POST)){
+                        $_POST['id_user'] = $_SESSION['id_user'];
+                        //Ajout Id_user 
+                        $article= new Article($_POST);   
+                        $article = $this->_articleManager->createArticle($article); 
+                        $articles = $this->_articleManager->getArticles();
+                        $this->_view = new View('Accueil','Post');
+                        $this->_view->generate(array('articles' =>$articles));
+                        exit;
+                        header('location; accueil');//sucess
+                    }
+                    else{}
+                }else{
+                    header('location; accueil');// article already exist
+                }
+            }else{
             header('location: accueil'); //not admin
         }
     }
@@ -101,27 +97,23 @@ class ControllerPost
         header('location: post&id_article='.$_SESSION['id_article']);
     }
 
-
     //Use TemplateSingle.html.twig
     private function article($routename){
-        echo('ControllerPost.php  article');
-
         if(isset($_GET['id_article'])){
             $_SESSION['id_article'] = $_GET['id_article'];
-
+            
             $this->_articleManager = new ArticleManager;
             $articleVerif = $this->_articleManager->articleVerif();
+
 
             if ($articleVerif == true ){
                 //Return Post
                 $article = $this->_articleManager->getArticle($_GET['id_article']);
-
                 //Return Comments        
                 $this->commentManager = new CommentManager;
                 $comments = $this->commentManager->getComments();
                 $nbrcomments = $this->commentManager->displaynumber($comments);
 
-                var_dump($routename);
                 //View
                 $this->_view = new View('singlePost','Post');
                 $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename),'PostsinglePost');

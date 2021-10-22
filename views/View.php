@@ -18,12 +18,15 @@ class View
 
     // /accueil 
         public function generate($data){  
-        echo('| View.php generate');
         $a = 'template.html.twig';
 
         //route
         $user = 'test user';
-        $getalert = $data['routename']; // ok
+        if(!empty($data['routename'])){
+            $getalert = $data['routename']; // ok
+        }else{
+            $getalert = null;
+        }
         //$articles = $data['article'][0]; // ok
         $articles = $data['articles']; // ok
  
@@ -37,23 +40,20 @@ class View
 
     // detail article
     public function generatePost($data){ //tableau multidimentionnel 1article + comments
-        echo('| View.php generatePost');
         $a = 'templateSingle.html.twig';
         //route
         $article = $data['article'][0];    
         $count =  $data['nbrcomments'];
         if($count != 0){
-            $comments = $data['comments'][0];
+            $comments = $data['comments'];
         }else{
-            $comments ='';
+            $comments =null;
         }
-        $user = 'ok retour user';
+        $user = 'ADMIN';
         $routename = $data['routename'];
-
+ 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        //echo $twig->render($a,$data); 
-        // article ? id_user uniquement | comment foreach tts les ligns ok | user quel id_user
         echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename]); 
     }
 
@@ -75,8 +75,6 @@ class View
      * views/template
      */
     public function displayForm($action,$data){ 
-        echo('| View.php displayForm');
-
         $page1 = 'template'.$action.'.html.twig';
         
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');

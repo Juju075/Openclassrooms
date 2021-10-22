@@ -21,21 +21,26 @@ class ControllerLogin
             $this->logout();       
         }        
         elseif (isset($_GET['status']) && isset($_GET['status']) =="login"){  
-            $this->logon();       
-        }
-        else{
+            //ajoute checkbox nama option
+            if (isset($_POST['option']) && $_POST['option'] === 'on') {
+                $checkbox = 'ADMIN';
+            }else{
+                $checkbox = 'MEMBRE';
+
+            }
+            $this->logon($checkbox);       
         }
     }
 
     private function formLogin(){
-        echo('ControllerLoging.php formLogin');
         $data ='';
         $this->_view = new View('Login', 'Login');
         $this->_view->displayForm('Login',$data);       
     }
 
-    private function logon(){
-        if(($user=Security::login(1))!=null){
+    private function logon($usertype){
+        //if(($user=Security::login($usertype))!=null){
+        if(($user=Security::login($usertype))!=null){
             header('Location: accueil&passe=valide');
         }
     else

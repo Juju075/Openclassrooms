@@ -6,6 +6,7 @@ use Tools\Model;
 use Manager\ArticleManager;
 use Manager\CommentManager;
 use Manager\ContactManager;
+use Tools\Security;
 
 //http://localhost/App_Blog_MVC/test&comment
 //http://localhost/App_Blog_MVC/test&comment
@@ -13,7 +14,7 @@ use Manager\ContactManager;
 
 
 
-Class ControllerTest extends Model
+Class ControllerTest extends Security
 {
 
     private $_testManager;
@@ -37,15 +38,12 @@ Class ControllerTest extends Model
          elseif (isset($_GET['image'])){
             $this->codeguyUpload(); 
         } 
-         elseif (isset($_GET['usertype'])){
-            $this->usertype(); 
-        }  
          elseif (isset($_GET['listarticle'])){
             $this->loopFor(); 
-        }
-          elseif (isset($_GET['deleteone'])){
-            $this->deleteTest(); 
-        }                                 
+        }     
+        elseif (isset($_GET['user'])){
+            $this->retrieveUserObj('MEMBRE'); 
+        }                                   
         else{
             header('location: /accueuil');
         }
@@ -115,15 +113,6 @@ Class ControllerTest extends Model
 
     }
 
-    public function usertype(){
-        echo('ControllerTest.php usertype');
-        //quel sont les moment ou on doit verifier le role
-        // creation article
-        // validation commentaire
-        //affichage boutons su
-        
-        return $this->roleVerification();
-    }
     public function loopFor(){
         echo('ControllerTest.php loopFor');
         $this->_articleManager = new ArticleManager(); 
@@ -135,10 +124,13 @@ Class ControllerTest extends Model
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         echo $twig->render('test.html.twig',['articles'=>$articles]); 
     }
-   public function deleteTest(){
-        echo('ControllerTest.php deleteTest');
 
-        $this->deleteOne('article', 118); 
-   } 
+   public function userobj(){
+       echo('| ControllerTest.php userobj');
+               if(($user=Security::login('MEMBRE'))!=null){ // aucun utilisateur retournee.
+            //$user->getid_User();
+            var_dump($user);
+        } 
+   }
 
 }

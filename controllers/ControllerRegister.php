@@ -5,6 +5,7 @@ session_start();
 use Entity\User;
 use Manager\UserManager;
 use View\View;
+use Tools\Security;
 
 class ControllerRegister
  {
@@ -29,46 +30,66 @@ class ControllerRegister
         echo('ControllerRegister create');
         if(isset($_GET['create'])){
 
+        //Logique
+        if(($user=Security::login('MEMBRE'))!=null){ // aucun utilisateur retournee.
+            //$user->getid_User();
+        } 
+
+
+        //View
             $data = '';
             $this->view = new View('CreateUser', 'Registration');
             $this->view->displayForm('Register',$data);
+
+     
         }
     }
 
+
+
+
+
     private function store(){
         echo('ControllerRegister store');
-
-        //if (isset($_POST) && empty($_SESSION['user'])){
-        if (isset($_POST)){
-
-            var_dump($_FILES);
-            var_dump($_FILES['foo']['size']);
-
-            if(!empty($_FILES) && $_FILES['foo']['size'] != 0){  //Traitement de l'image en premier (pour recuperer nom de l'image).
-                echo('/ oui image telechargé');
-
-                $this->imageUpload();
-                //nom du fichier  protected 'originalName' => string '17794632_500_D.jpg' (length=18)
-                // le fichier est un objet $file 
-                echo('/ Fin upload image');
-                $avatar = $_FILES['foo']['name']; 
-            }else{
-                echo('/ image non telechargé');
-                $avatar = 'default_avatar.jpg'; 
-            }
-
-        if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-            $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $token = md5($_POST['prenom'].$_POST['nom']); 
-            $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'0','validation_key'=> $token,'usertype'=>'1','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
-            $user= new User($obj);
-            $userManager= new UserManager();
-            $userManager->addUser($user);
-            header('location: accueil&register=created');
+        if (isset($_POST) && empty($_SESSION['user'])){
+                var_dump($_POST);    
+                var_dump($_FILES);    
+                
+                //Avec image
+                if(!empty($_FILES) && $_FILES['foo']['size'] != 0){  
+                    echo('/ oui image telechargé');
+                    
+                    $this->imageUpload();
+                    echo('/ Fin upload image');
+                    $avatar = $_FILES['foo']['name']; 
+                    var_dump($avatar);
+                }
+                else{
+                    echo('/ image non telechargé');
+                    $avatar = 'default_avatar.jpg'; 
+                }
+                
+                //Sans image
+                if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+                    $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                    $token = md5($_POST['prenom'].$_POST['nom']); 
+                    $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'MEMBRE','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
+                    //
+                    $user= new User($obj);
+                    $userManager= new UserManager();
+                    $userManager->addUser($user);
+                    header('location: accueil&register=created');
+                }
+                else{
+                    echo('error 2');
+                    exit;
+                header('location: accueil&register=error');
+            }    
+            
         }else{
-        header('location: accueil&register=error');
-         }           
-        }else{
+            echo('error 1');
+            exit;
+            header('location: accueil&register=error');
         }
     }
 
@@ -85,7 +106,7 @@ class ControllerRegister
         // MimeType List => http://www.iana.org/assignments/media-types/media-types.xhtml
         $file->addValidations(array(
         // Ensure file is of type "image/png"
-        new \Upload\Validation\Mimetype('image/png'),
+        new \Upload\Validation\Mimetype('image/png','image/jpeg'),
 
         //You can also add multi mimetype validation
         //new \Upload\Validation\Mimetype(array('image/png', 'image/gif'))

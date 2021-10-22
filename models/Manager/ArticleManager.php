@@ -22,22 +22,23 @@ class ArticleManager extends Model
      $this->deleteOne('article', $id);
    }
    public function updateArticle($content){
-      echo('| ArticleManager updateArticle');
       $this->updateOne('article', $content);
    }
     public function articleAlreadyExist($title, $content){
-      echo('| ArticleManager articleAlreadyExist');
-      var_dump($title. $content);
       return $this->noDuplicatePost('article', $title, $content);
    }  
 
 
-   public function roleverif(){
-     echo('| ArticleManager roleverif'); 
-     return $this->roleVerification();
-   } 
-   public function articleVerif(){ //effacer cette fonction non utilise.
-      echo('| ArticleManager articleVerif');
+   public function articleVerif(){ 
       return $this->postIfExist();
    }
+
+      public function articleVerifNote(){ 
+            $this->getBdd();
+            $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
+            $req0->execute(array($_SESSION['id_article']));
+            return $req0->fetchall();
+   }
+
+   
 }

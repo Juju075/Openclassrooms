@@ -15,8 +15,6 @@ abstract class Model
     private static function setBdd(){   
         try {
             $filePath = 'config.json';
-            //$filePath = __DIR__.'/config.json';
-
             $configfile = fopen($filePath, 'r');
             $config= json_decode(fread($configfile, filesize($filePath)));
 
@@ -31,7 +29,6 @@ abstract class Model
     }
 
     protected function getBdd(){
-        echo('| Connexion Bdd ');
         if(self::$_bdd == null){
             self::setBdd();
         }
@@ -56,89 +53,67 @@ abstract class Model
     protected function getAllComments(){
         echo('| Model.php getAllComments');
 
+        // pour l' id_article x quels sont les id_comments associes
+
+
         $result = [];
         //$id_article = $_SESSION['id_article'];
-
         //liste tous les articles comments.
         $this->getBdd();
-        $req0  = self::$_bdd->prepare('SELECT id_article FROM comment WHERE id_article = ?'); 
+        $req0  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_article = ?'); 
         $req0->execute(array($_SESSION['id_article']));
         $result = $req0->fetchall();
-          
         if(!empty($result)){
-                $var= [];
-                $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ? AND disabled = 1'); 
-                $req->execute(array($_SESSION['id_article']));
-                $var = $req->fetchall();
+            $var= [];
+            $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ? AND disabled = 1'); 
+            $req->execute(array($_SESSION['id_article']));
+            $var = $req->fetchall();
                 return $var; 
         }else{}
         
     }
     protected function getCommentsCount($comments){
         if(isset($comments) && $comments != null){
-            count($comments);
+           return count($comments);
         }else{
             return 0;
-        } 
-
-
-
+        }
     }
 
     protected function authenticationRequest($obj,$usertype){
         echo('| Model.php authenticationRequest');
-            $this->getBdd();
-            $req = self::$_bdd->prepare('SELECT id_user, password, activated, usertype  FROM user WHERE username = ?');
-            $req->execute(array($obj['username']));
-            $resultat = $req->fetch();
-            $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
 
-            if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype) {
-                echo('| Model.php condition verifie à true'); // ok fonctionne
-                //affecter la session user
-                $id_user = $resultat['id_user'];
-
-                $_SESSION['id_user']=$id_user; //ajout junior
-                
-
-                $user=$this->getOne('user','User',$id_user); 
-                echo('/ Fin true authenticationRequest');
-                return $user;  
+        
+        $this->getBdd();
+        $req = self::$_bdd->prepare('SELECT id_user, password, activated, usertype  FROM user WHERE username = ?');
+        $req->execute(array($obj['username']));
+        $resultat = $req->fetch();
+        
+        $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
+        
+        if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype) {
+            $id_user = $resultat['id_user'];
+            $_SESSION['id_user']=$id_user; 
+            $user=$this->getOne('user','User',$id_user); 
+            return $user;  
             }else{
-                echo('| Model.php condition else false'); // ok fonctionne
                 return false;
             }     
         }
 
 
-    protected function roleVerification(){
-        echo('| Model roleVerification');
-        $this->getBdd();
-        if(isset($_SESSION['id_user'])){
-            $req = self::$_bdd->prepare("SELECT usertype FROM user WHERE id_user = ?");
-            $req->execute(array($_SESSION['id_user']));
-            $result = $req->fetch();
-            
-            if(isset($result) && $result == 2){
-                $_SESSION['usertype']= $result;
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        echo('le resultat est false 1');
-        return false;
-    }
-
     protected function postIfExist(){
         echo('| Model.php postIfExist');
-
         //lister les id articles encours.
             $this->getBdd();
             $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
             $req0->execute(array($_SESSION['id_article']));
-            return $req0->fetchall();
+            $idArticle = $req0->fetchall();
+            if(!empty($idArticle )){
+                return true;
+            }else{
+                return false;
+            }
     }
 
 
@@ -154,7 +129,6 @@ abstract class Model
         $interrogation=[];
 
         foreach ($array as $key=>$value){
-            
             array_push($keys, strtolower(substr(str_replace($classFullName,"",$key),2)));
             array_push($values, $value);
             array_push($interrogation,'?');
@@ -173,12 +147,10 @@ abstract class Model
             {
                 $e->errorInfo;
             }
-        
         $req->closeCursor();
     }
 
     protected function createOneComment($table, $comment){
-        echo(' >> Model.php createOneComment');
         $this->getBdd();
 
         $req = self::$_bdd->prepare("INSERT INTO ".$table." (content, id_article, id_user) VALUES (?, ?, ?)");
@@ -187,35 +159,31 @@ abstract class Model
     }
     ///////////////////////////////////
 
-    // creation d'un article ou reload article new url.
-    protected function noDuplicatePost($table, $title, $content){ // ok fonctionne
+    // Notice: Array to string conversion in C:\wamp64\www\App_Blog_MVC\framework\Model.php on line 183
+    protected function noDuplicatePost($table, $title, $content){ 
         echo('| model.php noDuplicatePost');
-                $titleresult[]='';
+                $titleresult[]= null;
                 $this->getBdd();
                 $req = self::$_bdd->prepare("SELECT id_article FROM " .$table. " WHERE title = ?");
                 $req->execute(array($title));
                 $titleresult = $req->fetchall(); // assert list 0 or >=1 id_article
 
 
-        if (!empty($titleresult)) { //Ce titre existe. > recuperer l'id de l'article 
+        if (!empty($titleresult)) { 
                 $req = self::$_bdd->prepare("SELECT content FROM " .$table. " WHERE id_article = ?");
-
-
                 $req->execute(array($titleresult[0]));
-                $contentresult = $req->fetchall(); // error  Array to string conversion
+                $contentresult = $req->fetchall(); 
 
                     if ($contentresult === $content) {
-                        echo('contenu identique');
                         return true;
                     }
-                    else{ //Ce titre n'existe pas. > creer l'article
+                    else{ 
                         return false;
                     }
         }
         else{
             return false;
         }
-
     }
 
     protected function getOne($table, $obj, $id){ 
@@ -228,8 +196,8 @@ abstract class Model
             //$req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
             $req = self::$_bdd->prepare("SELECT id_article, title, chapo, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %T') AS date FROM " .$table. " WHERE id_article = ?");   
         }elseif ($obj === 'User'){
-            echo('| requete prepare User'); // Info display page profil
-            $req = self::$_bdd->prepare("SELECT prenom, nom, email FROM " .$table. " WHERE id_user= ?");   
+            echo('| requete prepare User'); // Obejt $user auth / Info display page profil
+            $req = self::$_bdd->prepare("SELECT usertype, prenom, nom, email, activated, validation_key, avatar, sentence   FROM " .$table. " WHERE id_user= ?");   
         }elseif ($obj === 'Comment') {
             echo('| requete prepare Comment'); //
             $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %T') AS date FROM " .$table. " WHERE id_comment = ?");
@@ -245,6 +213,7 @@ abstract class Model
         return $var; 
         $req->closeCursor();  
     }
+    
     protected function getAllUsersForComments(){ //$user
         //list d id_user
         //boucle for nb utilisateur 
@@ -300,9 +269,6 @@ abstract class Model
             $req->execute(array($id_comment)); 
             $result = $req->fetchall();
             $req->closeCursor(); 
-
-            var_dump($result[0]['id_user']);
-            var_dump($user[0]);
 
             if ($result[0]['id_user'] == $user[0]){ // pb ici
                 echo('user correspondance ok');

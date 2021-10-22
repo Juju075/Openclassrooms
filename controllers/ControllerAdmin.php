@@ -25,12 +25,7 @@ use Manager\ArticleManager;
         }
           elseif (isset($_GET['login'])){ //admin&login
             $this->login();       
-        }         
-         elseif (isset($_GET['update'])){ //admin&update=78
-             
-            $id = $_GET['update'];
-            $this->formUpdate($id);       
-        }       
+        }             
         else{
            //$this->login();
     }
@@ -57,25 +52,7 @@ use Manager\ArticleManager;
     header('location: accueil alert');
     }
 
-        public function formUpdate($id){
-        echo('ControllerPost.php  formUpdate');
 
-        $this->_articleManager = new ArticleManager;
-        $prepopuler = $this->_articleManager->getArticle($id);
-        var_dump($prepopuler[0]);
-        var_dump($prepopuler[0]['title']);
-
-        exit;
-        //data pour prepopopuler champs
-        // $title = $prepopuler[][];
-        // $chapo = $prepopuler[][];
-        // $content = $prepopuler[][];
-            // $data[] = array('titre'=>$title,'chapo'=>$chapo,'content'=>$content);
-
-            //View
-            $this->view = new View('update', 'Admin');
-            $this->view->displayForm('Update',$data);
-        }
     public function storeUpdate($id, $content){
         echo('ControllerPost.php  storeUpdate');
         $this->_articleManager = new ArticleManager;
@@ -83,6 +60,4 @@ use Manager\ArticleManager;
 
         header('location: acceuil alert');
     }
-
-
   }

@@ -9,6 +9,7 @@ use Manager\ContactManager;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Tools\Security;
 
 class ControllerContact
 {
@@ -45,7 +46,8 @@ class ControllerContact
         //Create an instance; passing `true` enables exceptions
         echo('| controllerContact sendMessage');
 
-        if(isset($_SESSION['id_user'])){
+        //if(isset($_SESSION['id_user'])){
+        if(($user=Security::retrieveUserObj('MEMBER'))!=null){ 
 
         //recuperer data user
         $this->contactManager = new ContactManager;
@@ -59,13 +61,8 @@ class ControllerContact
         $_POST['email']= $user[0]['email'];
 
         var_dump($_POST);
-        exit;
-
-
-
         $mail = new PHPMailer(true);
         
-
         try {
             //Server settings
             //SMTP::DEBUG_SERVER
@@ -118,14 +115,7 @@ class ControllerContact
 
         }else{ // si non connecté
             header('location: accueil&comment=notconnected');
-        }
-
-
-
-
-
-
-            
+        }    
     }
 
 }

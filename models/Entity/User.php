@@ -5,13 +5,12 @@ class User
 {
     // use Timestampable;
 
-    private $usertype = [ //                       var_dump obj >1
-        1 => 'Membre',
-        2 => 'Admin'
-        
-    ];
 
+    
+    
+    
     // created_date et modified_date dans timestampable  $createdAt $updatedAt
+    private $usertype; 
     private $id_user;   //                      var_dump obj >null
     private $username;
     private $password;

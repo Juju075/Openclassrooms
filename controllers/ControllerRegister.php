@@ -27,7 +27,6 @@ class ControllerRegister
     }
 
     private function create(){
-        echo('ControllerRegister create');
         if(isset($_GET['create'])){
 
         //Logique
@@ -35,22 +34,14 @@ class ControllerRegister
             //$user->getid_User();
         } 
 
-
         //View
             $data = '';
             $this->view = new View('CreateUser', 'Registration');
             $this->view->displayForm('Register',$data);
-
-     
         }
     }
 
-
-
-
-
     private function store(){
-        echo('ControllerRegister store');
         if (isset($_POST) && empty($_SESSION['user'])){
                 var_dump($_POST);    
                 var_dump($_FILES);    

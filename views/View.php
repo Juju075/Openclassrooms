@@ -21,15 +21,28 @@ class View
         $a = 'template.html.twig';
 
         //route
-        $user = 'test user';
         if(!empty($data['routename'])){
             $getalert = $data['routename']; // ok
         }else{
             $getalert = null;
         }
-        //$articles = $data['article'][0]; // ok
-        $articles = $data['articles']; // ok
- 
+        //articles
+        if(!empty($data['articles'])){
+            $articles = $data['articles']; // ok
+        }
+        else{
+            $articles = null;
+        }
+        
+        // user
+        if(!empty($_SESSION['user']['usertype'])){
+            $user = $_SESSION['user']['usertype'];
+        }
+        else{
+            $user = null;
+        }
+
+
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         echo $twig->render($a,['getalert'=>$getalert,'user'=>$user, 'articles'=>$articles]); 
@@ -49,7 +62,17 @@ class View
         }else{
             $comments =null;
         }
-        $user = 'ADMIN';
+
+        // user
+        if(!empty($_SESSION['user']['usertype'])){
+            $user = $_SESSION['user']['usertype'];
+        }
+        else{
+            $user = null;
+        }
+
+
+
         $routename = $data['routename'];
  
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');

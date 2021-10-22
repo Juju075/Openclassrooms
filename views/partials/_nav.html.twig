@@ -2,16 +2,16 @@
   <!-- par default -->
   <li><a href="accueil">Listing des articles</a></li>
 
-  <!-- Twig si non connecte -->
+  {% if user is empty %}
   <li><a href="register&create">S'inscrire</a></li>
   <li><a href="login&user">S'authentifier</a></li>
-
-  <!-- Twig si connecte -->
+  {% endif %} {% if user == 'MEMBRE' or user == 'ADMIN'%}
   <li><a href="profile">Mon profil</a></li>
-  <li><a href="contact&create">Nous contacter</a></li>
   <li><a href="login&logout">Me deconnecter</a></li>
-
-  <!-- Twig si role admin -->
+  {% endif %} {% if user == 'MEMBRE' %}
+  <li><a href="contact&create">Nous contacter</a></li>
+  {% endif %} {% if user == 'ADMIN'%}
   <li><a href="post&create">Créer un article</a></li>
+  {% endif %}
 </ul>
 <!-- main-menu -->

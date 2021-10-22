@@ -95,7 +95,7 @@ abstract class Model
             $id_user = $resultat['id_user'];
             $_SESSION['id_user']=$id_user; 
             $user=$this->getOne('user','User',$id_user); 
-            return $user;  
+            return $user;
             }else{
                 return false;
             }     

@@ -23,7 +23,6 @@ use View\View;
 
      //Affiche un contenu simple pas de repository
      private function myProfile(){
-      echo('ControllerProfile.php myProfile');
       if(isset($_SESSION['id_user'])){
       }else{
           header('Location: accueil&comment=notconnected' );
@@ -32,7 +31,6 @@ use View\View;
       //get User connected ok
       $this->usermanager = new UserManager;
       $data = $this->usermanager->ProfilUser();
-
 
       //View
         $this->_view = new View('Profile', 'Profile');

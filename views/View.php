@@ -41,18 +41,12 @@ class View
         else{
             $user = null;
         }
-
-
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         echo $twig->render($a,['getalert'=>$getalert,'user'=>$user, 'articles'=>$articles]); 
     }
     
-
-
-
-    // detail article
-    public function generatePost($data){ //tableau multidimentionnel 1article + comments
+    public function generatePost($data){ 
         $a = 'templateSingle.html.twig';
         //route
         $article = $data['article'][0];    
@@ -80,30 +74,18 @@ class View
         echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename]); 
     }
 
-
-
-
-    /**
-     * pas appeler a voir. 
-     * Cette fonction sert à 
-     */
     public function simpleContent($action){ 
         $page = 'views/template'.$action .'.html.twig';
         $view = $this->generateFileSimple($page);
         echo $view;
     }
 
-    /**
-     * Cette fonction sert à afficher le formulaire souhaité.
-     * views/template
-     */
     public function displayForm($action,$data){ 
         $page1 = 'template'.$action.'.html.twig';
         
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-
-        //route twig params
+        
         if($action === 'Register'){
             if (!empty($data)) {
                 $var = $data[0];

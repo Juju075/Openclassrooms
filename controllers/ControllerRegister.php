@@ -43,9 +43,7 @@ class ControllerRegister
 
     private function store(){
         if (isset($_POST) && empty($_SESSION['user'])){
-                var_dump($_POST);    
-                var_dump($_FILES);    
-                
+     
                 //Avec image
                 if(!empty($_FILES) && $_FILES['foo']['size'] != 0){  
                     echo('/ oui image telechargé');
@@ -53,7 +51,6 @@ class ControllerRegister
                     $this->imageUpload();
                     echo('/ Fin upload image');
                     $avatar = $_FILES['foo']['name']; 
-                    var_dump($avatar);
                 }
                 else{
                     echo('/ image non telechargé');

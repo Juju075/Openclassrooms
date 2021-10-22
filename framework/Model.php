@@ -51,14 +51,7 @@ abstract class Model
     
 
     protected function getAllComments(){
-        echo('| Model.php getAllComments');
-
-        // pour l' id_article x quels sont les id_comments associes
-
-
         $result = [];
-        //$id_article = $_SESSION['id_article'];
-        //liste tous les articles comments.
         $this->getBdd();
         $req0  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_article = ?'); 
         $req0->execute(array($_SESSION['id_article']));
@@ -80,10 +73,7 @@ abstract class Model
         }
     }
 
-    protected function authenticationRequest($obj,$usertype){
-        echo('| Model.php authenticationRequest');
-
-        
+    protected function authenticationRequest($obj,$usertype){ 
         $this->getBdd();
         $req = self::$_bdd->prepare('SELECT id_user, password, activated, usertype  FROM user WHERE username = ?');
         $req->execute(array($obj['username']));
@@ -103,7 +93,6 @@ abstract class Model
 
 
     protected function postIfExist(){
-        echo('| Model.php postIfExist');
         //lister les id articles encours.
             $this->getBdd();
             $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
@@ -119,7 +108,6 @@ abstract class Model
 
     ///////////////////////////////////
     protected function createOne($table, $obj){
-    echo('| model.php createOne');
         $array=(array)$obj;
         $classFullName=get_class($obj);
 
@@ -159,9 +147,7 @@ abstract class Model
     }
     ///////////////////////////////////
 
-    // Notice: Array to string conversion in C:\wamp64\www\App_Blog_MVC\framework\Model.php on line 183
     protected function noDuplicatePost($table, $title, $content){ 
-        echo('| model.php noDuplicatePost');
                 $titleresult[]= null;
                 $this->getBdd();
                 $req = self::$_bdd->prepare("SELECT id_article FROM " .$table. " WHERE title = ?");
@@ -187,22 +173,16 @@ abstract class Model
     }
 
     protected function getOne($table, $obj, $id){ 
-        echo('| Model.php getOne');
         $this->getBdd();
         $var = [];
 
         if ($obj === 'Article') {
-            echo('| requete prepare Article'); // ok fonctionne
-            //$req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
             $req = self::$_bdd->prepare("SELECT id_article, title, chapo, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %T') AS date FROM " .$table. " WHERE id_article = ?");   
         }elseif ($obj === 'User'){
-            echo('| requete prepare User'); // Obejt $user auth / Info display page profil
             $req = self::$_bdd->prepare("SELECT usertype, prenom, nom, email, activated, validation_key, avatar, sentence   FROM " .$table. " WHERE id_user= ?");   
         }elseif ($obj === 'Comment') {
-            echo('| requete prepare Comment'); //
             $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %T') AS date FROM " .$table. " WHERE id_comment = ?");
         }else{
-            echo('| erreur');
         }     
         $req->execute(array($id));
 
@@ -264,26 +244,21 @@ abstract class Model
         
         //Verifie si c bien lauteur du comment
         if(isset($user) && $user != null){
-            echo('user not empty');
             $req = self::$_bdd->prepare("SELECT id_user  FROM comment WHERE id_comment = ?");
             $req->execute(array($id_comment)); 
             $result = $req->fetchall();
             $req->closeCursor(); 
 
             if ($result[0]['id_user'] == $user[0]){ // pb ici
-                echo('user correspondance ok');
                 //valider l'affichage
                 $req = self::$_bdd->prepare("UPDATE comment SET disabled = 1 WHERE id_comment = ?");
                 $req->execute(array($id_comment));
                 $req->closeCursor(); 
-                echo('activer le commentaire ok');
                 return true;  
             }else{
-                echo('return false 2');
                 return false;
             }
         }else{
-            echo('return false 1');
             return false;
         }
     }

@@ -1,6 +1,5 @@
 <?php
-
-namespace Entity;
+namespace Tools;
 
 abstract class Entity 
 {

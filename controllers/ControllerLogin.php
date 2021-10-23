@@ -1,48 +1,53 @@
 <?php
-require_once 'views/View.php';
-require_once('models/Manager/UserManager.php'); 
-/**
- * 
- */
+namespace Controllers;
+session_start();
+
+use View\View;
+use Tools\security;
 class ControllerLogin
 {
+
+    private $id_user;
+
     public function __construct(){
+
         if(isset($url) && count($url) < 1){ 
             throw new \Exception("Page introuvable", 1);
         }
         elseif (isset($_GET['user'])){
-            $this->login();        
-            echo('controller option 1a');
+            $this->formLogin();        
         }
-        elseif (isset($_GET['forgot'])){
-            $this->forgot();       
-            echo('controller option 1b');
+        elseif (isset($_GET['login']) && isset($_GET['login']) =="notconnected"){  
+            //$this->alert();       
+        }         
+        elseif (isset($_GET['logout'])){
+            $this->logout();       
         }        
         elseif (isset($_GET['status']) && isset($_GET['status']) =="login"){  
             $this->logon();       
-            echo('controller option 2');
         }
         else{
-            echo('controller option 3');
         }
     }
 
-    private function login(){
+    private function formLogin(){
+        echo('ControllerLoging.php formLogin');
         $this->_view = new View('Login', 'Login');
         $this->_view->displayForm('Login');       
     }
 
-
     private function logon(){
-        
-    echo('function longon applique');
-    $credentials = array('username'=> $_POST['username'],'password'=> $_POST['password']);
-    $this->_item = new UserManager;
-    $this->_item->login($credentials);
- 
+        if(($user=Security::login(1))!=null){
+            header('Location: accueil?passe=valide');
+        }
+    else
+        {
+            header('Location: accueil?login=error');
+        }
     }
-    private function forgot(){  
-        
-    }
-    
+
+    private function logout(){
+        session_destroy();
+        header('Location: accueil?session=terminated');
+    } 
 }

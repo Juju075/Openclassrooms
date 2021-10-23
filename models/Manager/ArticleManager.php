@@ -1,26 +1,42 @@
 <?php
+namespace Manager;
 
-require_once('framework/Model.php'); // à enlever bizarre
+use Tools\Model;
+
 
 class ArticleManager extends Model
 {
    public function getArticles(){
-      return $this->getAll('articles','Article');
+      return $this->getAll('article','Article');
    }
 
    public function getArticle($id){
-      return $this->GetOne('articles','Article', $id);
+      return $this->getOne('article','Article', $id);
    }
-   public function createArticle(){
-      return $this->CreateOne('articles','Article');
+   public function createArticle($article){
+      return $this->CreateOne('article',$article);
    } 
 
+   //Admin delete post
    public function deleteArticle($id){
-
-      return $this->deleteOne('articles', $id);
-   
+      return $this->deleteOne('article', $id);
    }
-   public function update($id){
-
+   
+   
+   /**
+    * Cette fonction modifie le post actuel.
+    */
+   public function updateArticle($id){
+      echo('| ArticleManager updateArticle');
+      //return $this->updateOne('article', $id);
+   }
+    public function articleAlreadyExist($title, $content){
+      echo('| ArticleManager articleAlreadyExist');
+      var_dump($title. $content);
+      return $this->noDuplicatePost('article', $title, $content);
+   }  
+   public function articleVerif(){ //effacer cette fonction non utilise.
+      echo('| ArticleManager articleVerif');
+      return $this->postIfExist();
    }
 }

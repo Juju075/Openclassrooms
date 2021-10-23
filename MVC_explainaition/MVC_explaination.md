@@ -28,7 +28,7 @@ Contient des classes basic reutilisable plus tard dans le code.
 
 - _ENTITY_ | (Répectorie l'ensemble des entités de l'app).
 
-- _MANAGER_ | (Contient l'ensemble des fonctionnalités de chaque entité).
+- _MANAGER_ | (Contient l'ensemble des foctions qui passer des parametres aux fonctionnalites de Model.php).
 
 ---
 

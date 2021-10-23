@@ -50,7 +50,6 @@ class CommentManager extends Model
       $req  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_user = ? AND id_comment = ?'); 
       $req->execute(array($_SESSION['id_user'], $id_comment));
       $result = $req->fetchall();
-
       if(!empty($result)){
          return true;
       }
@@ -59,9 +58,13 @@ class CommentManager extends Model
 
 
 
-   public function deleteThisComment(){
-      return $this ->deleteOneComment('comment');
-   }
+    protected function deleteOneComment($table, $id_comment){
+        $this->getBdd();  
+        $req = self::$_bdd->prepare("DELETE FROM " .$table. " WHERE id_comment = $id_comment");
+        $req->execute(array());
+        $req->closeCursor();
+    } 
+
    public function validationByAdmin($id_comment, $token){
         $this->getBdd();  
         //Est ce que le token est bien celui de l'utilisateur

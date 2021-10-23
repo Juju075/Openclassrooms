@@ -52,15 +52,11 @@ class ControllerContact
         //recuperer data user
         $this->contactManager = new ContactManager;
         $user[] = $this->contactManager->getUser($_SESSION['id_user']);
-        var_dump($user);
-        var_dump($user[0]);
 
         //ajout POST 
         $_POST['prenom']= $user[0]['prenom'];
         $_POST['nom']= $user[0]['nom'];
         $_POST['email']= $user[0]['email'];
-
-        var_dump($_POST);
         $mail = new PHPMailer(true);
         
         try {
@@ -93,10 +89,6 @@ class ControllerContact
              * getEmail
              * genere lien d'activation
              */
-
-
-
-
 
 
             $mail->isHTML(true);                                  //Set email format to HTML

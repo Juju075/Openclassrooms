@@ -49,14 +49,14 @@ class View
     public function generatePost($data){ 
         $a = 'templateSingle.html.twig';
         //route
-        $article = $data['article'][0];    
+        $article = $data['article'][0];  
+         //comments
         $count =  $data['nbrcomments'];
         if($count != 0){
             $comments = $data['comments'];
         }else{
             $comments =null;
         }
-
         // user
         if(!empty($_SESSION['user']['usertype'])){
             $user = $_SESSION['user']['usertype'];
@@ -64,14 +64,18 @@ class View
         else{
             $user = null;
         }
-
-
+        if(!empty($data['id_comment'])){
+            $id_comment = $data['id_comment'];
+        }
+        else{
+            $id_comment = null;
+        }        
+        
 
         $routename = $data['routename'];
- 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename]); 
+        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment]); 
     }
 
     public function simpleContent($action){ 
@@ -82,7 +86,6 @@ class View
 
     public function displayForm($action,$data){ 
         $page1 = 'template'.$action.'.html.twig';
-        
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         

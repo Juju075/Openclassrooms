@@ -31,21 +31,41 @@ class ControllerPost
             //id_article
             $this->delete($_GET['delete']); 
         }
-        elseif (isset($_GET['update'])){ //Show update form behind article.
-            $routename = 'postUpdateRequest';
-            $this->article($routename); 
+        elseif (isset($_GET['update'])){ //Show update form below article. Admin
+            $this->article('postUpdateRequest',null); 
+        }
+        elseif (isset($_GET['comment_update'])){ //Show update form below article. Admin
+            $this->commentManager = new CommentManager;
+            $id_comment = $_GET['comment_update'];
+            $author = $this->commentManager->verifCommentAuthor($id_comment);
+            if($author == true){
+                $this->article('commentUpdateRequest',$id_comment);
+            }
+            else{
+                $this->article(null, null);
+            }
+        }
+        elseif (isset($_GET['comment_delete'])){
+            $this->commentManager = new CommentManager;
+            $id_comment = $_GET['comment_delete'];
+            $author = $this->commentManager->verifCommentAuthor($id_comment);
+                if($author == true){
+                    $this->commentManager->deleteOneComment('comment', $id_comment);
+                }
+                else{
+                    $this->article(null, null);
+                }            
         }
         elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ //Traitement update
             echo('Traitement du formulaire');
             $this->storeUpdate($_POST); 
-
-        }
+        }    
          elseif (isset($_GET['validation'])){
             //id_comment
             //$this->adminCommentValidation($_GET['id_comment'],$_GET['token']); 
         }       
         else{
-            $this->article('');
+            $this->article(null, null);
         }
     }
 
@@ -79,7 +99,6 @@ class ControllerPost
                         $articles = $this->_articleManager->getArticles();
                         $this->_view = new View('Accueil','Post');
                         $this->_view->generate(array('articles' =>$articles));
-                        exit;
                         header('location; accueil');//sucess
                     }
                     else{}
@@ -98,7 +117,10 @@ class ControllerPost
     }
 
     //Use TemplateSingle.html.twig
-    private function article($routename){
+    private function article($routename, $id_comment){
+        echo('jusquici tout vas bien');
+        var_dump($_GET['id_article']);
+
         if(isset($_GET['id_article'])){
             $_SESSION['id_article'] = $_GET['id_article'];
             
@@ -116,7 +138,7 @@ class ControllerPost
 
                 //View
                 $this->_view = new View('singlePost','Post');
-                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename),'PostsinglePost');
+                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename,'id_comment'=>$id_comment),'PostsinglePost');
             }
             elseif ($articleVerif == false){
                 header('location: accueil');

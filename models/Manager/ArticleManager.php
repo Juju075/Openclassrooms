@@ -48,6 +48,4 @@ class ArticleManager extends Model
             $req0->execute(array($_SESSION['id_article']));
             return $req0->fetchall();
    }
-
-   
 }

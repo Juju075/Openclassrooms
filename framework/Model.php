@@ -172,7 +172,7 @@ abstract class Model
         $req->execute(array($id));
         $comments = $req->fetchall();
 
-        if (count($comments) != 0) {
+        if (count($comments) != 0) { //Attention c tous les comments de l'article
             $req = self::$_bdd->prepare('DELETE  FROM comment WHERE id_article = ?');
             $req->execute(array($id)); 
         }else{
@@ -182,13 +182,7 @@ abstract class Model
     } 
     
 
-    protected function deleteOneComment($table){
-        $id_comment = $_SESSION['id_comment'];
-        $this->getBdd();  
-        $req = self::$_bdd->prepare("DELETE FROM " .$table. " WHERE id_comment = $id_comment");
-        $req->execute(array());
-        $req->closeCursor();
-    } 
+
     /////////////////
     protected function updateOne($table, $data){ // article ou comment 
         $this->getBdd();

@@ -196,9 +196,9 @@
 
               <div class="right-area">
                 <h6 class="reply-btn">
-                  <a href="comment&id_comment={{ comment.id_comment }}&update"><b>UPDATE</b></a
+                  <a href="post&id_article={{ article.id_article }}&comment_update={{ comment.id_comment }}"><b>UPDATE</b></a
                   ><br />
-                  <a href="comment&id_comment={{ comment.id_comment }}&delete"><b>DELETE</b></a>
+                  <a href="post&id_article={{ article.id_article }}&comment_delete={{ comment.id_comment }}"><b>DELETE</b></a>
                 </h6>
               </div>
             </div>
@@ -208,6 +208,16 @@
               {{ comment.content }}
             </p>
           </div>
+        </div>
+        <div>
+            <!-- Form update id_comment -->
+            {% if routename == 'commentUpdateRequest' and comment.id_comment == id_comment %}
+            <form action="comment&comment=update&id_comment={{ comment.id_comment }}" method="post">
+              <label for="prenom">Modifier commentaire</label>
+              <input type="textaera" name="content" class="form-control" >
+              <input type="submit" value="soumettre" class="btn btn-primary">
+            </form>
+            {% endif %}
         </div>
         {% endfor %}
 

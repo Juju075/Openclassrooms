@@ -35,6 +35,9 @@ abstract class Model
         return self::$_bdd;
     }
 
+    /**
+     * Ok univesal function
+     */
     protected function getAll($table, $obj){
         $this->getBdd();
         $var = [];
@@ -47,30 +50,6 @@ abstract class Model
         }
         return $var;
         $req->closeCursor();
-    }
-    
-
-    protected function getAllComments(){
-        $result = [];
-        $this->getBdd();
-        $req0  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_article = ?'); 
-        $req0->execute(array($_SESSION['id_article']));
-        $result = $req0->fetchall();
-        if(!empty($result)){
-            $var= [];
-            $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ? AND disabled = 1'); 
-            $req->execute(array($_SESSION['id_article']));
-            $var = $req->fetchall();
-                return $var; 
-        }else{}
-        
-    }
-    protected function getCommentsCount($comments){
-        if(isset($comments) && $comments != null){
-           return count($comments);
-        }else{
-            return 0;
-        }
     }
 
     protected function authenticationRequest($obj,$usertype){ 
@@ -90,22 +69,6 @@ abstract class Model
                 return false;
             }     
         }
-
-
-    protected function postIfExist(){
-        //lister les id articles encours.
-            $this->getBdd();
-            $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
-            $req0->execute(array($_SESSION['id_article']));
-            $idArticle = $req0->fetchall();
-            if(!empty($idArticle )){
-                return true;
-            }else{
-                return false;
-            }
-    }
-
-
     ///////////////////////////////////
     protected function createOne($table, $obj){
         $array=(array)$obj;
@@ -220,7 +183,6 @@ abstract class Model
     
 
     protected function deleteOneComment($table){
-        //verification du role       
         $id_comment = $_SESSION['id_comment'];
         $this->getBdd();  
         $req = self::$_bdd->prepare("DELETE FROM " .$table. " WHERE id_comment = $id_comment");
@@ -228,41 +190,6 @@ abstract class Model
         $req->closeCursor();
     } 
     /////////////////
-
-//
-    //verifier si le token est l'auteur du comment specifie.
-    //Serie d\'interogation
-    protected function commentValidation($id_comment, $validation_key){
-
-        $this->getBdd();  
-        //Est ce que le token est bien celui de l'utilisateur
-        //
-        $req = self::$_bdd->prepare("SELECT id_user  FROM user WHERE validation_key = ?");
-        $req->execute(array($validation_key)); 
-        $user = $req->fetch();
-        
-        
-        //Verifie si c bien lauteur du comment
-        if(isset($user) && $user != null){
-            $req = self::$_bdd->prepare("SELECT id_user  FROM comment WHERE id_comment = ?");
-            $req->execute(array($id_comment)); 
-            $result = $req->fetchall();
-            $req->closeCursor(); 
-
-            if ($result[0]['id_user'] == $user[0]){ // pb ici
-                //valider l'affichage
-                $req = self::$_bdd->prepare("UPDATE comment SET disabled = 1 WHERE id_comment = ?");
-                $req->execute(array($id_comment));
-                $req->closeCursor(); 
-                return true;  
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
-
     protected function updateOne($table, $data){ // article ou comment 
         $this->getBdd();
         $title = $data['title'];

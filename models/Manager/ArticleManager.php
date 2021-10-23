@@ -30,7 +30,16 @@ class ArticleManager extends Model
 
 
    public function articleVerif(){ 
-      return $this->postIfExist();
+        //lister les id articles encours.
+            $this->getBdd();
+            $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
+            $req0->execute(array($_SESSION['id_article']));
+            $idArticle = $req0->fetchall();
+            if(!empty($idArticle )){
+                return true;
+            }else{
+                return false;
+            }
    }
 
       public function articleVerifNote(){ 

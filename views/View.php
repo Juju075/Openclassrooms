@@ -49,14 +49,14 @@ class View
     // COPIE - Injection de Twig
     public function generatePost($data){ //tableau multidimentionnel 1article + comments
         echo('| View.php generatePost');
-        //var_dump($data);
         $a = 'templateSingle.html.twig';
 
         $content = $this->generateFile($this->_file,$data); //retourne du htl
 
-        $article=$data['article']; 
-        $comments= $data['comments']; 
-        $user='ok retour user'; 
+        $article = $data['article']; 
+        var_dump($article);
+        $comments = $data['comments']; 
+        $user = 'ok retour user'; 
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
@@ -97,9 +97,23 @@ class View
      */
     public function displayForm($action){ 
         echo('| View.php displayForm');
-        $page = 'views/template'.$action .'.html.twig';
-        $view = $this->generateFileSimple($page);
-        echo $view;
+
+        //issue multipages
+        //$page = 'views/template'.$action .'.html.twig';
+        $pagecopy = 'views/template'.$action .'Copy'.'.html.twig';
+
+        $page1 = 'template'.$action .'Copy'.'.html.twig';
+        var_dump($page1);
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+        $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+
+        //$view = $this->generateFileSimple($pagecopy); //$page  verifie et require
+        //echo $view;
+
+        $ici = 'ok loader twig';
+        echo $twig->render($page1,['ici'=>$ici]); 
+        // correction faudrait template.html.twig {{ include $action .'.html.twig'}}
     }
 
      /**

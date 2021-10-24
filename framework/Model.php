@@ -147,7 +147,7 @@ abstract class Model
             $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %T') AS date FROM " .$table. " WHERE id_comment = ?");
         }else{
         }     
-        $req->execute(array($id));
+        $req->execute(array($id)); 
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             $obj2="\\Entity\\".$obj;

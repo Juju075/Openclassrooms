@@ -31,7 +31,7 @@ class ControllerPost
             //id_article
             $this->delete($_GET['delete']); 
         }
-        elseif (isset($_GET['update'])){ //Show update form below article. Admin
+        elseif (isset($_GET['update'])){ //Admin only
             $this->article('postUpdateRequest',null); 
         }
         elseif (isset($_GET['comment_update'])){ //Show update form below article. Admin
@@ -49,15 +49,14 @@ class ControllerPost
             $this->commentManager = new CommentManager;
             $id_comment = $_GET['comment_delete'];
             $author = $this->commentManager->verifCommentAuthor($id_comment);
-                if($author == true){
-                    $this->commentManager->deleteOneComment('comment', $id_comment);
+            if($author == true){
+                $this->commentManager->deleteOneComment('comment', $id_comment);
                 }
-                else{
-                    $this->article(null, null);
-                }            
+            else{
+                $this->article(null, null);
+            }            
         }
         elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ //Traitement update
-            echo('Traitement du formulaire');
             $this->storeUpdate($_POST); 
         }    
          elseif (isset($_GET['validation'])){
@@ -118,15 +117,11 @@ class ControllerPost
 
     //Use TemplateSingle.html.twig
     private function article($routename, $id_comment){
-        echo('jusquici tout vas bien');
-        var_dump($_GET['id_article']);
-
         if(isset($_GET['id_article'])){
             $_SESSION['id_article'] = $_GET['id_article'];
             
             $this->_articleManager = new ArticleManager;
             $articleVerif = $this->_articleManager->articleVerif();
-
 
             if ($articleVerif == true ){
                 //Return Post

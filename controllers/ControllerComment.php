@@ -32,9 +32,6 @@ class ControllerComment extends ControllerContact
         elseif (isset($_GET['id_comment'])){
             $this->updateOneComment($_GET['id_comment']); 
         }               
-        elseif (isset($_GET['delete'])){
-            $this->deleteOneComment($_SESSION['id_article']); 
-        }
         else{
             header('Location: ' );
         }        

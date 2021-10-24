@@ -3,60 +3,61 @@ namespace Controllers;
 session_start();
 
 use View\View;
-
-/**
- * Toute les fonctionnalites
- * postManagement()
- * addPost()
- * deletePost()
- * postEdit()
- * updatePost()
- * usersManagement()
- * enableComment()
- * deleteComment()
- */
-
- /**
-  * routes
-  * login
-  *
-  */
+use Manager\CommentManager;
+use Manager\ArticleManager;
 
   class ControllerAdmin
   {
     private $adminManager;
     private $_view;
+    private $commentManager;
+    private $userManager;
 
 
     public function __construct(){
         if(isset($url) && count($url) < 1){
             throw new \Exception("Page introuvable", 1);
-        }else{
-            $this->login();
-        }      
+        }    
+        elseif(isset($_GET['validation']) && isset($_GET['validation']) =="comment"){ //admin&validation=comment&id=75&token=63aee5f60929e7e2aac8b25a3e826f0e
+            $id_comment = $_GET['id'];
+            $token = $_GET['token'];
+                $this->adminCommentValidation($id_comment,$token);
+        }
+          elseif (isset($_GET['login'])){ //admin&login
+            $this->login();       
+        }             
+        else{
+           //$this->login();
     }
+}
 
 
     private function login(){
-         echo('ControllerAdmin.php login');
-        $this->_view = new View('Login', 'Login');
-        $this->_view->displayForm('Login');       
+        echo('ControllerAdmin.php login');
+        $data = '';
+        $this->_view = new View('Login', 'Admin');
+        $this->_view->displayForm('Login', $data);       
     }
 
-    private function validationComment(){
-        //verification de role
-        //verification existance id_comment 
-        //verification si comment deja publie 1 ou 0
-        //verification id_comment (user) = validation_key
-        // statut 1 bdd pour ce comment
-        
+    //retour du lien de validation
+    private function adminCommentValidation($id_comment, $token){
+    echo('|ControllerAdmin.php adminCommentValidation');
+
+    $this->comment = new CommentManager;
+    $validation = $this->comment->validationByAdmin($id_comment, $token);
+    if($validation == true){
+    }else{
+        header('location: accueil alert');       
     }
-        private function adminCommentValidation($id_comment, $token){
-        //disabled 0>1
-        $this->comment = new CommentManager;
-        $this->comment->validationByAdmin($id_comment, $token);
-
-
+    header('location: accueil alert');
     }
 
+
+    public function storeUpdate($id, $content){
+        echo('ControllerPost.php  storeUpdate');
+        $this->_articleManager = new ArticleManager;
+        $this->_articleManager->updateArticle($id, $content);
+
+        header('location: acceuil alert');
+    }
   }

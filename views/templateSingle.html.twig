@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Vue Article</title>
+    <title>Detail Article</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
@@ -28,7 +28,7 @@
           <i class="ion-navicon"></i>
         </div>
 
-        {% include 'partials/_nav.php' %}
+        {% include 'partials/_nav.html.twig' %}
       </div>
       <!-- conatiner -->
     </header>
@@ -37,13 +37,12 @@
     <!-- couper dessus -->
     <!-- =================================================================== -->
     <!-- Post/viewSinglePost.php -->
-    <b>templateSingle.html.twig </b>
-    {% include 'Post/viewSinglePost.html copy.twig' %}
+    {% include 'Post/viewSinglePost.html.twig' %}
 
     <!-- =================================================================== -->
     <!-- couper dessous -->
     <!-- =================================================================== -->
-    {% include 'partials/_footer-copy.php' %}
+    {% include 'partials/_footer.html.twig' %}
 
     <!-- SCIPTS -->
     <script src="public/common-js/jquery-3.1.1.min.js"></script>

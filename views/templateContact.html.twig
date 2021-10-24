@@ -29,26 +29,29 @@
           <i class="ion-navicon"></i>
         </div>
 
-        <?php include("public/partials/_nav.php"); ?>
+        {% include 'partials/_nav.html.twig' %}
       </div>
       <!-- conatiner -->
     </header>
 
     <!-- Ci-dessous contenu -->
-    <div class="slider"></div>
-    <b>views/templateContact.html.twig</b>
-    <p>include de views/form/contact.html.twig</p>
-    <?php include("views/form/contact.html.twig"); ?>
 
-    <footer>
-      <div class="container">
-        <div class="row">
-          <?php include("public/partials/_footer.php"); ?>
-        </div>
-        <!-- row -->
-      </div>
-      <!-- container -->
-    </footer>
+    <!-- =================================================================== -->
+    <!-- couper dessus -->
+    <!-- =================================================================== -->
+    <!-- templateLogin.html.twig -->
+
+    <!-- =================================================================== -->
+    <!-- couper dessous -->
+    <!-- =================================================================== -->
+    <div class="slider"></div>
+    <p>views/form/contact.html.twig</p>
+    <?php include("views/form/contact.html.twig"); ?>
+    {% include 'form/contact.html.twig' %}
+    <!-- =================================================================== -->
+    <!-- couper dessous -->
+    <!-- =================================================================== -->
+    {% include 'partials/_footer.html.twig' %}
 
     <!-- SCIPTS -->
     <script src="public/common-js/jquery-3.1.1.min.js"></script>

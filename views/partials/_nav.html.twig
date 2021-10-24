@@ -1,0 +1,17 @@
+<ul class="main-menu visible-on-click" id="main-menu">
+  <!-- par default -->
+  <li><a href="accueil">Listing des articles</a></li>
+
+  {% if user is empty %}
+  <li><a href="register&create">S'inscrire</a></li>
+  <li><a href="login&user">S'authentifier</a></li>
+  {% endif %} {% if user == 'MEMBRE' or user == 'ADMIN'%}
+  <li><a href="profile">Mon profil</a></li>
+  <li><a href="login&logout">Me deconnecter</a></li>
+  {% endif %} {% if user == 'MEMBRE' %}
+  <li><a href="contact&create">Nous contacter</a></li>
+  {% endif %} {% if user == 'ADMIN'%}
+  <li><a href="post&create">Créer un article</a></li>
+  {% endif %}
+</ul>
+<!-- main-menu -->

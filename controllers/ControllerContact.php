@@ -9,6 +9,7 @@ use Manager\ContactManager;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Tools\Security;
 
 class ControllerContact
 {
@@ -33,39 +34,31 @@ class ControllerContact
 
     
     private function Message(){ 
-        echo('controllerContact function Message');
-
-        if(isset($_GET['create'])){
+        echo('| controllerContact Message');
             //View
+            $data ='';
             $this->_view = new View('Contact', 'Contact'); 
-            $this->_view->displayForm('Contact');       
-        }
+            $this->_view->displayForm('Contact', $data);       
+
     }
 
     private function sendMessage(){ 
         //Create an instance; passing `true` enables exceptions
-        echo('controllerContact sendMessage');
+        echo('| controllerContact sendMessage');
 
-        
+        //if(isset($_SESSION['id_user'])){
+        if(($user=Security::retrieveUserObj('MEMBER'))!=null){ 
+
         //recuperer data user
         $this->contactManager = new ContactManager;
         $user[] = $this->contactManager->getUser($_SESSION['id_user']);
-        var_dump($user);
-        var_dump($user[0]);
 
         //ajout POST 
-        $_POST['prenom']= 'ajoute cidi';
+        $_POST['prenom']= $user[0]['prenom'];
         $_POST['nom']= $user[0]['nom'];
         $_POST['email']= $user[0]['email'];
-
-        var_dump($_POST);
-        exit;
-
-
-
         $mail = new PHPMailer(true);
         
-
         try {
             //Server settings
             //SMTP::DEBUG_SERVER
@@ -98,10 +91,6 @@ class ControllerContact
              */
 
 
-
-
-
-
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Here is the subject';
             $mail->Body    = $_POST['message'];
@@ -115,7 +104,10 @@ class ControllerContact
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
-            
+
+        }else{ // si non connecté
+            header('location: accueil&comment=notconnected');
+        }    
     }
 
 }

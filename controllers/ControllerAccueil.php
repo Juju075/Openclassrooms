@@ -17,58 +17,54 @@ use Manager\ArticleManager;
         }
         //Gestion des alerts
         //Refactoring get $attribut1 et $attribut2
-
-
-        elseif (isset($_GET['acceuil']) && isset($_GET['login']) =="notconnected"){  
-            $this->$this->articles(1);       
-        }  
-        elseif (isset($_GET['acceuil']) && isset($_GET['login']) =="connected"){  
-            $this->$this->articles(2);       
-        }  
-        elseif (isset($_GET['acceuil']) && isset($_GET['register']) =="created"){  
-            $this->$this->articles(3);       
-        }  
-        elseif (isset($_GET['acceuil']) && isset($_GET['post']) =="created"){  
-            $this->$this->articles(4);       
-        }  
-        elseif (isset($_GET['acceuil']) && isset($_GET['passe']) =="valide"){  
-            $this->$this->articles(5);       
-        }  
-        elseif (isset($_GET['acceuil']) && isset($_GET['comment']) =="notconnected"){  
-            $this->$this->articles(6);       
-        }  
-        elseif (isset($_GET['acceuil']) && isset($_GET['login']) =="error"){  
-            $this->$this->articles(7);       
-        }  
-        elseif (isset($_GET['acceuil']) && isset($_GET['post']) =="created"){  
-            $this->$this->articles(8);       
-        }  
-        elseif (isset($_GET['acceuil']) && isset($_GET['session']) =="terminated"){  
-            $this->$this->articles(9);       
-        }  
-        elseif (isset($_GET['acceuil']) && isset($_GET['message']) =="send"){  
-            $this->$this->articles(10);       
-        }   
-
-
+        elseif(isset($_GET['register']) && isset($_GET['register']) =="created"){
+            $routename = 'accueil&register=created';
+            $this->articles($routename);
+        }
+        elseif(isset($_GET['post']) && isset($_GET['post']) =="created"){
+            $routename = 'accueil&post=created';
+            $this->articles($routename);
+        }
+        elseif(isset($_GET['passe']) && isset($_GET['passe']) =="valide"){
+            $routename = 'accueil&passe=valide';
+            $this->articles($routename);
+        }
+        elseif(isset($_GET['comment']) && isset($_GET['comment']) =="notconnected"){
+            $routename = 'accueil&comment=notconnected';
+            $this->articles($routename);
+        }
+        elseif(isset($_GET['login']) && isset($_GET['login']) =="error"){
+            $routename = 'accueil&login=error';
+            $this->articles($routename);
+        }
+        elseif(isset($_GET['register']) && isset($_GET['register']) =="error"){
+            $routename = 'accueil&register=error';
+            $this->articles($routename);
+        }
+        elseif(isset($_GET['session']) && isset($_GET['session']) =="terminated"){
+            $routename = 'accueil&session=terminated';
+            $this->articles($routename);
+        }
+        elseif(isset($_GET['post']) && isset($_GET['post']) =="exist"){
+            $routename = 'accueil&post=exist';
+            $this->articles($routename);
+        }
+        elseif(isset($_GET['message']) && isset($_GET['message']) =="sent"){
+            $routename = 'accueil&message=sent';
+            $this->articles($routename);
+        }
         else{
-            $this->articles(0);  
+            $this->articles('');  
         }
     }
     
-    /**
-     * Fonction d'affichage de tous les articles.
-     */
-    private function articles($alertnumb){
-        echo('ControllerAcceuil.php articles');
-
+    private function articles($routename){
+        //Repository    
         $this->_articleManager = new ArticleManager(); 
         $articles = $this->_articleManager->getArticles();
         
+        //View
         $this->_view = new View('Accueil', 'Post');
-        $this->_view->generate(array('articles'=>$articles));
-
-        //si besoin quel alert affiche. 0-8
+        $this->_view->generate(array('routename'=>$routename, 'articles'=>$articles));
     }
-
 }

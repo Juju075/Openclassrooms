@@ -1,10 +1,12 @@
-<?php ?>
-login.htlm.twig
+viewAdmin.html.twig update post login.htlm.twig
+
+<!-- Afficher si -->
 <h1 class="my-5 text-center">Me connecter.</h1>
 <!-- Twig si usertype 2-->
+<h1 class="my-5 text-center">Espace Administrateur.</h1>
 
 <form method="post" action="login&status=login">
-  <div class="row">
+  <div class="row"> 
     <div class="col-md-6">
       <label for="username">Username</label
       ><input
@@ -25,30 +27,15 @@ login.htlm.twig
         required
       />
     </div>
-
-    <div class="form-check">
-      <img src="/public/images/space.png" alt="" />
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
-
-    <div class="form-group">
-      <div class="form-check">
-        <label class="form-check-label" for="gridCheck">
-          Administrateur.
-        </label>
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="gridCheck"
-          name="option"
-        />
-      </div>
-    </div>
-
     <br />
-  </div>
-  <div class="button">
-    <button type="submit" class="btn btn-primary btn-lg btn-block">
-      Soumettre
-    </button>
+    <div class="button">
+      <button type="submit" class="btn btn-primary btn-lg btn-block">
+        Soumettre
+      </button>
+    </div>
   </div>
 </form>

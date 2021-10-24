@@ -6,6 +6,7 @@ use Tools\Model;
 use Manager\ArticleManager;
 use Manager\CommentManager;
 use Manager\ContactManager;
+use Tools\Security;
 
 //http://localhost/App_Blog_MVC/test&comment
 //http://localhost/App_Blog_MVC/test&comment
@@ -13,10 +14,12 @@ use Manager\ContactManager;
 
 
 
-Class ControllerTest extends Model
+Class ControllerTest extends Security
 {
 
     private $_testManager;
+    private $_articleManager;
+ 
 
         public function __construct(){
         //Ajouter contrainte Admin.
@@ -32,6 +35,15 @@ Class ControllerTest extends Model
         elseif (isset($_GET['twig'])){
             $this->twigImplementation(); 
         }
+         elseif (isset($_GET['image'])){
+            $this->codeguyUpload(); 
+        } 
+         elseif (isset($_GET['listarticle'])){
+            $this->loopFor(); 
+        }     
+        elseif (isset($_GET['user'])){
+            $this->retrieveUserObj('MEMBRE'); 
+        }                                   
         else{
             header('location: /accueuil');
         }
@@ -91,5 +103,34 @@ Class ControllerTest extends Model
         //envoye le tableau à la vue
 
     }
+
+    public function codeguyUpload(){
+        //afficher le formulaire
+        readfile("views/form/registerCopy.html.twig");
+        var_dump($_POST);
+        var_dump($_FILES);
+        var_dump($_POST['foo']);
+
+    }
+
+    public function loopFor(){
+        echo('ControllerTest.php loopFor');
+        $this->_articleManager = new ArticleManager(); 
+        $articles = $this->_articleManager->getArticles();
+        var_dump($articles);
+
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+        $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+        echo $twig->render('test.html.twig',['articles'=>$articles]); 
+    }
+
+   public function userobj(){
+       echo('| ControllerTest.php userobj');
+               if(($user=Security::login('MEMBRE'))!=null){ // aucun utilisateur retournee.
+            //$user->getid_User();
+            var_dump($user);
+        } 
+   }
 
 }

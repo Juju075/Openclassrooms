@@ -16,127 +16,152 @@ class View
         $this->b = $dossier.'/view'.$action.'.html.twig';
     }
 
-    //GENERATE PAGE $content
+    // /accueil 
         public function generate($data){  
-        echo('| View.php generate');
-        var_dump($data);
+        $a = 'template.html.twig';
 
-        $content = $this->generateFile($this->_file,$data);
-        // {% include 'Post/viewSinglePost.html copy.twig' %} vas aussi recuperer le html et on passe les data directment
-        // dans la page en 
-
-        $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t,'content' => $content));
-        echo $view;
-
-        //if content empty page erreur.
-    }
-
-
-    /**
-     * Cette fonction sert à generer le listing des Post (All). template.php 
-     */
-    public function generateBackup($data){  
-        echo('| View.php generate');
-
-        $content = $this->generateFile($this->_file,$data);
-        $view = $this->generateFile('views/template.html.twig', array('t' => $this->_t,'content' => $content));
-        echo $view;
-
-        //if content empty page erreur.
-    }
-
-
-    // COPIE - Injection de Twig
-    public function generatePost($data){ //tableau multidimentionnel 1article + comments
-        echo('| View.php generatePost');
-        $a = 'templateSingle.html.twig';
-
-        $content = $this->generateFile($this->_file,$data); //retourne du htl
-
-        $article = $data['article']; 
-        var_dump($article);
-        $comments = $data['comments']; 
-        $user = 'ok retour user'; 
-
+        //route
+        if(!empty($data['routename'])){
+            $getalert = $data['routename']; // ok
+        }else{
+            $getalert = null;
+        }
+        //articles
+        if(!empty($data['articles'])){
+            $articles = $data['articles']; // ok
+        }
+        else{
+            $articles = null;
+        }
+        
+        // user
+        if(!empty($_SESSION['user']['usertype'])){
+            $user = $_SESSION['user']['usertype'];
+        }
+        else{
+            $user = null;
+        }
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        //echo $twig->render($a,$data); 
-        echo $twig->render($a,['content'=>$content,'article'=>$article,'comments'=>$comments,'user'=>$user]); 
+        echo $twig->render($a,['getalert'=>$getalert,'user'=>$user, 'articles'=>$articles]); 
+    }
+    
+    public function generatePost($data){ 
+        $a = 'templateSingle.html.twig';
+        //route
+        $article = $data['article'][0];  
+         //comments
+        $count =  $data['nbrcomments'];
+        if($count != 0){
+            $comments = $data['comments'];
+        }else{
+            $comments =null;
+        }
+        // user
+        if(!empty($_SESSION['user']['usertype'])){
+            $user = $_SESSION['user']['usertype'];
+        }
+        else{
+            $user = null;
+        }
+        if(!empty($data['id_comment'])){
+            $id_comment = $data['id_comment'];
+        }
+        else{
+            $id_comment = null;
+        }        
+        
 
-        //$echo1 = $this->generateFile('views/'.$a, array('t'=>$this->_t, 'content'=>$content)); 
+        $routename = $data['routename'];
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+        $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment]); 
     }
 
-
-
-    /**
-     * Cette fonction sert generer la page de detail Post(One). templateSingle.php
-     * Injecte du twig
-     */
-    public function generatePostBackup($data){
-        echo('| View.php generatePost');
-        $content = $this->generateFile($this->_file,$data);
-        $view = $this->generateFile('views/templateSingle.html.twig', array('t'=>$this->_t, 'content'=>$content));  
-        echo $view;
-    }
-
-
-
-    /**
-     * pas appeler a voir. 
-     * Cette fonction sert à 
-     */
     public function simpleContent($action){ 
         $page = 'views/template'.$action .'.html.twig';
         $view = $this->generateFileSimple($page);
         echo $view;
     }
 
-    /**
-     * Cette fonction sert à afficher le formulaire souhaité.
-     * views/template
-     */
-    public function displayForm($action){ 
-        echo('| View.php displayForm');
-
-        //issue multipages
-        //$page = 'views/template'.$action .'.html.twig';
-        $pagecopy = 'views/template'.$action .'Copy'.'.html.twig';
-
-        $page1 = 'template'.$action .'Copy'.'.html.twig';
-        var_dump($page1);
-
+    public function displayForm($action,$data){ 
+        $page1 = 'template'.$action.'.html.twig';
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+        
+        if($action === 'Register'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }
+        elseif($action === 'Login'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }
+        elseif($action === 'Profile'){
+            $user = $data[0];
+            echo $twig->render($page1,['user'=>$user]);
+        }
+        elseif($action === 'Post'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }
+         elseif($action === 'Contact'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }       
+        elseif($action === 'Admin'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }
+        elseif($action === 'Update'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = '';  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }                           
+        else{
+        throw new \Exception("Route inconnue", 1);
 
-        //$view = $this->generateFileSimple($pagecopy); //$page  verifie et require
-        //echo $view;
-
-        $ici = 'ok loader twig';
-        echo $twig->render($page1,['ici'=>$ici]); 
-        // correction faudrait template.html.twig {{ include $action .'.html.twig'}}
+        }
     }
 
-     /**
-     * Cette fonction sert à 
-     */
+
     public function generateForm(){
         $content = $this->generateFileSimple($this->_file);
         $view = $this->generateFile('views/form/templatePost.html.twig', array('t' => $this->_t, 'content' => $content));
         echo $view;
     }
-    //Call 
-    /**
-     * Cette fonction sert à ajouter un require variable.
-     */
+
+
     public function generateFileSimple($file){
         if(file_exists($file)){
             require $file;
         }
     }
 
-    /**
-     * Cette fonction sert mise en tampon des datas.
-     */
+
     private function generateFile($file, $data){  
         if(file_exists($file)){
             extract($data); 
@@ -148,12 +173,4 @@ class View
         throw new \Exception("Fichier".$file." introuvable", 1);
         }
     }
-
-    /**
-     * Cette fonction sert à 
-     */
-    public function displayFormUpdate(){
-        
-    }
-
 }

@@ -19,24 +19,33 @@ class ArticleManager extends Model
 
    //Admin delete post
    public function deleteArticle($id){
-      return $this->deleteOne('article', $id);
+     $this->deleteOne('article', $id);
    }
-   
-   
-   /**
-    * Cette fonction modifie le post actuel.
-    */
-   public function updateArticle($id){
-      echo('| ArticleManager updateArticle');
-      //return $this->updateOne('article', $id);
+   public function updateArticle($content){
+      $this->updateOne('article', $content);
    }
     public function articleAlreadyExist($title, $content){
-      echo('| ArticleManager articleAlreadyExist');
-      var_dump($title. $content);
       return $this->noDuplicatePost('article', $title, $content);
    }  
-   public function articleVerif(){ //effacer cette fonction non utilise.
-      echo('| ArticleManager articleVerif');
-      return $this->postIfExist();
+
+
+   public function articleVerif(){ 
+        //lister les id articles encours.
+            $this->getBdd();
+            $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
+            $req0->execute(array($_SESSION['id_article']));
+            $idArticle = $req0->fetchall();
+            if(!empty($idArticle )){
+                return true;
+            }else{
+                return false;
+            }
+   }
+
+      public function articleVerifNote(){ 
+            $this->getBdd();
+            $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
+            $req0->execute(array($_SESSION['id_article']));
+            return $req0->fetchall();
    }
 }

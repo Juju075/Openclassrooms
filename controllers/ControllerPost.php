@@ -2,16 +2,18 @@
 namespace controllers;
 session_start();
 
+use Controllers\ControllerContact;
 use View\View;
 use Entity\Article;
 use Manager\ArticleManager;
 use Manager\CommentManager;
+use Tools\Security;
+
 
 class ControllerPost
  {
     private $_articleManager;
     private $commentManager;
-    private $comment;
 
     private $_view; 
 
@@ -22,120 +24,121 @@ class ControllerPost
         elseif (isset($_GET['create'])){
             $this->create(); 
         }
-        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ //Traitement
+        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){
             $this->store();
         }   
         elseif (isset($_GET['delete'])){
             //id_article
             $this->delete($_GET['delete']); 
         }
-        elseif (isset($_GET['update'])){ //App_Blog_MVC/post&update_id=29
-            $this->update($_GET['update']); 
+        elseif (isset($_GET['update'])){ //Show update form below article. Admin
+            $this->article('postUpdateRequest',null); 
         }
-        elseif (isset($_GET['update_id'])){ //Traitement update
-            $this->storeUpdate($_GET['update_id']); 
-            //recuperer les valeurs du formulaire
+        elseif (isset($_GET['comment_update'])){ //Show update form below article. Admin
+            $this->commentManager = new CommentManager;
+            $id_comment = $_GET['comment_update'];
+            $author = $this->commentManager->verifCommentAuthor($id_comment);
+            if($author == true){
+                $this->article('commentUpdateRequest',$id_comment);
+            }
+            else{
+                $this->article(null, null);
+            }
         }
+        elseif (isset($_GET['comment_delete'])){
+            $this->commentManager = new CommentManager;
+            $id_comment = $_GET['comment_delete'];
+            $author = $this->commentManager->verifCommentAuthor($id_comment);
+                if($author == true){
+                    $this->commentManager->deleteOneComment('comment', $id_comment);
+                }
+                else{
+                    $this->article(null, null);
+                }            
+        }
+        elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ //Traitement update
+            echo('Traitement du formulaire');
+            $this->storeUpdate($_POST); 
+        }    
          elseif (isset($_GET['validation'])){
             //id_comment
             //$this->adminCommentValidation($_GET['id_comment'],$_GET['token']); 
         }       
         else{
-            $this->article();
+            $this->article(null, null);
         }
     }
 
+    
+
     //CRUD
     private function create(){
-        if(isset($_GET['create'])){
+            $data ='';
             $this->_view = new View('CreatePost', 'Post');
-            $this->_view->displayForm('Post');
-        }
+            $this->_view->displayForm('Post',$data); //data ok vide (dispo si besoin).
     }   
 
     private function delete($id){
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->deleteArticle($id);
-        header('Location: accueil');
+        header('Location: accueil&article=deleted');
     }
-
-    private function update($id){
-        echo('ControllerPost function update()');
-
-        //View ok template + formulaire update ok
-        if(isset($_GET['update'])){
-            
-            $this->_view = new View('UpdatePost', 'Post'); //construct
-            $this->_view->displayForm('Update');
-        }        
-    }
-
-    //Traitement add article.
-    // Affectation $articles pour le foreach $content
 
     private function store(){
-        echo('| controllerPost.php store');
-
-        //Contrainte role administrateur usertype
-        //1 rch usertype si usertype === 1 sinon alert
-   
-        var_dump($_POST);
-
-        $this->_articleManager = new ArticleManager;
-        $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
-
-        if ($articleVerifNoDuplicate === false) {
-            if (isset($_POST)){
-                $_POST['id_user'] = $_SESSION['id_user'];
-                var_dump($_POST); //verification insertion
-
-                $article= new Article($_POST);   
+        if(($user=Security::retrieveUserObj('ADMIN'))!=null){ // return boll
+            //user->getid_User(); // Expected type 'object'. Found 'bool'
                 $this->_articleManager = new ArticleManager;
-                $article = $this->_articleManager->createArticle($article); //null
-
-                var_dump($article);
-
-                $articles = $this->_articleManager->getArticles();
-                $this->_view = new View('Accueil','Post');
-                $this->_view->generate(array('articles' =>$articles));
-
-            }else {
-                header('location; accueil');
-            }
+                $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
+               
+                if ($articleVerifNoDuplicate === false){
+                    if (isset($_POST)){
+                        $_POST['id_user'] = $_SESSION['id_user'];
+                        //Ajout Id_user 
+                        $article= new Article($_POST);   
+                        $article = $this->_articleManager->createArticle($article); 
+                        $articles = $this->_articleManager->getArticles();
+                        $this->_view = new View('Accueil','Post');
+                        $this->_view->generate(array('articles' =>$articles));
+                        header('location; accueil');//sucess
+                    }
+                    else{}
+                }else{
+                    header('location; accueil');// article already exist
+                }
+            }else{
+            header('location: accueil'); //not admin
         }
     }
 
-    public function storeUpdate($id){
-        echo('ControllerPost.php  storeUpdate()');
-
+    private function storeUpdate($data){
         $this->_articleManager = new ArticleManager;
-        $this->_articleManager->updateArticle($id);
-
-        //une fois fini script
-        //header('Location: App_Blog_MVC/accueil');
+        $this->_articleManager->updateArticle($data);
+        header('location: post&id_article='.$_SESSION['id_article']);
     }
 
-    private function article(){
-        echo('ControllerPost.php  article');
+    //Use TemplateSingle.html.twig
+    private function article($routename, $id_comment){
+        echo('jusquici tout vas bien');
+        var_dump($_GET['id_article']);
 
         if(isset($_GET['id_article'])){
             $_SESSION['id_article'] = $_GET['id_article'];
-
+            
             $this->_articleManager = new ArticleManager;
             $articleVerif = $this->_articleManager->articleVerif();
+
 
             if ($articleVerif == true ){
                 //Return Post
                 $article = $this->_articleManager->getArticle($_GET['id_article']);
-
                 //Return Comments        
                 $this->commentManager = new CommentManager;
-                $comments = $this->commentManager->getComments();  // array string
+                $comments = $this->commentManager->getComments();
+                $nbrcomments = $this->commentManager->displaynumber($comments);
 
-                //echo view
+                //View
                 $this->_view = new View('singlePost','Post');
-                //$this->_view->generatePost(array('article'=>$article)); //echo $view;
-                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments)); //echo $view;
+                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename,'id_comment'=>$id_comment),'PostsinglePost');
             }
             elseif ($articleVerif == false){
                 header('location: accueil');

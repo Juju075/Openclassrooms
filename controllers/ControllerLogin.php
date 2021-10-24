@@ -4,6 +4,7 @@ session_start();
 
 use View\View;
 use Tools\security;
+
 class ControllerLogin
 {
 
@@ -21,7 +22,6 @@ class ControllerLogin
             $this->logout();       
         }        
         elseif (isset($_GET['status']) && isset($_GET['status']) =="login"){  
-            //ajoute checkbox nama option
             if (isset($_POST['option']) && $_POST['option'] === 'on') {
                 $checkbox = 'ADMIN';
             }else{

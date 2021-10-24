@@ -47,7 +47,6 @@ echo('ControllerComment storeComment');
         $comment = $this->commentManager->addComment($comment);
         
         $this->commentManager->getComments();
-        exit;
         //PARTIE VALIDATION PAR L ADMIN. (envoie de la request insertion).
         //admin&validation=comment&id=75&token=63aee5f60929e7e2aac8b25a3e826f0e
 

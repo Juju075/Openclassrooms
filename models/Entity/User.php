@@ -30,7 +30,6 @@ class User
     public function __construct(array $obj){
         if(!empty($obj)){
             $this->hydrate($obj);
-            var_dump($obj);
         }
     }
   

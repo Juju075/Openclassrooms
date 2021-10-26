@@ -42,8 +42,6 @@ class ArticleManager extends Model
 
       if (!empty($titleresult)) { 
          $req = self::$_bdd->prepare("SELECT content FROM article WHERE id_article = ?");
-         var_dump($titleresult[0]);
-
          $req->execute(array($titleresult[0]));
          $contentresult = $req->fetchall(); 
             if ($contentresult === $content) {

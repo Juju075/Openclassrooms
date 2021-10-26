@@ -22,12 +22,20 @@
                     alt="Profile Image"
                 /></a>
               </div>
-
               <div class="middle-area">
                 <p>{{ user.prenom}}</p> {# de quel id? #}
                 <p>{{ user.nom}}</p>
-                <p>twig latest modification</p>
+
+                {% if user.updatedAt is not null or not empty %}
+                <p>Updated</p>
                 <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
+                {{ article.updatedAt}}
+                {% else %}
+                <p>Created</p>
+                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
+                {{ article.createdAt}}
+                {% endif %}
+
               </div>
             </div>
             <!-- post-info -->
@@ -58,7 +66,7 @@
 
             <!-- afficher si update -->
             {% if routename == 'postUpdateRequest' %}
-            <form action="post&article=update" method="post">
+            <form action="post&article=update&id_article={{ article.id_article }}" method="post">
               <label for="prenom">Nouveau titre</label>
               <input type="text" name="title" class="form-control" >
               <label for="prenom">Nouveau texte</label>

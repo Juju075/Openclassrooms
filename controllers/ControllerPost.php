@@ -50,14 +50,17 @@ class ControllerPost
             $id_comment = $_GET['comment_delete'];
             $author = $this->commentManager->verifCommentAuthor($id_comment);
             if($author == true){
-                $this->commentManager->deleteOneComment('comment', $id_comment);
+                $this->commentManager->deleteOneComment($id_comment);
                 }
             else{
                 $this->article(null, null);
             }            
         }
         elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ //Traitement update
-            $this->storeUpdate($_POST); 
+            $id = $_GET['id_article'];
+            $title =$_POST['title'];
+            $content = $_POST['content'];
+            $this->storeUpdate($id,$title,$content); 
         }    
         elseif (isset($_GET['validation'])){
             //id_comment
@@ -92,10 +95,9 @@ class ControllerPost
     }
 
     private function store(){
-        if(($user=Security::retrieveUserObj('ADMIN'))!=null){ // return boll
-            //user->getid_User(); // Expected type 'object'. Found 'bool'
+        if(($user=Security::retrieveUserObj('ADMIN'))!=null){ 
                 $this->_articleManager = new ArticleManager;
-                $articleVerifNoDuplicate = $this->_articleManager->articleAlreadyExist($_POST['title'], $_POST['content']);
+                $articleVerifNoDuplicate = $this->_articleManager->noDuplicatePost($_POST['title'], $_POST['content']);
                
                 if ($articleVerifNoDuplicate === false){
                     if (isset($_POST)){
@@ -106,21 +108,31 @@ class ControllerPost
                         $articles = $this->_articleManager->getArticles();
                         $this->_view = new View('Accueil','Post');
                         $this->_view->generate(array('articles' =>$articles));
-                        header('location; accueil');//sucess
+                        header('location; accueil');
                     }
                     else{}
                 }else{
-                    header('location; accueil');// article already exist
+                    header('location; accueil');
                 }
             }else{
-            header('location: accueil'); //not admin
+            header('location: accueil');
         }
     }
 
-    private function storeUpdate($data){
-        $this->_articleManager = new ArticleManager;
-        $this->_articleManager->updateArticle($data);
-        header('location: post&id_article='.$_SESSION['id_article']);
+    private function storeUpdate($id,$title,$content){
+        if(($user=Security::retrieveUserObj('ADMIN'))!=null){
+                $this->_articleManager = new ArticleManager;
+                $this->_articleManager->updateArticle($id,$title,$content);
+
+
+                //post&id_article=14
+                // header('location: post&id_article='.$_SESSION['id_article']);
+                header('location: /post&id_article=146'); 
+                echo('jusquici tout vas bien');
+        }else{
+            //Alert
+            header('location: post&id_article='.$_SESSION['id_article']);
+        }
     }
 
     //Use TemplateSingle.html.twig

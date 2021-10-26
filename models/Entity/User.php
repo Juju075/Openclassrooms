@@ -5,26 +5,22 @@ class User
 {
     // use Timestampable;
 
-
-    
-    
-    
     // created_date et modified_date dans timestampable  $createdAt $updatedAt
     private $usertype; 
-    private $id_user;   //                      var_dump obj >null
+    private $id_user;             
     private $username;
     private $password;
     private $email;
 
-    private $activated; //defaut 0              var_dump obj >int 1
-    private $validation_key; //a genere          var_dump obj >null
+    private $activated; 
+    private $validation_key;
 
     
 
     private $avatar;
-    private $prenom; // champs 
-    private $nom; // champs
-    private $sentence; //                       var_dump obj >null         
+    private $prenom;
+    private $nom;
+    private $sentence;        
 
 
     public function __construct(array $obj){
@@ -48,9 +44,6 @@ class User
 
 
     //Setters
-
-
-    
     public function setId_user(?int $id_user)
     {  
         $id = (int) $id_user;
@@ -102,7 +95,6 @@ class User
     }    
 
     
-
 
 
     //Getters
@@ -159,7 +151,6 @@ class User
 
     public function getFullName(){
         return $this->getPrenom() . " " . $this->getNom();
-
     }
 
 }

@@ -33,8 +33,6 @@ class CommentManager extends Model
       return $this->GetOne('comment','Comment', $id);
    }
    public function addComment($comment){
-      //verification si connecte
-      echo('|CommentManager createComment');
       return $this->createOne('comment', $comment);
    } 
 
@@ -47,8 +45,6 @@ class CommentManager extends Model
    }
 
    public function verifCommentAuthor($id_comment){
-
-      //doit etre connecte sinon alert
    if(($user=Security::retrieveUserObj('ADMIN'))!=null){
       $this->getBdd();
       $req  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_user = ? AND id_comment = ?'); 
@@ -62,13 +58,10 @@ class CommentManager extends Model
       return false;   
    }
 
-    public function deleteOneComment($table){
-        $id_comment = $_SESSION['id_comment'];
-        $this->getBdd();  
-        $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_comment = $id_comment");
-        $req->execute(array());
-    } 
 
+   public function deleteOneComment($id_comment){
+      $this-> deleteOne('comment', $id_comment);
+   }
 
    public function validationByAdmin($id_comment, $token){
         $this->getBdd();  

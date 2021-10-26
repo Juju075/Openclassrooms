@@ -20,7 +20,6 @@ abstract class Model
         } catch
             (\PDOException $e) {
             echo "<p>Erreur: " . $e->getMessage();
-            die();
         }
     }
 

@@ -69,14 +69,10 @@ class ControllerRegister
                     header('location: accueil&register=created');
                 }
                 else{
-                    echo('error 2');
-                    exit;
                 header('location: accueil&register=error');
             }    
             
         }else{
-            echo('error 1');
-            exit;
             header('location: accueil&register=error');
         }
     }

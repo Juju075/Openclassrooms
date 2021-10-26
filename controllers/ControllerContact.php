@@ -47,7 +47,7 @@ class ControllerContact
         echo('| controllerContact sendMessage');
 
         //if(isset($_SESSION['id_user'])){
-        if(($user=Security::retrieveUserObj('MEMBER'))!=null){ 
+        if(($user=Security::retrieveUserObj('MEMBER'))!==null){ 
 
         //recuperer data user
         $this->contactManager = new ContactManager;

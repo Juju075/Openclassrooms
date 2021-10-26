@@ -41,7 +41,7 @@ class ControllerComment extends ControllerContact
     private function storeComment(){
     echo('ControllerComment storeComment');
 
-    if(($user=Security::retrieveUserObj('MEMBER'))!=null){ //   
+    if(($user=Security::retrieveUserObj('MEMBER'))!==null){ //   
         $array = array('content'=> $_POST['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
         $comment = new Comment($array);  
         $this->commentManager = new CommentManager;
@@ -103,7 +103,7 @@ class ControllerComment extends ControllerContact
     private function updateOneComment($id_comment){
         echo('|ControllerComment. php updateOneComment');
 
-        if(($user=Security::retrieveUserObj('MEMBRE'))!=null){ // Ok array pas obj       
+        if(($user=Security::retrieveUserObj('MEMBRE'))!==null){ // Ok array pas obj       
             $this->commentManager = new CommentManager;
             $isAuthor = $this->commentManager->verifCommentAuthor($id_comment); //boll 
 
@@ -123,7 +123,7 @@ class ControllerComment extends ControllerContact
     private function deleteOneComment($id){
         //1 verifie si c bien lutilisateur du comment
         //2 envoyer une requete delete de l'id article       
-        if(($user=Security::retrieveUserObj('MEMBER'))!=null){ //
+        if(($user=Security::retrieveUserObj('MEMBER'))!==null){ //
         }   
 
     }

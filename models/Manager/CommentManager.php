@@ -23,7 +23,7 @@ class CommentManager extends Model
    }
 
    public function displaynumber($comments){
-        if(isset($comments) && $comments != null){
+        if(isset($comments) && $comments !== null){
            return count($comments);
         }else{
             return 0;
@@ -45,7 +45,7 @@ class CommentManager extends Model
    }
 
    public function verifCommentAuthor($id_comment){
-   if(($user=Security::retrieveUserObj('ADMIN'))!=null){
+   if(($user=Security::retrieveUserObj('ADMIN'))!==null){
       $this->getBdd();
       $req  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_user = ? AND id_comment = ?'); 
       $req->execute(array($_SESSION['id_user'], $id_comment));
@@ -73,7 +73,7 @@ class CommentManager extends Model
         
         
         //Verifie si c bien l'auteur du comment
-        if(isset($user) && $user != null){
+        if(isset($user) && $user !== null){
             $req = self::$_bdd->prepare("SELECT id_user  FROM comment WHERE id_comment = ?");
             $req->execute(array($id_comment)); 
             $result = $req->fetchall();

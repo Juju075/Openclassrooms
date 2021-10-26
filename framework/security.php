@@ -13,7 +13,7 @@ class Security
             $user['usertype']=$usertype;
 
             
-            if ($userObj=$userMAnager->logonManager($user,$usertype) != null){ 
+            if ($userObj=$userMAnager->logonManager($user,$usertype) !== null){ 
                 $_SESSION['user'] = array(
                     'username' => $user['username'],
                     'password' => $user['password'],
@@ -31,7 +31,7 @@ class Security
         if(isset($_SESSION['user']['username'])){
             $userMAnager=new UserManager();
             $user = array('username'=>$_SESSION['user']['username'],'password'=>$_SESSION['user']['password'],'usertype'=>$_SESSION['user']['usertype']);
-                if ($userObj=$userMAnager->logonManager($user,$user['usertype']) != null){ 
+                if ($userObj=$userMAnager->logonManager($user,$user['usertype']) !== null){ 
                     return $userObj;
                 } 
                 else{

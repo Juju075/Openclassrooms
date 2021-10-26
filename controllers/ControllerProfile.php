@@ -24,7 +24,7 @@ use Tools\Security;
     //Affiche un contenu simple pas de repository
     private function myProfile(){
         //usertype connecte
-        if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!=null){
+        if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null){
             $result = $this->$user->getPrenom(); // Expected type 'object'. Found 'bool'.
             $this->usermanager = new UserManager;
             $data = $this->usermanager->ProfilUser();

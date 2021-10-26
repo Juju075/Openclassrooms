@@ -30,7 +30,7 @@ class ControllerRegister
         if(isset($_GET['create'])){
 
         //Logique
-        if(($user=Security::login('MEMBRE'))!=null){ // aucun utilisateur retournee.
+        if(($user=Security::login('MEMBRE'))!==null){ 
             //$user->getid_User();
         } 
 

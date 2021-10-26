@@ -38,7 +38,7 @@ class ControllerPost
             $this->commentManager = new CommentManager;
             $id_comment = $_GET['comment_update'];
             $author = $this->commentManager->verifCommentAuthor($id_comment);
-            if($author == true){
+            if($author === true){
                 $this->article('commentUpdateRequest',$id_comment);
             }
             else{
@@ -49,7 +49,7 @@ class ControllerPost
             $this->commentManager = new CommentManager;
             $id_comment = $_GET['comment_delete'];
             $author = $this->commentManager->verifCommentAuthor($id_comment);
-            if($author == true){
+            if($author === true){
                 $this->commentManager->deleteOneComment($id_comment);
                 }
             else{
@@ -95,7 +95,7 @@ class ControllerPost
     }
 
     private function store(){
-        if(($user=Security::retrieveUserObj('ADMIN'))!=null){ 
+        if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
                 $this->_articleManager = new ArticleManager;
                 $articleVerifNoDuplicate = $this->_articleManager->noDuplicatePost($_POST['title'], $_POST['content']);
                
@@ -120,7 +120,7 @@ class ControllerPost
     }
 
     private function storeUpdate($id,$title,$content){
-        if(($user=Security::retrieveUserObj('ADMIN'))!=null){
+        if(($user=Security::retrieveUserObj('ADMIN'))!==null){
                 $this->_articleManager = new ArticleManager;
                 $this->_articleManager->updateArticle($id,$title,$content);
 
@@ -143,7 +143,7 @@ class ControllerPost
             $this->_articleManager = new ArticleManager;
             $articleVerif = $this->_articleManager->articleVerif();
 
-            if ($articleVerif == true ){
+            if ($articleVerif === true ){
                 //Return Post
                 $article = $this->_articleManager->getArticle($_GET['id_article']);
                 //Return Comments        
@@ -155,7 +155,7 @@ class ControllerPost
                 $this->_view = new View('singlePost','Post');
                 $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename,'id_comment'=>$id_comment),'PostsinglePost');
             }
-            elseif ($articleVerif == false){
+            elseif ($articleVerif === false){
                 header('location: accueil');
             }else{
                 header('location: accueil');

@@ -45,7 +45,7 @@ use Manager\ArticleManager;
 
     $this->comment = new CommentManager;
     $validation = $this->comment->validationByAdmin($id_comment, $token);
-    if($validation == true){
+    if($validation === true){
     }else{
         header('location: accueil alert');       
     }

@@ -62,19 +62,20 @@ class CommentManager extends Model
       return false;   
    }
 
-    public function deleteOneComment($table, $id_comment){
-      $this->getBdd();  
-      $req = self::$_bdd->prepare("DELETE FROM " .$table. " WHERE id_comment = $id_comment");
-      $req->execute(array());
-      $req->closeCursor();
+    public function deleteOneComment($table){
+        $id_comment = $_SESSION['id_comment'];
+        $this->getBdd();  
+        $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_comment = $id_comment");
+        $req->execute(array());
     } 
+
 
    public function validationByAdmin($id_comment, $token){
         $this->getBdd();  
         //Est ce que le token est bien celui de l'utilisateur
         //
         $req = self::$_bdd->prepare("SELECT id_user  FROM user WHERE validation_key = ?");
-        $req->execute(array($validation_key)); 
+        $req->execute(array($token)); 
         $user = $req->fetch();
         
         
@@ -97,6 +98,16 @@ class CommentManager extends Model
         }else{
             return false;
         }
+   }
+
+
+   public function storeCommentUpdate0($content, $id_comment){
+      $this->getBdd(); 
+       $req = self::$_bdd->prepare("UPDATE comment SET content = ? , disabled = 0  WHERE id_comment = ?");
+                $req->execute(array($content, $id_comment));
+                $req->closeCursor();
+      //envoie du email a l'admin
+      header('location: post&id_article='.$_SESSION['id_article']);
    }
 }
 

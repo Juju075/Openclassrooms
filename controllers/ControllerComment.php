@@ -24,21 +24,22 @@ class ControllerComment extends ControllerContact
             if(isset($url) && count($url) < 1){
                 throw new \Exception("Page introuvable", 1);
                 echo('ControllerComment.php construct |');
-        }    
+            }    
         elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ 
             $this->storeComment();
         }       
         //comment&id_article=96&update
         elseif (isset($_GET['id_comment'])){
             $this->updateOneComment($_GET['id_comment']); 
-        }               
-        else{
-            header('Location: ' );
-        }        
-}
+        }      
+
+        }
+
+
+
 
     private function storeComment(){
-echo('ControllerComment storeComment');
+    echo('ControllerComment storeComment');
 
     if(($user=Security::retrieveUserObj('MEMBER'))!=null){ //   
         $array = array('content'=> $_POST['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);

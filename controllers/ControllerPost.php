@@ -59,10 +59,18 @@ class ControllerPost
         elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ //Traitement update
             $this->storeUpdate($_POST); 
         }    
-         elseif (isset($_GET['validation'])){
+        elseif (isset($_GET['validation'])){
             //id_comment
             //$this->adminCommentValidation($_GET['id_comment'],$_GET['token']); 
-        }       
+        }   
+        elseif (isset($_GET['comment']) && isset($_GET['comment']) =="update_request"){
+            $this->commentManager = new commentManager;
+            $this->commentManager->storeCommentUpdate0($_POST['content'], $_GET['id_comment']);
+        }
+        
+
+
+
         else{
             $this->article(null, null);
         }

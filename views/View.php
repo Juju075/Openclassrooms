@@ -11,7 +11,7 @@ class View
     /**
      * Affecte le nom du fichier $_file eg:viewAccueil.php
      */
-    function __construct($action, $dossier){
+    public function __construct($action, $dossier){
         $this->_file = 'views/'.$dossier.'/view'.$action.'.html.twig';
         $this->b = $dossier.'/view'.$action.'.html.twig';
     }

@@ -2307,7 +2307,6 @@ if (typeof jQuery === "undefined") {
 
       // ----------------------------------------------------------------------
       // the following methods are used to handle overflowing modals
-      // todo (fat): these should probably be refactored out of modal.js
       // ----------------------------------------------------------------------
 
       Modal.prototype._handleUpdate = function _handleUpdate() {

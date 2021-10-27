@@ -5,6 +5,7 @@ session_start();
 use View\View;
 use Manager\CommentManager;
 use Manager\ArticleManager;
+use Tools\Security;
 
 class ControllerAdmin
 {
@@ -38,19 +39,19 @@ class ControllerAdmin
         $this->_view->displayForm('Login', $data);       
     }
 
-    //retour du lien de validation
     private function adminCommentValidation($id_comment, $token){
-    echo('|ControllerAdmin.php adminCommentValidation');
-
-    $this->comment = new CommentManager;
-    $validation = $this->comment->validationByAdmin($id_comment, $token);
-    if($validation === true){
-    }else{
-        header('location: accueil alert');       
+        if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){
+            $this->commentManager = new CommentManager;
+            $id_article = $this->commentManager->validationByAdmin($id_comment, $token);
+                if($id_article !== null){ 
+                    header('location: post&id_article='.$id_article);
+                }elseif($id_article == null){
+                    header('location: accueil');
+                }
+        }else{
+            header('location: accueil');
+        }
     }
-    header('location: accueil alert');
-    }
-
 
     public function storeUpdate($id, $content){
         echo('ControllerPost.php  storeUpdate');

@@ -74,31 +74,31 @@ class CommentManager extends Model
         
         //Verifie si c bien l'auteur du comment
         if(isset($user) && $user !== null){
-            $req = self::$_bdd->prepare("SELECT id_user  FROM comment WHERE id_comment = ?");
+            $req = self::$_bdd->prepare("SELECT id_user, id_article  FROM comment WHERE id_comment = ?");
             $req->execute(array($id_comment)); 
             $result = $req->fetchall();
             $req->closeCursor(); 
 
             if ($result[0]['id_user'] == $user[0]){ // pb ici
                 //valider l'affichage
-                $req = self::$_bdd->prepare("UPDATE comment SET disabled = 1 WHERE id_comment = ?");
-                $req->execute(array($id_comment));
-                $req->closeCursor(); 
-                return true;  
+               $req = self::$_bdd->prepare("UPDATE comment SET disabled = 1 WHERE id_comment = ?");
+               $req->execute(array($id_comment));
+               $req->closeCursor(); 
+
+               return $result[0]['id_article'];  
             }else{
-                return false;
+                return null;
             }
         }else{
-            return false;
+            return null;
         }
    }
 
-
    public function storeCommentUpdate0($content, $id_comment){
       $this->getBdd(); 
-       $req = self::$_bdd->prepare("UPDATE comment SET content = ? , disabled = 0  WHERE id_comment = ?");
-                $req->execute(array($content, $id_comment));
-                $req->closeCursor();
+      $req = self::$_bdd->prepare("UPDATE comment SET content = ? , disabled = 0  WHERE id_comment = ?");
+      $req->execute(array($content, $id_comment));
+      $req->closeCursor();
       //envoie du email a l'admin
       header('location: post&id_article='.$_SESSION['id_article']);
    }

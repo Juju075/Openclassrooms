@@ -70,10 +70,6 @@ class ControllerPost
             $this->commentManager = new commentManager;
             $this->commentManager->storeCommentUpdate0($_POST['content'], $_GET['id_comment']);
         }
-        
-
-
-
         else{
             $this->article(null, null);
         }
@@ -123,7 +119,6 @@ class ControllerPost
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){
                 $this->_articleManager = new ArticleManager;
                 $this->_articleManager->updateArticle($id,$title,$content);
-
 
                 //post&id_article=14
                 // header('location: post&id_article='.$_SESSION['id_article']);

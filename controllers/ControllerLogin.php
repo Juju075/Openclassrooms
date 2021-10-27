@@ -7,7 +7,6 @@ use Tools\security;
 
 class ControllerLogin
 {
-
     private $id_user;
 
     public function __construct(){

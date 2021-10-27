@@ -129,6 +129,5 @@ class ControllerComment extends ControllerContact
     }
 
     private function sendMessage(){
-
     }
 }

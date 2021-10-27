@@ -10,7 +10,6 @@ use View\View;
     private $_ctrl; 
     private $_view; 
 
-
     public function routeReq(){
 
     try {
@@ -42,10 +41,8 @@ use View\View;
             else{  
                 $this->_ctrl = new ControllerAccueil($url);
             }
-
         } catch(\Exception $e){ 
             $errorMsg = $e->getMessage();
-
             $this->_view = new View('Error','Post'); 
             $this->_view->generate(array('errosMsg'=>$errorMsg));
             require_once('views/Post/viewError.html.twig'); 

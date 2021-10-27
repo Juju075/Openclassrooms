@@ -8,7 +8,7 @@ use View\View;
 use Tools\Security;
 
 class ControllerRegister
- {
+{
      private $user;
      private $view;
 
@@ -29,12 +29,10 @@ class ControllerRegister
     private function create(){
         if(isset($_GET['create'])){
 
-        //Logique
         if(($user=Security::login('MEMBRE'))!==null){ 
             //$user->getid_User();
         } 
 
-        //View
             $data = '';
             $this->view = new View('CreateUser', 'Registration');
             $this->view->displayForm('Register',$data);
@@ -122,4 +120,4 @@ class ControllerRegister
 
             // FIN CODE CODEGUY UPLOAD
         }
-    }
+}

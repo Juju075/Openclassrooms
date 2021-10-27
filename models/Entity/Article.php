@@ -10,14 +10,9 @@ class Article
     private $content;
     private $id_user;
 
-
-    //verifie ds video si il a mis incrementation pour ID
-    
-    //Model.php $data = $req->fetch(PDO::FETCH_ASSOC)   
     public function __construct(array $data){
         $this->hydrate($data);
     }
-
 
     public function hydrate(array $data)
     {
@@ -31,8 +26,9 @@ class Article
         }
     }
  
-
-    //Setters
+    /**
+     * Setters
+     */
     public function setId_article(?int $id_article)
     {  
         $id = (int) $id_article;
@@ -47,13 +43,10 @@ class Article
             $this->title = $title;
         }
     }
-public function setId_user(?int $id_user){
-    $this->id_user = $id_user;
-}
+    public function setId_user(?int $id_user){
+        $this->id_user = $id_user;
+    }
 
-
-
-    //chapo bizzard
     public function setChapo(?string $chapo) 
     {
         if(is_string($chapo)){
@@ -68,27 +61,23 @@ public function setId_user(?int $id_user){
         }
     }
 
-
-
-
-    //Getters
+    /**
+     * Getters
+     */
     public function getId_article()
     {
         return $this->id_article;
     }
     
-
     public function getTitle(): ?string
     {
         return $this->title;
     }    
 
-
     public function getChapo(): ?string 
     {
     return $this->chapo;
     }
-
 
     public function getContent(): ?string
     { 
@@ -97,6 +86,4 @@ public function setId_user(?int $id_user){
     public function getId_user(){
         return $this->id_user;
     }
-    
-    //here Foreign key
 }

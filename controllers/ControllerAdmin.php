@@ -6,8 +6,8 @@ use View\View;
 use Manager\CommentManager;
 use Manager\ArticleManager;
 
-  class ControllerAdmin
-  {
+class ControllerAdmin
+{
     private $adminManager;
     private $_view;
     private $commentManager;
@@ -28,9 +28,8 @@ use Manager\ArticleManager;
         }             
         else{
            //$this->login();
+        }
     }
-}
-
 
     private function login(){
         echo('ControllerAdmin.php login');
@@ -60,4 +59,4 @@ use Manager\ArticleManager;
 
         header('location: acceuil alert');
     }
-  }
+}

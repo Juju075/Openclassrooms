@@ -5,7 +5,6 @@ abstract class Model
 {
     protected static $_bdd;
     
-
     private static function setBdd(){   
         try {
             $filePath = 'config.json';
@@ -63,30 +62,26 @@ abstract class Model
     }
 
     protected function authenticationRequest($obj,$usertype){
-            $this->getBdd();
-            $req = self::$_bdd->prepare('SELECT id_user, password, activated, usertype  FROM user WHERE username = ?');
-            $req->execute(array($obj['username']));
-            $resultat = $req->fetch();
-            $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
-            if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype) {
-                $id_user = $resultat['id_user'];
-                $_SESSION['id_user']=$id_user;       
-                $user=$this->getOne('user','User',$id_user); 
-                return $user;  
-            }else{
-                return false;
-            }     
-        }
-
-
-
+        $this->getBdd();
+        $req = self::$_bdd->prepare('SELECT id_user, password, activated, usertype  FROM user WHERE username = ?');
+        $req->execute(array($obj['username']));
+        $resultat = $req->fetch();
+        $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
+        if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype){
+            $id_user = $resultat['id_user'];
+            $_SESSION['id_user']=$id_user;       
+            $user=$this->getOne('user','User',$id_user); 
+            return $user;  
+        }else{
+            return false;
+        }     
+    }
 
     protected function postIfExist(){
-        //lister les id articles encours.
-            $this->getBdd();
-            $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
-            $req0->execute(array($_SESSION['id_article']));
-            return $req0->fetchall();
+        $this->getBdd();
+        $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
+        $req0->execute(array($_SESSION['id_article']));
+        return $req0->fetchall();
     }
 
 
@@ -123,7 +118,6 @@ abstract class Model
     protected function getOne($table, $obj, $id){ 
         $this->getBdd();
         $var = [];
-
         if ($obj === 'Article') { 
             $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
         }elseif ($obj === 'User'){
@@ -139,14 +133,11 @@ abstract class Model
         }
         return $var; 
         $req->closeCursor();  
-        
     }
 
     protected function deleteOne($table, $id){
         $this->getBdd();  
         $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_article = $id");
         $req->execute(array());
-
     } 
-  
 }

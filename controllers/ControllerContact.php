@@ -75,7 +75,6 @@ class ControllerContact
             $mail->setFrom('user@blobMVC.com', 'Mailer');
             $mail->addAddress('checkout.enterprise@gmail.com', 'Administrateur joe');     //Add a recipient
            
-
             //Attachments
             //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
             //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
@@ -83,31 +82,24 @@ class ControllerContact
             //Content
             //ajouter automatiquement des information a message
 
-
             /** INSERTION DANS POST     
              * getFullname
              * getEmail
              * genere lien d'activation
              */
 
-
-            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->isHTML(true);      
             $mail->Subject = 'Here is the subject';
             $mail->Body    = $_POST['message'];
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
             $mail->send();
             echo 'Message has been sent';
             header('location: accueil?message=send');
-
-
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
-
         }else{ // si non connecté
             header('location: accueil&comment=notconnected');
         }    
     }
-
 }

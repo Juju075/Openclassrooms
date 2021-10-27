@@ -12,7 +12,6 @@ class Security
             $user['password']=$_POST['password'];
             $user['usertype']=$usertype;
 
-            
             if ($userObj=$userMAnager->logonManager($user,$usertype) !== null){ 
                 $_SESSION['user'] = array(
                     'username' => $user['username'],
@@ -40,7 +39,5 @@ class Security
         }else{
             return false;
         }
-
     }
-
 }

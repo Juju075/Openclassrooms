@@ -17,13 +17,11 @@ class ArticleManager extends Model
       return $this->CreateOne('article',$article);
    } 
 
-   //Admin delete post
    public function deleteArticle($id){
      $this->deleteOne('article', $id);
    }
 
    public function updateArticle($id,$title,$content){ 
-      //date de modification
       $updatedAt= date('d-m-Y').' '.time();
       $this->getBdd();  
       $req = self::$_bdd->prepare('UPDATE article SET title = ?, content = ?, updatedAt = ? WHERE id_article = ?');
@@ -32,7 +30,6 @@ class ArticleManager extends Model
       $req->closeCursor(); 
    } 
         
-
    public function noDuplicatePost($title, $content){ 
       $titleresult[]='';
       $this->getBdd();
@@ -57,7 +54,6 @@ class ArticleManager extends Model
     }
 
    public function articleVerif(){ 
-        //lister les id articles encours.
             $this->getBdd();
             $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
             $req0->execute(array($_SESSION['id_article']));

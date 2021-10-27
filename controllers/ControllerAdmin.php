@@ -27,7 +27,7 @@ class ControllerAdmin
             $this->login();       
         }             
         else{
-           //$this->login();
+           $this->login();
         }
     }
 

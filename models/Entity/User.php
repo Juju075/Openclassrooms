@@ -3,9 +3,10 @@ namespace Entity;
 
 class User  
 {
-    // use Timestampable;
-
-    // created_date et modified_date dans timestampable  $createdAt $updatedAt
+    /**
+     * use Timestampable;
+     * created_date et modified_date dans timestampable  $createdAt $updatedAt
+     */
     private $usertype; 
     private $id_user;             
     private $username;
@@ -15,13 +16,10 @@ class User
     private $activated; 
     private $validation_key;
 
-    
-
     private $avatar;
     private $prenom;
     private $nom;
     private $sentence;        
-
 
     public function __construct(array $obj){
         if(!empty($obj)){
@@ -29,7 +27,6 @@ class User
         }
     }
   
-
     public function hydrate(array $obj)
     {
 		foreach ($obj as $key => $value)
@@ -43,7 +40,9 @@ class User
     }
 
 
-    //Setters
+    /**
+     * Setters
+     */
     public function setId_user(?int $id_user)
     {  
         $id = (int) $id_user;
@@ -97,7 +96,9 @@ class User
     
 
 
-    //Getters
+    /**
+     * Getters
+     */
     public function getUsertype(){
         return $this->usertype;
     }
@@ -116,25 +117,30 @@ class User
     public function getUsername(){
         return $this->username;
     }
+
     public function getPassword(){
         return $this->password;
     }
+
     public function getEmail(){
         return $this->email;
     }
+
     public function getAvatar(){
         return $this->avatar;
-    }   
+    }  
+
     public function getSentence(){
         return $this->sentence;
     } 
+
     public function getActivated(){
         return $this->activated;
     }
+
     public function getValidation_key(){
         return $this->validation_key;
     }
-
 
     public function getRoles(): array
     {
@@ -142,17 +148,14 @@ class User
         $roles[] = 'ROLE_USER';
         return array_unique($roles);
     }
+    
         public function setRoles(array $roles): self
     {
         $this->roles = $roles;
         return $this;
     }
 
-
     public function getFullName(){
         return $this->getPrenom() . " " . $this->getNom();
     }
-
 }
-
-

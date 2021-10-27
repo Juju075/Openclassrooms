@@ -11,7 +11,7 @@ use Tools\Security;
 
 
 class ControllerPost
- {
+{
     private $_articleManager;
     private $commentManager;
 
@@ -31,10 +31,10 @@ class ControllerPost
             //id_article
             $this->delete($_GET['delete']); 
         }
-        elseif (isset($_GET['update'])){ //Admin only
+        elseif (isset($_GET['update'])){
             $this->article('postUpdateRequest',null); 
         }
-        elseif (isset($_GET['comment_update'])){ //Show update form below article. Admin
+        elseif (isset($_GET['comment_update'])){ 
             $this->commentManager = new CommentManager;
             $id_comment = $_GET['comment_update'];
             $author = $this->commentManager->verifCommentAuthor($id_comment);
@@ -81,7 +81,7 @@ class ControllerPost
     private function create(){
             $data ='';
             $this->_view = new View('CreatePost', 'Post');
-            $this->_view->displayForm('Post',$data); //data ok vide (dispo si besoin).
+            $this->_view->displayForm('Post',$data);
     }   
 
     private function delete($id){
@@ -98,7 +98,6 @@ class ControllerPost
                 if ($articleVerifNoDuplicate === false){
                     if (isset($_POST)){
                         $_POST['id_user'] = $_SESSION['id_user'];
-                        //Ajout Id_user 
                         $article= new Article($_POST);   
                         $article = $this->_articleManager->createArticle($article); 
                         $articles = $this->_articleManager->getArticles();
@@ -130,7 +129,6 @@ class ControllerPost
         }
     }
 
-    //Use TemplateSingle.html.twig
     private function article($routename, $id_comment){
         if(isset($_GET['id_article'])){
             $_SESSION['id_article'] = $_GET['id_article'];
@@ -139,14 +137,11 @@ class ControllerPost
             $articleVerif = $this->_articleManager->articleVerif();
 
             if ($articleVerif === true ){
-                //Return Post
-                $article = $this->_articleManager->getArticle($_GET['id_article']);
-                //Return Comments        
+                $article = $this->_articleManager->getArticle($_GET['id_article']);     
                 $this->commentManager = new CommentManager;
                 $comments = $this->commentManager->getComments();
                 $nbrcomments = $this->commentManager->displaynumber($comments);
 
-                //View
                 $this->_view = new View('singlePost','Post');
                 $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename,'id_comment'=>$id_comment),'PostsinglePost');
             }

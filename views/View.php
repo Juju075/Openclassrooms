@@ -111,7 +111,7 @@ class View
             echo $twig->render($page1,['var'=>$var]);
         }
         elseif($action === 'Profile'){
-            $user = $data[0];
+            $user = $data;
             echo $twig->render($page1,['user'=>$user]);
         }
         elseif($action === 'Post'){
@@ -140,14 +140,20 @@ class View
         }
         elseif($action === 'Admin'){
             if (!empty($data)) {
-                $urls = $data['urls'];
+                var_dump($data);
+
+                $articles = $data[0]['article'];
+                var_dump($articles);
+                exit;
+
                 $comments = $data['comments'];
-                $articles = $data['articles'];
-                echo $twig->render($page1,['user'=>$user,'comments'=>$comments,'articles'=>$articles,'urls'=>$urls]);
+                var_dump($comments);
+                $urls = $data['urls'];
+                echo $twig->render($page1,['user'=>$user,'articles'=>$articles, 'comments'=>$comments,'urls'=>$urls]);
             }else{
               $var = null;  
+              echo $twig->render($page1,['var'=>$var]);
             }
-            echo $twig->render($page1,['var'=>$var]);
         }                                   
         else{
         throw new \Exception("Route inconnue", 1);

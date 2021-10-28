@@ -27,10 +27,10 @@ use Tools\Security;
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null){
 
             $this->userManager = new UserManager;
-            $userObj = $this->userManager->ProfilUser($_SESSION['id_user']);
+            $userObj = $this->userManager->ProfilUser($_SESSION['id_user']); //Objet
 
             $this->_view = new View('Profile', 'Profile');
-            $this->_view->displayForm('Profile',$data); 
+            $this->_view->displayForm('Profile', $userObj); 
         }else{
              header('Location: accueil&comment=notconnected' );
             }    

@@ -127,6 +127,13 @@ class CommentManager extends Model
          return false;
       }
    }
+
+   public function getUrls(){
+      $this->getBdd(); 
+      $req = self::$_bdd->prepare('SELECT * FROM moderator');
+      $req->execute();
+      $req->closeCursor();       
+   }
 }
 
 

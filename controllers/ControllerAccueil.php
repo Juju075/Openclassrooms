@@ -58,12 +58,10 @@ use Manager\ArticleManager;
         }
     }
     
-    private function articles($routename){
-        //Repository    
+    private function articles($routename){   
         $this->_articleManager = new ArticleManager(); 
         $articles = $this->_articleManager->getArticles();
-        
-        //View
+
         $this->_view = new View('Accueil', 'Post');
         $this->_view->generate(array('routename'=>$routename, 'articles'=>$articles));
     }

@@ -9,9 +9,9 @@ use Tools\Security;
 
 class ControllerAdmin
 {
-    private $adminManager;
     private $_view;
     private $commentManager;
+    private $articleManager;
     private $userManager;
 
 
@@ -44,9 +44,20 @@ class ControllerAdmin
 
     public function allValidationsRequest(){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
-            $data = null;  //['comments'=>$comments,'articles'=>$articles]);
-            $this->_view = new View('Board', 'Post');
-            $this->_view->displayForm('Admin',$data);
+
+        $this->articleManager = new ArticleManager(); 
+        $articles = $this->articleManager->getArticles();
+
+        $this->commentManager = new CommentManager;
+        $comments = $this->commentManager->getComments(0);
+        //urls
+        $this->moderatorManager = new CommentManager;
+        $this->moderatorManager->getUrls();
+
+        $data = array($articles, $comments);
+
+        $this->_view = new View('Board', 'Post');
+        $this->_view->displayForm('Admin',$data);
         }
     }
 

@@ -69,10 +69,7 @@ class ControllerPost
         elseif (isset($_GET['comment']) && isset($_GET['comment']) =="update_request"){
             $this->commentManager = new commentManager;
             $this->commentManager->storeCommentUpdate0($_POST['content'], $_GET['id_comment']);
-        }
-        elseif(isset($_GET['comments']) && isset($_GET['comments']) == 'validation'){
-            $this->allValidationsRequest();
-        }       
+        }     
         else{
             $this->article(null, null);
         }
@@ -92,14 +89,6 @@ class ControllerPost
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->deleteArticle($id);
         header('Location: accueil&article=deleted');
-    }
-
-    public function allValidationsRequest(){
-        if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
-            $data = null;
-            $this->_view = new View('Board', 'Post');
-            $this->_view->displayForm('Validations',$data);
-        }
     }
 
     private function store(){

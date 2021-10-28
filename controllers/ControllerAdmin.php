@@ -26,7 +26,10 @@ class ControllerAdmin
         }
           elseif (isset($_GET['login'])){ //admin&login
             $this->login();       
-        }             
+        }
+        elseif(isset($_GET['comments']) && isset($_GET['comments']) == 'validation'){
+            $this->allValidationsRequest();
+        }                      
         else{
            $this->login();
         }
@@ -39,6 +42,13 @@ class ControllerAdmin
         $this->_view->displayForm('Login', $data);       
     }
 
+    public function allValidationsRequest(){
+        if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
+            $data = null;
+            $this->_view = new View('Board', 'Post');
+            $this->_view->displayForm('Admin',$data);
+        }
+    }
 
     private function adminCommentValidation($id_comment, $token){
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){

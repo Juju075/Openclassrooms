@@ -1,41 +1,47 @@
-viewAdmin.html.twig update post login.htlm.twig
+<h3>Espace Administrateur</h3>
+<h5>Gestion des commentaires.</h5>
 
-<!-- Afficher si -->
-<h1 class="my-5 text-center">Me connecter.</h1>
-<!-- Twig si usertype 2-->
-<h1 class="my-5 text-center">Espace Administrateur.</h1>
+<style type="text/css">
+  .tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  .tg td {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+  }
+  .tg th {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+  }
+  .tg .tg-0lax {
+    text-align: left;
+    vertical-align: top;
+  }
+</style>
 
-<form method="post" action="login&status=login">
-  <div class="row"> 
-    <div class="col-md-6">
-      <label for="username">Username</label
-      ><input
-        type="text"
-        class="form-control"
-        name="username"
-        placeholder="username"
-        required
-      />
-    </div>
-    <div class="col-md-6">
-      <label for="password">password</label
-      ><input
-        type="password"
-        class="form-control"
-        name="password"
-        placeholder="First name"
-        required
-      />
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <br />
-    <div class="button">
-      <button type="submit" class="btn btn-primary btn-lg btn-block">
-        Soumettre
-      </button>
-    </div>
-  </div>
-</form>
+<table class="tg">
+  <thead>
+    <tr>
+      <td class="tg-0lax">fullname user</td>
+      <td class="tg-0lax">date de requete</td>
+      <td class="tg-0lax">content commentaire id=</td>
+      {# lien post #}
+      <td class="tg-0lax">Article associe</td>
+      <td class="tg-0lax">asscocie a urlvalidation id=</td>
+    </tr>
+  </thead>
+</table>

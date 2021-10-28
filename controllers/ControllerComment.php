@@ -25,7 +25,7 @@ class ControllerComment extends ControllerContact
                 throw new \Exception("Page introuvable", 1);
                 echo('ControllerComment.php construct |');
             }    
-        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ 
+        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){       
             $this->storeComment($_GET['id_article']);
         }       
         //comment&id_article=96&update
@@ -35,29 +35,28 @@ class ControllerComment extends ControllerContact
 
         }
 
-
-
-
     private function storeComment($id_article){
+        if(isset($_SESSION['user'])){
+            $user=Security::retrieveUserObj($_SESSION['user']['usertype']);
 
-    if(($user=Security::retrieveUserObj('MEMBER'))!== null){ 
-        $array = array('content'=> $_POST['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
-        $comment = new Comment($array);  
-        $this->commentManager = new CommentManager;
-        $comment = $this->commentManager->addComment($comment);
-        
-        $this->commentManager->getComments();
-        
-        //recupere l'id_comment fraichement cree (id user + id_article + contenue 3 premiers caracter a verifie)
-        
-        //PARTIE VALIDATION PAR L ADMIN. (envoie de la request insertion).
-        //admin&validation=comment&id=75&token=63aee5f60929e7e2aac8b25a3e826f0e
-        
-        $this->sendMessage();    
+            $array = array('content'=> $_POST['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
+            $comment = new Comment($array);  
+            $this->commentManager = new CommentManager;
+            $comment = $this->commentManager->addComment($comment);
+            
+            $this->commentManager->getComments();
+            
+            $id_comment = $this->commentManager->retriveIdComment($array['id_user'], $array['id_article'], $array['content']);
+            var_dump($id_comment);
+            //$this->sendMessage(); //admin&validation=comment&id=102&token=63aee5f60929e7e2aac8b25a3e826f0e   
+            $_SESSION['routeNameForComment'] = 'post&comment=waiting';    
+             header('Location: post&id_article='.$_SESSION['id_article']);
+ 
         }else{
-            header('Location: login&user');
+            header('Location: accueil&comment=notconnected');
         }
     }
+
 
     private function updateOneComment($id_comment){
         echo('|ControllerComment. php updateOneComment');

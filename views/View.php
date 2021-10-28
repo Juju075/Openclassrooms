@@ -16,19 +16,19 @@ class View
         $this->b = $dossier.'/view'.$action.'.html.twig';
     }
 
-    // /accueil 
+
         public function generate($data){  
         $a = 'template.html.twig';
 
         //route
         if(!empty($data['routename'])){
-            $getalert = $data['routename']; // ok
+            $getalert = $data['routename'];
         }else{
             $getalert = null;
         }
         //articles
         if(!empty($data['articles'])){
-            $articles = $data['articles']; // ok
+            $articles = $data['articles'];
         }
         else{
             $articles = null;
@@ -48,16 +48,13 @@ class View
     
     public function generatePost($data){ 
         $a = 'templateSingle.html.twig';
-        //route
         $article = $data['article'][0];  
-         //comments
         $count =  $data['nbrcomments'];
         if($count != 0){
             $comments = $data['comments'];
         }else{
             $comments =null;
         }
-        // user
         if(!empty($_SESSION['user']['usertype'])){
             $user = $_SESSION['user']['usertype'];
         }
@@ -71,11 +68,17 @@ class View
             $id_comment = null;
         }        
         
-
+        //route
+        if(!empty($data['routename'])){
+            $getalert = $data['routename'];
+        }else{
+            $getalert = null;
+        }
         $routename = $data['routename'];
+
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment]); 
+        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment,'getalert'=>$getalert]); 
     }
 
     public function simpleContent($action){ 

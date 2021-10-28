@@ -132,6 +132,10 @@ class ControllerPost
     private function article($routename, $id_comment){
         if(isset($_GET['id_article'])){
             $_SESSION['id_article'] = $_GET['id_article'];
+
+            if(isset($_SESSION['routeNameForComment'])){
+                $routename = $_SESSION['routeNameForComment'];
+            }
             
             $this->_articleManager = new ArticleManager;
             $articleVerif = $this->_articleManager->articleVerif();
@@ -144,6 +148,10 @@ class ControllerPost
 
                 $this->_view = new View('singlePost','Post');
                 $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename,'id_comment'=>$id_comment),'PostsinglePost');
+            
+                if(isset($_SESSION['routeNameForComment'])){
+                    unset($_SESSION['routeNameForComment']);
+                }
             }
             elseif ($articleVerif === false){
                 header('location: accueil');

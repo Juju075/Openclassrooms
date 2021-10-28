@@ -102,6 +102,10 @@ class CommentManager extends Model
       //envoie du email a l'admin
       header('location: post&id_article='.$_SESSION['id_article']);
    }
+
+   public function retriveIdComment(){
+      
+   }
 }
 
 

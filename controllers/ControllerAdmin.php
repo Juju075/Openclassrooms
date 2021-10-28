@@ -39,14 +39,6 @@ class ControllerAdmin
         $this->_view->displayForm('Login', $data);       
     }
 
-//Affichage liste des commentaires a valider associe avec  les url cliquable
-
-
-
-
-
-
-
 
     private function adminCommentValidation($id_comment, $token){
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){

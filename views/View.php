@@ -17,7 +17,7 @@ class View
     }
 
 
-        public function generate($data){  
+    public function generate($data){  
         $a = 'template.html.twig';
 
         //route
@@ -74,7 +74,6 @@ class View
         }
 
         $routename = $data['routename'];
-
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment,'getalert'=>$getalert]); 
@@ -95,7 +94,7 @@ class View
             if (!empty($data)) {
                 $var = $data[0];
             }else{
-              $var = '';  
+              $var = null;  
             }
             echo $twig->render($page1,['var'=>$var]);
         }
@@ -103,7 +102,7 @@ class View
             if (!empty($data)) {
                 $var = $data[0];
             }else{
-              $var = '';  
+              $var = null;  
             }
             echo $twig->render($page1,['var'=>$var]);
         }
@@ -115,7 +114,7 @@ class View
             if (!empty($data)) {
                 $var = $data[0];
             }else{
-              $var = '';  
+              $var = null;  
             }
             echo $twig->render($page1,['var'=>$var]);
         }
@@ -123,7 +122,7 @@ class View
             if (!empty($data)) {
                 $var = $data[0];
             }else{
-              $var = '';  
+              $var = null;  
             }
             echo $twig->render($page1,['var'=>$var]);
         }       
@@ -131,7 +130,7 @@ class View
             if (!empty($data)) {
                 $var = $data[0];
             }else{
-              $var = '';  
+              $var = null;  
             }
             echo $twig->render($page1,['var'=>$var]);
         }
@@ -139,13 +138,20 @@ class View
             if (!empty($data)) {
                 $var = $data[0];
             }else{
-              $var = '';  
+              $var = null;  
             }
             echo $twig->render($page1,['var'=>$var]);
-        }                           
+        }
+        elseif($action === 'Validations'){
+            if (!empty($data)) {
+                $var = $data[0];
+            }else{
+              $var = null;  
+            }
+            echo $twig->render($page1,['var'=>$var]);
+        }                                   
         else{
         throw new \Exception("Route inconnue", 1);
-
         }
     }
 

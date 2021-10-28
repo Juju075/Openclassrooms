@@ -5,15 +5,14 @@
   {% if user is empty %}
   <li><a href="register&create">S'inscrire</a></li>
   <li><a href="login&user">S'authentifier</a></li>
+  {% endif %} {% if user == 'ADMIN'%}
+  <li><a href="post&create">Créer un article</a></li>
+  <li><a href="post&comments=validation">Validations en attente.</a></li>
   {% endif %} {% if user == 'MEMBRE' or user == 'ADMIN'%}
   <li><a href="profile">Mon profil</a></li>
   <li><a href="login&logout">Me deconnecter</a></li>
   {% endif %} {% if user == 'MEMBRE' %}
   <li><a href="contact&create">Nous contacter</a></li>
-  {% endif %} {% if user == 'ADMIN'%}
-  <li><a href="post&create">Créer un article</a></li>
-  <li><a href="post&comments=validation">Validations en attente.</a></li>
-
   {% endif %}
 </ul>
 <p>Type:</p>

@@ -79,7 +79,7 @@ class ControllerPost
     }
 
     private function create(){
-        if($user=Security::retrieveUserObj('ADMIN') == true){
+        if($user=Security::retrieveUserObj('ADMIN') === true){
             $data = null;
             $this->_view = new View('CreatePost', 'Post');
             $this->_view->displayForm('Post',$data);
@@ -98,10 +98,9 @@ class ControllerPost
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
             $data = null;
             $this->_view = new View('Board', 'Post');
-            $this->_view->displayForm('Post',$data);
+            $this->_view->displayForm('Validations',$data);
         }
     }
-
 
     private function store(){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 

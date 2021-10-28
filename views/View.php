@@ -67,13 +67,12 @@ class View
         else{
             $id_comment = null;
         }        
-        
-        //route
         if(!empty($data['routename'])){
             $getalert = $data['routename'];
         }else{
             $getalert = null;
         }
+
         $routename = $data['routename'];
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');

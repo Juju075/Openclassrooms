@@ -140,7 +140,8 @@ abstract class Model
             $req = self::$_bdd->prepare("SELECT * FROM " .$table. " WHERE id_user= ?"); 
             //$req->bindParam(':$table', $table, \PDO::PARAM_STR, 12 );
         }elseif ($obj === 'Comment') {
-            $req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_comment = ?");
+            //$req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_comment = ?");
+            $req = self::$_bdd->prepare("SELECT * FROM " .$table. " WHERE id_comment = ?");
             //$req->bindParam(':$table', $table, \PDO::PARAM_STR, 12 );
         }else{
         }     
@@ -149,8 +150,7 @@ abstract class Model
             $obj2="\\Entity\\".$obj;
             $var[] = new $obj2($data); 
         }
-        return $var; 
-        $req->closeCursor();  
+        return $var;  
     }
 
     protected function deleteOne($table, $id){

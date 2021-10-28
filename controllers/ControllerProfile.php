@@ -25,15 +25,14 @@ use Tools\Security;
     private function myProfile(){
         //usertype connecte
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null){
-            $result = $this->$user->getPrenom(); // Expected type 'object'. Found 'bool'.
-            $this->usermanager = new UserManager;
-            $data = $this->usermanager->ProfilUser();
-            //View
+
+            $this->userManager = new UserManager;
+            $userObj = $this->userManager->ProfilUser($_SESSION['id_user']);
+
             $this->_view = new View('Profile', 'Profile');
             $this->_view->displayForm('Profile',$data); 
         }else{
              header('Location: accueil&comment=notconnected' );
             }    
     }
-    //manque usertype
 }

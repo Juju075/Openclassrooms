@@ -75,9 +75,6 @@ class ControllerPost
         }
     }
 
-    
-
-    //CRUD
     private function create(){
             $data ='';
             $this->_view = new View('CreatePost', 'Post');
@@ -119,13 +116,9 @@ class ControllerPost
                 $this->_articleManager = new ArticleManager;
                 $this->_articleManager->updateArticle($id,$title,$content);
 
-                //post&id_article=14
-                // header('location: post&id_article='.$_SESSION['id_article']);
-                header('location: /post&id_article=146'); 
-                echo('jusquici tout vas bien');
+                header('location: /post&id_article='.$_SESSION['id_article']); 
         }else{
-            //Alert
-            header('location: post&id_article='.$_SESSION['id_article']);
+            header('location: post&id_article='.$_SESSION['id_article']); //pas admin
         }
     }
 
@@ -143,7 +136,7 @@ class ControllerPost
             if ($articleVerif === true ){
                 $article = $this->_articleManager->getArticle($_GET['id_article']);     
                 $this->commentManager = new CommentManager;
-                $comments = $this->commentManager->getComments();
+                $comments = $this->commentManager->getComments(1);
                 $nbrcomments = $this->commentManager->displaynumber($comments);
 
                 $this->_view = new View('singlePost','Post');

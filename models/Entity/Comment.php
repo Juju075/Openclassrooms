@@ -19,7 +19,7 @@ class Comment
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value){
-            $method = 'set'.ucfirst($key);  //function setContent  (attribut est la clé data est la valeur.)
+            $method = 'set'.ucfirst($key);
 
             if(method_exists($this, $method)) 
             {  
@@ -30,7 +30,9 @@ class Comment
 
 
     
-    //Setters
+/**
+ * Setters
+ */
     public function setId_comment($id_comment) 
     {
         $this->id_comment = $id_comment;
@@ -57,7 +59,9 @@ class Comment
 
 
 
-    //Getters
+/**
+ * Getters
+ */
     public function getId_comment() 
     { 
         return $this->id_comment; 

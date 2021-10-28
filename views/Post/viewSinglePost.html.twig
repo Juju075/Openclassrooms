@@ -8,14 +8,41 @@
 </div>
 <!-- slider -->
 <section class="post-area section">
-
+{{ getalert }}
   <div>
     <!-- get alerts ici -->
     {% if getalert == 'post&comment=waiting' %}
-    <!-- route: accueil&register=created -->
     <!-- alert=1 -->
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         Votre commentaire à été soumis au modérateur!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    {% elseif getalert == 'post&comment=already' %}
+    <!-- alert=2 -->
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      Vous avez déjà commenté cet article!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    {% elseif getalert == 'post&comment=notconnected' %}
+    <!-- alert=2 -->
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      Veuillez vous authentifier!
+      <a href="http://">Login</a>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>    
+
+    {% elseif getalert == 'post&comment=update' %}
+    <!-- alert=2 -->
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Votre commentaire est modifié!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

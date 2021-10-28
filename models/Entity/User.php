@@ -40,9 +40,9 @@ class User
     }
 
 
-    /**
-     * Setters
-     */
+/**
+ * Setters
+ */
     public function setId_user(?int $id_user)
     {  
         $id = (int) $id_user;
@@ -96,9 +96,9 @@ class User
     
 
 
-    /**
-     * Getters
-     */
+/**
+ * Getters
+ */
     public function getUsertype(){
         return $this->usertype;
     }

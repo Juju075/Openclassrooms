@@ -18,8 +18,8 @@ class ControllerAdmin
     public function __construct(){
         if(isset($url) && count($url) < 1){
             throw new \Exception("Page introuvable", 1);
-        }    
-        elseif(isset($_GET['validation']) && isset($_GET['validation']) =="comment"){ //admin&validation=comment&id=75&token=63aee5f60929e7e2aac8b25a3e826f0e
+        }
+        elseif(isset($_GET['validation']) && isset($_GET['validation']) =="comment"){
             $id_comment = $_GET['id'];
             $token = $_GET['token'];
                 $this->adminCommentValidation($id_comment,$token);
@@ -39,13 +39,22 @@ class ControllerAdmin
         $this->_view->displayForm('Login', $data);       
     }
 
+//Affichage liste des commentaires a valider associe avec  les url cliquable
+
+
+
+
+
+
+
+
     private function adminCommentValidation($id_comment, $token){
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){
             $this->commentManager = new CommentManager;
             $id_article = $this->commentManager->validationByAdmin($id_comment, $token);
                 if($id_article !== null){ 
                     header('location: post&id_article='.$id_article);
-                }elseif($id_article == null){
+                }elseif($id_article === null){
                     header('location: accueil');
                 }
         }else{

@@ -70,15 +70,22 @@ class ControllerPost
             $this->commentManager = new commentManager;
             $this->commentManager->storeCommentUpdate0($_POST['content'], $_GET['id_comment']);
         }
+        elseif(isset($_GET['comments']) && isset($_GET['comments']) == 'validation'){
+            $this->allValidationsRequest();
+        }       
         else{
             $this->article(null, null);
         }
     }
 
     private function create(){
-            $data ='';
+        if($user=Security::retrieveUserObj('ADMIN') == true){
+            $data = null;
             $this->_view = new View('CreatePost', 'Post');
             $this->_view->displayForm('Post',$data);
+        }else{
+            header('Location: accueil');
+        }
     }   
 
     private function delete($id){
@@ -86,6 +93,15 @@ class ControllerPost
         $this->_articleManager->deleteArticle($id);
         header('Location: accueil&article=deleted');
     }
+
+    public function allValidationsRequest(){
+        if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
+            $data = null;
+            $this->_view = new View('Board', 'Post');
+            $this->_view->displayForm('Post',$data);
+        }
+    }
+
 
     private function store(){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 

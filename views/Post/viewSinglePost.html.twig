@@ -8,7 +8,6 @@
 </div>
 <!-- slider -->
 <section class="post-area section">
-{{ getalert }}
   <div>
     <!-- get alerts ici -->
     {% if getalert == 'post&comment=waiting' %}
@@ -227,7 +226,7 @@
 
               <div class="middle-area">
                 <a class="name" href="#"
-                  ><b>{{ "#{user.prenom} #{ user.nom }" }}</b></a
+                  ><b><p>prenom et nom user</p> {{ "#{user.prenom} #{ user.nom }" }}</b></a
                 >
                 <h6 class="date">
     {% set trans_day_hash = { 
@@ -239,10 +238,13 @@
         "Saturday": "Samedi", 
         "Sunday": "Dimanche" 
     } 
-%} Le 
+%} 
+
+Le 
 {{ trans_day_hash[comment.createdat|date('l')] }}
   {{ comment.createdat|date("m/d/Y")}}
                 </h6>
+                
               </div>
 
               <div class="right-area">

@@ -33,8 +33,6 @@ class View
         else{
             $articles = null;
         }
-        
-        // user
         if(!empty($_SESSION['user']['usertype'])){
             $user = $_SESSION['user']['usertype'];
         }
@@ -50,6 +48,7 @@ class View
         $a = 'templateSingle.html.twig';
         $article = $data['article'][0];  
         $count =  $data['nbrcomments'];
+
         if($count != 0){
             $comments = $data['comments'];
         }else{
@@ -71,7 +70,7 @@ class View
             $getalert = $data['routename'];
         }else{
             $getalert = null;
-        }
+        }    
 
         $routename = $data['routename'];
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
@@ -90,6 +89,11 @@ class View
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         
+        if(!empty($_SESSION['user']['usertype'])){
+            $user = $_SESSION['user']['usertype'];
+        }   
+
+
         if($action === 'Register'){
             if (!empty($data)) {
                 $var = $data[0];
@@ -126,14 +130,6 @@ class View
             }
             echo $twig->render($page1,['var'=>$var]);
         }       
-        elseif($action === 'Admin'){
-            if (!empty($data)) {
-                $var = $data[0];
-            }else{
-              $var = null;  
-            }
-            echo $twig->render($page1,['var'=>$var]);
-        }
         elseif($action === 'Update'){
             if (!empty($data)) {
                 $var = $data[0];
@@ -142,9 +138,12 @@ class View
             }
             echo $twig->render($page1,['var'=>$var]);
         }
-        elseif($action === 'Validations'){
+        elseif($action === 'Admin'){
             if (!empty($data)) {
-                $var = $data[0];
+                $urls = $data['urls'];
+                $comments = $data['comments'];
+                $articles = $data['articles'];
+                echo $twig->render($page1,['user'=>$user,'comments'=>$comments,'articles'=>$articles,'urls'=>$urls]);
             }else{
               $var = null;  
             }

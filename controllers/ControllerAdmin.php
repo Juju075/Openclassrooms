@@ -44,7 +44,7 @@ class ControllerAdmin
 
     public function allValidationsRequest(){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
-            $data = null;
+            $data = null;  //['comments'=>$comments,'articles'=>$articles]);
             $this->_view = new View('Board', 'Post');
             $this->_view->displayForm('Admin',$data);
         }

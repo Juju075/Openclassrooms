@@ -176,13 +176,12 @@ class View
         }
         elseif($action === 'Admin'){
             if (!empty($data)) {
-                var_dump($data);
+                $countarticles = $data['countarticles'];
+                $countcomments1 = $data['countcomments1'];
+                $countcomments0 = $data['countcomments0'];
+                $countusers = $data['countusers'];
 
-$countarticles = null;
-$countcomments1 = null;
-$countcomments0 = null;
-$countusers = null;
-                echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers]);
+            echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers]);
             }else{
               $var = null;  
               echo $twig->render($page1,['var'=>$var]);

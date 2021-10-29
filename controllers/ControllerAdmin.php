@@ -61,8 +61,8 @@ class ControllerAdmin
         //count utilisateurs
         $this->adminManager = new AdminManager;
         $countusers = $this->adminManager->countEntity('Users', null); 
-        $data =$this->adminManager->commentsToValide();
 
+        $data =$this->adminManager->commentsToValide();
 
         // $listIdUsers[] =null;
         // $this->userManager = new UserManager;

@@ -15,15 +15,15 @@ class AdminManager extends Model
             $req  = self::$_bdd->prepare('SELECT id_article FROM article'); 
             $req->execute();
         }
-        elseif($table === 'Comments'){
+        elseif($table === 'Comments'){          
             $req  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE disabled = ?');
             $req->execute(array($number));
         }
-        elseif($table === 'Users'){
+        elseif($table === 'Users'){          
             $req  = self::$_bdd->prepare('SELECT id_user FROM user');
             $req->execute();
         }
-        $result = count($req->fetchall());
+        return count($req->fetchall());
     }
     
 

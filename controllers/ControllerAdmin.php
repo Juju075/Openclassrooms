@@ -6,6 +6,8 @@ use View\View;
  
 use Manager\CommentManager;
 use Manager\ArticleManager;
+use Manager\AdminManager;
+use Manager\UserManager;
 use Tools\Security;
 
 class ControllerAdmin
@@ -29,7 +31,7 @@ class ControllerAdmin
             $this->login();       
         }
         elseif(isset($_GET['comments']) && isset($_GET['comments']) == 'validation'){
-            $this->allValidationsRequest();
+            $this->dashboard();
         }                      
         else{
            $this->login();
@@ -42,6 +44,36 @@ class ControllerAdmin
         $this->_view = new View('Login', 'Admin');
         $this->_view->displayForm('Login', $data);       
     }
+    
+    public function dashboard(){
+        if(($user=Security::retrieveUserObj('ADMIN'))!==null){         
+        //count articles
+        $this->adminManager = new AdminManager;
+        $countarticles = $this->adminManager->countEntity('Articles', null);
+
+        //count commentaires 1
+        $this->adminManager = new AdminManager;
+        $countcomments1 = $this->adminManager->countEntity('Comments',1);    
+        
+        //count commentaires 0
+        $countcomments0 = $this->adminManager->countEntity('Comments',0);   
+
+        //count utilisateurs
+        $this->adminManager = new AdminManager;
+        $countusers = $this->adminManager->countEntity('Users', null); 
+        $data =$this->adminManager->commentsToValide();
+
+
+        // $listIdUsers[] =null;
+        // $this->userManager = new UserManager;
+        // $allusersname = $this->userManager->getFullName($listIdUsers); // select prenom nom boulce de rech par id_user
+    
+
+        $this->_view = new View('singlePost','Admin');
+        $this->_view->displayForm('Admin',array('countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers));        
+        }
+    }
+
 
     public function allValidationsRequest(){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
@@ -60,9 +92,9 @@ class ControllerAdmin
         $id_comment = null;
 
         $this->_view = new View('Admin','Admin');
-        $this->_view->generateAdmin(array('article'=>$article, 'comments'=> $comments, 'urls'=>$urls,'id_comment'=>$id_comment),'PostsinglePost');
+        $this->_view->generateAdmin(array('article'=>$article, 'comments'=> $comments, 'urls'=>$urls,'id_comment'=>$id_comment));
         }
-    }
+    } //delete
 
     private function adminCommentValidation($id_comment, $token){
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){
@@ -86,24 +118,4 @@ class ControllerAdmin
         header('location: acceuil alert');
     }
 
-    public function dashboard(){
-        //count articles
-        $this->articleManager = new AdminManager;
-        $countarticles = $this->articleManager->countArticles();
-
-        //count commentaires 1
-        $this->commentManager = new AdminManager;
-        $countarticles = $this->commentManager->countComments(1);    
-        
-        //count commentaires 0
-        $this->commentManager = new AdminManager;
-        $countarticles = $this->commentManager->countComments(0);   
-
-        //count utilisateurs
-        $this->userManager = new AdminManager;
-        $countarticles = $this->userManager->countUsers(); 
-        
-        $this->_view = new View('singlePost','Admin');
-        $this->_view->displayForm(array(),'PostsinglePost');        
-    }
 }

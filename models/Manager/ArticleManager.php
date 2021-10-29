@@ -54,21 +54,24 @@ class ArticleManager extends Model
     }
 
    public function articleVerif(){ 
-            $this->getBdd();
-            $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
-            $req0->execute(array($_SESSION['id_article']));
-            $idArticle = $req0->fetchall();
-            if(!empty($idArticle )){
-                return true;
-            }else{
-                return false;
-            }
+      $this->getBdd();
+      $req  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
+      $req->execute(array($_SESSION['id_article']));
+      $idArticle = $req->fetchall();
+      if(!empty($idArticle )){
+            return true;
+      }else{
+            return false;
+      }
    }
 
-      public function articleVerifNote(){ 
-            $this->getBdd();
-            $req0  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
-            $req0->execute(array($_SESSION['id_article']));
-            return $req0->fetchall();
+   public function articleVerifNote(){ 
+      $this->getBdd();
+      $req  = self::$_bdd->prepare('SELECT id_article FROM article WHERE id_article = ?'); 
+      $req->execute(array($_SESSION['id_article']));
+      return $req->fetchall();
+   }
+   public function allUsersNames($list){
+      $result= [];
    }
 }

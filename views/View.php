@@ -80,7 +80,7 @@ class View
     }
 
     public function generateAdmin($data){ 
-        $a = 'templateAdmin.html.twig';
+        $a = 'templateAdmin.html.twig'; //Pourquoi
         $article = $data['article'][0];  
         $count =  $data['nbrcomments'];
 
@@ -178,14 +178,11 @@ class View
             if (!empty($data)) {
                 var_dump($data);
 
-                $articles = $data[0]['articles'];
-                var_dump($articles);
-                exit;
-
-                $comments = $data['comments'];
-                var_dump($comments);
-                $urls = $data['urls'];
-                echo $twig->render($page1,['user'=>$user,'articles'=>$articles, 'comments'=>$comments,'urls'=>$urls]);
+$countarticles = null;
+$countcomments1 = null;
+$countcomments0 = null;
+$countusers = null;
+                echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers]);
             }else{
               $var = null;  
               echo $twig->render($page1,['var'=>$var]);

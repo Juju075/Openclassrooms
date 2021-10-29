@@ -58,15 +58,12 @@ class ControllerAdmin
         $this->adminManager = new AdminManager;
         $countusers = $this->adminManager->countEntity('Users', null); 
 
-        $data =$this->adminManager->commentsToValide();
-
-        // $listIdUsers[] =null;
-        // $this->userManager = new UserManager;
-        // $allusersname = $this->userManager->getFullName($listIdUsers); // select prenom nom boulce de rech par id_user
-    
+        $_SESSION['getcomments'] =$this->adminManager->getCommentToValidate();
 
         $this->_view = new View('singlePost','Admin');
         $this->_view->displayForm('Admin',array('countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers));        
+        
+        unset($_SESSION['getcomments']);
         }
     }
 

@@ -51,7 +51,7 @@
             <div class="media d-flex">
               <div class="media-body text-left">
                 <h3 class="success">{{ countusers }}</h3>
-                <span>Total des utilisateurs.</span>
+                <span>Total des utilisateur(s).</span>
               </div>
               <div class="align-self-center">
                 <i class="icon-user success font-large-2 float-right"></i>
@@ -72,7 +72,7 @@
               </div>
               <div class="media-body text-right">
                 <h3>{{ countarticles }}</h3>
-                <span>Total des articles.</span>
+                <span>Total des article(s).</span>
               </div>
             </div>
           </div>
@@ -90,7 +90,7 @@
               </div>
               <div class="media-body text-right">
                 <h3>{{ countcomments1 }}</h3>
-                <span>Total des commentaires.</span>
+                <span>Total des commentaire(s).</span>
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@
             <div class="media d-flex">
               <div class="media-body text-left">
                 <h3 class="warning">{{ countcomments0 }}</h3>
-                <span>Commentaires en attente.</span>
+                <span>Commentaire(s) en attente.</span>
               </div>
               <div class="align-self-center">
                 <i class="icon-bubbles warning font-large-2 float-right"></i>
@@ -153,4 +153,6 @@
       </div>
     </div>
   </div>
+
+  {% for cardcomment in cardcomments %} {% endfor %}
 </section>

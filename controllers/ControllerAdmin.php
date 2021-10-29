@@ -3,6 +3,7 @@ namespace Controllers;
 session_start();
 
 use View\View;
+ 
 use Manager\CommentManager;
 use Manager\ArticleManager;
 use Tools\Security;
@@ -83,5 +84,26 @@ class ControllerAdmin
         $this->_articleManager->updateArticle($id, $content);
 
         header('location: acceuil alert');
+    }
+
+    public function dashboard(){
+        //count articles
+        $this->articleManager = new AdminManager;
+        $countarticles = $this->articleManager->countArticles();
+
+        //count commentaires 1
+        $this->commentManager = new AdminManager;
+        $countarticles = $this->commentManager->countComments(1);    
+        
+        //count commentaires 0
+        $this->commentManager = new AdminManager;
+        $countarticles = $this->commentManager->countComments(0);   
+
+        //count utilisateurs
+        $this->userManager = new AdminManager;
+        $countarticles = $this->userManager->countUsers(); 
+        
+        $this->_view = new View('singlePost','Admin');
+        $this->_view->displayForm(array(),'PostsinglePost');        
     }
 }

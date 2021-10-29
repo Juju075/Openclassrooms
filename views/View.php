@@ -34,14 +34,15 @@ class View
             $articles = null;
         }
         if(!empty($_SESSION['user']['usertype'])){
-            $user = $_SESSION['user']['usertype'];
+            $user = $_SESSION['user']['usertype'];  
+            $usertype = $_SESSION['user']['usertype']; 
         }
         else{
             $user = null;
         }
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        echo $twig->render($a,['getalert'=>$getalert,'user'=>$user, 'articles'=>$articles]); 
+        echo $twig->render($a,['getalert'=>$getalert,'user'=>$user,'usertype'=>$usertype, 'articles'=>$articles]); 
     }
     
     public function generatePost($data){ 

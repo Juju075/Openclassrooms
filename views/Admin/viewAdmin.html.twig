@@ -47,6 +47,24 @@
         <div class="card-content">
           <div class="card-body">
             <div class="media d-flex">
+              <div class="media-body text-left">
+                <h3 class="success">0</h3>
+                <span>Total des utilisateurs.</span>
+              </div>
+              <div class="align-self-center">
+                <i class="icon-user success font-large-2 float-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex">
               <div class="align-self-center">
                 <i class="icon-pencil primary font-large-2 float-left"></i>
               </div>
@@ -78,23 +96,6 @@
       </div>
     </div>
 
-    <div class="col-xl-3 col-sm-6 col-12">
-      <div class="card">
-        <div class="card-content">
-          <div class="card-body">
-            <div class="media d-flex">
-              <div class="media-body text-left">
-                <h3 class="success">0</h3>
-                <span>Total des utilisateurs.</span>
-              </div>
-              <div class="align-self-center">
-                <i class="icon-user success font-large-2 float-right"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="col-xl-3 col-sm-6 col-12">
       <div class="card">
         <div class="card-content">
@@ -133,13 +134,16 @@
               <i class="icon-bubbles warning font-large-2 mr-2"></i>
             </div>
             <div class="media-body">
-              <h4>Titre de l'article commenté.</h4>
+              <a href="http://">Titre de l'article commenté.</a><br />
+              {{ comments }}
               <span>Content commentaire.</span><br />
+              {{ user }}
               <span>Fullname user.</span><br />
+              {{ comments.createdat }}
               <span>Date de soumission.</span>
             </div>
             <div class="align-self-center">
-              <h5>Je valide.</h5>
+              <a href="http://">Je valide.</a>
             </div>
           </div>
         </div>

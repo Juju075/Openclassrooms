@@ -47,18 +47,14 @@ class ControllerAdmin
     
     public function dashboard(){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){         
-        //count articles
         $this->adminManager = new AdminManager;
         $countarticles = $this->adminManager->countEntity('Articles', null);
 
-        //count commentaires 1
         $this->adminManager = new AdminManager;
         $countcomments1 = $this->adminManager->countEntity('Comments',1);    
         
-        //count commentaires 0
         $countcomments0 = $this->adminManager->countEntity('Comments',0);   
 
-        //count utilisateurs
         $this->adminManager = new AdminManager;
         $countusers = $this->adminManager->countEntity('Users', null); 
 

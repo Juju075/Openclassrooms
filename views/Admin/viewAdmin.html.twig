@@ -32,7 +32,7 @@
     background-color: #f5f7fa;
   }
 </style>
-{{ cards.prenom }}
+
 <section>
   <div class="row">
     <div class="col-12 mt-3 mb-1">
@@ -137,16 +137,16 @@
               <i class="icon-bubbles warning font-large-2 mr-2"></i>
             </div>
             <div class="media-body">
-              <a href="http://">Titre de l'article commenté.</a><br />
-              {{ comments }}
-              <span>Content commentaire.</span><br />
-              {{ user }}
-              <span>Fullname user.</span><br />
-              {{ comments.createdat }}
-              <span>Date de soumission.</span>
+              <a href="http://">{{ cards.0 }}</a
+              ><br />
+              <span>{{ cards.1}}</span
+              ><br />
+              <span>{{ cards.2 }} {{ cards.3 }}</span
+              ><br />
+              <span>{{ cards.5 }}</span>
             </div>
             <div class="align-self-center">
-              <a href="http://">Je valide.</a>
+              <a href="{{ cards.4 }}">Je valide.</a>
             </div>
           </div>
         </div>

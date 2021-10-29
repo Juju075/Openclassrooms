@@ -59,8 +59,6 @@ class ControllerAdmin
         $countusers = $this->adminManager->countEntity('Users', null); 
 
         $_SESSION['getcomments'] = $this->adminManager->getCommentToValidate();
-        var_dump($_SESSION['getcomments']);
-
         $this->_view = new View('singlePost','Admin');
         $this->_view->displayForm('Admin',array('countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers));        
         

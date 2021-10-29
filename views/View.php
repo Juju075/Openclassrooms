@@ -181,8 +181,8 @@ class View
                 $countcomments0 = $data['countcomments0'];
                 $countusers = $data['countusers'];
                 $cards = $_SESSION['getcomments'];
-
-            echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers, 'cards'=>$cards]);
+var_dump($cards);
+            echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers, 'cards'=>$cards,'user'=>$user]);
             }else{
               $var = null;  
               echo $twig->render($page1,['var'=>$var]);

@@ -128,7 +128,7 @@
 
 <section id="stats-subtitle">
   <div class="col-xl-12 col-md-12">
-    {#Foreach #}
+    {% for card in cards|slice(0,1) %} {# tous les 5 #}
     <div class="card">
       <div class="card-content">
         <div class="card-body cleartfix">
@@ -137,22 +137,21 @@
               <i class="icon-bubbles warning font-large-2 mr-2"></i>
             </div>
             <div class="media-body">
-              <a href="http://">{{ cards.0 }}</a
+              <a href="">{{ cards.title }}</a
               ><br />
-              <span>{{ cards.1}}</span
+              <span>{{ cards.content }}</span
               ><br />
-              <span>{{ cards.2 }} {{ cards.3 }}</span
+              <span>{{ cards.prenom }} {{ cards.nom }}</span
               ><br />
-              <span>{{ cards.5 }}</span>
+              <span>{{ cards.date }}</span>
             </div>
             <div class="align-self-center">
-              <a href="{{ cards.4 }}">Je valide.</a>
+              <a href="{{ cards.link }}">Je valide.</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  {% for card in cards %} {% endfor %}
+  {% endfor %}
 </section>

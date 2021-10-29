@@ -35,7 +35,6 @@ class AdminManager extends Model
 
         $i = 0;
         while (!empty($idComments[$i][$i])) {
-            $cards = [];
             $req = self::$_bdd->prepare('SELECT id_article FROM comment WHERE id_comment = ?');
             $req->execute(array($idComments[$i][$i]));
             $idArticle = $req->fetch();
@@ -62,9 +61,9 @@ class AdminManager extends Model
 
             $req = self::$_bdd->prepare('SELECT createdat FROM moderator WHERE id_comment = 160');
             $req->execute(array($idComments[$i][$i]));
-            $date = $req->fetch();            
-                    
-            $cards = array($title[0]['title'], $content[0]['content'], $fullName['prenom'],$fullName['nom'], $link['link'], $date['date']);
+            $date = $req->fetch();  
+                   
+            $cards = array('title'=>$title[0]['title'], 'content'=>$content[0]['content'], 'prenom'=>$fullName['prenom'], 'nom'=>$fullName['nom'], 'link'=>$link['link'], 'date'=>$date['date']);
             $i++;   
         }
     return $cards;

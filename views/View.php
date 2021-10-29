@@ -78,6 +78,42 @@ class View
         echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment,'getalert'=>$getalert]); 
     }
 
+    public function generateAdmin($data){ 
+        $a = 'templateAdmin.html.twig';
+        $article = $data['article'][0];  
+        $count =  $data['nbrcomments'];
+
+        if($count != 0){
+            $comments = $data['comments'];
+        }else{
+            $comments =null;
+        }
+        if(!empty($_SESSION['user']['usertype'])){
+            $user = $_SESSION['user']['usertype'];
+        }
+        else{
+            $user = null;
+        }
+        if(!empty($data['id_comment'])){
+            $id_comment = $data['id_comment'];
+        }
+        else{
+            $id_comment = null;
+        }        
+        if(!empty($data['routename'])){
+            $getalert = $data['routename'];
+        }else{
+            $getalert = null;
+        }    
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
+        $twig = new \Twig\Environment($loader, ['cache'=> false]);  
+        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'id_comment'=>$id_comment,'getalert'=>$getalert]); 
+    }
+
+
+
+
     public function simpleContent($action){ 
         $page = 'views/template'.$action .'.html.twig';
         $view = $this->generateFileSimple($page);
@@ -92,7 +128,6 @@ class View
         if(!empty($_SESSION['user']['usertype'])){
             $user = $_SESSION['user']['usertype'];
         }   
-
 
         if($action === 'Register'){
             if (!empty($data)) {
@@ -142,7 +177,7 @@ class View
             if (!empty($data)) {
                 var_dump($data);
 
-                $articles = $data[0]['article'];
+                $articles = $data[0]['articles'];
                 var_dump($articles);
                 exit;
 

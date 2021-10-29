@@ -91,6 +91,7 @@ class ControllerPost
         header('Location: accueil&article=deleted');
     }
 
+
     private function store(){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
                 $this->_articleManager = new ArticleManager;

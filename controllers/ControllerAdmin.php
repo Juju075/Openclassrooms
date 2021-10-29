@@ -46,18 +46,20 @@ class ControllerAdmin
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
 
         $this->articleManager = new ArticleManager(); 
-        $articles = $this->articleManager->getArticles();
+        $article = $this->articleManager->getArticles();
 
         $this->commentManager = new CommentManager;
         $comments = $this->commentManager->getComments(0);
+
         //urls
         $this->moderatorManager = new CommentManager;
         $this->moderatorManager->getUrls();
+        $urls =null;
 
-        $data = array($articles, $comments);
+        $id_comment = null;
 
-        $this->_view = new View('Board', 'Post');
-        $this->_view->displayForm('Admin',$data);
+        $this->_view = new View('Admin','Admin');
+        $this->_view->generateAdmin(array('article'=>$article, 'comments'=> $comments, 'urls'=>$urls,'id_comment'=>$id_comment),'PostsinglePost');
         }
     }
 

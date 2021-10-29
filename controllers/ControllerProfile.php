@@ -5,6 +5,7 @@ session_start();
 use Manager\UserManager;
 use View\View;
 use Tools\Security;
+use Entity\User;
 
 
  class ControllerProfile
@@ -28,6 +29,14 @@ use Tools\Security;
 
             $this->userManager = new UserManager;
             $userObj = $this->userManager->ProfilUser($_SESSION['id_user']); //Objet
+            var_dump($userObj);
+            //prenom
+            $this->variable = new User($userObj);
+            $prenom = $this->variable->getPrenom();
+
+            var_dump($prenom);
+            //nom
+            //sentence
 
             $this->_view = new View('Profile', 'Profile');
             $this->_view->displayForm('Profile', $userObj); 

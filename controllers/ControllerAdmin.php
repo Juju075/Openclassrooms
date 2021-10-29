@@ -58,7 +58,8 @@ class ControllerAdmin
         $this->adminManager = new AdminManager;
         $countusers = $this->adminManager->countEntity('Users', null); 
 
-        $_SESSION['getcomments'] =$this->adminManager->getCommentToValidate();
+        $_SESSION['getcomments'] = $this->adminManager->getCommentToValidate();
+        var_dump($_SESSION['getcomments']);
 
         $this->_view = new View('singlePost','Admin');
         $this->_view->displayForm('Admin',array('countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers));        
@@ -66,28 +67,6 @@ class ControllerAdmin
         unset($_SESSION['getcomments']);
         }
     }
-
-
-    public function allValidationsRequest(){
-        if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
-
-        $this->articleManager = new ArticleManager(); 
-        $article = $this->articleManager->getArticles();
-
-        $this->commentManager = new CommentManager;
-        $comments = $this->commentManager->getComments(0);
-
-        //urls
-        $this->moderatorManager = new CommentManager;
-        $this->moderatorManager->getUrls();
-        $urls =null;
-
-        $id_comment = null;
-
-        $this->_view = new View('Admin','Admin');
-        $this->_view->generateAdmin(array('article'=>$article, 'comments'=> $comments, 'urls'=>$urls,'id_comment'=>$id_comment));
-        }
-    } //delete
 
     private function adminCommentValidation($id_comment, $token){
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){

@@ -61,7 +61,7 @@ class AdminManager extends Model
         $req->execute(array($idComments[$i][$i]));
         $link = $req->fetch();
                  
-        $cards = array($title, $content, $fullName, $link);
+        $cards = array($title[0]['title'], $content[0]['content'], $fullName['prenom'],$fullName['nom'], $link);
         $i++;   
     }
     return $cards;

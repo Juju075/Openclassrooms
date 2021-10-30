@@ -38,6 +38,7 @@ class ControllerComment extends ControllerContact
         }
 
     private function storeComment($id_article){ 
+        echo('storeComment');
         if(isset($_SESSION['user'])){
             $this->commentManager = new CommentManager;
             if($this->commentManager->verifUserCommentArticle() === true){ 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 30 oct. 2021 à 13:07
+-- Généré le : sam. 30 oct. 2021 à 16:53
 -- Version du serveur :  8.0.22
 -- Version de PHP : 7.4.12
 
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id_comment`),
   KEY `fk_comment_user` (`id_user`),
   KEY `fk_comment_article_0` (`id_article`)
-) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -91,10 +91,36 @@ CREATE TABLE IF NOT EXISTS `comment` (
 
 INSERT INTO `comment` (`id_comment`, `content`, `createdat`, `disabled`, `id_article`, `id_user`) VALUES
 (99, 'modification du commentaire par l admin', '2021-10-21 00:43:53', 1, 146, 89),
-(199, 'sdfsfsfsfsfdsdffdsdf', '2021-10-28 18:02:42', 0, 146, 14),
-(200, 'dqsdqsdqsdqsdqs', '2021-10-30 00:24:35', 0, 150, 89),
-(211, 'sfsfsfsfsfsfssfsfsfsdfdgdgdgdgdssdfsdff', '2021-10-30 13:57:44', 0, 151, 14),
-(212, 'sfsfsfsfsfsfsfsfsf', '2021-10-30 14:01:27', 0, 150, 14);
+(200, 'dqsdqsdqsdqsdqs', '2021-10-30 00:24:35', 1, 150, 89),
+(225, 'dsfsdfsdfsfsdfsdf', '2021-10-30 18:04:28', 1, 133, 14),
+(226, 'dfgdgdgdgdgdgdgdgdgdgdgd', '2021-10-30 18:12:59', 0, 131, 89);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `moderator`
+--
+
+DROP TABLE IF EXISTS `moderator`;
+CREATE TABLE IF NOT EXISTS `moderator` (
+  `id_moderator` int NOT NULL AUTO_INCREMENT,
+  `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_comment` int NOT NULL,
+  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `erase` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_moderator`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `moderator`
+--
+
+INSERT INTO `moderator` (`id_moderator`, `link`, `id_comment`, `createdat`, `erase`) VALUES
+(6, 'admin&validation=comment&id=222&token=63aee5f60929e7e2aac8b25a3e826f0e', 222, '2021-10-30 18:01:45', ''),
+(7, 'admin&validation=comment&id=223&token=63aee5f60929e7e2aac8b25a3e826f0e', 223, '2021-10-30 18:03:28', ''),
+(8, 'admin&validation=comment&id=224&token=63aee5f60929e7e2aac8b25a3e826f0e', 224, '2021-10-30 18:03:57', ''),
+(9, 'admin&validation=comment&id=225&token=63aee5f60929e7e2aac8b25a3e826f0e', 225, '2021-10-30 18:04:28', ''),
+(10, 'admin&validation=comment&id=226&token=5ae1b1a56edabdb8b752439e4733ab85', 226, '2021-10-30 18:12:59', '');
 
 -- --------------------------------------------------------
 

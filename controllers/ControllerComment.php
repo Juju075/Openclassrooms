@@ -33,7 +33,7 @@ class ControllerComment extends ControllerContact
         //comment&id_article=96&update
         elseif (isset($_GET['id_comment'])){
             $this->updateOneComment($_GET['id_comment']); 
-        }      
+        }     
 
         }
 
@@ -55,6 +55,7 @@ class ControllerComment extends ControllerContact
 
                 $token = $this->commentManager->retrieveToken();
                 $url = 'admin&validation=comment&id='.$id_comment['id_comment'].'&token='.$token;  
+                $urlToDelete = 'admin&comment=delete&id='.$id_comment['id_comment'];
 
                 $moderator = $this->commentManager->addCommentRequest($id_comment['id_comment'], $url);
 
@@ -79,8 +80,6 @@ class ControllerComment extends ControllerContact
     }
 
     private function updateOneComment($id_comment){
-        echo('|ControllerComment. php updateOneComment');
-
         if(($user=Security::retrieveUserObj('MEMBRE'))!==null){   
             $this->commentManager = new CommentManager;
             $isAuthor = $this->commentManager->verifCommentAuthor($id_comment);
@@ -94,5 +93,10 @@ class ControllerComment extends ControllerContact
                 //Alert vous n'etes pas l'auteur de ce commentaire!
             }
         } 
+    }
+
+    private function deleteOneComment(){
+        $this->commentManager = new CommentManager;
+        $$this->commentManager->deleteOneComment();
     }
 }

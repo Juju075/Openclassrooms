@@ -30,6 +30,9 @@ class ControllerAdmin
           elseif (isset($_GET['login'])){ //admin&login
             $this->login();       
         }
+         elseif (isset($_GET['comment'])&& isset($_GET['comment']) =="delete"){ 
+            $this->deleteOneComment($_GET['id']); 
+        }          
         elseif(isset($_GET['comments']) && isset($_GET['comments']) == 'validation'){
             $this->dashboard();
         }                      
@@ -87,6 +90,18 @@ class ControllerAdmin
         $this->_articleManager->updateArticle($id, $content);
 
         header('location: acceuil alert');
+    }
+
+
+    public function deleteOneComment($id){
+        if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){
+            $this->commentManager = new CommentManager;
+            $this->commentManager->deleteOneComment($id);
+            header('location: accueil');      
+    }
+        else{
+        header('location: accueil');
+        }
     }
 
 }

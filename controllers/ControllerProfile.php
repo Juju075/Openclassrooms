@@ -28,7 +28,6 @@ use Entity\User;
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null){
             $this->userManager = new UserManager;
             $userObj = $this->userManager->ProfilUser($_SESSION['id_user']); //Objet
-            var_dump($userObj);
             //prenom
             $this->variable = new User($userObj);
             $prenom = $this->variable->getPrenom();

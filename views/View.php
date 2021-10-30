@@ -127,7 +127,9 @@ class View
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         
         if(!empty($_SESSION['user']['usertype'])){
-            $user = $_SESSION['user']['usertype'];
+            $usertype = $_SESSION['user']['usertype'];
+        }else{
+            $usertype = null;
         }   
 
         if($action === 'Register'){
@@ -148,8 +150,8 @@ class View
         }
         elseif($action === 'Profile'){
             $user = $data;
-            $usertype = $_SESSION['user']['usertype'];
-            echo $twig->render($page1,['usertype'=>$usertype]);
+            var_dump($user);
+            echo $twig->render($page1,['user'=>$user,'usertype'=>$usertype]);
         }
         elseif($action === 'Post'){
             if (!empty($data)) {
@@ -161,11 +163,11 @@ class View
         }
          elseif($action === 'Contact'){
             if (!empty($data)) {
-                $var = $data[0];
+                
             }else{
               $var = null;  
             }
-            echo $twig->render($page1,['var'=>$var]);
+            echo $twig->render($page1,['usertype'=>$usertype]);
         }       
         elseif($action === 'Update'){
             if (!empty($data)) {
@@ -185,7 +187,7 @@ class View
                 $cards = $_SESSION['cards'];
                 var_dump($cards);
                 
-            echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers, 'cards'=>$cards,'user'=>$user]);
+            echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers, 'cards'=>$cards,'usertype'=>$usertype]);
             }else{
               $var = null;  
               echo $twig->render($page1,['var'=>$var]);

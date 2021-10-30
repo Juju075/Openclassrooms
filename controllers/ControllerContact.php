@@ -34,19 +34,13 @@ class ControllerContact
 
     
     private function Message(){ 
-        echo('| controllerContact Message');
-            //View
-            $data ='';
+            $data =null;
             $this->_view = new View('Contact', 'Contact'); 
             $this->_view->displayForm('Contact', $data);       
 
     }
 
     private function sendMessage(){ 
-        //Create an instance; passing `true` enables exceptions
-        echo('| controllerContact sendMessage');
-
-        //if(isset($_SESSION['id_user'])){
         if(($user=Security::retrieveUserObj('MEMBER'))!==null){ 
 
         //recuperer data user

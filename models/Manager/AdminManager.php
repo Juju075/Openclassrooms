@@ -64,10 +64,12 @@ class AdminManager extends Model
             $req->execute(array($idComments[$i][$i]));
             $date = $req->fetch();  
                     
-            $cards = array('title'=>$title['title'],'content'=>$content['content'],'prenom'=>$fullName['prenom'],'nom'=>$fullName['nom'],'link'=>$link['link'],'createdat'=>$date['createdat']);
+            $cards = array('id_article'=>$idArticle['id_article'],'title'=>$title['title'],'content'=>$content['content'],'prenom'=>$fullName['prenom'],'nom'=>$fullName['nom'],'link'=>$link['link'],'createdat'=>$date['createdat']);
             
         $i++;
         return $cards;
         }
     }
+
+
 }

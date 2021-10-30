@@ -86,7 +86,6 @@ abstract class Model
             $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
             
                 if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype){
-                    echo('Conditions valide');
                         $id_user = $resultat['id_user'];
                         $_SESSION['id_user']=$id_user;  
 

@@ -83,11 +83,9 @@ abstract class Model
         $resultat = $req->fetch();
 
             if ($resultat !== false) {
-                echo('Username ok');
                 $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
                 
                     if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype){
-                        echo('Success connection');
                         $id_user = $resultat['id_user'];
                         $_SESSION['id_user']=$id_user;  
 
@@ -98,7 +96,6 @@ abstract class Model
                         return false;
                     }  
             }elseif($resultat === false){
-                echo('Username inconnue');
                 return false;
             }  
     }

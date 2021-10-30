@@ -146,7 +146,20 @@
               <span>{{ cards.createdat }}</span>
             </div>
             <div class="align-self-center">
-              <a href="{{ cards.link }}">Je valide.</a>
+              <button
+                type="button"
+                class="btn btn-success"
+                onclick="{{ cards.link }}"
+              >
+                Je valide
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="{{ cards.link }}"
+              >
+                Je refuse
+              </button>
             </div>
           </div>
         </div>

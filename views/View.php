@@ -159,7 +159,7 @@ class View
             }else{
               $var = null;  
             }
-            echo $twig->render($page1,['var'=>$var]);
+            echo $twig->render($page1,['usertype'=>$usertype]);
         }
          elseif($action === 'Contact'){
             if (!empty($data)) {

@@ -55,7 +55,7 @@ class ControllerPost
                 $this->article(null, null);
             }            
         }
-        elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ //Traitement update
+        elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){
             $id = $_GET['id_article'];
             $title =$_POST['title'];
             $content = $_POST['content'];
@@ -85,11 +85,9 @@ class ControllerPost
     }   
 
     private function delete($id){
-        echo('delete');
-        var_dump($id);
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->deleteArticle($id);
-        header('Location: accueil&article=deleted');
+        header('location: accueil');
     }
 
 
@@ -119,12 +117,11 @@ class ControllerPost
 
     private function storeUpdate($id,$title,$content){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){
-                $this->_articleManager = new ArticleManager;
-                $this->_articleManager->updateArticle($id,$title,$content);
-
-                header('location: /post&id_article='.$_SESSION['id_article']); 
+            $this->_articleManager = new ArticleManager;
+            $this->_articleManager->updateArticle($id,$title,$content);
+            header('location: /post&id_article='.$id); 
         }else{
-            header('location: post&id_article='.$_SESSION['id_article']); //pas admin
+            header('location: post&id_article='.$id); //pas admin
         }
     }
 

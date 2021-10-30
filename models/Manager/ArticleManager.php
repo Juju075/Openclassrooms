@@ -32,15 +32,24 @@ class ArticleManager extends Model
         $req = self::$_bdd->prepare('DELETE FROM article WHERE id_article = ?');
         $req->execute(array($id));
         $req->fetch();
+        $req->closeCursor();
    }
 
    public function updateArticle($id,$title,$content){ 
+      echo('updatefunction');
       $updatedAt= date('d-m-Y').' '.time();
+
       $this->getBdd();  
-      $req = self::$_bdd->prepare('UPDATE article SET title = ?, content = ?, updatedAt = ? WHERE id_article = ?');
-      $req->execute(array($_POST['title'],$_POST['content'],$updatedAt, $_SESSION['id_article']));
-      $req->fetch();
-      $req->closeCursor(); 
+      if($title != ''){
+            $req = self::$_bdd->prepare('UPDATE article SET title = ?, updatedAt = ? WHERE id_article = ?');
+            $req->execute(array($title, $updatedAt, $id));
+      }
+      if($content != ''){
+            $req = self::$_bdd->prepare('UPDATE article SET  content = ?, updatedAt = ? WHERE id_article = ?');
+            $req->execute(array($content, $updatedAt, $id));
+      }
+            $req->fetch();
+            $req->closeCursor();
    } 
         
    public function noDuplicatePost($title, $content){ 

@@ -32,10 +32,6 @@ use Entity\User;
             $this->variable = new User($userObj);
             $prenom = $this->variable->getPrenom();
 
-            var_dump($prenom);
-            //nom
-            //sentence
-
             $this->_view = new View('Profile', 'Profile');
             $this->_view->displayForm('Profile', $userObj); 
         }else{

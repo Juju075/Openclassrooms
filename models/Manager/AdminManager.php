@@ -33,7 +33,6 @@ class AdminManager extends Model
         $req = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE disabled = 0');    
         $req->execute();
         $idComments = $req->fetchall();
-        var_dump($idComments);
         
         $i = 0;
         while (!empty($idComments[$i]['id_comment'])) {
@@ -79,10 +78,6 @@ class AdminManager extends Model
         $req = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE disabled = 0');    
         $req->execute();
         $idComments = $req->fetchall();
-
-        var_dump($idComments);
-        var_dump($idComments[0]['id_comment']);
-   
 
         $i = 0;
         while (!empty($idComments[$i][$i])) { //recupere le string

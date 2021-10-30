@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 30 oct. 2021 à 16:53
+-- Généré le : sam. 30 oct. 2021 à 22:07
 -- Version du serveur :  8.0.22
 -- Version de PHP : 7.4.12
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `id_user` int DEFAULT NULL,
   PRIMARY KEY (`id_article`),
   KEY `fk_article_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `article`
@@ -47,11 +47,12 @@ CREATE TABLE IF NOT EXISTS `article` (
 INSERT INTO `article` (`id_article`, `title`, `content`, `updatedAt`, `chapo`, `createdAt`, `id_user`) VALUES
 (131, 'Les royaumes africain.', 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', NULL, 'il est de nouveau de ', '2021-10-15 13:48:36', NULL),
 (132, 'Egypte antique', 'contenu ici', NULL, 'beaucoup d\'interpre', '2021-10-15 13:49:14', NULL),
-(133, 'Kemet', 'un paradis perdu', NULL, 'une soiree au 31', '2021-10-15 13:49:47', NULL),
-(145, 'test articles ', 'test articlesfsdfs', NULL, 'test articlessdfsdf', '2021-10-19 16:46:25', 89),
-(146, 'sfsdf', 'sdfsdfs', '26-10-2021 1635270500', 'dfsfsf', '2021-10-19 16:46:25', 89),
-(150, 'sdfsdfsdf', 'sdfdsdfsfsdfsd', NULL, 'sdfsdfs', '2021-10-26 19:49:27', 89),
-(151, 'sdfsdfsdf', 'sdfdsdfsfsdfsd', NULL, 'sdfsdfs', '2021-10-26 19:50:27', 89);
+(153, 'Initiation aux mathématiques africaines pour les enfants de 5 a 15 ans.', 'Ce manuel a pour vocation d\'initier les enfants (mais aussi les parents) aux mathématiques africaines par le biais d\'une méthode pédagogique volontairement ludique.', NULL, 'Nioussérê Kalala Omotunde', '2021-10-30 22:13:55', 89),
+(154, 'Valoriser nos Humanités Classiques Africaines', 'L\'Institut d\'Histoire ANYJART se veut être un espace de culture, d\'histoire et de découverte de l\'extême richesse du patrimoine historique, culturel, scientifique, technologique, littéraire et spirituel du Monde Noir. Dédié à la promotion de nos Humanités Classiques Africaines,  il vous invitera à porter un regard nouveau, positif et pragmatique sur notre culture africaine et panafricaine.', NULL, 'L\'Institut d\'Histoire Anyjart', '2021-10-30 22:15:18', 89),
+(155, 'Immersion dans les civilisations africaines', 'z', NULL, 'z', '2021-10-30 22:16:29', 89),
+(156, 'Philosophie Kamite', 'nouveau texte', '30-10-2021 1635631323', 'd', '2021-10-30 22:17:28', 89),
+(157, 'Les réacteurs nucléaires naturels existaient déjà il y a 2 milliards d\'années au Gabon', 'Nos premiers réacteurs nucléaires datent des années 1950… et suivent de près de 2 milliards d\'années les 17 « réacteurs » naturels qui ont fonctionné de manière stable pendant 100 000 à 500 000 ans sur une période d\'environ un million d\'années. Ils produisirent de l\'énergie avec des rendements modestes (100 kilowatts en moyenne par réacteur, bien inférieurs aux réacteurs actuels produisant 1 à 1,5 gigawatt, soit au moins 1 000 fois plus).', NULL, 'Terre d\'exception.', '2021-10-30 23:17:14', 89),
+(158, '300 000 mille ans seul sur terre. modifie', 'sdfsdfsdfsdfsdf', '30-10-2021 1635629156', 'ffsdfsdfsd', '2021-10-30 23:25:34', 89);
 
 -- --------------------------------------------------------
 
@@ -83,16 +84,13 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id_comment`),
   KEY `fk_comment_user` (`id_user`),
   KEY `fk_comment_article_0` (`id_article`)
-) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=228 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
 --
 
 INSERT INTO `comment` (`id_comment`, `content`, `createdat`, `disabled`, `id_article`, `id_user`) VALUES
-(99, 'modification du commentaire par l admin', '2021-10-21 00:43:53', 1, 146, 89),
-(200, 'dqsdqsdqsdqsdqs', '2021-10-30 00:24:35', 1, 150, 89),
-(225, 'dsfsdfsdfsfsdfsdf', '2021-10-30 18:04:28', 1, 133, 14),
 (226, 'dfgdgdgdgdgdgdgdgdgdgdgd', '2021-10-30 18:12:59', 0, 131, 89);
 
 -- --------------------------------------------------------
@@ -109,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `moderator` (
   `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `erase` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id_moderator`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `moderator`
@@ -120,7 +118,8 @@ INSERT INTO `moderator` (`id_moderator`, `link`, `id_comment`, `createdat`, `era
 (7, 'admin&validation=comment&id=223&token=63aee5f60929e7e2aac8b25a3e826f0e', 223, '2021-10-30 18:03:28', ''),
 (8, 'admin&validation=comment&id=224&token=63aee5f60929e7e2aac8b25a3e826f0e', 224, '2021-10-30 18:03:57', ''),
 (9, 'admin&validation=comment&id=225&token=63aee5f60929e7e2aac8b25a3e826f0e', 225, '2021-10-30 18:04:28', ''),
-(10, 'admin&validation=comment&id=226&token=5ae1b1a56edabdb8b752439e4733ab85', 226, '2021-10-30 18:12:59', '');
+(10, 'admin&validation=comment&id=226&token=5ae1b1a56edabdb8b752439e4733ab85', 226, '2021-10-30 18:12:59', ''),
+(11, 'admin&validation=comment&id=227&token=63aee5f60929e7e2aac8b25a3e826f0e', 227, '2021-10-30 22:03:07', '');
 
 -- --------------------------------------------------------
 

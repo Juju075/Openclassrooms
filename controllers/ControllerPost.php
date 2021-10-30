@@ -118,11 +118,13 @@ class ControllerPost
     private function storeUpdate($id,$title,$content){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){
             $this->_articleManager = new ArticleManager;
-            $this->_articleManager->updateArticle($id,$title,$content);
-            header('location: /post&id_article='.$id); 
+            $response = $this->_articleManager->updateArticle($id,$title,$content);
+
+            header('location: post&id_article=156'); 
+            echo('jusquici tout vas bien');
         }else{
-            header('location: post&id_article='.$id); //pas admin
-        }
+            header('location: post&id_article=156');
+        }    
     }
 
     private function article($routename, $id_comment){

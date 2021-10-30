@@ -36,7 +36,6 @@ class ArticleManager extends Model
    }
 
    public function updateArticle($id,$title,$content){ 
-      echo('updatefunction');
       $updatedAt= date('d-m-Y').' '.time();
 
       $this->getBdd();  
@@ -50,6 +49,7 @@ class ArticleManager extends Model
       }
             $req->fetch();
             $req->closeCursor();
+            return true;
    } 
         
    public function noDuplicatePost($title, $content){ 

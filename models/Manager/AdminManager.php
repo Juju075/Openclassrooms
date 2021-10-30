@@ -56,11 +56,11 @@ class AdminManager extends Model
             $req->execute(array($idUser['id_user']));
             $fullName = $req->fetch();
                       
-            $req = self::$_bdd->prepare('SELECT link FROM moderator WHERE id_comment = 160');
+            $req = self::$_bdd->prepare('SELECT link FROM moderator WHERE id_comment = ?');
             $req->execute(array($idComments[$i][$i]));
             $link = $req->fetch();
              
-            $req = self::$_bdd->prepare('SELECT createdat FROM moderator WHERE id_comment = 160');
+            $req = self::$_bdd->prepare('SELECT createdat FROM moderator WHERE id_comment = ?');
             $req->execute(array($idComments[$i][$i]));
             $date = $req->fetch();  
                     

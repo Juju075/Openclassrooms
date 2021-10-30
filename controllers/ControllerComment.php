@@ -38,12 +38,10 @@ class ControllerComment extends ControllerContact
         }
 
     private function storeComment($id_article){ 
-        echo('storeComment');
         if(isset($_SESSION['user'])){
             $this->commentManager = new CommentManager;
             if($this->commentManager->verifUserCommentArticle() === true){ 
-                $user=Security::retrieveUserObj($_SESSION['user']['usertype']); //?
-    
+
                 $array = array('content'=> $_POST['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
                 $comment = new Comment($array);            
 
@@ -58,14 +56,17 @@ class ControllerComment extends ControllerContact
                 $token = $this->commentManager->retrieveToken();
                 $url = 'admin&validation=comment&id='.$id_comment['id_comment'].'&token='.$token;  
 
+                $moderator = $this->commentManager->addCommentRequest($id_comment['id_comment'], $url);
 
+                if ($moderator === TRUE) {
+                    $_SESSION['routeNameForComment'] = 'post&comment=waiting';   
+                    header('Location: post&id_article='.$_SESSION['id_article']);
+                }
+                else{
+                    //Alert erreur envoie au moderateur
+                    header('location: accueil');
+                }
 
-                //$this->commentManager->addCommentRequest($id_comment['id_comment'], $url); //Pb Primary key !!!!
-
-
-
-                $_SESSION['routeNameForComment'] = 'post&comment=waiting';   
-                header('Location: post&id_article='.$_SESSION['id_article']);
 
 
             }else{ 

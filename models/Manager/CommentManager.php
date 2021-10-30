@@ -111,7 +111,7 @@ class CommentManager extends Model
       $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment) VALUES (?, ?) ');
       $req->execute(array($link, $id_comment));
       $req->fetch();
-      $req->closeCursor();     
+      return true;    
    }
 
 

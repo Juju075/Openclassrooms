@@ -82,7 +82,7 @@ abstract class Model
         $req->execute(array($obj['username']));
         $resultat = $req->fetch();
 
-        if ($resultat != false) {
+        if ($resultat !== false) {
             $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
             
                 if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype){

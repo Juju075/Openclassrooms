@@ -96,6 +96,7 @@ abstract class Model
                         return false;
                     }  
             }elseif($resultat === false){
+
                 return false;
             }  
     }

@@ -28,7 +28,6 @@ class ControllerPost
             $this->store();
         }   
         elseif (isset($_GET['delete'])){
-            //id_article
             $this->delete($_GET['delete']); 
         }
         elseif (isset($_GET['update'])){
@@ -86,6 +85,8 @@ class ControllerPost
     }   
 
     private function delete($id){
+        echo('delete');
+        var_dump($id);
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->deleteArticle($id);
         header('Location: accueil&article=deleted');

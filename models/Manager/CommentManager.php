@@ -110,6 +110,7 @@ class CommentManager extends Model
       $this->getBdd(); 
       $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment) VALUES (?, ?) ');
       $req->execute(array($link, $id_comment));
+      $req->fetch();
       $req->closeCursor();     
    }
 
@@ -128,12 +129,12 @@ class CommentManager extends Model
       }
    }
 
-   public function getUrls(){
+   public function retrieveToken(){
       $this->getBdd(); 
-      $req = self::$_bdd->prepare('SELECT * FROM moderator');
-      $req->execute();
-      $req->closeCursor();       
+      $req = self::$_bdd->prepare('SELECT validation_key FROM user WHERE id_user = ?');
+      $req->execute(array($_SESSION['id_user']));
+      $result = $req->fetch();
+      $req->closeCursor();    
+      return $result['validation_key'];
    }
 }
-
-

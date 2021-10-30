@@ -33,16 +33,16 @@ class View
         else{
             $articles = null;
         }
-        if(!empty($_SESSION['user']['usertype'])){
-            $user = $_SESSION['user']['usertype'];  
+        //usertype
+        if(!empty($_SESSION['user']['usertype'])){ 
             $usertype = $_SESSION['user']['usertype']; 
         }
         else{
-            $user = null;
+            $usertype  = null;
         }
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        echo $twig->render($a,['getalert'=>$getalert,'user'=>$user,'usertype'=>$usertype, 'articles'=>$articles]); 
+        echo $twig->render($a,['getalert'=>$getalert,'usertype'=>$usertype, 'articles'=>$articles]); 
     }
     
     public function generatePost($data){ 
@@ -55,11 +55,11 @@ class View
         }else{
             $comments =null;
         }
-        if(!empty($_SESSION['user']['usertype'])){
-            $user = $_SESSION['user']['usertype'];
+        if(!empty($_SESSION['user']['usertype'])){ 
+            $usertype = $_SESSION['user']['usertype']; 
         }
         else{
-            $user = null;
+            $usertype  = null;
         }
         if(!empty($data['id_comment'])){
             $id_comment = $data['id_comment'];
@@ -76,7 +76,7 @@ class View
         $routename = $data['routename'];
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment,'getalert'=>$getalert]); 
+        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'usertype'=>$usertype,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment,'getalert'=>$getalert]); 
     }
 
     public function generateAdmin($data){ 
@@ -148,7 +148,8 @@ class View
         }
         elseif($action === 'Profile'){
             $user = $data;
-            echo $twig->render($page1,['user'=>$user]);
+            $usertype = $_SESSION['user']['usertype'];
+            echo $twig->render($page1,['usertype'=>$usertype]);
         }
         elseif($action === 'Post'){
             if (!empty($data)) {
@@ -180,7 +181,10 @@ class View
                 $countcomments1 = $data['countcomments1'];
                 $countcomments0 = $data['countcomments0'];
                 $countusers = $data['countusers'];
-                $cards = $_SESSION['getcomments'];
+
+                $cards = $_SESSION['cards'];
+                var_dump($cards);
+                
             echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers, 'cards'=>$cards,'user'=>$user]);
             }else{
               $var = null;  

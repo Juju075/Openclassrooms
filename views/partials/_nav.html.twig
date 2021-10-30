@@ -2,19 +2,21 @@
   <!-- par default -->
   <li><a href="accueil">Listing des articles</a></li>
 
-  {% if user is empty %}
+  {% if usertype is empty %}
   <li><a href="register&create">S'inscrire</a></li>
   <li><a href="login&user">S'authentifier</a></li>
-  {% endif %} {% if user == 'ADMIN'%}
+  {% endif %} {% if usertype == 'ADMIN'%}
   <li><a href="post&create">Créer un article</a></li>
   <li><a href="admin&comments=validation">Validations en attente.</a></li>
-  {% endif %} {% if user == 'MEMBRE' or user == 'ADMIN'%}
+  {% endif %} {% if usertype == 'MEMBRE' or usertype == 'ADMIN'%}
   <li><a href="profile">Mon profil</a></li>
   <li><a href="login&logout">Me deconnecter</a></li>
-  {% endif %} {% if user == 'MEMBRE' %}
+  {% endif %} {% if usertype == 'MEMBRE' %}
   <li><a href="contact&create">Nous contacter</a></li>
   {% endif %}
 </ul>
-<p>Type:</p>
-{{ user }}
+<div>
+  <p>Type:</p>
+  {{ usertype }}
+</div>
 <!-- main-menu -->

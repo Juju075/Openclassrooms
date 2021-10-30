@@ -28,13 +28,64 @@ class AdminManager extends Model
     
 
     public function getCommentToValidate(){
+        $cards = [];
+        $this->getBdd();
+        $req = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE disabled = 0');    
+        $req->execute();
+        $idComments = $req->fetchall();
+        var_dump($idComments);
+        
+        $i = 0;
+        while (!empty($idComments[$i]['id_comment'])) {
+            $req = self::$_bdd->prepare('SELECT id_article FROM comment WHERE id_comment = ?');
+            $req->execute(array($idComments[$i][$i]));
+            $idArticle = $req->fetch();
+            
+            $req = self::$_bdd->prepare('SELECT id_user FROM comment WHERE id_comment = ?');
+            $req->execute(array($idComments[$i][$i]));
+            $idUser = $req->fetch();
+                     
+            $req = self::$_bdd->prepare('SELECT title FROM article WHERE id_article = ?');
+            $req->execute(array($idArticle['id_article']));
+            $title = $req->fetch();
+                       
+            $req = self::$_bdd->prepare('SELECT content FROM comment WHERE id_comment = ?');
+            $req->execute(array($idComments[$i][$i]));
+            $content = $req->fetch();
+            
+            $req = self::$_bdd->prepare('SELECT prenom, nom FROM user WHERE id_user = ?');
+            $req->execute(array($idUser['id_user']));
+            $fullName = $req->fetch();
+                      
+            $req = self::$_bdd->prepare('SELECT link FROM moderator WHERE id_comment = 160');
+            $req->execute(array($idComments[$i][$i]));
+            $link = $req->fetch();
+             
+            $req = self::$_bdd->prepare('SELECT createdat FROM moderator WHERE id_comment = 160');
+            $req->execute(array($idComments[$i][$i]));
+            $date = $req->fetch();  
+                    
+            $cards = array('title'=>$title['title'],'content'=>$content['content'],'prenom'=>$fullName['prenom'],'nom'=>$fullName['nom'],'link'=>$link['link'],'createdat'=>$date['createdat']);
+            
+        $i++;
+        return $cards;
+        }
+    }
+
+
+
+    public function getCommentToValidateBackup(){
         $this->getBdd();
         $req = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE disabled = 0');    
         $req->execute();
         $idComments = $req->fetchall();
 
+        var_dump($idComments);
+        var_dump($idComments[0]['id_comment']);
+        exit;
+
         $i = 0;
-        while (!empty($idComments[$i][$i])) {
+        while (!empty($idComments[$i][$i])) { //recupere le string
             $req = self::$_bdd->prepare('SELECT id_article FROM comment WHERE id_comment = ?');
             $req->execute(array($idComments[$i][$i]));
             $idArticle = $req->fetch();

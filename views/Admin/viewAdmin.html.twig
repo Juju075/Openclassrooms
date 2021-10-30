@@ -128,7 +128,7 @@
 
 <section id="stats-subtitle">
   <div class="col-xl-12 col-md-12">
-    {% for card in cards|slice(0,1) %} {# tous les 5 #}
+    {% for card in cards %}
     <div class="card">
       <div class="card-content">
         <div class="card-body cleartfix">
@@ -143,7 +143,7 @@
               ><br />
               <span>{{ cards.prenom }} {{ cards.nom }}</span
               ><br />
-              <span>{{ cards.date }}</span>
+              <span>{{ cards.createdat }}</span>
             </div>
             <div class="align-self-center">
               <a href="{{ cards.link }}">Je valide.</a>

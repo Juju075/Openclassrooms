@@ -50,18 +50,22 @@ class ControllerComment extends ControllerContact
                 $comment = $this->commentManager->addComment($comment);
                 $this->commentManager->getComments(1);
                 
-                $id_comment = $this->commentManager->retriveIdComment(array($array['id_user'], $array['id_article'], $array['content']));     
-                
-                //token user ?
+                $id_comment = $this->commentManager->retriveIdComment(array($array['id_user'], $array['id_article'], $array['content']));  
+
                 $this->userManager = new UserManager;
-                $userObj = $this->userManager->ProfilUser($array['id_user']);
-                
-                $token ='63aee5f60929e7e2aac8b25a3e826f0e';
-                $url = 'admin&validation=comment&id='.$id_comment[0].'&token='.$token;
-                
+                $user = $this->userManager->ProfilUser($array['id_user']);
+
+                $token = $this->commentManager->retrieveToken();
+                $url = 'admin&validation=comment&id='.$id_comment['id_comment'].'&token='.$token;  
 
 
-                //$this->commentManager->addCommentRequest($id_comment[0], $url); //erreur ici pb primary key
+
+
+
+                //$this->commentManager->addCommentRequest($id_comment['id_comment'], $url); //Pb Primary key !!!!
+
+
+
 
 
 
@@ -77,7 +81,6 @@ class ControllerComment extends ControllerContact
             header('Location: accueil&comment=notconnected');
         }
     }
-
 
     private function updateOneComment($id_comment){
         echo('|ControllerComment. php updateOneComment');

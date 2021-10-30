@@ -26,7 +26,6 @@ use Entity\User;
     private function myProfile(){
         //usertype connecte
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null){
-
             $this->userManager = new UserManager;
             $userObj = $this->userManager->ProfilUser($_SESSION['id_user']); //Objet
             var_dump($userObj);

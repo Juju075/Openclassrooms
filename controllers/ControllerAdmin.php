@@ -58,11 +58,12 @@ class ControllerAdmin
         $this->adminManager = new AdminManager;
         $countusers = $this->adminManager->countEntity('Users', null); 
 
-        $_SESSION['getcomments'] = $this->adminManager->getCommentToValidate();
+        $_SESSION['cards'] = $this->adminManager->getCommentToValidate();
+
         $this->_view = new View('singlePost','Admin');
         $this->_view->displayForm('Admin',array('countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers));        
         
-        unset($_SESSION['getcomments']);
+        unset($_SESSION['cards']);
         }
     }
 

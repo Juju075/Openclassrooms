@@ -82,7 +82,7 @@ class AdminManager extends Model
 
         var_dump($idComments);
         var_dump($idComments[0]['id_comment']);
-        exit;
+   
 
         $i = 0;
         while (!empty($idComments[$i][$i])) { //recupere le string

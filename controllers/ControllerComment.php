@@ -40,7 +40,6 @@ class ControllerComment extends ControllerContact
     private function storeComment($id_article){ 
         if(isset($_SESSION['user'])){
             $this->commentManager = new CommentManager;
-
             if($this->commentManager->verifUserCommentArticle() === true){ 
                 $user=Security::retrieveUserObj($_SESSION['user']['usertype']); //?
     
@@ -60,12 +59,7 @@ class ControllerComment extends ControllerContact
 
 
 
-
-
                 //$this->commentManager->addCommentRequest($id_comment['id_comment'], $url); //Pb Primary key !!!!
-
-
-
 
 
 

@@ -116,6 +116,7 @@ class CommentManager extends Model
 
 
    public function verifUserCommentArticle(){
+      dd($_SESSION['id_user']);
       $this->getBdd(); 
       $req = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_article = ? AND id_user = ?');
       $req->execute(array($_SESSION['id_article'], $_SESSION['id_user']));

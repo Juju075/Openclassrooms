@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 17 oct. 2021 à 09:37
+-- Généré le : sam. 30 oct. 2021 à 13:07
 -- Version du serveur :  8.0.22
 -- Version de PHP : 7.4.12
 
@@ -32,22 +32,26 @@ CREATE TABLE IF NOT EXISTS `article` (
   `id_article` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `updatedAt` datetime DEFAULT NULL,
+  `updatedAt` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `chapo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_user` int DEFAULT NULL,
   PRIMARY KEY (`id_article`),
   KEY `fk_article_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `article`
 --
 
 INSERT INTO `article` (`id_article`, `title`, `content`, `updatedAt`, `chapo`, `createdAt`, `id_user`) VALUES
-(131, 'les elephants rose', 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', NULL, 'il est de nouveau de ', '2021-10-15 13:48:36', NULL),
-(132, 'la musique est un art ?', ' by accident, sometimes on purpose (injected humour and the like).', NULL, 'beaucoup d\'interpre', '2021-10-15 13:49:14', NULL),
-(133, 'une petite tenue de soiree', 'ge when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', NULL, 'une soiree au 31', '2021-10-15 13:49:47', NULL);
+(131, 'Les royaumes africain.', 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', NULL, 'il est de nouveau de ', '2021-10-15 13:48:36', NULL),
+(132, 'Egypte antique', 'contenu ici', NULL, 'beaucoup d\'interpre', '2021-10-15 13:49:14', NULL),
+(133, 'Kemet', 'un paradis perdu', NULL, 'une soiree au 31', '2021-10-15 13:49:47', NULL),
+(145, 'test articles ', 'test articlesfsdfs', NULL, 'test articlessdfsdf', '2021-10-19 16:46:25', 89),
+(146, 'sfsdf', 'sdfsdfs', '26-10-2021 1635270500', 'dfsfsf', '2021-10-19 16:46:25', 89),
+(150, 'sdfsdfsdf', 'sdfdsdfsfsdfsd', NULL, 'sdfsdfs', '2021-10-26 19:49:27', 89),
+(151, 'sdfsdfsdf', 'sdfdsdfsfsdfsd', NULL, 'sdfsdfs', '2021-10-26 19:50:27', 89);
 
 -- --------------------------------------------------------
 
@@ -79,7 +83,18 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id_comment`),
   KEY `fk_comment_user` (`id_user`),
   KEY `fk_comment_article_0` (`id_article`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `comment`
+--
+
+INSERT INTO `comment` (`id_comment`, `content`, `createdat`, `disabled`, `id_article`, `id_user`) VALUES
+(99, 'modification du commentaire par l admin', '2021-10-21 00:43:53', 1, 146, 89),
+(199, 'sdfsfsfsfsfdsdffdsdf', '2021-10-28 18:02:42', 0, 146, 14),
+(200, 'dqsdqsdqsdqsdqs', '2021-10-30 00:24:35', 0, 150, 89),
+(211, 'sfsfsfsfsfsfssfsfsfsdfdgdgdgdgdssdfsdff', '2021-10-30 13:57:44', 0, 151, 14),
+(212, 'sfsfsfsfsfsfsfsfsf', '2021-10-30 14:01:27', 0, 150, 14);
 
 -- --------------------------------------------------------
 
@@ -95,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `activated` tinyint(1) NOT NULL,
   `validation_key` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `usertype` tinyint(1) NOT NULL,
+  `usertype` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -103,19 +118,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `updatedAt` datetime DEFAULT NULL,
   `sentence` char(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `activated`, `validation_key`, `usertype`, `avatar`, `createdAt`, `prenom`, `nom`, `updatedAt`, `sentence`) VALUES
-(14, 'testusername', 'monemail@gmail.com', '$2y$10$PB7BBTMqnoV0w0Zl1X7jZ.0rtZOkzUCnfWMnt9mRy0EapQVHh4nIK', 1, '63aee5f60929e7e2aac8b25a3e826f0e', 1, 'default_avatar.jpg', '2021-09-27 14:20:26', 'benoit', 'Grosse', NULL, NULL),
-(15, 'testusername2', 'miki@gmail.com', '$2y$10$E8RwzxRQhh/Jsv9PhC3rOuRAfWin5PVBk/U3UTiyycS28HiWAp/2m', 0, '123456', 1, 'default_avatar.jpg', '2021-09-28 19:07:23', 'michael', 'jones', NULL, NULL),
-(52, 'testformulaire', 'juniorkheve@gmail.com', '$2y$10$2SrpDDlel8FTGx0a7r3H6.z7w/u7Zys.8u6Ya/qCTPDrArxK2GdHG', 0, '5cd223aee63b5fe06b2cb84a3839f0eb', 1, 'default_avatar.jpg', '2021-10-11 15:02:44', 'sdfsdfs', 'sdfsf', NULL, 'sfsfsfsfs'),
-(67, 'cfwcw', 'bempime.k@gmail.com', '$2y$10$CWZMFw3DFO173aHW21HONOKAaKzVL5voxP8nhTDSXp3W14IydGiPO', 0, '133d21cec05b90f4631ac1b8dda345f1', 1, 'image_telecharge.jpg', '2021-10-13 22:01:46', 'wxcwxc', 'cwcwcxw', NULL, 'ffqsffqs'),
-(69, 'admin', 'amzfba.1bestbuy@gmail.com', '$2y$10$OAZy0rmIAdpJzHQ/UEDKBu/mEpNYbSS8YhzF9rJwyAlrr/rak0Ml2', 0, 'b7d2769dbf12e35f893b10711fc4152e', 2, 'image_telecharge.jpg', '2021-10-15 15:28:14', 'Robert', 'Ford', NULL, 'je suis le boss'),
-(70, 'testnoimage', 'bempime.k@gmail.com', '$2y$10$vuyxcMwUYLDQOUiH9LNhoOImzxuMdOPFkccH89UPyjipV5RMsCYsm', 0, '39c8e9953fe8ea40ff1c59876e0e2f28', 2, 'image_telecharge.jpg', '2021-10-15 15:30:52', 'sdfsdf', 'sdfsdf', NULL, 'sdfsfds');
+(14, 'testusername', 'monemail@gmail.com', '$2y$10$PB7BBTMqnoV0w0Zl1X7jZ.0rtZOkzUCnfWMnt9mRy0EapQVHh4nIK', 1, '63aee5f60929e7e2aac8b25a3e826f0e', 'MEMBRE', 'default_avatar.jpg', '2021-09-27 14:20:26', 'benoit', 'Grosse', NULL, 'qdqsdqdqdqdqd'),
+(85, 'utilisateur1', 'ToddBBower@dayrep.com', '$2y$10$FmRRHGqDdrrkOv33tQv7BO1dP.U4NxWf2yj72pSFIjPuyfIqGmHLS', 1, 'b4489abcc06e34aff531b50caa5e40e4', 'MEMBRE', 'Capture.JPG', '2021-10-18 15:18:54', 'Todd B', 'Bower', NULL, 'Les cordonniers sont les plus mal chaussés'),
+(87, 'utilisateur2', 'JohnSJohnson@teleworm.us', '$2y$10$gDegAMqgeUWqNFe1zIYrFeacakzFRPm7xj4Q3m6i0A5VerEEGJ6xq', 1, '0248fa8c97546a3180712114931c7dfb', 'MEMBRE', 'Capture1.jpg', '2021-10-18 15:25:21', 'John S', 'Johnson', NULL, 'Imite le moins possible les hommes dans leur énigmatique maladie de faire des noeuds'),
+(89, 'Admin', 'amzfba.1bestbuy@gmail.com', '$2y$10$t7U5YM/ir5pKjk/XWOHz0e2ReuhjetuXunuuvvJ5unbph3PdUPtf2', 1, '5ae1b1a56edabdb8b752439e4733ab85', 'ADMIN', 'Capture1.jpg', '2021-10-18 18:59:00', 'Christian J', 'Grogan', NULL, 'Tout ce qui n\'est pas passion est sur un fond d\'ennui.');
 
 --
 -- Contraintes pour les tables déchargées

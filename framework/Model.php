@@ -78,18 +78,27 @@ abstract class Model
 
     protected function authenticationRequest($obj,$usertype){
         $this->getBdd();
-        $req = self::$_bdd->prepare('SELECT id_user, password, activated, usertype  FROM user WHERE username = ?');
+        $req = self::$_bdd->prepare('SELECT id_user, password, activated, usertype FROM user WHERE username = ?');
         $req->execute(array($obj['username']));
         $resultat = $req->fetch();
-        $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
-        if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype){
-            $id_user = $resultat['id_user'];
-            $_SESSION['id_user']=$id_user;       
-            $user=$this->getOne('user','User',$id_user); 
-            return $user;  
+
+        if ($resultat != false) {
+            $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
+            
+                if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype){
+                    echo('Conditions valide');
+                        $id_user = $resultat['id_user'];
+                        $_SESSION['id_user']=$id_user;  
+
+                        $user=$this->getOne('user','User',$id_user); 
+                        return $user;
+                }
+                else{
+                    return false;
+                }  
         }else{
             return false;
-        }     
+        }      
     }
 
     protected function postIfExist(){
@@ -98,7 +107,6 @@ abstract class Model
         $req0->execute(array($_SESSION['id_article']));
         return $req0->fetchall();
     }
-
 
     protected function createOne($table, $obj){
         $array=(array)$obj;

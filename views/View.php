@@ -111,16 +111,7 @@ class View
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
         echo $twig->render($a,['article'=>$article,'comments'=>$comments,'user'=>$user,'id_comment'=>$id_comment,'getalert'=>$getalert]); 
     }
-
-
-
-
-    public function simpleContent($action){ 
-        $page = 'views/template'.$action .'.html.twig';
-        $view = $this->generateFileSimple($page);
-        echo $view;
-    }
-
+    
     public function displayForm($action,$data){ 
         $page1 = 'template'.$action.'.html.twig';
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
@@ -141,12 +132,12 @@ class View
             echo $twig->render($page1,['var'=>$var]);
         }
         elseif($action === 'Login'){
-            if (!empty($data)) {
+           if (!empty($data)) {
                 $var = $data[0];
             }else{
               $var = null;  
             }
-            echo $twig->render($page1,['var'=>$var]);
+            echo $twig->render($page1,['usertype'=>$usertype]);
         }
         elseif($action === 'Profile'){
             $user = $data;
@@ -198,6 +189,11 @@ class View
         }
     }
 
+    public function simpleContent($action){ 
+        $page = 'views/template'.$action .'.html.twig';
+        $view = $this->generateFileSimple($page);
+        echo $view;
+    }
 
     public function generateForm(){
         $content = $this->generateFileSimple($this->_file);
@@ -205,13 +201,11 @@ class View
         echo $view;
     }
 
-
     public function generateFileSimple($file){
         if(file_exists($file)){
             require $file;
         }
     }
-
 
     private function generateFile($file, $data){  
         if(file_exists($file)){

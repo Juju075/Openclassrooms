@@ -82,22 +82,25 @@ abstract class Model
         $req->execute(array($obj['username']));
         $resultat = $req->fetch();
 
-        if ($resultat !== false) {
-            $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
-            
-                if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype){
+            if ($resultat !== false) {
+                echo('Username ok');
+                $Verif_pass = password_verify(htmlspecialchars($obj['password']), $resultat['password']);
+                
+                    if ($Verif_pass == TRUE && $resultat['activated'] == 1 && $resultat['usertype']==$usertype){
+                        echo('Success connection');
                         $id_user = $resultat['id_user'];
                         $_SESSION['id_user']=$id_user;  
 
                         $user=$this->getOne('user','User',$id_user); 
                         return $user;
-                }
-                else{
-                    return false;
-                }  
-        }else{
-            return false;
-        }      
+                    }
+                    else{
+                        return false;
+                    }  
+            }elseif($resultat === false){
+                echo('Username inconnue');
+                return false;
+            }  
     }
 
     protected function postIfExist(){

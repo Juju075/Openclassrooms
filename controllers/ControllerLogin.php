@@ -25,24 +25,22 @@ class ControllerLogin
                 $checkbox = 'ADMIN';
             }else{
                 $checkbox = 'MEMBRE';
-
             }
             $this->logon($checkbox);       
         }
     }
 
     private function formLogin(){
-        $data ='';
+        $data =null;
         $this->_view = new View('Login', 'Login');
         $this->_view->displayForm('Login',$data);       
     }
 
     private function logon($usertype){
-        if(($user=Security::login($usertype))!==null){
+        if(($user=Security::login($usertype))!== false){
             header('Location: accueil&passe=valide');
         }
-    else
-        {
+        else{
             header('Location: accueil&login=error');
         }
     }

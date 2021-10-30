@@ -1,0 +1,7 @@
+login
+
+testusername  identique  role MEMBRE
+*******************
+Admin  identique  
+cocher Admin pour avoir le role ADMIN 
+*******************

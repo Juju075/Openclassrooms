@@ -26,31 +26,29 @@ class ArticleManager extends Model
       if(!empty($result)){
             $req = self::$_bdd->prepare('DELETE FROM comment WHERE id_article = ?');
             $req->execute(array($id));
-            $req->fetch();
       }else{}
 
         $req = self::$_bdd->prepare('DELETE FROM article WHERE id_article = ?');
         $req->execute(array($id));
-        $req->fetch();
         $req->closeCursor();
    }
 
    public function updateArticle($id,$title,$content){ 
       $updatedAt= date('d-m-Y').' '.time();
-
+      
       $this->getBdd();  
       if($title != ''){
-            $req = self::$_bdd->prepare('UPDATE article SET title = ?, updatedAt = ? WHERE id_article = ?');
-            $req->execute(array($title, $updatedAt, $id));
-      }
+         $req = self::$_bdd->prepare('UPDATE article SET title = ?, updatedAt = ? WHERE id_article = ?');
+         $req->execute(array($title, $updatedAt, $id));
+      }else{}
       if($content != ''){
-            $req = self::$_bdd->prepare('UPDATE article SET  content = ?, updatedAt = ? WHERE id_article = ?');
-            $req->execute(array($content, $updatedAt, $id));
-      }
-            $req->fetch();
-            $req->closeCursor();
-            return true;
+         $req = self::$_bdd->prepare('UPDATE article SET  content = ?, updatedAt = ? WHERE id_article = ?');
+         $req->execute(array($content, $updatedAt, $id));
+      }else{}
+      $req->closeCursor();
    } 
+
+
         
    public function noDuplicatePost($title, $content){ 
       $titleresult[]='';

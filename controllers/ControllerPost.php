@@ -30,6 +30,8 @@ class ControllerPost
         elseif (isset($_GET['delete'])){
             $this->delete($_GET['delete']); 
         }
+
+
         elseif (isset($_GET['update'])){
             $this->article('postUpdateRequest',null); 
         }
@@ -55,7 +57,7 @@ class ControllerPost
                 $this->article(null, null);
             }            
         }
-        elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){
+        elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ // Traitement article update
             $id = $_GET['id_article'];
             $title =$_POST['title'];
             $content = $_POST['content'];
@@ -119,12 +121,8 @@ class ControllerPost
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){
             $this->_articleManager = new ArticleManager;
             $response = $this->_articleManager->updateArticle($id,$title,$content);
-
-            header('location: post&id_article=156'); 
-            echo('jusquici tout vas bien');
-        }else{
-            header('location: post&id_article=156');
-        }    
+            header('location: post&id_article='.$id);
+        }
     }
 
     private function article($routename, $id_comment){

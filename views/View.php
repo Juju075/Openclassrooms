@@ -47,7 +47,7 @@ class View
     
     public function generatePost($data){ 
         $a = 'templateSingle.html.twig';
-        $article = $data['article'][0];  
+        $article = $data['article'];  
         $count =  $data['nbrcomments'];
 
         if($count != 0){
@@ -141,8 +141,12 @@ class View
         }
         elseif($action === 'Profile'){
             $user = $data;
+            var_dump($data);
             var_dump($user);
-            //
+            //$user->getUsername();
+            //echo($user[0]->getUsername());
+
+          
             
             echo $twig->render($page1,['user'=>$user,'usertype'=>$usertype]);
         }

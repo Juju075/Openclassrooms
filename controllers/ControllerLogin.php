@@ -37,7 +37,7 @@ class ControllerLogin
     }
 
     private function logon($usertype){
-        if(($user=Security::login($usertype))!== false){
+        if(($user=Security::login($usertype))!==null){
             header('Location: accueil&passe=valide');
         }
         else{

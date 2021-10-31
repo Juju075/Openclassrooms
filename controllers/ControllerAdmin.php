@@ -61,6 +61,8 @@ class ControllerAdmin
         $this->adminManager = new AdminManager;
         $countusers = $this->adminManager->countEntity('Users', null); 
 
+
+        
         $_SESSION['cards'] = $this->adminManager->getCommentToValidate();
 
         $this->_view = new View('singlePost','Admin');

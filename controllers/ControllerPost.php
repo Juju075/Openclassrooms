@@ -117,6 +117,10 @@ class ControllerPost
 
     private function storeUpdate($id,$title,$content){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){
+
+
+        $user->getUsername();
+
             $this->_articleManager = new ArticleManager;
             $response = $this->_articleManager->updateArticle($id,$title,$content);
             header('location: post&id_article='.$id);

@@ -30,8 +30,10 @@ abstract class Model
     protected function getAll($table, $obj){
         $this->getBdd();
         $var = [];
-        $req  = self::$_bdd->prepare('SELECT * FROM '. $table.' ORDER BY id_article desc');  //binparam
-        //$req->binParam(':$table', $table, \PDO::PARAM_STR, 12);
+        $id='id_'.$table;
+        $sql='SELECT * FROM '. $table.' ORDER BY :id desc';
+        $req  = self::$_bdd->prepare($sql);  //binparam
+        $req->bindValue(':id', $id);
         $req->execute();
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
@@ -46,7 +48,6 @@ abstract class Model
         $this->getBdd();
         $var = [];
         $req  = self::$_bdd->prepare('SELECT * FROM '. $table.' ORDER BY id_article desc');
-        //$req->binParam(':$table', $table, \PDO::PARAM_STR, 12);
         $req->execute();
 
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
@@ -140,23 +141,18 @@ abstract class Model
 
     protected function getOne($table, $obj, $id){ 
         $this->getBdd();
-        $var = [];
         if ($obj === 'Article') { 
             $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
-            //$req->bindParam(':$table', $table, \PDO::PARAM_STR, 12 );
         }elseif ($obj === 'User'){
             $req = self::$_bdd->prepare("SELECT * FROM " .$table. " WHERE id_user= ?"); 
-            //$req->bindParam(':$table', $table, \PDO::PARAM_STR, 12 );
         }elseif ($obj === 'Comment') {
-            //$req = self::$_bdd->prepare("SELECT id_comment, content, createdat DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_comment = ?");
             $req = self::$_bdd->prepare("SELECT * FROM " .$table. " WHERE id_comment = ?");
-            //$req->bindParam(':$table', $table, \PDO::PARAM_STR, 12 );
         }else{
         }     
         $req->execute(array($id));
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             $obj2="\\Entity\\".$obj;
-            $var[] = new $obj2($data); 
+            $var = new $obj2($data); 
         }
         return $var;  
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 31 oct. 2021 à 09:39
+-- Généré le : Dim 31 oct. 2021 à 10:17
 -- Version du serveur :  8.0.22
 -- Version de PHP : 7.4.12
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `id_user` int DEFAULT NULL,
   PRIMARY KEY (`id_article`),
   KEY `fk_article_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `article`
@@ -51,7 +51,9 @@ INSERT INTO `article` (`id_article`, `title`, `content`, `updatedAt`, `chapo`, `
 (154, 'Valoriser nos Humanités Classiques Africaines', 'L\'Institut d\'Histoire ANYJART se veut être un espace de culture, d\'histoire et de découverte de l\'extême richesse du patrimoine historique, culturel, scientifique, technologique, littéraire et spirituel du Monde Noir. Dédié à la promotion de nos Humanités Classiques Africaines,  il vous invitera à porter un regard nouveau, positif et pragmatique sur notre culture africaine et panafricaine.', NULL, 'L\'Institut d\'Histoire Anyjart', '2021-10-30 22:15:18', 89),
 (155, 'Immersion dans les civilisations africaines', 'z', NULL, 'z', '2021-10-30 22:16:29', 89),
 (157, 'Les réacteurs nucléaires naturels existaient déjà il y a 2 milliards d\'années au Gabon', 'Nos premiers réacteurs nucléaires datent des années 1950… et suivent de près de 2 milliards d\'années les 17 « réacteurs » naturels qui ont fonctionné de manière stable pendant 100 000 à 500 000 ans sur une période d\'environ un million d\'années. Ils produisirent de l\'énergie avec des rendements modestes (100 kilowatts en moyenne par réacteur, bien inférieurs aux réacteurs actuels produisant 1 à 1,5 gigawatt, soit au moins 1 000 fois plus).', NULL, 'Terre d\'exception.', '2021-10-30 23:17:14', 89),
-(158, '300 000 mille ans seul sur terre.', 'sdfsdfsdf', '31-10-2021 1635668556', 'ffsdfsdfsd', '2021-10-30 23:25:34', 89);
+(158, '300 000 mille ans seul sur terre.', 'sdfsdfsdf', '31-10-2021 1635668556', 'ffsdfsdfsd', '2021-10-30 23:25:34', 89),
+(160, 'Les sciences et l\'histoire.', 'qqsdqsd', NULL, 'sdqsd', '2021-10-31 11:09:27', 89),
+(161, 'La spiritualité Africaine.', 'les 42 lois de la maat', '31-10-2021 1635675433', 'Maat', '2021-10-31 11:15:34', 89);
 
 -- --------------------------------------------------------
 

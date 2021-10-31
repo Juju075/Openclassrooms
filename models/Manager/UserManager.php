@@ -18,9 +18,6 @@ class UserManager extends Model
     $req  = self::$_bdd->prepare('SELECT prenom, nom FROM user WHERE id_user = ?'); 
 
 
-    
-    //boucle while de la list ids
-    //incrementer 
     $id_user = $listIdUsers[0];
 
     $req->execute(array($id_user));

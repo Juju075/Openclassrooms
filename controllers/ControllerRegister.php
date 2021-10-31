@@ -19,7 +19,7 @@ class ControllerRegister
         elseif (isset($_GET['create'])){
             $this->create();       
         }
-        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ //Traitement du form
+        elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){ 
             $this->store();       
         }
         else{
@@ -30,7 +30,7 @@ class ControllerRegister
         if(isset($_GET['create'])){
 
         if(($user=Security::login('MEMBRE'))!==null){ 
-            //$user->getid_User();
+
         } 
 
             $data = '';
@@ -42,7 +42,7 @@ class ControllerRegister
     private function store(){
         if (isset($_POST) && empty($_SESSION['user'])){
      
-                //Avec image
+
                 if(!empty($_FILES) && $_FILES['foo']['size'] != 0){  
                     echo('/ oui image telechargé');
                     
@@ -55,7 +55,7 @@ class ControllerRegister
                     $avatar = 'default_avatar.jpg'; 
                 }
                 
-                //Sans image
+
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
                     $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
                     $token = md5($_POST['prenom'].$_POST['nom']); 
@@ -80,7 +80,7 @@ class ControllerRegister
         $storage = new \Upload\Storage\FileSystem('public\images\upload'); 
         $file = new \Upload\File('foo', $storage);
 
-        // Optionally you can rename the file on upload
+
         $new_filename = uniqid();
         $file->setName($new_filename);
 

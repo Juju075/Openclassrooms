@@ -6,7 +6,6 @@ use Tools\Security;
 
 class CommentManager extends Model
 {
-   //id article deja en session return $var[]
    public function getComments($display){
         $result = [];
         $this->getBdd();
@@ -74,7 +73,7 @@ class CommentManager extends Model
             $result = $req->fetchall();
             $req->closeCursor(); 
 
-            if ($result[0]['id_user'] == $user[0]){ // pb ici
+            if ($result[0]['id_user'] == $user[0]){
                $req = self::$_bdd->prepare("UPDATE comment SET disabled = 1 WHERE id_comment = ?");
                $req->execute(array($id_comment));
                $req->closeCursor(); 
@@ -93,7 +92,6 @@ class CommentManager extends Model
       $req = self::$_bdd->prepare("UPDATE comment SET content = ? , disabled = 0  WHERE id_comment = ?");
       $req->execute(array($content, $id_comment));
       $req->closeCursor();
-      //envoie du email a l'admin
       header('location: post&id_article='.$_SESSION['id_article']);
    }
 
@@ -110,7 +108,8 @@ class CommentManager extends Model
       var_dump($erase);
       $this->getBdd(); 
       $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment, erase) VALUES (?, ?, ?) ');
-      $req->execute(array($link, $id_comment, $erase));  
+      $req->execute(array($link, $id_comment, $erase));
+      return true;  
    }
 
 

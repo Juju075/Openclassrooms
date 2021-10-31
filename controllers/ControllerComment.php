@@ -29,7 +29,6 @@ class ControllerComment extends ControllerContact
         elseif (isset($_GET['status']) && isset($_GET['status']) =="new"){       
             $this->storeComment($_GET['id_article']);
         }       
-        //comment&id_article=96&update
         elseif (isset($_GET['id_comment'])){
             $this->updateOneComment($_GET['id_comment']); 
         }     
@@ -63,7 +62,6 @@ class ControllerComment extends ControllerContact
                     header('Location: post&id_article='.$_SESSION['id_article']);
                 }
                 else{
-                    //Alert erreur envoie au moderateur
                     header('location: accueil');
                 }
 
@@ -84,12 +82,10 @@ class ControllerComment extends ControllerContact
             $isAuthor = $this->commentManager->verifCommentAuthor($id_comment);
 
             if($isAuthor = true) {
-                header('location: post&id_article='.$_SESSION['id_article']); //'commentUpdateRequest'
+                header('location: post&id_article='.$_SESSION['id_article']); 
             }
             else{
                 header('location: accueil');
-                //Alert accueil
-                //Alert vous n'etes pas l'auteur de ce commentaire!
             }
         } 
     }

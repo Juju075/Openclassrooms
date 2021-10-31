@@ -15,8 +15,6 @@ use Manager\ArticleManager;
         if(isset($url) && count($url) > 1){ 
             throw new \Exception("Page introuvable", 1);
         }
-        //Gestion des alerts
-        //Refactoring get $attribut1 et $attribut2
         elseif(isset($_GET['register']) && isset($_GET['register']) =="created"){
             $routename = 'accueil&register=created';
             $this->articles($routename);

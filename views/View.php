@@ -3,8 +3,8 @@ namespace View;
 
 class View
 {
-    private $_file; //
-    private $_t; //
+    private $_file; 
+    private $_t; 
     private $a;
     private $b;
 

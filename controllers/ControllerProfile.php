@@ -22,13 +22,10 @@ use Entity\User;
         }       
     }
 
-    //Affiche un contenu simple pas de repository
     private function myProfile(){
-        //usertype connecte
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null){
             $this->userManager = new UserManager;
             $userObj = $this->userManager->ProfilUser($_SESSION['id_user']); //Objet
-            //prenom
             $this->variable = new User($userObj);
             $prenom = $this->variable->getPrenom();
 

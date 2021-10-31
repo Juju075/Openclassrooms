@@ -64,8 +64,6 @@ class ControllerPost
             $this->storeUpdate($id,$title,$content); 
         }    
         elseif (isset($_GET['validation'])){
-            //id_comment
-            //$this->adminCommentValidation($_GET['id_comment'],$_GET['token']); 
         }   
         elseif (isset($_GET['comment']) && isset($_GET['comment']) =="update_request"){
             $this->commentManager = new commentManager;

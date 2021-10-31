@@ -27,7 +27,7 @@ class ControllerAdmin
             $token = $_GET['token'];
                 $this->adminCommentValidation($id_comment,$token);
         }
-          elseif (isset($_GET['login'])){ //admin&login
+          elseif (isset($_GET['login'])){ 
             $this->login();       
         }
          elseif (isset($_GET['comment'])&& isset($_GET['comment']) =="delete"){ 

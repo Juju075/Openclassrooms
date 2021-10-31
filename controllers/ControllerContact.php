@@ -42,12 +42,9 @@ class ControllerContact
 
     private function sendMessage(){ 
         if(($user=Security::retrieveUserObj('MEMBER'))!==null){ 
-
-        //recuperer data user
         $this->contactManager = new ContactManager;
         $user[] = $this->contactManager->getUser($_SESSION['id_user']);
 
-        //ajout POST 
         $_POST['prenom']= $user[0]['prenom'];
         $_POST['nom']= $user[0]['nom'];
         $_POST['email']= $user[0]['email'];
@@ -92,7 +89,7 @@ class ControllerContact
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
-        }else{ // si non connecté
+        }else{  
             header('location: accueil&comment=notconnected');
         }    
     }

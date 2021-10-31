@@ -5,8 +5,6 @@ use Tools\Model;
 
 class AdminManager extends Model
 {
-
-    //refactoring Article Comment User
     public function countEntity($table, $number){
         $result = [];
         $this->getBdd();

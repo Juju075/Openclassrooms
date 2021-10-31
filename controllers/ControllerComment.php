@@ -1,7 +1,6 @@
 <?php
 namespace controllers;
 
-
 use Controllers\ControllerContact;
 use controllers\ControllerPost;
 use Entity\Comment;
@@ -40,7 +39,7 @@ class ControllerComment extends ControllerContact
     private function storeComment($id_article){ 
         if(isset($_SESSION['user'])){
             $this->commentManager = new CommentManager;
-            if($this->commentManager->verifUserCommentArticle() === true){ 
+            if($this->commentManager->verifUserCommentArticle() === TRUE){ 
 
                 $array = array('content'=> $_POST['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
                 $comment = new Comment($array);            
@@ -55,9 +54,9 @@ class ControllerComment extends ControllerContact
 
                 $token = $this->commentManager->retrieveToken();
                 $url = 'admin&validation=comment&id='.$id_comment['id_comment'].'&token='.$token;  
-                $urlToDelete = 'admin&comment=delete&id='.$id_comment['id_comment'];
+                $erase = 'admin&comment=delete&id='.$id_comment['id_comment'];
 
-                $moderator = $this->commentManager->addCommentRequest($id_comment['id_comment'], $url);
+                $moderator = $this->commentManager->addCommentRequest($id_comment['id_comment'], $url, $erase);
 
                 if ($moderator === TRUE) {
                     $_SESSION['routeNameForComment'] = 'post&comment=waiting';   

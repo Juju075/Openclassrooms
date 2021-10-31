@@ -105,7 +105,6 @@ class CommentManager extends Model
    }
 
    public function addCommentRequest($id_comment, $link, $erase){
-      var_dump($erase);
       $this->getBdd(); 
       $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment, erase) VALUES (?, ?, ?) ');
       $req->execute(array($link, $id_comment, $erase));

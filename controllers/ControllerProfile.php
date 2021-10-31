@@ -23,11 +23,13 @@ use Entity\User;
     }
 
     private function myProfile(){
-        if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null){
+        if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!== FALSE){
             $this->userManager = new UserManager;
             $userObj = $this->userManager->ProfilUser($_SESSION['id_user']); //Objet
+
             $this->variable = new User($userObj);
             $prenom = $this->variable->getPrenom();
+            var_dump($prenom);
 
             $this->_view = new View('Profile', 'Profile');
             $this->_view->displayForm('Profile', $userObj); 

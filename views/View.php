@@ -142,6 +142,8 @@ class View
         elseif($action === 'Profile'){
             $user = $data;
             var_dump($user);
+            //
+            
             echo $twig->render($page1,['user'=>$user,'usertype'=>$usertype]);
         }
         elseif($action === 'Post'){

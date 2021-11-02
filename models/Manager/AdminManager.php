@@ -23,7 +23,7 @@ class AdminManager extends Model
         }
         return count($req->fetchall());
     }
-    
+
 
     public function getCommentToValidate(){
         $cards = [];

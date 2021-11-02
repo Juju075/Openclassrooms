@@ -6,6 +6,7 @@ use controllers\ControllerPost;
 use Entity\Comment;
 use Manager\CommentManager;
 use Manager\UserManager;
+use Entity\Moderator;
 
 use Tools\Security;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -19,6 +20,7 @@ class ControllerComment extends ControllerContact
         public $comments;
         public $comment;
         public $controller;
+        public $moderator;
 
 
         public function __construct(){
@@ -41,9 +43,11 @@ class ControllerComment extends ControllerContact
             if($this->commentManager->verifUserCommentArticle() === TRUE){ 
 
                 $array = array('content'=> $_POST['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
+                var_dump($array);
                 $comment = new Comment($array);            
-
                 $comment = $this->commentManager->addComment($comment);
+                var_dump($comment);
+
                 $this->commentManager->getComments(1);
                 
                 $id_comment = $this->commentManager->retriveIdComment(array($array['id_user'], $array['id_article'], $array['content']));  
@@ -55,17 +59,21 @@ class ControllerComment extends ControllerContact
                 $url = 'admin&validation=comment&id='.$id_comment['id_comment'].'&token='.$token;  
                 $erase = 'admin&comment=delete&id='.$id_comment['id_comment'];
 
-                $moderator = $this->commentManager->addCommentRequest($id_comment['id_comment'], $url, $erase);
+                
+                $stagedComment = array('id_comment'=>$id_comment['id_comment'],'link'=>$url, 'erase'=>$erase);
+                var_dump($stagedComment); //ok
+                
+  
+                $moderator = new Moderator($stagedComment);
+                $this->commentManager->addCommentRequest($moderator);
+                var_dump($moderator);
 
-                if ($moderator === TRUE) {
-                    $_SESSION['routeNameForComment'] = 'post&comment=waiting';   
-                    header('Location: post&id_article='.$_SESSION['id_article']);
-                }
-                else{
-                    header('location: accueil');
-                }
 
+                $_SESSION['routeNameForComment'] = 'post&comment=waiting';   
+                header('Location: post&id_article='.$_SESSION['id_article']);
+                echo('jusqu\ici tout vas bien');
 
+                //$moderator = $this->commentManager->addCommentRequest($id_comment['id_comment'], $url, $erase);
 
             }else{ 
                 $_SESSION['routeNameForComment'] = 'post&comment=already';

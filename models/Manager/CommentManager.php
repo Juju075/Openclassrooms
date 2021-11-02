@@ -34,7 +34,9 @@ class CommentManager extends Model
    public function addComment($comment){
       return $this->createOne('comment', $comment);
    } 
-
+   public function addCommentRequest($moderator){
+      return $this->createOne('moderator', $moderator);
+   } 
    public function updateComment($id_comment){
       $this->getBdd();
       $req  = self::$_bdd->prepare('UPDATE comment SET content = ? WHERE id_user = ? AND id_comment = ?'); 
@@ -104,12 +106,29 @@ class CommentManager extends Model
       return $idComment;
    }
 
-   public function addCommentRequest($id_comment, $link, $erase){
+
+
+   
+
+
+   public function addCommentRequestBackup1($array){
+
+      $this->getBdd(); 
+      $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment, erase) VALUES (?, ?, ?) ');
+      $req->execute($array);
+      return true;  
+   }
+
+   public function addCommentRequestBackup($id_comment, $link, $erase){
       $this->getBdd(); 
       $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment, erase) VALUES (?, ?, ?) ');
       $req->execute(array($link, $id_comment, $erase));
       return true;  
    }
+
+
+
+
 
 
    public function verifUserCommentArticle(){

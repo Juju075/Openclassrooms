@@ -52,17 +52,10 @@ class ControllerAdmin
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){         
         $this->adminManager = new AdminManager;
         $countarticles = $this->adminManager->countEntity('Articles', null);
-
-        $this->adminManager = new AdminManager;
         $countcomments1 = $this->adminManager->countEntity('Comments',1);    
-        
-        $countcomments0 = $this->adminManager->countEntity('Comments',0);   
-
-        $this->adminManager = new AdminManager;
+        $countcomments0 = $this->adminManager->countEntity('Comments',0);  
         $countusers = $this->adminManager->countEntity('Users', null); 
 
-
-        
         $_SESSION['cards'] = $this->adminManager->getCommentToValidate();
 
         $this->_view = new View('singlePost','Admin');

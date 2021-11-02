@@ -24,14 +24,9 @@ use Entity\User;
 
     private function myProfile(){
         if(($user=Security::retrieveUserObj('MEMBRE'))!==null){
-        //if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!== FALSE){
-        var_dump($user);
-
             $this->userManager = new UserManager;
             $userObj = $this->userManager->ProfilUser($_SESSION['id_user']);
-            
-
-
+        
             $this->_view = new View('Profile', 'Profile');
             $this->_view->displayForm('Profile', $userObj); 
         }else{

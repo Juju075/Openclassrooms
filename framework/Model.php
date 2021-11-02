@@ -127,8 +127,11 @@ abstract class Model
         }
         $keysString=implode(' , ',$keys);
         $interrogationString=implode(' , ',$interrogation);
+        
         $this->getBdd();
         $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
+        var_dump($sql);
+
         try {$req = self::$_bdd->prepare($sql);
             $req->execute($values);}
             catch(\PDOException $e)
@@ -139,8 +142,11 @@ abstract class Model
         $req->closeCursor();
     }
 
+
+
     protected function getOne($table, $obj, $id){ 
         $this->getBdd();
+
         if ($obj === 'Article') { 
             $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
         }elseif ($obj === 'User'){
@@ -148,7 +154,8 @@ abstract class Model
         }elseif ($obj === 'Comment') {
             $req = self::$_bdd->prepare("SELECT * FROM " .$table. " WHERE id_comment = ?");
         }else{
-        }     
+        }   
+        
         $req->execute(array($id));
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             $obj2="\\Entity\\".$obj;

@@ -20,20 +20,18 @@ class View
     public function generate($data){  
         $a = 'template.html.twig';
 
-        //route
+
         if(!empty($data['routename'])){
             $getalert = $data['routename'];
         }else{
             $getalert = null;
         }
-        //articles
         if(!empty($data['articles'])){
             $articles = $data['articles'];
         }
         else{
             $articles = null;
         }
-        //usertype
         if(!empty($_SESSION['user']['usertype'])){ 
             $usertype = $_SESSION['user']['usertype']; 
         }
@@ -80,7 +78,7 @@ class View
     }
 
     public function generateAdmin($data){ 
-        $a = 'templateAdmin.html.twig'; //Pourquoi
+        $a = 'templateAdmin.html.twig';
         $article = $data['article'][0];  
         $count =  $data['nbrcomments'];
 
@@ -141,13 +139,6 @@ class View
         }
         elseif($action === 'Profile'){
             $user = $data;
-            var_dump($data);
-            var_dump($user);
-            //$user->getUsername();
-            //echo($user[0]->getUsername());
-
-          
-            
             echo $twig->render($page1,['user'=>$user,'usertype'=>$usertype]);
         }
         elseif($action === 'Post'){

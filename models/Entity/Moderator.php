@@ -3,17 +3,12 @@ namespace Entity;
 
 class Moderator
 {
- //use Timestampable
     private $id_moderator;
     private $createdat;
     private $link;
     private $erase;
     private $id_comment;
 
-
-
-
-    
     public function __construct(array $data){
         $this->hydrate($data);
     }
@@ -31,10 +26,18 @@ class Moderator
         }
     }
 
+    /**
+     * Setters
+     */
 
-/**
- * Setters
- */
+    public function setId_moderator(?int $id_moderator)
+    {  
+        $id = (int) $id_moderator;
+        if ($id > 0){
+            $this->id_moderator = $id_moderator;
+        }
+    }
+
     public function setLink($link){
         $this->link = $link;
     }
@@ -45,9 +48,9 @@ class Moderator
         $this->createdat = $createdat;
     }   
 
-/**
- * Getters
- */
+    /**
+     * Getters
+     */
     public function getlink(){
         return $this->link;
     }
@@ -58,9 +61,15 @@ class Moderator
         return $this->createdat;
     }
 
-/**
- * Foreigh key
- */
+    public function getId_moderator()
+    {
+        return $this->id_moderator;
+    }
+
+
+    /**
+     * Foreigh key
+     */
     public function setIdComment($id_comment){
         $this->id_comment = $id_comment;
     }
@@ -68,7 +77,4 @@ class Moderator
     public function getIdid_comment(){
         return $this->id_comment;
     }
-
-
-
 }

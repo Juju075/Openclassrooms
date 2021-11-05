@@ -32,7 +32,7 @@ abstract class Model
         $var = [];
         $id='id_'.$table;
         $sql='SELECT * FROM '. $table.' ORDER BY :id desc';
-        $req  = self::$_bdd->prepare($sql);  //binparam
+        $req  = self::$_bdd->prepare($sql);
         $req->bindValue(':id', $id);
         $req->execute();
 
@@ -43,23 +43,7 @@ abstract class Model
         return $var;
         $req->closeCursor();
     }
-    
-    protected function getAll_Backup($table, $obj){
-        $this->getBdd();
-        $var = [];
-        $req  = self::$_bdd->prepare('SELECT * FROM '. $table.' ORDER BY id_article desc');
-        $req->execute();
-
-        while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
-            $obj2="\\Entity\\".$obj;
-            $var[] = new $obj2($data);
-        }
-        return $var;
-        $req->closeCursor();
-    }
-
-    
-
+       
     protected function getAllComments(){
         $result = [];
         $this->getBdd();
@@ -167,6 +151,6 @@ abstract class Model
     protected function deleteOne($table, $id){
         $this->getBdd();  
         $req = self::$_bdd->prepare("DELETE FROM $table WHERE id_article = $id");
-        $req->execute(array());
+        $req->execute(array($id));
     } 
 }

@@ -47,11 +47,13 @@ class ControllerPost
             }
         }
         elseif (isset($_GET['comment_delete'])){
-            $this->commentManager = new CommentManager;
+            echo('route comment delete');
             $id_comment = $_GET['comment_delete'];
+            $this->commentManager = new CommentManager;
             $author = $this->commentManager->verifCommentAuthor($id_comment);
             if($author === true){
                 $this->commentManager->deleteOneComment($id_comment);
+                $this->article(null, null);
                 }
             else{
                 $this->article(null, null);

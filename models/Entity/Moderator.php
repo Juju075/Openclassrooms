@@ -51,30 +51,30 @@ class Moderator
     /**
      * Getters
      */
-    public function getlink(){
-        return $this->link;
-    }
-    public function getErase(){
-        return $this->erase;
-    }
-    public function getCreatedat(){
-        return $this->createdat;
-    }
-
     public function getId_moderator()
     {
         return $this->id_moderator;
     }
+    public function getlink(){
+        return $this->link;
+    }
+    public function getCreatedat(){
+        return $this->createdat;
+    }
+    public function getErase(){
+        return $this->erase;
+    }
+
 
 
     /**
      * Foreigh key
      */
-    public function setIdComment($id_comment){
+    public function setId_comment($id_comment){
         $this->id_comment = $id_comment;
     }
 
-    public function getIdid_comment(){
+    public function getId_comment(){
         return $this->id_comment;
     }
 }

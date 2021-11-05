@@ -43,38 +43,30 @@ class ControllerComment extends ControllerContact
             if($this->commentManager->verifUserCommentArticle() === TRUE){ 
 
                 $array = array('content'=> $_POST['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
-                var_dump($array);
                 $comment = new Comment($array);            
                 $comment = $this->commentManager->addComment($comment);
-                var_dump($comment);
 
                 $this->commentManager->getComments(1);
                 
                 $id_comment = $this->commentManager->retriveIdComment(array($array['id_user'], $array['id_article'], $array['content']));  
 
                 $this->userManager = new UserManager;
-                $user = $this->userManager->ProfilUser($array['id_user']);
+                $this->userManager->ProfilUser($array['id_user']);
 
                 $token = $this->commentManager->retrieveToken();
+
                 $url = 'admin&validation=comment&id='.$id_comment['id_comment'].'&token='.$token;  
                 $erase = 'admin&comment=delete&id='.$id_comment['id_comment'];
 
                 
                 $stagedComment = array('id_comment'=>$id_comment['id_comment'],'link'=>$url, 'erase'=>$erase);
-                var_dump($stagedComment); //ok
                 
-  
                 $moderator = new Moderator($stagedComment);
                 $this->commentManager->addCommentRequest($moderator);
-                var_dump($moderator);
-
+                $this->commentManager->addCommentRequestSkipGetOne($stagedComment);
 
                 $_SESSION['routeNameForComment'] = 'post&comment=waiting';   
                 header('Location: post&id_article='.$_SESSION['id_article']);
-                echo('jusqu\ici tout vas bien');
-
-                //$moderator = $this->commentManager->addCommentRequest($id_comment['id_comment'], $url, $erase);
-
             }else{ 
                 $_SESSION['routeNameForComment'] = 'post&comment=already';
                 header('Location: post&id_article='.$_SESSION['id_article']); 

@@ -21,6 +21,7 @@ class CommentManager extends Model
         }else{}
    }
 
+
    public function displaynumber($comments){
         if(isset($comments) && $comments !== null){
            return count($comments);
@@ -37,6 +38,18 @@ class CommentManager extends Model
    public function addCommentRequest($moderator){
       return $this->createOne('moderator', $moderator);
    } 
+
+   public function addCommentRequestSkipGetOne($array){
+      $id_comment = $array['id_comment'];
+      $link = $array['link'];
+      $erase = $array['erase'];
+
+      $this->getBdd(); 
+      $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment, erase) VALUES (?, ?, ?) ');
+      $req->execute(array($link, $id_comment, $erase));
+      return true;  
+   }
+
    public function updateComment($id_comment){
       $this->getBdd();
       $req  = self::$_bdd->prepare('UPDATE comment SET content = ? WHERE id_user = ? AND id_comment = ?'); 
@@ -45,23 +58,31 @@ class CommentManager extends Model
       $req->closeCursor();    
    }
 
+
    public function verifCommentAuthor($id_comment){
-      if(($user=Security::retrieveUserObj('ADMIN'))!==null){
-         $this->getBdd();
-         $req  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_user = ? AND id_comment = ?'); 
-         $req->execute(array($_SESSION['id_user'], $id_comment));
-         $result = $req->fetchall();
-         if(!empty($result)){
+      if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null){
+         if ($_SESSION['user']['usertype'] === 'ADMIN') {
             return true;
+         }elseif ($_SESSION['user']['usertype'] === 'MEMBRE') {
+            $this->getBdd();
+            $req  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_user = ? AND id_comment = ?'); 
+            $req->execute(array($_SESSION['id_user'], $id_comment));
+            $result = $req->fetchall();
+            if(!empty($result)){
+               return true;
+               }
+               return false;   
          }
-         return false;
+      }else{
+         //retour au poste
       }
-         return false;   
    }
 
-
    public function deleteOneComment($id_comment){
-      $this-> deleteOne('comment', $id_comment);
+         $this->getBdd();
+         $req  = self::$_bdd->prepare('DELETE FROM comment WHERE id_comment =?'); 
+         $req->execute(array($id_comment));
+         $req->closeCursor();
    }
 
    public function validationByAdmin($id_comment, $token){
@@ -111,20 +132,6 @@ class CommentManager extends Model
    
 
 
-   public function addCommentRequestBackup1($array){
-
-      $this->getBdd(); 
-      $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment, erase) VALUES (?, ?, ?) ');
-      $req->execute($array);
-      return true;  
-   }
-
-   public function addCommentRequestBackup($id_comment, $link, $erase){
-      $this->getBdd(); 
-      $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment, erase) VALUES (?, ?, ?) ');
-      $req->execute(array($link, $id_comment, $erase));
-      return true;  
-   }
 
 
 

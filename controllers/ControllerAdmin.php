@@ -87,7 +87,6 @@ class ControllerAdmin
         header('location: acceuil alert');
     }
 
-
     public function deleteOneComment($id){
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){
             $this->commentManager = new CommentManager;
@@ -98,5 +97,4 @@ class ControllerAdmin
         header('location: accueil');
         }
     }
-
 }

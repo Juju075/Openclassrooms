@@ -24,7 +24,6 @@ class AdminManager extends Model
         return count($req->fetchall());
     }
 
-
     public function getCommentToValidate(){
         $cards = [];
         $this->getBdd();
@@ -68,6 +67,4 @@ class AdminManager extends Model
         return $cards;
         }
     }
-
-
 }

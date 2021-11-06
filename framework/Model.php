@@ -114,7 +114,6 @@ abstract class Model
         
         $this->getBdd();
         $sql="INSERT INTO ".$table." (".$keysString.") VALUES (".$interrogationString.")";
-        var_dump($sql);
 
         try {$req = self::$_bdd->prepare($sql);
             $req->execute($values);}

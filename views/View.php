@@ -173,7 +173,6 @@ class View
                 $countusers = $data['countusers'];
 
                 $cards = $_SESSION['cards'];
-                var_dump($cards);
                 
             echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers, 'cards'=>$cards,'usertype'=>$usertype]);
             }else{

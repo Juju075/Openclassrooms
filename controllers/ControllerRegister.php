@@ -77,17 +77,12 @@ class ControllerRegister
 
     private function imageUpload(){
         echo('| ControllerRegister imageUpload');          
-        //$storage = new \Upload\Storage\FileSystem('public\images\upload'); 
         $storage = new \Upload\Storage\FileSystem( __DIR__."/../public/images/uploads/");
         $file = new \Upload\File('foo', $storage);
-
 
         $new_filename = uniqid();
         $file->setName($new_filename);
         $_SESSION['avatar'] = $new_filename;
-
-        //id user
-
 
 
         // Validate file upload

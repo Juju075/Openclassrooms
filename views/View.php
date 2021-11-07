@@ -64,7 +64,16 @@ class View
         }
         else{
             $id_comment = null;
+        }  
+        
+         if(!empty($data['auteur'])){
+            $auteur = $data['auteur'];
+        }
+        else{
+            $auteur = null;
         }        
+
+
         if(!empty($data['routename'])){
             $getalert = $data['routename'];
         }else{
@@ -74,7 +83,7 @@ class View
         $routename = $data['routename'];
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../views');
         $twig = new \Twig\Environment($loader, ['cache'=> false]);  
-        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'usertype'=>$usertype,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment,'getalert'=>$getalert]); 
+        echo $twig->render($a,['article'=>$article,'comments'=>$comments,'usertype'=>$usertype,'count'=>$count,'routename'=>$routename,'id_comment'=>$id_comment,'getalert'=>$getalert,'auteur'=>$auteur]); 
     }
 
     public function generateAdmin($data){ 

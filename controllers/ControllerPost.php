@@ -7,8 +7,8 @@ use View\View;
 use Entity\Article;
 use Manager\ArticleManager;
 use Manager\CommentManager;
+use Manager\UserManager;
 use Tools\Security;
-
 
 class ControllerPost
 {
@@ -136,12 +136,16 @@ class ControllerPost
 
             if ($articleVerif === true ){
                 $article = $this->_articleManager->getArticle($_GET['id_article']);
+                //i auteur
+                $auteur = $this->userManager = new UserManager;
+                $auteur = $article->getId_user();
+
                 $this->commentManager = new CommentManager;
                 $comments = $this->commentManager->getComments(1);
                 $nbrcomments = $this->commentManager->displaynumber($comments);
 
                 $this->_view = new View('singlePost','Post');
-                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename,'id_comment'=>$id_comment),'PostsinglePost');
+                $this->_view->generatePost(array('article'=>$article, 'comments'=> $comments, 'nbrcomments'=>$nbrcomments, 'routename'=>$routename,'id_comment'=>$id_comment,'auteur'=>$auteur),'PostsinglePost');
             
                 if(isset($_SESSION['routeNameForComment'])){
                     unset($_SESSION['routeNameForComment']);

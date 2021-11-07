@@ -47,8 +47,8 @@ class ControllerRegister
                     echo('/ oui image telechargé');
                     
                     $this->imageUpload();
-                    echo('/ Fin upload image');
-                    $avatar = $_FILES['foo']['name']; 
+                    $avatar = $_SESSION['avatar'];
+                    
                 }
                 else{
                     echo('/ image non telechargé');
@@ -60,10 +60,10 @@ class ControllerRegister
                     $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
                     $token = md5($_POST['prenom'].$_POST['nom']); 
                     $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'MEMBRE','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
-                    //
                     $user= new User($obj);
                     $userManager= new UserManager();
                     $userManager->addUser($user);
+                    unset($_SESSION['avatar']);
                     header('location: accueil&register=created');
                 }
                 else{
@@ -77,18 +77,24 @@ class ControllerRegister
 
     private function imageUpload(){
         echo('| ControllerRegister imageUpload');          
-        $storage = new \Upload\Storage\FileSystem('public\images\upload'); 
+        //$storage = new \Upload\Storage\FileSystem('public\images\upload'); 
+        $storage = new \Upload\Storage\FileSystem( __DIR__."/../public/images/uploads/");
         $file = new \Upload\File('foo', $storage);
 
 
         $new_filename = uniqid();
         $file->setName($new_filename);
+        $_SESSION['avatar'] = $new_filename;
+
+        //id user
+
+
 
         // Validate file upload
         // MimeType List => http://www.iana.org/assignments/media-types/media-types.xhtml
         $file->addValidations(array(
         // Ensure file is of type "image/png"
-        new \Upload\Validation\Mimetype('image/png','image/jpeg'),
+        new \Upload\Validation\Mimetype('image/jpeg', 'image/png'),
 
         //You can also add multi mimetype validation
         //new \Upload\Validation\Mimetype(array('image/png', 'image/gif'))

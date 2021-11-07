@@ -27,12 +27,21 @@ abstract class Model
         return self::$_bdd;
     }
 
+
     protected function getAll($table, $obj){
         $this->getBdd();
         $var = [];
         $id='id_'.$table;
-        $sql='SELECT * FROM '. $table.' ORDER BY :id desc';
-        $req  = self::$_bdd->prepare($sql);
+        switch($table)
+        {
+            case 'article':
+                $sql = 'SELECT * FROM article ORDER BY :id desc';
+                break;
+            case 'comment':
+                $sql = 'SELECT * FROM comment ORDER BY :id desc';
+                break;
+        }
+        $req  = self::$_bdd->prepare($sql);  //binparam
         $req->bindValue(':id', $id);
         $req->execute();
 
@@ -127,18 +136,23 @@ abstract class Model
 
 
 
+
+
     protected function getOne($table, $obj, $id){ 
         $this->getBdd();
+  
+        switch($obj){
+            case 'Article':
+            $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");
+            break;
+            case 'User':
+            $req = self::$_bdd->prepare("SELECT * FROM user WHERE id_user= ?");
+            break;
+            case 'Comment':
+            $req = self::$_bdd->prepare("SELECT * FROM comment WHERE id_comment = ?");
+            break;                        
+        }
 
-        if ($obj === 'Article') { 
-            $req = self::$_bdd->prepare("SELECT id_article, title, content, DATE_FORMAT(updatedAt, '%d/%m/%Y à %Hh%imin%ss') AS date FROM " .$table. " WHERE id_article = ?");   
-        }elseif ($obj === 'User'){
-            $req = self::$_bdd->prepare("SELECT * FROM " .$table. " WHERE id_user= ?"); 
-        }elseif ($obj === 'Comment') {
-            $req = self::$_bdd->prepare("SELECT * FROM " .$table. " WHERE id_comment = ?");
-        }else{
-        }   
-        
         $req->execute(array($id));
         while ($data = $req->fetch(\PDO::FETCH_ASSOC)){
             $obj2="\\Entity\\".$obj;
@@ -146,6 +160,9 @@ abstract class Model
         }
         return $var;  
     }
+
+
+
 
     protected function deleteOne($table, $id){
         $this->getBdd();  

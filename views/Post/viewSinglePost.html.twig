@@ -19,7 +19,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
     {% elseif getalert == 'post&comment=already' %}
     <!-- alert=2 -->
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -28,7 +27,6 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-
     {% elseif getalert == 'post&comment=notconnected' %}
     <!-- alert=2 -->
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -38,7 +36,6 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>    
-
     {% elseif getalert == 'post&comment=update' %}
     <!-- alert=2 -->
       <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -49,8 +46,6 @@
       </div>
     {% endif %}
   </div>
-
-
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-12 no-right-padding">
@@ -66,8 +61,9 @@
                 /></a>
               </div>
               <div class="middle-area">
-                <p>{{ user.prenom}}</p> {# de quel id? #}
-                <p>{{ user.nom}}</p>
+                Auteur
+                <p>{{ auteur.prenom}}</p> {# de quel id? #}
+                <p>{{ auteur.nom}}</p>
 
                 {% if user.updatedAt is not null or not empty %}
                 <p>Updated</p>
@@ -88,7 +84,7 @@
               >
             </h3>
 
-            <p class="para">{{ article.content|u.wordwrap(84)}}</p> {# de quel id? #}
+            <p class="para">{{ article.content}}</p> {# de quel id? #}
 
 
 

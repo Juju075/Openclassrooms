@@ -9,17 +9,19 @@ class AdminManager extends Model
         $result = [];
         $this->getBdd();
 
-        if($table === 'Articles'){
+        switch ($table) {
+            case 'Articles':
             $req  = self::$_bdd->prepare('SELECT id_article FROM article'); 
             $req->execute();
-        }
-        elseif($table === 'Comments'){          
+                break;
+            case 'Comments':
             $req  = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE disabled = ?');
             $req->execute(array($number));
-        }
-        elseif($table === 'Users'){          
+                break;
+            case 'Users':
             $req  = self::$_bdd->prepare('SELECT id_user FROM user');
             $req->execute();
+                break;                
         }
         return count($req->fetchall());
     }

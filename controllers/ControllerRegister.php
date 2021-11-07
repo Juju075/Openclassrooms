@@ -9,7 +9,7 @@ use Tools\Security;
 
 class ControllerRegister
 {
-     private $user;
+     private $userManager;
      private $view;
 
     public function __construct(){
@@ -28,12 +28,9 @@ class ControllerRegister
 
     private function create(){
         if(isset($_GET['create'])){
-
         if(($user=Security::login('MEMBRE'))!==null){ 
-
         } 
-
-            $data = '';
+            $data = null;
             $this->view = new View('CreateUser', 'Registration');
             $this->view->displayForm('Register',$data);
         }
@@ -41,27 +38,20 @@ class ControllerRegister
 
     private function store(){
         if (isset($_POST) && empty($_SESSION['user'])){
-     
-
-                if(!empty($_FILES) && $_FILES['foo']['size'] != 0){  
-                    echo('/ oui image telechargé');
-                    
+                if(!empty($_FILES) && $_FILES['foo']['size'] != 0){
                     $this->imageUpload();
                     $avatar = $_SESSION['avatar'];
-                    
                 }
                 else{
                     echo('/ image non telechargé');
                     $avatar = 'default_avatar.jpg'; 
                 }
-                
-
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
                     $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
                     $token = md5($_POST['prenom'].$_POST['nom']); 
                     $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'MEMBRE','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
                     $user= new User($obj);
-                    $userManager= new UserManager();
+                    $userManager = new UserManager();
                     $userManager->addUser($user);
                     unset($_SESSION['avatar']);
                     header('location: accueil&register=created');
@@ -69,7 +59,6 @@ class ControllerRegister
                 else{
                 header('location: accueil&register=error');
             }    
-            
         }else{
             header('location: accueil&register=error');
         }

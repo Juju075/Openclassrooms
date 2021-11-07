@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 31 oct. 2021 à 10:17
+-- Généré le : Dim 07 nov. 2021 à 07:07
 -- Version du serveur :  8.0.22
 -- Version de PHP : 7.4.12
 
@@ -45,28 +45,15 @@ CREATE TABLE IF NOT EXISTS `article` (
 --
 
 INSERT INTO `article` (`id_article`, `title`, `content`, `updatedAt`, `chapo`, `createdAt`, `id_user`) VALUES
-(131, 'Les royaumes africain.', 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', NULL, 'il est de nouveau de ', '2021-10-15 13:48:36', NULL),
-(132, 'Egypte antique', 'contenu ici', NULL, 'beaucoup d\'interpre', '2021-10-15 13:49:14', NULL),
+(131, 'Les royaumes africain.', 'L\'histoire du continent africain est passionnante. Nous connaissons tous les pharaons d\'Egypte et leurs tombeaux magnifiques. Mais combien d\'entre nous ont entendu parler des anciens empires de l\'Afrique de l\'Ouest ? Le premier de ces empire, le Ghana, s\'est développé de l\'an 300 à l\'an 1300. Le Ghana était alors si riche que, dans le palais du roi, les chiens portaient des colliers d\'or.', '07-11-2021 1636266378', 'Première déclaration des \"droits de l\'homme.\"', '2021-10-15 13:48:36', NULL),
+(132, 'Egypte antique', 'Les Égyptiens de l\'antiquité donnaient parfois à leur pays le nom de Kemet ou Kêmi. Les égyptologues traduisent généralement ce mot par « la terre noire », en référence à la bande de terre rendue fertile par le limon noir déposé par la crue annuelle du Nil, artère vitale de la civilisation de l\'égypte antique.', '07-11-2021 1636266247', 'Les bases de la civilisation.', '2021-10-15 13:49:14', NULL),
 (153, 'Initiation aux mathématiques africaines pour les enfants de 5 a 15 ans.', 'Ce manuel a pour vocation d\'initier les enfants (mais aussi les parents) aux mathématiques africaines par le biais d\'une méthode pédagogique volontairement ludique.', NULL, 'Nioussérê Kalala Omotunde', '2021-10-30 22:13:55', 89),
 (154, 'Valoriser nos Humanités Classiques Africaines', 'L\'Institut d\'Histoire ANYJART se veut être un espace de culture, d\'histoire et de découverte de l\'extême richesse du patrimoine historique, culturel, scientifique, technologique, littéraire et spirituel du Monde Noir. Dédié à la promotion de nos Humanités Classiques Africaines,  il vous invitera à porter un regard nouveau, positif et pragmatique sur notre culture africaine et panafricaine.', NULL, 'L\'Institut d\'Histoire Anyjart', '2021-10-30 22:15:18', 89),
-(155, 'Immersion dans les civilisations africaines', 'z', NULL, 'z', '2021-10-30 22:16:29', 89),
-(157, 'Les réacteurs nucléaires naturels existaient déjà il y a 2 milliards d\'années au Gabon', 'Nos premiers réacteurs nucléaires datent des années 1950… et suivent de près de 2 milliards d\'années les 17 « réacteurs » naturels qui ont fonctionné de manière stable pendant 100 000 à 500 000 ans sur une période d\'environ un million d\'années. Ils produisirent de l\'énergie avec des rendements modestes (100 kilowatts en moyenne par réacteur, bien inférieurs aux réacteurs actuels produisant 1 à 1,5 gigawatt, soit au moins 1 000 fois plus).', NULL, 'Terre d\'exception.', '2021-10-30 23:17:14', 89),
-(158, '300 000 mille ans seul sur terre.', 'sdfsdfsdf', '31-10-2021 1635668556', 'ffsdfsdfsd', '2021-10-30 23:25:34', 89),
-(160, 'Les sciences et l\'histoire.', 'qqsdqsd', NULL, 'sdqsd', '2021-10-31 11:09:27', 89),
-(161, 'La spiritualité Africaine.', 'les 42 lois de la maat', '31-10-2021 1635675433', 'Maat', '2021-10-31 11:15:34', 89);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `avatar`
---
-
-DROP TABLE IF EXISTS `avatar`;
-CREATE TABLE IF NOT EXISTS `avatar` (
-  `id_avatar` int NOT NULL,
-  `lien_avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_avatar`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(155, 'Immersion dans les civilisations africaines', 'La racine du mot « KaMa » est omniprésente chez bon nombre de peuples d’Afrique centrale, d’Afrique de l’Ouest : « KaMa » signifie noir en copte,<<KAMeen>> signifie chez nous en peulh du fouta djallon ,« iKaMa » signifie noirci en mbochi (Congo-Brazzaville, Gabon, Cameroun), « Ka-FFiin » signifie (le noici), I ka-fiin, cela veut dire aussi tu la noici. en bambara (Mali, Burkina Faso, Côte d\'Ivoire, etc.), « KeM » signifie brûlé en wolof (Sénégal), « Kanbé » signifie brûlé en mossi (Burkina Faso, Niger, etc.)', '07-11-2021 1636267884', 'z', '2021-10-30 22:16:29', 89),
+(157, 'Les réacteurs nucléaires naturels existaient déjà il y a 2 milliards d\'années au Gabon', 'Les réacteurs nucléaires naturels d’Oklo auraient fonctionné il y a environ deux milliards d\'années. On a retrouvé dans la mine d\'uranium d\'Oklo, près de la ville de Franceville dans la province de Haut-Ogooué au Gabon, les résidus fossiles de réacteurs nucléaires naturels, où des réactions de fission nucléaire en chaîne auto-entretenues auraient eu lieu, bien avant l\'apparition de l\'être humain.', '07-11-2021 1636266549', 'Réacteur nucléaire naturel d\'Oklo.', '2021-10-30 23:17:14', 89),
+(158, '300 000 mille ans seul sur terre.', 'Les traces des civilisations noire à travers le monde bien avant la découverte des continents par les \"explorateurs\" L\'origine africaine du peuple asiatique et européen.', '07-11-2021 1636268759', 'dispersés aux quatre coins du monde.', '2021-10-30 23:25:34', 89),
+(160, 'Les sciences et l\'histoire.', 'L’origine des sciences est bel et bien africaine. Un os pétrifié prouve que les mathématiques étaient pratiquées dans la région des Grands Lacs il y a plus de 20 000 ans. Le bâton d’Ishango (à gauche), exposé à l’Institut royal des sciences naturelles de Belgique, constitue le plus ancien témoignage mathématique de l’humanité. D’une dizaine de centimètres, il a été mis au jour lors de fouilles près du lac Rutanzige, à la frontière de l’Ouganda et de la République démocratique du Congo', '07-11-2021 1636266814', 'L’origine des sciences est bel et bien africaine', '2021-10-31 11:09:27', 89),
+(161, 'La spiritualité Africaine.', 'a', '01-11-2021 1635774549', 'A l\'origine des religions ditent \"revelées\".', '2021-10-31 11:15:34', 89);
 
 -- --------------------------------------------------------
 
@@ -85,15 +72,14 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id_comment`),
   KEY `fk_comment_user` (`id_user`),
   KEY `fk_comment_article_0` (`id_article`)
-) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
 --
 
 INSERT INTO `comment` (`id_comment`, `content`, `createdat`, `disabled`, `id_article`, `id_user`) VALUES
-(226, 'dfgdgdgdgdgdgdgdgdgdgdgd', '2021-10-30 18:12:59', 0, 131, 89),
-(231, 'sfsfsfsfdsdfsdfdfs', '2021-10-31 09:42:52', 0, 158, 89);
+(226, 'dfgdgdgdgdgdgdgdgdgdgdgd', '2021-10-30 18:12:59', 0, 131, 89);
 
 -- --------------------------------------------------------
 
@@ -109,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `moderator` (
   `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `erase` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id_moderator`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `moderator`
@@ -122,7 +108,7 @@ INSERT INTO `moderator` (`id_moderator`, `link`, `id_comment`, `createdat`, `era
 (9, 'admin&validation=comment&id=225&token=63aee5f60929e7e2aac8b25a3e826f0e', 225, '2021-10-30 18:04:28', ''),
 (10, 'admin&validation=comment&id=226&token=5ae1b1a56edabdb8b752439e4733ab85', 226, '2021-10-30 18:12:59', ''),
 (11, 'admin&validation=comment&id=227&token=63aee5f60929e7e2aac8b25a3e826f0e', 227, '2021-10-30 22:03:07', ''),
-(14, 'admin&validation=comment&id=231&token=5ae1b1a56edabdb8b752439e4733ab85', 231, '2021-10-31 09:42:52', 'admin&comment=delete&id=231');
+(16, 'admin&validation=comment&id=263&token=5ae1b1a56edabdb8b752439e4733ab85', 263, '2021-11-05 17:12:44', 'admin&comment=delete&id=263');
 
 -- --------------------------------------------------------
 
@@ -146,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `updatedAt` datetime DEFAULT NULL,
   `sentence` char(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
@@ -157,7 +143,8 @@ INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `activated`, `va
 (85, 'utilisateur1', 'ToddBBower@dayrep.com', '$2y$10$FmRRHGqDdrrkOv33tQv7BO1dP.U4NxWf2yj72pSFIjPuyfIqGmHLS', 1, 'b4489abcc06e34aff531b50caa5e40e4', 'MEMBRE', 'Capture.JPG', '2021-10-18 15:18:54', 'Todd B', 'Bower', NULL, 'Les cordonniers sont les plus mal chaussés'),
 (87, 'utilisateur2', 'JohnSJohnson@teleworm.us', '$2y$10$gDegAMqgeUWqNFe1zIYrFeacakzFRPm7xj4Q3m6i0A5VerEEGJ6xq', 1, '0248fa8c97546a3180712114931c7dfb', 'MEMBRE', 'Capture1.jpg', '2021-10-18 15:25:21', 'John S', 'Johnson', NULL, 'Imite le moins possible les hommes dans leur énigmatique maladie de faire des noeuds'),
 (89, 'Admin', 'amzfba.1bestbuy@gmail.com', '$2y$10$t7U5YM/ir5pKjk/XWOHz0e2ReuhjetuXunuuvvJ5unbph3PdUPtf2', 1, '5ae1b1a56edabdb8b752439e4733ab85', 'ADMIN', 'Capture1.jpg', '2021-10-18 18:59:00', 'Christian J', 'Grogan', NULL, 'Tout ce qui n\'est pas passion est sur un fond d\'ennui.'),
-(91, 'testusername2', 'amzfba.1bestbuy@gmail.com', '$2y$10$CnB6zB88lexDjdS0w8ej2.mX4suF.bFnX1w.jmXwrLCZEDTlKRo1C', 1, '6117a912a7d347620cf1f91c5eeac794', 'MEMBRE', 'default_avatar.jpg', '2021-10-31 00:13:57', 'Hanna', 'Hossi', NULL, 'C\'est par la force des images que, par la suite des temps, pourraient bien s\'accomplir les « vraies » révolutions.');
+(91, 'testusername2', 'amzfba.1bestbuy@gmail.com', '$2y$10$CnB6zB88lexDjdS0w8ej2.mX4suF.bFnX1w.jmXwrLCZEDTlKRo1C', 1, '6117a912a7d347620cf1f91c5eeac794', 'MEMBRE', 'default_avatar.jpg', '2021-10-31 00:13:57', 'Hanna', 'Hossi', NULL, 'C\'est par la force des images que, par la suite des temps, pourraient bien s\'accomplir les « vraies » révolutions.'),
+(92, 'utilisateur3', 'bempime.k@gmail.com', '$2y$10$oYmAy.I.LHFVkcRIuBO3tOYGtw6E68nJ7jAL/FdiBbd5ytjErEzyu', 1, '583a96854d8470f98f40754d7cd3b38c', 'MEMBRE', 'Capture1.jpg', '2021-10-31 20:52:45', 'Phillip P', 'Wood', NULL, 'Quand la langue cesse de faire du chichi l\'attention se porte du côté du dedans là où l\'énergie rit');
 
 --
 -- Contraintes pour les tables déchargées
@@ -168,12 +155,6 @@ INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `activated`, `va
 --
 ALTER TABLE `article`
   ADD CONSTRAINT `fk_article_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
-
---
--- Contraintes pour la table `avatar`
---
-ALTER TABLE `avatar`
-  ADD CONSTRAINT `fk_avatar_user` FOREIGN KEY (`id_avatar`) REFERENCES `user` (`id_user`);
 
 --
 -- Contraintes pour la table `comment`

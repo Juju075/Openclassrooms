@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'cf6feb3c349b11f1464d11cb2433789ca05616a7',
+    'reference' => '66939ea5ae1c39960733058e5f83aae2fbe04d97',
     'name' => 'openclassrooms/app_blog_mvc',
   ),
   'versions' => 
@@ -60,7 +60,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'cf6feb3c349b11f1464d11cb2433789ca05616a7',
+      'reference' => '66939ea5ae1c39960733058e5f83aae2fbe04d97',
     ),
     'phpmailer/phpmailer' => 
     array (
@@ -406,6 +406,15 @@ private static $installed = array (
       ),
       'reference' => '8d224396e28d30f81969f083a58763b8b9ceb0a5',
     ),
+    'symfony/translation-contracts' => 
+    array (
+      'pretty_version' => 'v2.4.0',
+      'version' => '2.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '95c812666f3e91db75385749fe219c5e494c7f95',
+    ),
     'symfony/var-dumper' => 
     array (
       'pretty_version' => 'v5.3.7',
@@ -432,6 +441,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c3d3807420961a0c70db3ff1b2527b7138ccf412',
+    ),
+    'twig/string-extra' => 
+    array (
+      'pretty_version' => 'v3.3.3',
+      'version' => '3.3.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a0fee99b205440758f9958caad9174d12352a620',
     ),
     'twig/twig' => 
     array (

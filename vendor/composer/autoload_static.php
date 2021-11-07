@@ -28,6 +28,7 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
         ),
         'T' => 
         array (
+            'Twig\\Extra\\String\\' => 18,
             'Twig\\' => 5,
             'Tools\\' => 6,
         ),
@@ -40,6 +41,7 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
             'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
             'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Contracts\\Service\\' => 26,
             'Symfony\\Contracts\\HttpClient\\' => 29,
             'Symfony\\Contracts\\EventDispatcher\\' => 34,
@@ -98,6 +100,10 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
         array (
             0 => __DIR__ . '/../..' . '/views',
         ),
+        'Twig\\Extra\\String\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/string-extra',
+        ),
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -133,6 +139,10 @@ class ComposerStaticInit2e04eb7b4708527ae535ec0e8a521b68
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Contracts\\Translation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/translation-contracts',
         ),
         'Symfony\\Contracts\\Service\\' => 
         array (

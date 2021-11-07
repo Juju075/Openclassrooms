@@ -30,8 +30,6 @@ class ControllerPost
         elseif (isset($_GET['delete'])){
             $this->delete($_GET['delete']); 
         }
-
-
         elseif (isset($_GET['update'])){
             $this->article('postUpdateRequest',null); 
         }
@@ -137,7 +135,7 @@ class ControllerPost
             $articleVerif = $this->_articleManager->articleVerif();
 
             if ($articleVerif === true ){
-                $article = $this->_articleManager->getArticle($_GET['id_article']);     
+                $article = $this->_articleManager->getArticle($_GET['id_article']);
                 $this->commentManager = new CommentManager;
                 $comments = $this->commentManager->getComments(1);
                 $nbrcomments = $this->commentManager->displaynumber($comments);

@@ -1,9 +1,0 @@
-{
-  "name": "App blog MVC",
-  "short_name": "Openclassroom project",
-  "theme_color": "#1586df",
-  "background_color": "#e5edf4",
-  "display": "browser",
-  "scope": "/",
-  "start_url": "/"
-}

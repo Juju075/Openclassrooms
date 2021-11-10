@@ -13,7 +13,7 @@ use View\View;
     public function routeReq(){
 
     try {
-        $class = 'Article'; //corrige mettre duynamique
+        $class = 'Article';
         spl_autoload_register(
             function($class){ 
             require_once('models/Entity/Article.php');

@@ -180,8 +180,8 @@ class View
                 $countcomments1 = $data['countcomments1'];
                 $countcomments0 = $data['countcomments0'];
                 $countusers = $data['countusers'];
-
-                $cards = $_SESSION['cards'];
+                $cards = $data['cards'];
+                var_dump($cards );
                 
             echo $twig->render($page1,['countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers, 'cards'=>$cards,'usertype'=>$usertype]);
             }else{

@@ -14,8 +14,7 @@ class ControllerAdmin
 {
     private $_view;
     private $commentManager;
-    private $articleManager;
-    private $userManager;
+    private $adminManager;
 
 
     public function __construct(){
@@ -56,17 +55,16 @@ class ControllerAdmin
         $countcomments0 = $this->adminManager->countEntity('Comments',0);  
         $countusers = $this->adminManager->countEntity('Users', null); 
 
-        $_SESSION['cards'] = $this->adminManager->getCommentToValidate();
+        $cards = $this->adminManager->getCommentToValidate();
 
         $this->_view = new View('singlePost','Admin');
-        $this->_view->displayForm('Admin',array('countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers));        
-        
-        unset($_SESSION['cards']);
+        $this->_view->displayForm('Admin',array('cards'=>$cards, 'countarticles'=>$countarticles,'countcomments1'=>$countcomments1,'countcomments0'=>$countcomments0,'countusers'=>$countusers));        
         }
     }
 
     private function adminCommentValidation($id_comment, $token){
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){
+            
             $this->commentManager = new CommentManager;
             $id_article = $this->commentManager->validationByAdmin($id_comment, $token);
                 if($id_article !== null){ 

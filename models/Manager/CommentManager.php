@@ -90,6 +90,7 @@ class CommentManager extends Model
         $req = self::$_bdd->prepare("SELECT id_user  FROM user WHERE validation_key = ?");
         $req->execute(array($token)); 
         $user = $req->fetch();
+        
         if(isset($user) && $user !== null){
             $req = self::$_bdd->prepare("SELECT id_user, id_article  FROM comment WHERE id_comment = ?");
             $req->execute(array($id_comment)); 

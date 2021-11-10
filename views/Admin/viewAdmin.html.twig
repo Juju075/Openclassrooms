@@ -121,11 +121,9 @@
   <div class="row">
     <div class="col-12 mt-3 mb-1">
       <h6 class="text-uppercase">Gestion des commentaires.</h6>
-      <p>mis en attente.</p>
     </div>
   </div>
 </section>
-
 <section id="stats-subtitle">
   <div class="col-xl-12 col-md-12">
     {% for card in cards %}
@@ -137,20 +135,20 @@
               <i class="icon-bubbles warning font-large-2 mr-2"></i>
             </div>
             <div class="media-body">
-              <a href="post&id_article={{ cards.id_article }}">
-                <span class="h3">{{ cards.title }}</span></a
+              <a href="post&id_article={{ card.id_article }}">
+                <span class="h3">{{ card.title }}</span></a
               ><br />
-              <span>{{ cards.content }}</span
+              <span>{{ card.content }}</span
               ><br />
-              <span>{{ cards.prenom }} {{ cards.nom }}</span
+              <span>{{ card.prenom }} {{ cards.nom }}</span
               ><br />
-              <span>{{ cards.createdat }}</span>
+              <span>{{ card.createdat }}</span>
             </div>
             <div class="align-self-center">
               <button
                 type="button"
                 class="btn btn-success"
-                onclick="window.location.href = '{{ cards.link }}';"
+                onclick="window.location.href = '{{ card.link }}';"
               >
                 Je valide
               </button>
@@ -158,7 +156,7 @@
               <button
                 type="button"
                 class="btn btn-danger"
-                onclick="window.location.href = '{{ cards.erase }}';"
+                onclick="window.location.href = '{{ card.erase }}';"
               >
                 Je refuse
               </button>

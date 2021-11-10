@@ -25,8 +25,19 @@ class AdminManager extends Model
         }
         return count($req->fetchall());
     }
-
     public function getCommentToValidate(){
+            $cards = [];
+            $this->getBdd();
+            $cards=[];    
+            //$req = self::$_bdd->prepare('SELECT article.title, comment.content, user.nom, user.prenom FROM comment, user, article WHERE comment.id_article=article.id_article and user.id_user=comment.id_user and comment.disabled = 0');    
+            $req = self::$_bdd->prepare('SELECT article.title, comment.content, comment.id_article, user.nom, user.prenom, moderator.link, moderator.createdat, moderator.erase FROM comment, user, article, moderator WHERE comment.id_article=article.id_article and user.id_user=comment.id_user and comment.disabled = 0');    
+            $req->execute();
+            $Comments = $req->fetchAll(\PDO::FETCH_ASSOC);
+            $cards=$Comments;
+            return $cards;
+        }
+        
+    public function getCommentToValidateBackup(){
         $cards = [];
         $this->getBdd();
         $req = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE disabled = 0');    

@@ -8,12 +8,11 @@ _Blog php conçu sur une architecture MVC._
 
 # **Comment lancer l'Application sur sa machine locale depuis github?**
 
-²
 Suivez les instructions ci-dessous.
 
 ## Cloner le projet, charger la BDD et lancer l'application.
 
-1- Créer la BDD (Charger sql.txt dans phpmyadmin).
+1- Créer la BDD (Charger app_blog_MVC.txt dans phpmyadmin).
 
 2- Télecharger les fichiers source de l'app.
 (cloner le repository)
@@ -25,6 +24,19 @@ git clone https://github.com/Juju075/Openclassrooms
 3- Ouvrez votre navigateur preferé et saisiser.
 
 http://localhost/App_Blog_MVC/accueil
+
+---
+
+# LOGIN @Route /login
+
+Membre
+username: testusername
+password: identique
+
+Admin
+username: Admin
+password: identique
+COCHEZ également la checkbox Administrateur.
 
 ---
 

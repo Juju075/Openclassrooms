@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 07 nov. 2021 à 07:07
+-- Généré le : mer. 17 nov. 2021 à 23:40
 -- Version du serveur :  8.0.22
 -- Version de PHP : 7.4.12
 
@@ -45,8 +45,8 @@ CREATE TABLE IF NOT EXISTS `article` (
 --
 
 INSERT INTO `article` (`id_article`, `title`, `content`, `updatedAt`, `chapo`, `createdAt`, `id_user`) VALUES
-(131, 'Les royaumes africain.', 'L\'histoire du continent africain est passionnante. Nous connaissons tous les pharaons d\'Egypte et leurs tombeaux magnifiques. Mais combien d\'entre nous ont entendu parler des anciens empires de l\'Afrique de l\'Ouest ? Le premier de ces empire, le Ghana, s\'est développé de l\'an 300 à l\'an 1300. Le Ghana était alors si riche que, dans le palais du roi, les chiens portaient des colliers d\'or.', '07-11-2021 1636266378', 'Première déclaration des \"droits de l\'homme.\"', '2021-10-15 13:48:36', NULL),
-(132, 'Egypte antique', 'Les Égyptiens de l\'antiquité donnaient parfois à leur pays le nom de Kemet ou Kêmi. Les égyptologues traduisent généralement ce mot par « la terre noire », en référence à la bande de terre rendue fertile par le limon noir déposé par la crue annuelle du Nil, artère vitale de la civilisation de l\'égypte antique.', '07-11-2021 1636266247', 'Les bases de la civilisation.', '2021-10-15 13:49:14', NULL),
+(131, 'Les royaumes africain.', 'L\'histoire du continent africain est passionnante. Nous connaissons tous les pharaons d\'Egypte et leurs tombeaux magnifiques. Mais combien d\'entre nous ont entendu parler des anciens empires de l\'Afrique de l\'Ouest ? Le premier de ces empire, le Ghana, s\'est développé de l\'an 300 à l\'an 1300. Le Ghana était alors si riche que, dans le palais du roi, les chiens portaient des colliers d\'or. La Charte de Kurugan Fuga contient déjà, en 1232, des prescriptions qui relèvent de la problématique moderne des droits de l\'homme ou des droits humains. Elle figure ainsi parmi les premiers édits de ce type tous continents confondus', '07-11-2021 1636269330', 'Première déclaration des \"droits de l\'homme.\"', '2021-10-15 13:48:36', 89),
+(132, 'Egypte antique', 'Les Égyptiens de l\'antiquité donnaient parfois à leur pays le nom de Kemet ou Kêmi. Les égyptologues traduisent généralement ce mot par « la terre noire », en référence à la bande de terre rendue fertile par le limon noir déposé par la crue annuelle du Nil, artère vitale de la civilisation de l\'égypte antique.', '07-11-2021 1636266247', 'Les bases de la civilisation.', '2021-10-15 13:49:14', 89),
 (153, 'Initiation aux mathématiques africaines pour les enfants de 5 a 15 ans.', 'Ce manuel a pour vocation d\'initier les enfants (mais aussi les parents) aux mathématiques africaines par le biais d\'une méthode pédagogique volontairement ludique.', NULL, 'Nioussérê Kalala Omotunde', '2021-10-30 22:13:55', 89),
 (154, 'Valoriser nos Humanités Classiques Africaines', 'L\'Institut d\'Histoire ANYJART se veut être un espace de culture, d\'histoire et de découverte de l\'extême richesse du patrimoine historique, culturel, scientifique, technologique, littéraire et spirituel du Monde Noir. Dédié à la promotion de nos Humanités Classiques Africaines,  il vous invitera à porter un regard nouveau, positif et pragmatique sur notre culture africaine et panafricaine.', NULL, 'L\'Institut d\'Histoire Anyjart', '2021-10-30 22:15:18', 89),
 (155, 'Immersion dans les civilisations africaines', 'La racine du mot « KaMa » est omniprésente chez bon nombre de peuples d’Afrique centrale, d’Afrique de l’Ouest : « KaMa » signifie noir en copte,<<KAMeen>> signifie chez nous en peulh du fouta djallon ,« iKaMa » signifie noirci en mbochi (Congo-Brazzaville, Gabon, Cameroun), « Ka-FFiin » signifie (le noici), I ka-fiin, cela veut dire aussi tu la noici. en bambara (Mali, Burkina Faso, Côte d\'Ivoire, etc.), « KeM » signifie brûlé en wolof (Sénégal), « Kanbé » signifie brûlé en mossi (Burkina Faso, Niger, etc.)', '07-11-2021 1636267884', 'z', '2021-10-30 22:16:29', 89),
@@ -72,14 +72,16 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id_comment`),
   KEY `fk_comment_user` (`id_user`),
   KEY `fk_comment_article_0` (`id_article`)
-) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
 --
 
 INSERT INTO `comment` (`id_comment`, `content`, `createdat`, `disabled`, `id_article`, `id_user`) VALUES
-(226, 'dfgdgdgdgdgdgdgdgdgdgdgd', '2021-10-30 18:12:59', 0, 131, 89);
+(264, 'sfsfsfsfsdf', '2021-11-07 20:46:39', 1, 131, 89),
+(265, 'sfsdfsfdssfsfsfsf', '2021-11-10 21:45:31', 1, 153, 89),
+(266, 'fsfsfsfsfsf', '2021-11-10 21:46:54', 0, 158, 89);
 
 -- --------------------------------------------------------
 
@@ -94,21 +96,18 @@ CREATE TABLE IF NOT EXISTS `moderator` (
   `id_comment` int NOT NULL,
   `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `erase` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_moderator`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id_moderator`),
+  KEY `fk_moderator_comment` (`id_comment`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `moderator`
 --
 
 INSERT INTO `moderator` (`id_moderator`, `link`, `id_comment`, `createdat`, `erase`) VALUES
-(6, 'admin&validation=comment&id=222&token=63aee5f60929e7e2aac8b25a3e826f0e', 222, '2021-10-30 18:01:45', ''),
-(7, 'admin&validation=comment&id=223&token=63aee5f60929e7e2aac8b25a3e826f0e', 223, '2021-10-30 18:03:28', ''),
-(8, 'admin&validation=comment&id=224&token=63aee5f60929e7e2aac8b25a3e826f0e', 224, '2021-10-30 18:03:57', ''),
-(9, 'admin&validation=comment&id=225&token=63aee5f60929e7e2aac8b25a3e826f0e', 225, '2021-10-30 18:04:28', ''),
-(10, 'admin&validation=comment&id=226&token=5ae1b1a56edabdb8b752439e4733ab85', 226, '2021-10-30 18:12:59', ''),
-(11, 'admin&validation=comment&id=227&token=63aee5f60929e7e2aac8b25a3e826f0e', 227, '2021-10-30 22:03:07', ''),
-(16, 'admin&validation=comment&id=263&token=5ae1b1a56edabdb8b752439e4733ab85', 263, '2021-11-05 17:12:44', 'admin&comment=delete&id=263');
+(17, 'admin&validation=comment&id=264&token=5ae1b1a56edabdb8b752439e4733ab85', 264, '2021-11-07 20:46:39', 'admin&comment=delete&id=264'),
+(18, 'admin&validation=comment&id=265&token=5ae1b1a56edabdb8b752439e4733ab85', 265, '2021-11-10 21:45:31', 'admin&comment=delete&id=265'),
+(19, 'admin&validation=comment&id=266&token=5ae1b1a56edabdb8b752439e4733ab85', 266, '2021-11-10 21:46:54', 'admin&comment=delete&id=266');
 
 -- --------------------------------------------------------
 
@@ -132,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `updatedAt` datetime DEFAULT NULL,
   `sentence` char(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
@@ -144,7 +143,9 @@ INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `activated`, `va
 (87, 'utilisateur2', 'JohnSJohnson@teleworm.us', '$2y$10$gDegAMqgeUWqNFe1zIYrFeacakzFRPm7xj4Q3m6i0A5VerEEGJ6xq', 1, '0248fa8c97546a3180712114931c7dfb', 'MEMBRE', 'Capture1.jpg', '2021-10-18 15:25:21', 'John S', 'Johnson', NULL, 'Imite le moins possible les hommes dans leur énigmatique maladie de faire des noeuds'),
 (89, 'Admin', 'amzfba.1bestbuy@gmail.com', '$2y$10$t7U5YM/ir5pKjk/XWOHz0e2ReuhjetuXunuuvvJ5unbph3PdUPtf2', 1, '5ae1b1a56edabdb8b752439e4733ab85', 'ADMIN', 'Capture1.jpg', '2021-10-18 18:59:00', 'Christian J', 'Grogan', NULL, 'Tout ce qui n\'est pas passion est sur un fond d\'ennui.'),
 (91, 'testusername2', 'amzfba.1bestbuy@gmail.com', '$2y$10$CnB6zB88lexDjdS0w8ej2.mX4suF.bFnX1w.jmXwrLCZEDTlKRo1C', 1, '6117a912a7d347620cf1f91c5eeac794', 'MEMBRE', 'default_avatar.jpg', '2021-10-31 00:13:57', 'Hanna', 'Hossi', NULL, 'C\'est par la force des images que, par la suite des temps, pourraient bien s\'accomplir les « vraies » révolutions.'),
-(92, 'utilisateur3', 'bempime.k@gmail.com', '$2y$10$oYmAy.I.LHFVkcRIuBO3tOYGtw6E68nJ7jAL/FdiBbd5ytjErEzyu', 1, '583a96854d8470f98f40754d7cd3b38c', 'MEMBRE', 'Capture1.jpg', '2021-10-31 20:52:45', 'Phillip P', 'Wood', NULL, 'Quand la langue cesse de faire du chichi l\'attention se porte du côté du dedans là où l\'énergie rit');
+(92, 'utilisateur3', 'bempime.k@gmail.com', '$2y$10$oYmAy.I.LHFVkcRIuBO3tOYGtw6E68nJ7jAL/FdiBbd5ytjErEzyu', 1, '583a96854d8470f98f40754d7cd3b38c', 'MEMBRE', 'Capture1.jpg', '2021-10-31 20:52:45', 'Phillip P', 'Wood', NULL, 'Quand la langue cesse de faire du chichi l\'attention se porte du côté du dedans là où l\'énergie rit'),
+(95, 'testimage', 'bempime.k@gmail.com', '$2y$10$o6hon/4/HcciaKjdZTXfSOqUPhBuXWIrq3bs5L4hNytfBYkkfv1B2', 1, '81230da75c851cab59664c29815eba6b', 'MEMBRE', '6187ca659ccf9', '2021-11-07 13:45:25', 'rezerze', 'rzerzer', NULL, 'erzrzerzerz'),
+(96, 'dfsqf', 'amzfba.1bestbuy@gmail.com', '$2y$10$xKgxqdbC8A5SQnvviPvMF.RZriCC1eTsy5ET1A6WPfJA3cyhGwMoq', 1, 'f669ec6437f90b35ff7647f32b46f3aa', 'MEMBRE', '61956d28b1992', '2021-11-17 21:59:20', 'sfsdf', 'fdsff', NULL, 'qsdqsdqsdq');
 
 --
 -- Contraintes pour les tables déchargées
@@ -162,6 +163,12 @@ ALTER TABLE `article`
 ALTER TABLE `comment`
   ADD CONSTRAINT `fk_comment_article_0` FOREIGN KEY (`id_article`) REFERENCES `article` (`id_article`),
   ADD CONSTRAINT `fk_comment_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+
+--
+-- Contraintes pour la table `moderator`
+--
+ALTER TABLE `moderator`
+  ADD CONSTRAINT `fk_moderator_comment` FOREIGN KEY (`id_comment`) REFERENCES `comment` (`id_comment`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

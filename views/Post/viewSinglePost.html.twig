@@ -214,10 +214,18 @@
             <div class="post-info">
               <div class="left-area">
                 <a class="avatar" href="#"
-                  ><img
-                    src="public/images/avatar-1-120x120.jpg"
-                    alt="Profile Image"
-                  />
+                  >
+                  {% if comment.avatar == 'default_avatar.jpg' %}
+                  <img
+                    src="public/images/default.jpg"
+                    alt="default avatar"
+                  /> 
+                  {% else %}
+                  <img
+                    src="public/images/uploads/{{ comment.avatar }}.jpg"
+                    alt="Profile avatar"
+                  />   
+                  {% endif %}             
                 </a>
               </div>
 

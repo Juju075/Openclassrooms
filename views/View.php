@@ -65,15 +65,12 @@ class View
         else{
             $id_comment = null;
         }  
-        
-         if(!empty($data['auteur'])){
+        if(!empty($data['auteur'])){
             $auteur = $data['auteur'];
         }
         else{
             $auteur = null;
         }        
-
-
         if(!empty($data['routename'])){
             $getalert = $data['routename'];
         }else{

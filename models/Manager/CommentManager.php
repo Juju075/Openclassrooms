@@ -14,7 +14,8 @@ class CommentManager extends Model
         $result = $req0->fetchall();
         if(!empty($result)){
             $var= [];
-            $req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ? AND disabled = ?'); 
+            //$req  = self::$_bdd->prepare('SELECT id_comment, content, createdat, id_user FROM comment WHERE id_article = ? AND disabled = ?'); 
+            $req  = self::$_bdd->prepare('SELECT comment.id_comment, comment.content, comment.createdat, comment.id_user, user.avatar FROM comment, user WHERE comment.id_article = ? AND comment.disabled = ? AND user.id_user = comment.id_user'); 
             $req->execute(array($_SESSION['id_article'],$display));
             $var = $req->fetchall();
                 return $var; 
@@ -79,6 +80,7 @@ class CommentManager extends Model
    }
 
    public function deleteOneComment($id_comment){
+      var_dump($id_comment);
          $this->getBdd();
          $req  = self::$_bdd->prepare('DELETE FROM comment WHERE id_comment =?'); 
          $req->execute(array($id_comment));

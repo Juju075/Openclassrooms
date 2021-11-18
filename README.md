@@ -21,7 +21,7 @@ Suivez les instructions ci-dessous.
 
 git clone https://github.com/Juju075/Openclassrooms
 
-3- Ouvrez votre navigateur preferé et saisiser.
+3- Ouvrez votre navigateur preferé et saissiser.
 
 http://localhost/App_Blog_MVC/accueil
 

@@ -73,12 +73,10 @@ class CommentManager extends Model
                return false;   
          }
       }else{
-         //retour au poste
       }
    }
 
    public function deleteOneComment($id_comment){
-      var_dump($id_comment);
          $this->getBdd();
          $req  = self::$_bdd->prepare('DELETE FROM comment WHERE id_comment =?'); 
          $req->execute(array($id_comment));

@@ -1,55 +1,68 @@
-# Openclassrooms 2021 formation développeur Symfony.
+## P5_blog_MVC
 
-**Projet 5 | Bempime Kheve**
+Project 5 du "parcours développeur d'application PHP/Symfony" d'Openclassrooms.
+Ce projet consite à la création d'un blog professionnel avec de nombreuse fonctionnalités.
 
-_Blog php conçu sur une architecture MVC._
+Vous pouvez les retrouver ici
 
----
+[Pages Visiteurs](https://github.com/Juju075/Openclassrooms/issues/83)
+[Pages Administrateur](https://github.com/Juju075/Openclassrooms/issues/84).
 
-# **Comment lancer l'Application sur sa machine locale depuis github?**
+![Symfony Insight] Lien direct [Here](https://insight.symfony.com/projects/403dd71c-1a0a-494d-a6c9-6ff6ad861691/analyses/88).
 
-Suivez les instructions ci-dessous.
+## Table des matières.
 
-## Cloner le projet, charger la BDD et lancer l'application.
+1. [Pre required](#Pré-requis)
+2. [Installation](#Instalation)
+3. [How to use](#How-to-use)
+4. [Fait avec](#Fait-avec)
+5. [Auteur](#Auteur)
 
-1- Créer la BDD (Charger app_blog_MVC.txt dans phpmyadmin).
+## Pré requis
 
-2- Télecharger les fichiers source de l'app.
-(cloner le repository)
+Environnement
 
-**CLI**
+- _PHP_ (7.4.12)
+- _Apache_ (2.4.46)
+- _MySQL_ (8.0.22)
+- _Composer_ (2.0.9)
 
-git clone https://github.com/Juju075/Openclassrooms
+## Installation
 
-3- Ouvrez votre navigateur preferé et saissiser.
+- Get sources files / Cloner le repository du projet. [Here](https://github.com/Juju075/Openclassrooms)
+  > Make sure the `www` repository, is at the root of your server, you can also create a virtual host that redirect the visitors to the `www` directory.
 
-http://localhost/App_Blog_MVC/accueil
+_Go with a console to the repository and do thoses commands_
 
----
+- `composer install`
+- `composer update`
 
-# LOGIN @Route /login
+- Créer la database.
+- Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
+- http://localhost/phpmyadmin/server_sql.php
+- app_blog_mvc.sql (à la racine du projet)
 
-Membre
-username: testusername
-password: identique
+## Logins
 
-Admin
-username: Admin
-password: identique
-COCHEZ également la checkbox Administrateur.
+- LOGINS de demonstration
 
----
+  [MEMBRE]
 
-# Diagrammes UML
+- login : username
+- password : identique
 
-- cas d'utilisation. [ici](UML/use_case_diagram.JPG)
-- diagramme de classe. [ici](UML/class_diagram.JPG)
-- model relationnel. [ici](UML/relational_model.JPG)
+  [ADMIN]
 
-# Explication du fonctionnement de l'App.
+- login : Admin
+- password : identique
+- don't forget to check "administrateur" to be granted as [ADMIN_ROLE]
 
-Organisation des dossiers. [MVC](MVC_explainaition/MVC_explaination.md)
+## fait avec
 
-Résume graphique du cheminement des données dans les classes. [GRAPHIC CODE](MVC_explainaition/graphic_code.png)
+- [twig](https://twig.symfony.com/) - génerateur de template
+- [codeguy/upload 1.3.2] https://github.com/brandonsavage/Upload.git - telechargement de fichier
+- [phpmailer/phpmailer v6.5.1] https://github.com/PHPMailer/PHPMailer.git - sending e-mails from PHP applications
 
-**NOTE:** _Vous pouvez télécharger le fichier pour le visualiser en pleine page._
+### Auteur
+
+- **Bempime KHEVE** (https://github.com/Juju075)

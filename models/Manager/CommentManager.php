@@ -78,8 +78,10 @@ class CommentManager extends Model
 
    public function deleteOneComment($id_comment){
          $this->getBdd();
-         $req  = self::$_bdd->prepare('DELETE FROM comment WHERE id_comment =?'); 
+         $req  = self::$_bdd->prepare('DELETE FROM moderator WHERE id_comment = ? '); 
+         $req0  = self::$_bdd->prepare('DELETE FROM comment WHERE id_comment = ? '); 
          $req->execute(array($id_comment));
+         $req0->execute(array($id_comment));
          $req->closeCursor();
    }
 

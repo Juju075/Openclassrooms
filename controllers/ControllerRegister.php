@@ -97,7 +97,7 @@ class ControllerRegister
         'dimensions' => $file->getDimensions()
         );
 
-        $imageName = $data['name'];
+        $imageName = $data['name']; //ajouter extention.
         // Try to upload file
         try {
         // Success!

@@ -14,7 +14,7 @@ Vous pouvez les retrouver ici
 
 1. [Pre required](#Pré-requis)
 2. [Installation](#Instalation)
-3. [How to use](#How-to-use)
+3. [Affichage de l'App](#use)
 4. [Fait avec](#Fait-avec)
 5. [Auteur](#Auteur)
 
@@ -42,7 +42,10 @@ _Go with a console to the repository and do thoses commands_
 - http://localhost/phpmyadmin/server_sql.php
 - app_blog_mvc.sql (à la racine du projet)
 
-## Logins
+## use
+
+Lancer dans votre navigateur:
+/index.php?url=accueil
 
 - LOGINS de demonstration
 

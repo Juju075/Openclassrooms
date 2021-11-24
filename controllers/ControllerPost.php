@@ -45,7 +45,6 @@ class ControllerPost
             }
         }
         elseif (isset($_GET['comment_delete'])){
-            echo('route comment delete');
             $id_comment = $_GET['comment_delete'];
             $this->commentManager = new CommentManager;
             $author = $this->commentManager->verifCommentAuthor($id_comment);
@@ -85,8 +84,13 @@ class ControllerPost
     }   
 
     private function delete($id){
+
+        $this->commentManager = new commentManager;
+        $comments = $this->commentManager->getComments(1);
+        $nbrcomments = $this->commentManager->displaynumber($comments);
+
         $this->_articleManager = new ArticleManager;
-        $this->_articleManager->deleteArticle($id);
+        $this->_articleManager->deleteArticle($id, $nbrcomments);
         header('location: accueil');
     }
 

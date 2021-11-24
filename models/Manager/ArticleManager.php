@@ -17,21 +17,23 @@ class ArticleManager extends Model
       return $this->CreateOne('article',$article);
    } 
 
-   public function deleteArticle($id){
-      $this->getBdd();  
-      $req = self::$_bdd->prepare('SELECT id_comment FROM comment WHERE id_article = ?');
-      $req->execute(array($id));
-      $result = $req->fetchAll();
 
-      if(!empty($result)){
-            $req = self::$_bdd->prepare('DELETE FROM comment WHERE id_article = ?');
-            $req->execute(array($id));
-      }else{}
 
+   public function deleteArticle($id, $countComments){
+      $this->getBdd();     
+      if ($countComments > 0) {
+         $req  = self::$_bdd->prepare('DELETE FROM moderator WHERE id_article = ?'); 
+         $req->execute(array($id));
+
+         $req  = self::$_bdd->prepare('DELETE FROM comment WHERE id_article = ?'); 
+         $req->execute(array($id));
+      }
         $req = self::$_bdd->prepare('DELETE FROM article WHERE id_article = ?');
         $req->execute(array($id));
         $req->closeCursor();
    }
+
+
 
    public function updateArticle($id,$title,$content){ 
       $updatedAt= date('d-m-Y').' '.time();

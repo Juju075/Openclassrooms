@@ -44,8 +44,8 @@ class CommentManager extends Model
       $erase = $array['erase'];
 
       $this->getBdd(); 
-      $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment, erase) VALUES (?, ?, ?) ');
-      $req->execute(array($link, $id_comment, $erase));
+      $req = self::$_bdd->prepare('INSERT INTO moderator (link, id_comment, erase, id_article) VALUES (?, ?, ?, ?) ');
+      $req->execute(array($link, $id_comment, $erase, $_SESSION['id_article']));
       return true;  
    }
 

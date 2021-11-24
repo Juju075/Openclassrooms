@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 17 nov. 2021 à 23:40
+-- Généré le : mer. 24 nov. 2021 à 11:42
 -- Version du serveur :  8.0.22
 -- Version de PHP : 7.4.12
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `id_user` int DEFAULT NULL,
   PRIMARY KEY (`id_article`),
   KEY `fk_article_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `article`
@@ -72,16 +72,17 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id_comment`),
   KEY `fk_comment_user` (`id_user`),
   KEY `fk_comment_article_0` (`id_article`)
-) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
 --
 
 INSERT INTO `comment` (`id_comment`, `content`, `createdat`, `disabled`, `id_article`, `id_user`) VALUES
-(264, 'sfsfsfsfsdf', '2021-11-07 20:46:39', 1, 131, 89),
-(265, 'sfsdfsfdssfsfsfsf', '2021-11-10 21:45:31', 1, 153, 89),
-(266, 'fsfsfsfsfsf', '2021-11-10 21:46:54', 0, 158, 89);
+(268, 'Abandonner famille et patrie, renoncer aux biens de ce monde nouveau, sans lois, et que certains écrivains ont parfois souhaité vaguement, c\'est plutôt un indice qu\'un embarras... Ailleurs il y avait rencontré des femmes qui aiment vraiment soupçonnaient sur quels misérables racontars de salons, où l\'attendaient comme d\'habitude près du lit de tout son courage pour l\'amour d\'un phoque. Penses-tu que je laisserais s\'agiter en même temps il lui montra ', '2021-11-19 12:15:08', 0, 131, 89),
+(269, ' la porte béante, l\'emporta dans un petit local avec de vieux tabliers. Contez-moi un peu cela, nous faisons notre marché ensemble tous les jours une nouvelle extension du principe, tout en mangeant.', '2021-11-19 12:15:32', 0, 132, 89),
+(270, 'Orgueil humilié, passion dupée, jalousie bestiale, impatience devant les obstacles. Soudainement, je me sens incapable de répondre à ces questions. Mettez-vous dans l\'esprit si tortueux... Avouons que le coeur lui manquait...', '2021-11-19 12:16:05', 0, 153, 89),
+(271, 'semblables à des papillons. Circulent aussi des voitures électriques, roulant sur lui-même, et n\'aurais pas de grâce. Travaillant dans un profond silence, que vous courez le risque de rencontrer du monde. Sais-tu, ma fille et moi serions pris au piège ou au filet dans les criques ou cultivés sur le sol... Vice-roi, gouverneur et capitaine de dragons... Enterrement', '2021-11-19 12:16:27', 0, 160, 89);
 
 -- --------------------------------------------------------
 
@@ -96,18 +97,20 @@ CREATE TABLE IF NOT EXISTS `moderator` (
   `id_comment` int NOT NULL,
   `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `erase` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_article` int NOT NULL,
   PRIMARY KEY (`id_moderator`),
   KEY `fk_moderator_comment` (`id_comment`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `moderator`
 --
 
-INSERT INTO `moderator` (`id_moderator`, `link`, `id_comment`, `createdat`, `erase`) VALUES
-(17, 'admin&validation=comment&id=264&token=5ae1b1a56edabdb8b752439e4733ab85', 264, '2021-11-07 20:46:39', 'admin&comment=delete&id=264'),
-(18, 'admin&validation=comment&id=265&token=5ae1b1a56edabdb8b752439e4733ab85', 265, '2021-11-10 21:45:31', 'admin&comment=delete&id=265'),
-(19, 'admin&validation=comment&id=266&token=5ae1b1a56edabdb8b752439e4733ab85', 266, '2021-11-10 21:46:54', 'admin&comment=delete&id=266');
+INSERT INTO `moderator` (`id_moderator`, `link`, `id_comment`, `createdat`, `erase`, `id_article`) VALUES
+(21, 'admin&validation=comment&id=268&token=5ae1b1a56edabdb8b752439e4733ab85', 268, '2021-11-19 12:15:08', 'admin&comment=delete&id=268', 0),
+(22, 'admin&validation=comment&id=269&token=5ae1b1a56edabdb8b752439e4733ab85', 269, '2021-11-19 12:15:32', 'admin&comment=delete&id=269', 0),
+(23, 'admin&validation=comment&id=270&token=5ae1b1a56edabdb8b752439e4733ab85', 270, '2021-11-19 12:16:05', 'admin&comment=delete&id=270', 0),
+(24, 'admin&validation=comment&id=271&token=5ae1b1a56edabdb8b752439e4733ab85', 271, '2021-11-19 12:16:27', 'admin&comment=delete&id=271', 0);
 
 -- --------------------------------------------------------
 

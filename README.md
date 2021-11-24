@@ -40,6 +40,9 @@ _Go with a console to the repository and do thoses commands_
 - Créer la database.
 - Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
 - http://localhost/phpmyadmin/server_sql.php
+
+Base de données : `app_blog_mvc`
+
 - app_blog_mvc.sql (à la racine du projet)
 
 ## use

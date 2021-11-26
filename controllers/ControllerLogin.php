@@ -38,15 +38,15 @@ class ControllerLogin
 
     private function logon($usertype){
         if(($user=Security::login($usertype))!==null){
-            header('Location: accueil&passe=valide');
+            header('Location: listing&passe=valide');
         }
         else{
-            header('Location: accueil&login=error');
+            header('Location: listing&login=error');
         }
     }
 
     private function logout(){
         session_destroy();
-        header('Location: accueil&session=terminated');
+        header('Location: listing&session=terminated');
     } 
 }

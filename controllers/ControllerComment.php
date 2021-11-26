@@ -41,8 +41,8 @@ class ControllerComment extends ControllerContact
         if(isset($_SESSION['user'])){
             $this->commentManager = new CommentManager;
             if($this->commentManager->verifUserCommentArticle() === TRUE){ 
-
-                $array = array('content'=> $_POST['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
+                $securedPost = array_map( 'htmlspecialchars' , $_POST );
+                $array = array('content'=> $securedPost['content'],'disabled'=> '0','id_article'=> $_SESSION['id_article'],'id_user'=>$_SESSION['id_user']);
                 $comment = new Comment($array);            
                 $comment = $this->commentManager->addComment($comment);
 
@@ -72,7 +72,7 @@ class ControllerComment extends ControllerContact
                 header('Location: post&id_article='.$_SESSION['id_article']); 
             }
         }else{
-            header('Location: accueil&comment=notconnected');
+            header('Location: listing&comment=notconnected');
         }
     }
 
@@ -85,7 +85,7 @@ class ControllerComment extends ControllerContact
                 header('location: post&id_article='.$_SESSION['id_article']); 
             }
             else{
-                header('location: accueil');
+                header('location: listing');
             }
         } 
     }

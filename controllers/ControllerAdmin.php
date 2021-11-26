@@ -70,10 +70,10 @@ class ControllerAdmin
                 if($id_article !== null){ 
                     header('location: post&id_article='.$id_article);
                 }elseif($id_article === null){
-                    header('location: accueil');
+                    header('location: listing');
                 }
         }else{
-            header('location: accueil');
+            header('location: listing');
         }
     }
 
@@ -89,10 +89,10 @@ class ControllerAdmin
         if(($user=Security::retrieveUserObj($_SESSION['user']['usertype']))!==null && $_SESSION['user']['usertype'] === 'ADMIN'){
             $this->commentManager = new CommentManager;
             $this->commentManager->deleteOneComment($id);
-            header('location: accueil');      
+            header('location: listing');      
     }
         else{
-        header('location: accueil');
+        header('location: listing');
         }
     }
 }

@@ -85,12 +85,12 @@ class ControllerContact
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             $mail->send();
             echo 'Message has been sent';
-            header('location: accueil?message=send');
+            header('location: listing?message=send');
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         }else{  
-            header('location: accueil&comment=notconnected');
+            header('location: listing&comment=notconnected');
         }    
     }
 }

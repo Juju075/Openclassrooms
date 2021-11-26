@@ -14,10 +14,11 @@ class ControllerPost
 {
     private $_articleManager;
     private $commentManager;
-
+    private $securedPost;
     private $_view; 
 
     public function __construct(){
+        $securedPost = array_map( 'htmlspecialchars' , $_POST );        
         if(isset($url) && count($url) < 1){
             throw new \Exception("Page introuvable", 1);
         }
@@ -56,17 +57,17 @@ class ControllerPost
                 $this->article(null, null);
             }            
         }
-        elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){ // Traitement article update
+        elseif (isset($_GET['article']) && isset($_GET['article']) =="update"){           
             $id = $_GET['id_article'];
-            $title =$_POST['title'];
-            $content = $_POST['content'];
+            $title =$securedPost['title'];
+            $content = $securedPost['content'];
             $this->storeUpdate($id,$title,$content); 
         }    
         elseif (isset($_GET['validation'])){
         }   
         elseif (isset($_GET['comment']) && isset($_GET['comment']) =="update_request"){
             $this->commentManager = new commentManager;
-            $this->commentManager->storeCommentUpdate0($_POST['content'], $_GET['id_comment']);
+            $this->commentManager->storeCommentUpdate0($securedPost['content'], $_GET['id_comment']);
         }     
         else{
             $this->article(null, null);
@@ -79,7 +80,7 @@ class ControllerPost
             $this->_view = new View('CreatePost', 'Post');
             $this->_view->displayForm('Post',$data);
         }else{
-            header('Location: accueil');
+            header('Location: listing');
         }
     }   
 
@@ -91,31 +92,32 @@ class ControllerPost
 
         $this->_articleManager = new ArticleManager;
         $this->_articleManager->deleteArticle($id, $nbrcomments);
-        header('location: accueil');
+        header('location: listing');
     }
 
 
     private function store(){
         if(($user=Security::retrieveUserObj('ADMIN'))!==null){ 
+                $securedPost = array_map( 'htmlspecialchars' , $_POST );
                 $this->_articleManager = new ArticleManager;
-                $articleVerifNoDuplicate = $this->_articleManager->noDuplicatePost($_POST['title'], $_POST['content']);
+                $articleVerifNoDuplicate = $this->_articleManager->noDuplicatePost($securedPost['title'], $securedPost['content']);
                
                 if ($articleVerifNoDuplicate === false){
                     if (isset($_POST)){
-                        $_POST['id_user'] = $_SESSION['id_user'];
-                        $article= new Article($_POST);   
+                        $securedPost['id_user'] = $_SESSION['id_user'];
+                        $article= new Article($securedPost);   
                         $article = $this->_articleManager->createArticle($article); 
                         $articles = $this->_articleManager->getArticles();
-                        $this->_view = new View('Accueil','Post');
+                        $this->_view = new View('Listing','Post');
                         $this->_view->generate(array('articles' =>$articles));
-                        header('location; accueil');
+                        header('location; listing');
                     }
                     else{}
                 }else{
-                    header('location; accueil');
+                    header('location; listing');
                 }
             }else{
-            header('location: accueil');
+            header('location: listing');
         }
     }
 
@@ -156,9 +158,9 @@ class ControllerPost
                 }
             }
             elseif ($articleVerif === false){
-                header('location: accueil');
+                header('location: listing');
             }else{
-                header('location: accueil');
+                header('location: listing');
             }
         }
     }

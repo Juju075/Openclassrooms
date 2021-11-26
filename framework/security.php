@@ -6,10 +6,10 @@ class Security
 {
     public static function login($usertype){
         if(isset($_POST) && !empty($_POST['username']) && !empty($_POST['password'])){   
-            
+            $securedPost = array_map( 'htmlspecialchars' , $_POST );
             $userMAnager=new UserManager();
-            $user['username']=$_POST['username'];
-            $user['password']=$_POST['password'];
+            $user['username']=$securedPost['username'];
+            $user['password']=$securedPost['password'];
             $user['usertype']=$usertype;
 
             if ($userObj=$userMAnager->logonManager($user,$usertype) !== false){

@@ -30,7 +30,7 @@ use Entity\User;
             $this->_view = new View('Profile', 'Profile');
             $this->_view->displayForm('Profile', $userObj); 
         }else{
-             header('Location: accueil&comment=notconnected' );
+             header('Location: listing&comment=notconnected' );
             }    
     }
 }

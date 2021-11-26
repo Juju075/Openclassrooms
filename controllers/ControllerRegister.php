@@ -38,29 +38,31 @@ class ControllerRegister
 
     private function store(){
         if (isset($_POST) && empty($_SESSION['user'])){
-                if(!empty($_FILES) && $_FILES['foo']['size'] != 0){
-                    $this->imageUpload();
-                    $avatar = $_SESSION['avatar'];
-                }
-                else{
-                    echo('/ image non telechargé');
-                    $avatar = 'default_avatar.jpg'; 
-                }
+            if(!empty($_FILES) && $_FILES['foo']['size'] != 0){
+                $this->imageUpload();
+                $avatar = $_SESSION['avatar'];
+            }
+            else{
+                echo('/ image non telechargé');
+                $avatar = 'default_avatar.jpg'; 
+            }
+            //implementer htmlspecialchars()
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-                    $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                    $token = md5($_POST['prenom'].$_POST['nom']); 
-                    $obj = array('username'=> $_POST['username'],'password'=> $pass_hache,'email'=> $_POST['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'MEMBRE','prenom'=> $_POST['prenom'],'nom'=> $_POST['nom'],'avatar' => $avatar,'sentence'=>$_POST['sentence']);
+                    $securedPost = array_map( 'htmlspecialchars' , $_POST );
+                    $pass_hache = password_hash($securedPost['password'], PASSWORD_DEFAULT);
+                    $token = md5(htmlspecialchars($securedPost['prenom'].$securedPost['nom'])); 
+                    $obj = array('username'=> $securedPost['username'],'password'=> $pass_hache,'email'=> $securedPost['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'MEMBRE','prenom'=> $securedPost['prenom'],'nom'=> $securedPost['nom'],'avatar' => $avatar,'sentence'=>$securedPost['sentence']);
                     $user= new User($obj);
                     $userManager = new UserManager();
                     $userManager->addUser($user);
                     unset($_SESSION['avatar']);
-                    header('location: accueil&register=created');
+                    header('location: listing&register=created');
                 }
                 else{
-                header('location: accueil&register=error');
+                header('location: listing&register=error');
             }    
         }else{
-            header('location: accueil&register=error');
+            header('location: listing&register=error');
         }
     }
 

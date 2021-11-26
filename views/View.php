@@ -16,11 +16,15 @@ class View
         $this->b = $dossier.'/view'.$action.'.html.twig';
     }
 
-
     public function generate($data){  
-        $a = 'template.html.twig';
+        //$a = 'template.html.twig';
 
-
+        if(!empty($data['template'])){
+            $a = $data['template'];
+        }
+        else{
+            $a = 'template.html.twig';
+        }
         if(!empty($data['routename'])){
             $getalert = $data['routename'];
         }else{

@@ -1,6 +1,6 @@
 <ul class="main-menu visible-on-click" id="main-menu">
   <!-- par default -->
-  <li><a href="accueil">Listing des articles</a></li>
+  <li><a href="listing">Listing des articles</a></li>
 
   {% if usertype is empty %}
   <li><a href="register&create">S'inscrire</a></li>
@@ -9,6 +9,7 @@
   <li><a href="post&create">Créer un article</a></li>
   <li><a href="admin&comments=validation">Validations en attente.</a></li>
   {% endif %} {% if usertype == 'MEMBRE' or usertype == 'ADMIN'%}
+  <li><a href="accueil">Accueil</a></li>
   <li><a href="profile">Mon profil</a></li>
   <li><a href="login&logout">Me déconnecter</a></li>
   {% endif %} {% if usertype == 'MEMBRE' %}

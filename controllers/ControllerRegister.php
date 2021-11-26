@@ -27,17 +27,20 @@ class ControllerRegister
     }
 
     private function create(){
+        $_SESSION['token'] = md5(uniqid(mt_rand(), true));
         if(isset($_GET['create'])){
-        if(($user=Security::login('MEMBRE'))!==null){ 
-        } 
-            $data = null;
-            $this->view = new View('CreateUser', 'Registration');
-            $this->view->displayForm('Register',$data);
+            if(($user=Security::login('MEMBRE'))!==null){ 
+            } 
+                $data = null;
+                $this->view = new View('CreateUser', 'Registration');
+                $this->view->displayForm('Register',$data);
         }
     }
 
     private function store(){
-        if (isset($_POST) && empty($_SESSION['user'])){
+        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+        if (!$token || $token !== $_SESSION['token']) {
+            if (isset($_POST) && empty($_SESSION['user'])){
             if(!empty($_FILES) && $_FILES['foo']['size'] != 0){
                 $this->imageUpload();
                 $avatar = $_SESSION['avatar'];
@@ -46,12 +49,11 @@ class ControllerRegister
                 echo('/ image non telechargé');
                 $avatar = 'default_avatar.jpg'; 
             }
-            //implementer htmlspecialchars()
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
                     $securedPost = array_map( 'htmlspecialchars' , $_POST );
                     $pass_hache = password_hash($securedPost['password'], PASSWORD_DEFAULT);
-                    $token = md5(htmlspecialchars($securedPost['prenom'].$securedPost['nom'])); 
-                    $obj = array('username'=> $securedPost['username'],'password'=> $pass_hache,'email'=> $securedPost['email'],'activated'=>'1','validation_key'=> $token,'usertype'=>'MEMBRE','prenom'=> $securedPost['prenom'],'nom'=> $securedPost['nom'],'avatar' => $avatar,'sentence'=>$securedPost['sentence']);
+                    $validationKey = md5(htmlspecialchars($securedPost['prenom'].$securedPost['nom'])); 
+                    $obj = array('username'=> $securedPost['username'],'password'=> $pass_hache,'email'=> $securedPost['email'],'activated'=>'1','validation_key'=> $validationKey,'usertype'=>'MEMBRE','prenom'=> $securedPost['prenom'],'nom'=> $securedPost['nom'],'avatar' => $avatar,'sentence'=>$securedPost['sentence']);
                     $user= new User($obj);
                     $userManager = new UserManager();
                     $userManager->addUser($user);
@@ -61,8 +63,13 @@ class ControllerRegister
                 else{
                 header('location: listing&register=error');
             }    
-        }else{
-            header('location: listing&register=error');
+            }else{
+                header('location: listing&register=error');
+            }
+        } else {
+            // return 405 http status code
+            header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+            exit;
         }
     }
 

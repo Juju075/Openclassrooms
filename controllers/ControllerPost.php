@@ -75,6 +75,7 @@ class ControllerPost
     }
 
     private function create(){
+        $_SESSION['token'] = md5(uniqid(mt_rand(), true));       
         if($user=Security::retrieveUserObj('ADMIN') === true){
             $data = null;
             $this->_view = new View('CreatePost', 'Post');

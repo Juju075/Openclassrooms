@@ -18,7 +18,7 @@ class Security
                     'username' => $user['username'],
                     'password' => $user['password'],
                     'usertype' => $user['usertype']
-                );
+                );              
                 return $userObj;
             } 
             else{

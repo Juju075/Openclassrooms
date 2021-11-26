@@ -31,17 +31,24 @@ class ControllerLogin
     }
 
     private function formLogin(){
+        $_SESSION['token'] = md5(uniqid(mt_rand(), true));  
         $data =null;
         $this->_view = new View('Login', 'Login');
         $this->_view->displayForm('Login',$data);       
     }
 
     private function logon($usertype){
-        if(($user=Security::login($usertype))!==null){
-            header('Location: listing&passe=valide');
-        }
-        else{
-            header('Location: listing&login=error');
+        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+        if (!$token || $token !== $_SESSION['token']) {
+            if(($user=Security::login($usertype))!==null){
+                header('Location: listing&passe=valide');
+            }
+            else{
+                header('Location: listing&login=error');
+            }    
+        } else {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+            exit;
         }
     }
 

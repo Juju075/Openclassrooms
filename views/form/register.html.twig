@@ -80,7 +80,12 @@
         />
       </div>
     </div>
-
+    <!-- Creation du token-->
+    <input
+      type="hidden"
+      name="token"
+      value="<?php echo $_SESSION['token'] ?? '' ?>"
+    />
     <div class="input-group mb-3">
       <div class="form-group">
         <label for="upload_file">Télecharger un avatar ou un logo.</label>

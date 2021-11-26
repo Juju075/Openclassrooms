@@ -34,6 +34,7 @@ class ControllerContact
 
     
     private function Message(){ 
+            $_SESSION['token'] = md5(uniqid(mt_rand(), true));
             $data =null;
             $this->_view = new View('Contact', 'Contact'); 
             $this->_view->displayForm('Contact', $data);       
@@ -41,15 +42,12 @@ class ControllerContact
     }
 
     private function sendMessage(){ 
-        if(($user=Security::retrieveUserObj('MEMBER'))!==null){ 
-        $this->contactManager = new ContactManager;
-        $user[] = $this->contactManager->getUser($_SESSION['id_user']);
+        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
 
-        $_POST['prenom']= $user[0]['prenom'];
-        $_POST['nom']= $user[0]['nom'];
-        $_POST['email']= $user[0]['email'];
+        if (!$token || $token !== $_SESSION['token']) {
+
+        if(($user=Security::retrieveUserObj('MEMBER'))!==null){ 
         $mail = new PHPMailer(true);
-        
         try {
             //Server settings
             //SMTP::DEBUG_SERVER
@@ -91,6 +89,11 @@ class ControllerContact
             }
         }else{  
             header('location: listing&comment=notconnected');
-        }    
+        }   
+        } else {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+            exit;
+        }
+
     }
 }

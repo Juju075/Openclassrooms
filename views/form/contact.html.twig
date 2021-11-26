@@ -19,6 +19,13 @@
         required="required"
       ></textarea>
     </div>
+    <div>
+      <input
+        type="hidden"
+        name="token"
+        value="<?php echo $_SESSION['token'] ?? '' ?>"
+      />
+    </div>
   </div>
   <div class="button">
     <button type="submit" class="btn btn-primary btn-lg btn-block">

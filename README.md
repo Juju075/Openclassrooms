@@ -45,6 +45,19 @@ Base de données : `app_blog_mvc`
 
 - app_blog_mvc.sql (à la racine du projet)
 
+Connexion a la Bdd.
+
+- Creer un fichier config.json
+  pour permettre au code de trouver les identifiants
+  de connexion a la base de donnees.
+
+{
+"host": "localhost",
+"dbname": "app_blog_mvc",
+"user": "vos identifiant personnel",
+"pass": "votre mot de passe personnel"
+}
+
 ## use
 
 Lancer dans votre navigateur:
